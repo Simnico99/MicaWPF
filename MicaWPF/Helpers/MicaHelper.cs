@@ -47,7 +47,6 @@ namespace MicaWPF.Helpers
             int trueValue = 0x01;
             int falseValue = 0x00;
 
-
             if (theme is WindowsTheme.Auto)
             {
                 _ = darkThemeEnabled == WindowsTheme.Dark
@@ -68,7 +67,6 @@ namespace MicaWPF.Helpers
             }
             else
             {
-
                 WindowChrome.SetWindowChrome(
                     window,
                     new WindowChrome()

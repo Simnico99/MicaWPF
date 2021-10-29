@@ -15,10 +15,8 @@ namespace MicaWPF.Helpers
 
         private const string _registryValueName = "AppsUseLightTheme";
 
-
         public static WindowsTheme GetWindowsTheme()
         {
-
             using RegistryKey key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
             object registryValueObject = key?.GetValue(_registryValueName);
             if (registryValueObject == null)
