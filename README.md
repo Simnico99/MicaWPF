@@ -8,8 +8,8 @@ Install-Package MicaWPF
 ```
 
 ## Preview
-![image](https://user-images.githubusercontent.com/80013536/139436431-fb3983d9-af4e-4d39-8bdf-b0f40093d263.png)
-Also snap grid works with this method:
+![image](https://user-images.githubusercontent.com/80013536/139436431-fb3983d9-af4e-4d39-8bdf-b0f40093d263.png)<br/><br/>
+Also snap grid works with this method:<br/>
 ![image](https://user-images.githubusercontent.com/80013536/139436498-ab330947-7df3-4c24-a382-3974ef554db2.png)
 
 ## Usage
