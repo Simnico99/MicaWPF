@@ -1,5 +1,14 @@
-# MicaWPF
+# Overview
 Library to use Mica in WPF because we can't wait for WinUI 3.0 to support it in unpackaged apps.
+
+<div align="center">
+
+[![NuGet](https://img.shields.io/nuget/v/MicaWPF.svg)](https://www.nuget.org/packages/MicaWPF/latest)
+[![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg)](https://www.nuget.org/packages/MicaWPF/latest/prerelease)
+[![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg)](https://www.nuget.org/packages/MicaWPF/)
+[![License](https://img.shields.io/github/license/Simnico99/MicaWPF)](https://github.com/Simnico99/MicaWPF/blob/main/LICENSE)
+
+</div>
 
 ## Installation
 Download via the Nuget package manager.
