@@ -1,4 +1,9 @@
-# Overview
+
+
+<h1 align="center">MicaWPF</h1><br />
+<div align="center"> 
+<img src="./Logo/Logo178x178.png" width="256"/>
+    </div>
 <div align="center">
 <h4>This is a library to make Mica available in WPF because we can't wait for WinUI 3.0 to support it in unpackaged apps.</h4>
     
@@ -6,21 +11,22 @@
 [![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg)](https://www.nuget.org/packages/MicaWPF/latest/prerelease)
 [![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg)](https://www.nuget.org/packages/MicaWPF/)
 [![License](https://img.shields.io/github/license/Simnico99/MicaWPF)](https://github.com/Simnico99/MicaWPF/blob/main/LICENSE)
-
 </div>
 
-## Installation
+<h2 align="center">Overview</h2>
+
+### Installation
 Download via the Nuget package manager.
 ```nuget
 Install-Package MicaWPF
 ```
 
-## Preview
+### Preview
 ![image](https://user-images.githubusercontent.com/80013536/139436431-fb3983d9-af4e-4d39-8bdf-b0f40093d263.png)<br/><br/>
 Also snap grid works with this method:<br/>
 ![image](https://user-images.githubusercontent.com/80013536/139436498-ab330947-7df3-4c24-a382-3974ef554db2.png)
 
-## Usage
+### Usage
 
 First in the code behind your window add those lines:
 ```csharp
@@ -67,5 +73,5 @@ In the window xaml add this:
 
 ```
 
-## More Info
+### More Info
 There is a demo app you can download in the demo folder if you need a template or to see it in action.
