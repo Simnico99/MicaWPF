@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF", "MicaWPF\MicaWPF.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{EE597F82-5B8F-4963-A686-CFE9CC38B0BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDemo", "WpfApp1\WpfDemo.csproj", "{459E184A-C118-4715-85D1-25AEB1F1810A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDemo", "Demo\WpfDemo\WpfDemo.csproj", "{459E184A-C118-4715-85D1-25AEB1F1810A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
