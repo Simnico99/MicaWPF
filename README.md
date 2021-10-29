@@ -30,12 +30,12 @@ First in the code behind your window add those lines:
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += MainWindow_Loaded; \\<-- Add this line
+            Loaded += MainWindow_Loaded; //<-- Add this line
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e) \\<-- Add this entire method or add to your loaded method.
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e) //< --Add this entire method or add to your loaded method.
         {
-            this.UpdateStyleAttributes();
+            this.UpdateStyleAttributes(); 
         }
     }
 ```
