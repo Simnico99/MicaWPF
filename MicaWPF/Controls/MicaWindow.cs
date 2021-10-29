@@ -37,7 +37,6 @@ namespace MicaWPF.Controls
     {
         public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
 
-
         static MicaWindow()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
