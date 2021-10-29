@@ -20,5 +20,12 @@
                     UseAeroCaptionButtons="True" />
             </Setter.Value>
         </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MicaWindow}">
+                    <ContentPresenter/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

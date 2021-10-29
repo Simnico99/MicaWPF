@@ -11,6 +11,6 @@
         Width="800"        
         Background="Transparent">
     <Grid>
-
+        <TextBlock>Test</TextBlock>
     </Grid>
 </mica:MicaWindow>
