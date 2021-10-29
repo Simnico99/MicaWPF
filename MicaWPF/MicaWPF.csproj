@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<Copyright>Copyright (c) 2021 Simnico99</Copyright>
+		<RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>WPF;Mica;WinUI;</PackageTags>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Company>Simnico99</Company>
+		<PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageLicenseFile></PackageLicenseFile>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
+</Project>
