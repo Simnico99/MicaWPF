@@ -11,6 +11,7 @@
 [![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg)](https://www.nuget.org/packages/MicaWPF/latest/prerelease)
 [![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg)](https://www.nuget.org/packages/MicaWPF/)
 [![License](https://img.shields.io/github/license/Simnico99/MicaWPF)](https://github.com/Simnico99/MicaWPF/blob/main/LICENSE)
+[![CodeFactor](https://www.codefactor.io/repository/github/simnico99/micawpf/badge/main)](https://www.codefactor.io/repository/github/simnico99/micawpf/overview/main)
 </div>
 
 <h2 align="center">Overview</h2>
