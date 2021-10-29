@@ -1,23 +1,16 @@
-﻿<Window x:Class="WpfDemo.MainWindow"
+﻿<mica:MicaWindow x:Class="WpfDemo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDemo"
+        xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
         Width="800"        
         Background="Transparent">
-    <WindowChrome.WindowChrome>
-        <WindowChrome
-            CaptionHeight="20"
-            ResizeBorderThickness="8"
-            CornerRadius="0"
-            GlassFrameThickness="-1"
-            UseAeroCaptionButtons="True" />
-    </WindowChrome.WindowChrome>
     <Grid>
 
     </Grid>
-</Window>
+</mica:MicaWindow>

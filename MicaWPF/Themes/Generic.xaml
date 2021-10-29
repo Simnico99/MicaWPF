@@ -1,0 +1,24 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MicaWPF.Controls">
+
+
+    <Style TargetType="{x:Type local:MicaWindow}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="Transparent"/>
+            </Setter.Value> 
+        </Setter>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome
+                    CaptionHeight="20"
+                    ResizeBorderThickness="8"
+                    CornerRadius="0"
+                    GlassFrameThickness="-1"
+                    UseAeroCaptionButtons="True" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

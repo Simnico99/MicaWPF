@@ -17,7 +17,7 @@ namespace MicaWPF.Helpers
             DWMWA_MICA_EFFECT = 1029
         }
 
-        public static void UpdateStyleAttributes(this Window window)
+        public static void EnableMica(this Window window, WindowsTheme theme)
         {
             IntPtr windowHandle = new WindowInteropHelper(window).Handle;
             var darkThemeEnabled = ThemeHelper.GetWindowsTheme();
@@ -25,9 +25,23 @@ namespace MicaWPF.Helpers
             int trueValue = 0x01;
             int falseValue = 0x00;
 
-            _ = darkThemeEnabled == WindowsTheme.Dark
-                ? DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)))
-                : DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
+
+            if (theme is WindowsTheme.Auto)
+            {
+                _ = darkThemeEnabled == WindowsTheme.Dark
+                    ? DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)))
+                    : DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
+            }
+            else if (theme is WindowsTheme.Light)
+            {
+                _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
+            }
+            else
+            {
+                _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)));
+            }
+
+
 
             _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_MICA_EFFECT, ref trueValue, Marshal.SizeOf(typeof(int)));
         }

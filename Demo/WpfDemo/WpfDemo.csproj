@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MicaWPF" Version="1.0.1" />
+    <ProjectReference Include="..\..\MicaWPF\MicaWPF.csproj" />
   </ItemGroup>
 
 </Project>

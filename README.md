@@ -22,7 +22,44 @@ Also snap grid works with this method:<br/>
 
 ## Usage
 
-First in the code behind your window add those lines:
+### Recommended
+The easiest way is to use the custom window:
+
+1. In the code behind your window add those lines
+```csharp
+    public partial class MainWindow : MicaWindow //<-- Make this a mica window right here
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+    }
+```
+
+2. In the window xaml add this:
+```xaml
+<mica:MicaWindow x:Class="WpfDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDemo"
+        xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="450" 
+        Width="800">
+    <Grid>
+
+    </Grid>
+</mica:MicaWindow>
+
+```
+
+### Compatibility
+If you already use a custom window you can do this:
+
+1. In the code behind your window add those lines
 ```csharp
     public partial class MainWindow : Window
     {
@@ -34,12 +71,12 @@ First in the code behind your window add those lines:
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) //< --Add this entire method or add to your loaded method.
         {
-            this.UpdateStyleAttributes(); 
+            this.EnableMica(WindowsTheme.Auto); 
         }
     }
 ```
 
-In the window xaml add this:
+2. In the window xaml add this:
 ```xaml
 <Window x:Class="WpfDemo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

@@ -8,7 +8,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>WPF;Mica;WinUI;</PackageTags>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Company>Simnico99</Company>
+		<Company></Company>
 		<PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
 		<NeutralLanguage>en</NeutralLanguage>
 		<PackageLicenseFile></PackageLicenseFile>
@@ -17,9 +17,10 @@
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>1.0.2</Version>
+		<Version>1.1.0</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageIcon>Logo128x128.png</PackageIcon>
+		<Authors>Simnico99</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>

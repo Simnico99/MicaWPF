@@ -5,7 +5,8 @@ namespace MicaWPF.Helpers
     public enum WindowsTheme
     {
         Light,
-        Dark
+        Dark,
+        Auto
     }
 
     public class ThemeHelper
