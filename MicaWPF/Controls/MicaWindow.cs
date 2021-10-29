@@ -1,7 +1,6 @@
 ﻿using MicaWPF.Helpers;
 using System;
 using System.Windows;
-using System.Windows.Media;
 
 namespace MicaWPF.Controls
 {
@@ -41,7 +40,7 @@ namespace MicaWPF.Controls
 
         static MicaWindow()
         {
-                DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
         }
 
         protected override void OnContentRendered(EventArgs e)

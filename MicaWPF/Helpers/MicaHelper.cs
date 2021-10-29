@@ -1,11 +1,8 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Management;
-using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Shell;
 
 namespace MicaWPF.Helpers
@@ -39,12 +36,7 @@ namespace MicaWPF.Helpers
         {
             ManagementObject mo = GetMngObj("Win32_OperatingSystem");
 
-            if (null == mo)
-            {
-                return new Version(0, 0, 0, 0);
-            }
-
-            return Version.Parse(mo["Version"].ToString());
+            return mo == null ? new Version(0, 0, 0, 0) : Version.Parse(mo["Version"].ToString());
         }
 
         public static void EnableMica(this Window window, WindowsTheme theme)
@@ -84,7 +76,7 @@ namespace MicaWPF.Helpers
                         CaptionHeight = 20,
                         ResizeBorderThickness = new Thickness(8),
                         CornerRadius = new CornerRadius(0),
-                        GlassFrameThickness = new Thickness(0,32,0,0),
+                        GlassFrameThickness = new Thickness(0, 32, 0, 0),
                         UseAeroCaptionButtons = true
                     }
                     );
