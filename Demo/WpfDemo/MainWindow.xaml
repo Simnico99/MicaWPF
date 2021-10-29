@@ -8,9 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
-        Width="800"        
-        Background="Transparent">
+        Width="800">
     <Grid>
-        <TextBlock>Test</TextBlock>
+        <TextBlock Foreground="#FFFFFF">Test</TextBlock>
     </Grid>
 </mica:MicaWindow>

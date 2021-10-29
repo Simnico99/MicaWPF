@@ -8,7 +8,7 @@
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="Transparent"/>
-            </Setter.Value> 
+            </Setter.Value>
         </Setter>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
@@ -28,4 +28,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>
