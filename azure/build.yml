@@ -5,6 +5,20 @@ steps:
     packageType: 'sdk'
     version: '6.0.x'
     includePreviewVersions: true
+    
+- task: UseDotNet@2
+  displayName: 'Use .Net 5.0'
+  inputs:
+    packageType: 'sdk'
+    version: '5.0.x'
+    includePreviewVersions: true
+
+- task: UseDotNet@2
+  displayName: 'Use .Net core 3.1'
+  inputs:
+    packageType: 'sdk'
+    version: '3.1.x'
+    includePreviewVersions: true
 
 - task: Cake@2
   displayName: 'Running Cake Build'
