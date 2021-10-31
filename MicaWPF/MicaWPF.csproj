@@ -25,6 +25,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="ReadmeNuget.md" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Include="..\Logo\Logo128x128.png">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
@@ -36,10 +40,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="ReadmeNuget.md">
+	  <Resource Include="ReadmeNuget.md">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
-	  </None>
+	  </Resource>
 	</ItemGroup>
 
 </Project>
