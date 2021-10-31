@@ -23,13 +23,13 @@ jobs:
 - job: "Windows_Build"
   pool:
     vmImage: 'windows-2022'
-   condition: |
-    not(
-      or (
-        eq(variables['Build.SourceBranch'], 'refs/heads/main'),
-        eq(variables['buildTag'], True)
+  condition: |
+      not(
+        or (
+          eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+          eq(variables['buildTag'], True)
+          )
         )
-      )
   steps:
   - template: azure/build.yml
 
