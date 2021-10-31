@@ -20,5 +20,7 @@ steps:
   displayName: Push to NuGet
   inputs:
     command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
-    packagesToPush: $(System.DefaultWorkingDirectory)\**\*.nupkg
+    publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
+    
