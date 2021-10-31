@@ -4,7 +4,12 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
 trigger:
-- *
+  tags:
+    include:
+      - "*"
+  branches:
+    include:
+      - "*"
 
 variables:
   solution: '**/*.sln'
