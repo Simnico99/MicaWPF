@@ -14,13 +14,14 @@ variables:
   buildTag: $[ startsWith(variables['Build.SourceBranch'], 'refs/tags') ]
   suffix: $(Date:yyyyMMdd)
 
+
+jobs:
 - job: "Linux"
   pool:
     vmImage: "ubuntu-latest"
   steps:
     - template: azure/build.yml
 
-jobs:
 - job: "Build_Windows"
   pool:
     vmImage: 'windows-2022'
