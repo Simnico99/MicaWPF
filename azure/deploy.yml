@@ -26,4 +26,4 @@ steps:
     nuGetFeedType: 'internal'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
-    
+    allowPackageConflicts: true
