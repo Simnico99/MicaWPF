@@ -18,10 +18,11 @@
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
-		<Version>1.1.7</Version>
+		<Version>1.1.8</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageIcon>Logo128x128.png</PackageIcon>
 		<Authors>Simnico99</Authors>
+		<Description>A WPF Library that implement an easy way to use Mica material without WinUI.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using MicaWPF.Helpers;
-using System;
 using System.Windows;
 
 namespace MicaWPF.Controls;

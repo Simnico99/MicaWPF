@@ -49,4 +49,3 @@ Task("Publish")
     });
 
 RunTarget(target);
-

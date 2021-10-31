@@ -82,11 +82,11 @@ public static class MicaHelper
                 );
         }
 
-        if (isThemeAware is true) 
+        if (isThemeAware is true)
         {
             _ = Task.Run(() =>
             {
-                var watcher = ThemeHelper.WatchThemeChange();
+                ManagementEventWatcher watcher = ThemeHelper.WatchThemeChange();
                 watcher.EventArrived += (sender, args) =>
                 {
                     Application.Current.Dispatcher.Invoke(() =>

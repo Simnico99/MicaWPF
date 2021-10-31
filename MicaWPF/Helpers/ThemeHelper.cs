@@ -19,33 +19,33 @@ public class ThemeHelper
 
     private const string _registryValueName = "AppsUseLightTheme";
 
-	public static ManagementEventWatcher WatchThemeChange()
-	{
-		var currentUser = WindowsIdentity.GetCurrent();
-		string query = string.Format(
-			CultureInfo.InvariantCulture,
-			@"SELECT * FROM RegistryValueChangeEvent WHERE Hive = 'HKEY_USERS' AND KeyPath = '{0}\\{1}' AND ValueName = '{2}'",
-			currentUser.User.Value,
-			_registryKeyPath.Replace(@"\", @"\\"),
-			_registryValueName);
+    public static ManagementEventWatcher WatchThemeChange()
+    {
+        WindowsIdentity currentUser = WindowsIdentity.GetCurrent();
+        string query = string.Format(
+            CultureInfo.InvariantCulture,
+            @"SELECT * FROM RegistryValueChangeEvent WHERE Hive = 'HKEY_USERS' AND KeyPath = '{0}\\{1}' AND ValueName = '{2}'",
+            currentUser.User.Value,
+            _registryKeyPath.Replace(@"\", @"\\"),
+            _registryValueName);
 
-		var watcher = new ManagementEventWatcher();
+        ManagementEventWatcher watcher = new ManagementEventWatcher();
 
-		try
-		{
-			watcher = new ManagementEventWatcher(query);
+        try
+        {
+            watcher = new ManagementEventWatcher(query);
 
-			return watcher;
-		}
-		catch (Exception)
-		{
-			return watcher;
-		}
-		
-	}
+            return watcher;
+        }
+        catch (Exception)
+        {
+            return watcher;
+        }
+
+    }
 
 
-	public static WindowsTheme GetWindowsTheme()
+    public static WindowsTheme GetWindowsTheme()
     {
         using RegistryKey key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
         object registryValueObject = key?.GetValue(_registryValueName);

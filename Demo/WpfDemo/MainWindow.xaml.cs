@@ -1,6 +1,4 @@
 ﻿using MicaWPF.Controls;
-using MicaWPF.Helpers;
-using System.Windows;
 
 namespace WpfDemo;
 

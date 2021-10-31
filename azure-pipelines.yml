@@ -19,15 +19,13 @@ variables:
   buildTag: $[ startsWith(variables['Build.SourceBranch'], 'refs/tags') ]
   suffix: $(Date:yyyyMMdd)
 
-
 jobs:
 - job: "Windows_Build"
   pool:
     vmImage: 'windows-2022'
   steps:
   - template: azure/build.yml
-  
-  
+
 - job: "Windows_deploy"
   pool:
     vmImage: "windows-2022"
@@ -42,6 +40,3 @@ jobs:
   steps:
       - template: azure/build.yml
       - template: azure/deploy.yml
-      
-      
-      
