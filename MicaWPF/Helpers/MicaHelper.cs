@@ -63,7 +63,7 @@ public static class MicaHelper
                 ? DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)))
                 : DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)));
         }
-        if (GetOsVer() >= new Version(10, 0, 22000, 0) && Environment.OSVersion.Platform == PlatformID.Win32NT)
+        if (GetOsVer() >= new Version(10, 0, 222000, 0) && Environment.OSVersion.Platform == PlatformID.Win32NT)
         {
             _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_MICA_EFFECT, ref trueValue, Marshal.SizeOf(typeof(int)));
         }
@@ -84,13 +84,17 @@ public static class MicaHelper
 
         if (isThemeAware is true) 
         {
-            _ = Task.Run(async () =>
+            _ = Task.Run(() =>
             {
-                ThemeHelper.WatchThemeChange();
-                await Application.Current.Dispatcher.InvokeAsync(() => 
+                var watcher = ThemeHelper.WatchThemeChange();
+                watcher.EventArrived += (sender, args) =>
                 {
-                    EnableMica(window, theme, isThemeAware);
-                });
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        EnableMica(window, theme, isThemeAware);
+                    });
+                };
+                watcher.Start();
             });
         }
     }

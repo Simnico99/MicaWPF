@@ -19,7 +19,7 @@ public class ThemeHelper
 
     private const string _registryValueName = "AppsUseLightTheme";
 
-	public static void WatchThemeChange()
+	public static ManagementEventWatcher WatchThemeChange()
 	{
 		var currentUser = WindowsIdentity.GetCurrent();
 		string query = string.Format(
@@ -29,24 +29,19 @@ public class ThemeHelper
 			_registryKeyPath.Replace(@"\", @"\\"),
 			_registryValueName);
 
+		var watcher = new ManagementEventWatcher();
+
 		try
 		{
-			var watcher = new ManagementEventWatcher(query);
-			watcher.EventArrived += (sender, args) =>
-			{
-				WindowsTheme newWindowsTheme = GetWindowsTheme();
-				// React to new theme
-			};
+			watcher = new ManagementEventWatcher(query);
 
-			// Start listening for events
-			watcher.Start();
+			return watcher;
 		}
 		catch (Exception)
 		{
-			// This can fail on Windows 7
+			return watcher;
 		}
-
-		WindowsTheme initialTheme = GetWindowsTheme();
+		
 	}
 
 

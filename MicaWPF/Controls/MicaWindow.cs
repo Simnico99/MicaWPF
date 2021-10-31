@@ -44,9 +44,14 @@ public class MicaWindow : Window
         DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
     }
 
-    protected override void OnContentRendered(EventArgs e)
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
+        Loaded += MicaWindow_Loaded;
+    }
+
+    private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
     {
         this.EnableMica(Theme, IsThemeAware);
-        base.OnContentRendered(e);
     }
 }
