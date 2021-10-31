@@ -1,4 +1,4 @@
--steps:
+steps:
 - task: NuGetCommand@2
   displayName: Pack metapackage (release mode)
   condition: eq(variables['buildTag'], True)
