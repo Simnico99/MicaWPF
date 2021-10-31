@@ -21,4 +21,4 @@ steps:
   inputs:
     command: 'push'
     nuGetFeedType: 'internal'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    packagesToPush: 'src/MicaWPF/*.nupkg'

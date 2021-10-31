@@ -19,7 +19,6 @@ jobs:
 - job: "Build_Windows"
   pool:
     vmImage: 'windows-2022'
-  condition: ne(variables['Build.SourceBranch'], 'refs/heads/main')
   steps:
   - template: azure/build.yml
   
