@@ -1,26 +1,29 @@
 steps:
 - task: NuGetCommand@2
-  displayName: Pack metapackage (release mode)
+  displayName: Pack metapackage (Release mode)
   condition: eq(variables['buildTag'], True)
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
+    nobuild: true
+    includesymbols: true
     versioningScheme: 'off'
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: Pack metapackage
   condition: eq(variables['buildTag'], False)
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
+    nobuild: true
+    includesymbols: true
     versioningScheme: 'off'
-    buildProperties: 'suffix=-$(buildNumber)'
 
-- task: NuGetCommand@2
-  displayName: Push to NuGet
+- task: DotNetCoreCLI@2
   inputs:
     command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     nuGetFeedType: 'internal'
-    packagesToPush: $(System.DefaultWorkingDirectory)\**\*.nupkg
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
     allowPackageConflicts: true
+    
