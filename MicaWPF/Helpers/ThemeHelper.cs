@@ -29,7 +29,7 @@ public class ThemeHelper
             _registryKeyPath.Replace(@"\", @"\\"),
             _registryValueName);
 
-        ManagementEventWatcher watcher = new ManagementEventWatcher();
+        ManagementEventWatcher watcher = new();
 
         try
         {

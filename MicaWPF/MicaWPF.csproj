@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFrameworks>net472;net48;netcoreapp3.1;net5.0-windows;net6.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<Copyright>Copyright (c) 2021 Simnico99</Copyright>
 		<RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
@@ -18,7 +18,7 @@
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
-		<Version>1.1.8</Version>
+		<Version>1.1.9</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageIcon>Logo128x128.png</PackageIcon>
 		<Authors>Simnico99</Authors>
