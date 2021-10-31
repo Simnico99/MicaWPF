@@ -20,12 +20,9 @@ steps:
     version: '3.1.x'
     includePreviewVersions: false
 
-- task: Cake@2
-  displayName: 'Running Cake Build'
+- task: DotNetCoreCLI@2
   inputs:
-    script: 'build.cake'
-    target: 'Publish'
-
+    command: 'build'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
