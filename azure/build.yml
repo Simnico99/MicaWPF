@@ -1,4 +1,9 @@
 steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Nuget Install'
+  inputs:
+    checkLatest: true
+
 - task: UseDotNet@2
   displayName: 'Use .Net 6.0'
   inputs:
@@ -14,13 +19,14 @@ steps:
     includePreviewVersions: false
 
 - task: UseDotNet@2
-  displayName: 'Use .Net core 3.1'
-  inputs:
+  displayName: 'Use .Net cre 3.1'
+  inputs:o
     packageType: 'sdk'
     version: '3.1.x'
     includePreviewVersions: false
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build project'
   inputs:
     command: 'build'
 
