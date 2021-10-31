@@ -11,7 +11,7 @@
 [![NuGet](https://img.shields.io/nuget/v/MicaWPF.svg?style=flat&logo=NuGet)](https://www.nuget.org/packages/MicaWPF/latest)
 [![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg?style=flat&logo=NuGet)](https://www.nuget.org/packages/MicaWPF/latest/prerelease)
 [![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg?style=flat&logo=NuGet)](https://www.nuget.org/packages/MicaWPF/)
-[![CodeFactor](https://www.codefactor.io/repository/github/simnico99/micawpf/badge/main?style=flat&logo=codefactor)](https://www.codefactor.io/repository/github/simnico99/micawpf/overview/main)
+[![CodeFactor](https://img.shields.io/codefactor/grade/github/Simnico99/MicaWPF/main?logo=codefactor&logoColor=%23ffff)](https://www.codefactor.io/repository/github/simnico99/micawpf/overview/main)
 </div>
 
 <h2 align="center">Overview</h2>
