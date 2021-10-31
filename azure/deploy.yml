@@ -21,4 +21,4 @@ steps:
   inputs:
     command: 'push'
     nuGetFeedType: 'internal'
-    packagesToPush: './artifacts/*.nupkg'
+    packagesToPush: $(System.DefaultWorkingDirectory)\**\*.nupkg
