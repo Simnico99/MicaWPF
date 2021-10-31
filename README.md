@@ -22,7 +22,7 @@ Download via the Nuget package manager.
 Install-Package MicaWPF
 ```
 
-### Preview
+# Preview
 ![image](https://user-images.githubusercontent.com/80013536/139436431-fb3983d9-af4e-4d39-8bdf-b0f40093d263.png)<br/><br/>
 Also snap grid works with this method:<br/>
 ![image](https://user-images.githubusercontent.com/80013536/139436498-ab330947-7df3-4c24-a382-3974ef554db2.png)
@@ -30,6 +30,7 @@ Also snap grid works with this method:<br/>
 ### Usage
 
 ### Recommended
+<hr>
 The easiest way is to use the custom window:
 
 1. In the code behind your window add those lines
@@ -45,13 +46,13 @@ The easiest way is to use the custom window:
 
 2. In the window xaml add this:
 ```xaml
-<mica:MicaWindow x:Class="WpfDemo.MainWindow"
+<mica:MicaWindow x:Class="WpfDemo.MainWindow" <!-- Add Mica at the start here -->
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDemo"
-        xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
+        xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"  <!-- Add MicaWPF Reference here -->
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
@@ -59,11 +60,13 @@ The easiest way is to use the custom window:
     <Grid>
 
     </Grid>
-</mica:MicaWindow>
+</mica:MicaWindow>  <!-- Don't forget to add Mica at the end here too -->
 
 ```
 
+
 ### Compatibility
+<hr>
 If you already use a custom window you can do this:
 
 1. In the code behind your window add those lines
@@ -78,7 +81,7 @@ If you already use a custom window you can do this:
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) //< --Add this entire method or add to your loaded method.
         {
-            this.EnableMica(WindowsTheme.Auto); 
+            this.EnableMica(WindowsTheme.Auto, true); 
         }
     }
 ```
