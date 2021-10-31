@@ -35,6 +35,8 @@ namespace MicaWPF.Controls;
 /// </summary>
 public class MicaWindow : Window
 {
+    public bool IsThemeAware { get; set; } = true;
+
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
 
     static MicaWindow()
@@ -44,7 +46,7 @@ public class MicaWindow : Window
 
     protected override void OnContentRendered(EventArgs e)
     {
-        this.EnableMica(Theme);
+        this.EnableMica(Theme, IsThemeAware);
         base.OnContentRendered(e);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Management;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Shell;
@@ -42,7 +43,7 @@ public static class MicaHelper
         return mo == null ? new Version(0, 0, 0, 0) : Version.Parse(mo["Version"].ToString());
     }
 
-    public static void EnableMica(this Window window, WindowsTheme theme)
+    public static void EnableMica(this Window window, WindowsTheme theme, bool isThemeAware)
     {
         IntPtr windowHandle = new WindowInteropHelper(window).Handle;
         WindowsTheme darkThemeEnabled = ThemeHelper.GetWindowsTheme();
@@ -79,6 +80,18 @@ public static class MicaHelper
                     UseAeroCaptionButtons = true
                 }
                 );
+        }
+
+        if (isThemeAware is true) 
+        {
+            _ = Task.Run(async () =>
+            {
+                ThemeHelper.WatchThemeChange();
+                await Application.Current.Dispatcher.InvokeAsync(() => 
+                {
+                    EnableMica(window, theme, isThemeAware);
+                });
+            });
         }
     }
 }
