@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
 trigger:
-- main
+- *
 
 variables:
   solution: '**/*.sln'
@@ -16,7 +16,7 @@ variables:
 
 
 jobs:
-- job: "Build_Windows"
+- job: "Windows_Build"
   pool:
     vmImage: 'windows-2022'
   steps:
