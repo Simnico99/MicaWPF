@@ -5,7 +5,7 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: './artifacts/MicaWPF.nupkg'
-    versioningScheme: 'off'  
+    versioningScheme: 'off'
 
 - task: NuGetCommand@2
   displayName: Pack metapackage
