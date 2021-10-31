@@ -4,7 +4,7 @@ steps:
   condition: eq(variables['buildTag'], True)
   inputs:
     command: 'pack'
-    packagesToPack: './artifacts/MicaWPF.nupkg'
+    packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
 
 - task: NuGetCommand@2
@@ -12,7 +12,7 @@ steps:
   condition: eq(variables['buildTag'], False)
   inputs:
     command: 'pack'
-    packagesToPack: './artifacts/MicaWPF.nupkg'
+    packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
     buildProperties: 'suffix=-$(buildNumber)'
 
