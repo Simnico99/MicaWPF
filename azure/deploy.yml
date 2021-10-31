@@ -1,0 +1,24 @@
+-steps:
+- task: NuGetCommand@2
+  displayName: Pack metapackage (release mode)
+  condition: eq(variables['buildTag'], True)
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/MicaWPF/MicaWPF.nuspec'
+    versioningScheme: 'off'  
+
+- task: NuGetCommand@2
+  displayName: Pack metapackage
+  condition: eq(variables['buildTag'], False)
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/MicaWPF/MicaWPF.nuspec'
+    versioningScheme: 'off'
+    buildProperties: 'suffix=-$(buildNumber)'
+
+- task: NuGetCommand@2
+  displayName: Push to NuGet
+  inputs:
+    command: 'push'
+    nuGetFeedType: 'internal'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'

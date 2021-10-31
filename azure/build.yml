@@ -1,0 +1,48 @@
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .Net 6.0'
+  inputs:
+    packageType: 'sdk'
+    version: '6.0.x'
+    includePreviewVersions: true
+    
+- task: UseDotNet@2
+  displayName: 'Use .Net 5.0'
+  inputs:
+    packageType: 'sdk'
+    version: '5.0.x'
+    includePreviewVersions: false    
+
+- task: Cake@2
+  displayName: 'Running Cake Build'
+  inputs:
+    script: 'build.cake'
+    target: 'Publish'
+
+
+- task: ado-discord-webhook@1
+  displayName: Publish test results
+  condition: succeededOrFailed()
+  inputs:
+    channelId: '892075724847079494'
+    webhookKey: 'S3CPGp0vqpF-azkSH-LSxjUf47h3LrTliK7M7QZlJV2GacMn1sQe4OVvpqrItEVd1sBf'
+    name: 'Azure DevOps'
+    avatar: 'https://cdn.iconscout.com/icon/free/png-256/azure-devops-3628645-3029870.png'
+    messageType: 'embeds'
+    embeds: |
+      [{
+            "title": "Azure Build Pipeline",
+            "description": "Build [$(Build.BuildNumber)](https://dev.azure.com/ZirconCloud/web/build.aspx?builduri=$(Build.BuildUri)) $(Agent.JobStatus)\n",
+            "fields": [
+              {
+                "name": "Project",
+                "value": "ZirconSound",
+                "inline": true
+              },
+              {
+                "name": "Id",
+                "value": "$(Build.BuildId)",
+                "inline": true
+              }
+            ]
+          }]
