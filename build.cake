@@ -31,6 +31,7 @@ Task("Test")
     .Does(() => {
         DotNetCoreTest(solutionFolder, new DotNetCoreTestSettings
         {
+			Framework = "net6.0-windows",
             NoRestore = true,
             Configuration = configuration,
             NoBuild = true
@@ -42,6 +43,7 @@ Task("Publish")
     .Does(() => {
         DotNetCorePublish(solutionFolder, new DotNetCorePublishSettings
         {
+			Framework = "net6.0-windows",
             NoRestore = true,
             Configuration = configuration,
             NoBuild = true,
