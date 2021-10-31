@@ -20,7 +20,7 @@ Task("Build")
     {
         DotNetCoreBuild(solutionFolder, new DotNetCoreBuildSettings
         {
-			Framework = "net6.0",
+			Framework = "net6.0-windows",
             NoRestore = true,
             Configuration = configuration
         });
