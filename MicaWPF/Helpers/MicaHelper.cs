@@ -4,12 +4,15 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Shell;
 
 namespace MicaWPF.Helpers;
 
 public static class MicaHelper
 {
+    private delegate void NoArgDelegate();
+
     [DllImport("dwmapi.dll")]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, DwmWindowAttribute dwAttribute, ref int pvAttribute, int cbAttribute);
 
@@ -20,82 +23,78 @@ public static class MicaHelper
         DWMWA_MICA_EFFECT = 1029
     }
 
-    private static ManagementObject GetMngObj(string className)
+    private static void SetMica(Window window, WindowsTheme theme, OsVersion osVersion)
     {
-        ManagementClass wmi = new(className);
-
-        foreach (ManagementBaseObject o in wmi.GetInstances())
+        if (osVersion == OsVersion.Windows11)
         {
-            ManagementObject mo = (ManagementObject)o;
-            if (mo != null)
+            int trueValue = 0x01;
+            int falseValue = 0x00;
+
+            WindowChrome.SetWindowChrome(
+            window,
+            new WindowChrome()
             {
-                return mo;
+                CaptionHeight = 20,
+                ResizeBorderThickness = new Thickness(8),
+                CornerRadius = new CornerRadius(0),
+                GlassFrameThickness = new Thickness(-1),
+                UseAeroCaptionButtons = true
             }
-        }
+            );
 
-        return null;
-    }
+            window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
 
-    public static Version GetOsVer()
-    {
-        ManagementObject mo = GetMngObj("Win32_OperatingSystem");
-
-        return mo == null ? new Version(0, 0, 0, 0) : Version.Parse(mo["Version"].ToString());
-    }
-
-    public static void EnableMica(this Window window, WindowsTheme theme, bool isThemeAware)
-    {
-        IntPtr windowHandle = new WindowInteropHelper(window).Handle;
-        WindowsTheme darkThemeEnabled = ThemeHelper.GetWindowsTheme();
-
-        int trueValue = 0x01;
-        int falseValue = 0x00;
-
-        if (theme is WindowsTheme.Auto)
-        {
-            _ = darkThemeEnabled == WindowsTheme.Dark
+            IntPtr windowHandle = new WindowInteropHelper(window).Handle;
+            _ = theme == WindowsTheme.Dark
                 ? DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)))
                 : DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
-        }
-        else
-        {
-            _ = theme is WindowsTheme.Light
-                ? DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)))
-                : DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)));
-        }
-        if (GetOsVer() >= new Version(10, 0, 22000, 0) && Environment.OSVersion.Platform == PlatformID.Win32NT)
-        {
+
             _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_MICA_EFFECT, ref trueValue, Marshal.SizeOf(typeof(int)));
         }
         else
         {
-            WindowChrome.SetWindowChrome(
-                window,
-                new WindowChrome()
+            window.Background = osVersion == OsVersion.WindowsOld || theme == WindowsTheme.Light
+            ? new SolidColorBrush(Color.FromArgb(0xFF, 243, 243, 243))
+            : new SolidColorBrush(Color.FromArgb(0xFF, 32, 32, 32));
+        }
+    }
+
+    private static void ThemeAware(Window window)
+    {
+        _ = Task.Run(() =>
+        {
+            ManagementEventWatcher watcher = ThemeHelper.WatchThemeChange();
+            watcher.EventArrived += (sender, args) =>
+            {
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    CaptionHeight = 20,
-                    ResizeBorderThickness = new Thickness(8),
-                    CornerRadius = new CornerRadius(0),
-                    GlassFrameThickness = new Thickness(0, 32, 0, 0),
-                    UseAeroCaptionButtons = true
-                }
-                );
+                    EnableMica(window, WindowsTheme.Auto, true);
+                });
+            };
+            watcher.Start();
+        });
+    }
+
+    public static void EnableMica(this Window window, WindowsTheme theme, bool isThemeAware)
+    {
+        OsVersion osVersion = OsHelper.GetOsVersion();
+
+        if (theme == WindowsTheme.Auto || isThemeAware == true)
+        {
+            WindowsTheme currentWindowsTheme = ThemeHelper.GetWindowsTheme();
+            SetMica(window, currentWindowsTheme, osVersion);
+        }
+        else
+        {
+            SetMica(window, theme, osVersion);
         }
 
-        if (isThemeAware is true)
+        if (osVersion is not OsVersion.WindowsOld)
         {
-            _ = Task.Run(() =>
+            if (isThemeAware is true)
             {
-                ManagementEventWatcher watcher = ThemeHelper.WatchThemeChange();
-                watcher.EventArrived += (sender, args) =>
-                {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        EnableMica(window, theme, isThemeAware);
-                    });
-                };
-                watcher.Start();
-            });
+                ThemeAware(window);
+            }
         }
     }
 }

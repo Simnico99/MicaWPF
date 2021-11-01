@@ -5,11 +5,6 @@
 
 
     <Style TargetType="{x:Type local:MicaWindow}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="Transparent"/>
-            </Setter.Value>
-        </Setter>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome
@@ -23,7 +18,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MicaWindow}">
-                    <ContentPresenter/>
+                    <Grid>
+
+                        <Border Background="{TemplateBinding Background}"  >
+
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

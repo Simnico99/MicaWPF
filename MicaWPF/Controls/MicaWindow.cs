@@ -40,7 +40,7 @@ public class MicaWindow : Window
 
     static MicaWindow()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
+        //DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
     }
 
     public override void OnApplyTemplate()

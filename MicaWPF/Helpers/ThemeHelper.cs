@@ -6,13 +6,6 @@ using System.Security.Principal;
 
 namespace MicaWPF.Helpers;
 
-public enum WindowsTheme
-{
-    Light,
-    Dark,
-    Auto
-}
-
 public class ThemeHelper
 {
     private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
