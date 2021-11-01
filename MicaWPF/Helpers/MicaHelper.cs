@@ -52,18 +52,18 @@ public static class MicaHelper
 
     private static void ThemeAware(Window window)
     {
-        _ = Task.Run(() =>
+        SystemEvents.UserPreferenceChanged += (s, e) =>
         {
-            ManagementEventWatcher watcher = ThemeHelper.WatchThemeChange();
-            watcher.EventArrived += (sender, args) =>
+            switch (e.Category)
             {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    EnableMica(window, WindowsTheme.Auto, true);
-                });
-            };
-            watcher.Start();
-        });
+                case UserPreferenceCategory.General:
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        EnableMica(window, WindowsTheme.Auto, true);
+                    });
+                    break;
+            }
+        };
     }
 
     public static void EnableMica(this Window window, WindowsTheme theme, bool isThemeAware)
