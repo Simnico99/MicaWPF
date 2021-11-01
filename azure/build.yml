@@ -1,4 +1,9 @@
 steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Installing Nuget 5.11.0'
+  inputs:
+    versionSpec: '5.11.0'
+
 - task: UseDotNet@2
   displayName: 'Use .Net 6.0'
   inputs:

@@ -1,4 +1,9 @@
 steps:
+- task: NuGetAuthenticate@0
+  displayName: Authenticating with Nuget
+  inputs:
+    nuGetServiceConnections: 'NugetConnection'
+
 - task: DotNetCoreCLI@2
   displayName: Pack metapackage (Release mode)
   condition: eq(variables['buildTag'], True)
@@ -35,6 +40,6 @@ steps:
   condition: and(succeeded(), eq(variables['buildTag'], true))
   inputs:
     command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
