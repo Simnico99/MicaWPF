@@ -1,4 +1,4 @@
-var target = Argument("target", "Publish");
+var target = Argument("target", "Test");
 var configuration = Argument("configuration", "Release");
 var solutionFolder = "./";
 
@@ -52,11 +52,6 @@ Task("Test")
             Configuration = configuration,
             NoBuild = true
         });
-    });
-	
-Task("Publish")
-    .IsDependentOn("Test")
-    .Does(() => {
     });
 
 RunTarget(target); 

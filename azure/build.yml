@@ -10,7 +10,8 @@ steps:
   displayName: 'Running Cake Build'
   inputs:
     script: 'build.cake'
-    target: 'Publish'
+    target: 'Test'
+    Version: '1.3.0'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
