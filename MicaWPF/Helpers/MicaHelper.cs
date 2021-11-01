@@ -50,21 +50,6 @@ public static class MicaHelper
         }
     }
 
-    private static void ThemeAware(Window window)
-    {
-        SystemEvents.UserPreferenceChanged += (s, e) =>
-        {
-            switch (e.Category)
-            {
-                case UserPreferenceCategory.General:
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        EnableMica(window, WindowsTheme.Auto, true);
-                    });
-                    break;
-            }
-        };
-    }
 
     public static void EnableMica(this Window window, WindowsTheme theme, bool isThemeAware)
     {
@@ -84,7 +69,18 @@ public static class MicaHelper
         {
             if (isThemeAware is true)
             {
-                ThemeAware(window);
+                SystemEvents.UserPreferenceChanged += (s, e) =>
+                {
+                    switch (e.Category)
+                    {
+                        case UserPreferenceCategory.General:
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                EnableMica(window, WindowsTheme.Auto, false);
+                            });
+                            break;
+                    }
+                };
             }
         }
     }
