@@ -11,14 +11,6 @@ steps:
     version: '6.0.x'
     includePreviewVersions: true
 
-- task: UseDotNet@2
-  displayName: 'Use .Net 5.0'
-  inputs:
-    version: '5.0.x'
-    packageType: runtime
-    includePreviewVersions: true
-
-
 - task: DotNetCoreCLI@2
   displayName: 'Build project'
   inputs:
