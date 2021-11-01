@@ -38,7 +38,7 @@ public static class OsHelper
         }
         else if (version.Major >= 10 && version.Build >= 22000)
         {
-            return OsVersion.Windows10;
+            return OsVersion.Windows11;
         }
 
         return OsVersion.WindowsOld;
