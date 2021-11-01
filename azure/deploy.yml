@@ -1,5 +1,5 @@
 steps:
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: Pack metapackage (Release mode)
   condition: eq(variables['buildTag'], True)
   inputs:
@@ -18,12 +18,23 @@ steps:
     nobuild: true
     includesymbols: true
     versioningScheme: 'off'
+    buildProperties: 'suffix=-$(buildNumber)'
 
 - task: NuGetCommand@2
   displayName: Push to NuGet
+  condition: and(succeeded(), eq(variables['buildTag'], false))
   inputs:
     command: 'push'
     nuGetFeedType: 'internal'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
     allowPackageConflicts: true
+
+- task: NuGetCommand@2
+  displayName: Push to NuGet (Release Mode)
+  condition: and(succeeded(), eq(variables['buildTag'], true))
+  inputs:
+    command: 'push'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NugetConnection'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
