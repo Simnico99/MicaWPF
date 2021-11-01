@@ -1,20 +1,16 @@
 steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Nuget Install'
-  inputs:
-    checkLatest: true
-
 - task: UseDotNet@2
-  displayName: 'Install .Net 6.0'
+  displayName: 'Use .Net 6.0'
   inputs:
     packageType: 'sdk'
     version: '6.0.x'
     includePreviewVersions: true
 
-- task: DotNetCoreCLI@2
-  displayName: 'Build project'
+- task: Cake@2
+  displayName: 'Running Cake Build'
   inputs:
-    command: 'build'
+    script: 'build.cake'
+    target: 'Publish'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
