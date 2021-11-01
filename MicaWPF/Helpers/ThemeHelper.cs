@@ -1,10 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Globalization;
-using System.Management;
-using System.Security.Principal;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 public class ThemeHelper
 {

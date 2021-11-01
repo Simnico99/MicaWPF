@@ -1,13 +1,4 @@
-﻿using System;
-using System.Management;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Shell;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 public static class MicaHelper
 {

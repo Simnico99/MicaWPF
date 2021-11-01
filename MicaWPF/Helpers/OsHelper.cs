@@ -1,31 +1,14 @@
-﻿using System;
-using System.Management;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 public static class OsHelper
 {
-    private static ManagementObject GetManagementObject(string className)
-    {
-        ManagementClass wmi = new(className);
 
-        foreach (ManagementBaseObject o in wmi.GetInstances())
-        {
-            ManagementObject mo = (ManagementObject)o;
-            if (mo != null)
-            {
-                return mo;
-            }
-        }
-
-        return null;
-    }
 
     public static OsVersion GetOsVersion()
     {
-        ManagementObject mo = GetManagementObject("Win32_OperatingSystem");
 
-        Version version = Version.Parse(mo["Version"].ToString());
+
+        Version version = Environment.OSVersion.Version;
 
 
         if (version.Major <= 6)

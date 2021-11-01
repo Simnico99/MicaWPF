@@ -9,6 +9,7 @@
 		<PackageTags>WPF;Mica;WinUI;</PackageTags>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Company></Company>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
 		<NeutralLanguage>en</NeutralLanguage>
 		<LangVersion>10</LangVersion>
