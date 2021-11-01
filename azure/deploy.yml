@@ -1,19 +1,4 @@
 steps:
-- task: NuGetAuthenticate@0
-  displayName: Authenticating with Nuget
-  inputs:
-    nuGetServiceConnections: 'NugetConnection'
-
-- task: DotNetCoreCLI@2
-  displayName: Pack metapackage (Release mode)
-  condition: eq(variables['buildTag'], True)
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    nobuild: true
-    includesymbols: true
-    versioningScheme: 'off'
-
 - task: DotNetCoreCLI@2
   displayName: Pack metapackage
   condition: eq(variables['buildTag'], False)
@@ -25,8 +10,18 @@ steps:
     versioningScheme: 'off'
     buildProperties: 'suffix=-$(buildNumber)'
 
+- task: DotNetCoreCLI@2
+  displayName: Pack metapackage (Release mode)
+  condition: eq(variables['buildTag'], True)
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    nobuild: true
+    includesymbols: true
+    versioningScheme: 'off'
+
 - task: NuGetCommand@2
-  displayName: Push to NuGet
+  displayName: Push to Artifacts
   condition: and(succeeded(), eq(variables['buildTag'], false))
   inputs:
     command: 'push'
