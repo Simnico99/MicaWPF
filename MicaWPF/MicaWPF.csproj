@@ -19,7 +19,7 @@
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
-		<Version>1.1.15</Version>
+		<Version>1.1.2</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageIcon>Logo128x128.png</PackageIcon>
 		<Authors>Simnico99</Authors>
@@ -37,9 +37,6 @@
 	  </None>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="ControlzEx" Version="5.0.1" />
-	</ItemGroup>
 
 	<ItemGroup>
 	  <Resource Include="ReadmeNuget.md">
