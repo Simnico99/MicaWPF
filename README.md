@@ -24,7 +24,7 @@ Install-Package MicaWPF
 
 # Preview
 ![image](https://user-images.githubusercontent.com/80013536/139436431-fb3983d9-af4e-4d39-8bdf-b0f40093d263.png)<br/>
-Supports falling back to dark or light theme window on Windows 10.
+Supports falling back to dark or light theme on Windows 10.
 ![image](https://user-images.githubusercontent.com/80013536/139864645-8a48016b-e369-4c9c-9ca9-73ee7fc10a07.png)<br/>
 Also snap grid works with this method:<br/>
 ![image](https://user-images.githubusercontent.com/80013536/139436498-ab330947-7df3-4c24-a382-3974ef554db2.png)
