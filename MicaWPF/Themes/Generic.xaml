@@ -4,28 +4,157 @@
     xmlns:local="clr-namespace:MicaWPF.Controls">
 
 
-    <Style TargetType="{x:Type local:MicaWindow}">
-        <Setter Property="WindowChrome.WindowChrome">
+    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+
+    <SolidColorBrush x:Key="MicaBackgroundColorBrush" Color="{DynamicResource MicaBackgroundColor}"/>
+    <SolidColorBrush x:Key="MicaHighLightColorBrush" Color="{DynamicResource MicaHighLightColor}"/>
+    <SolidColorBrush x:Key="ForegroundColorBrush" Color="{DynamicResource ForegroundColor}"/>
+
+    <Style x:Key="WindowButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
             <Setter.Value>
-                <WindowChrome
-                    CaptionHeight="20"
-                    ResizeBorderThickness="8"
-                    CornerRadius="0"
-                    GlassFrameThickness="-1"
-                    UseAeroCaptionButtons="True" />
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter x:Name="contentPresenter"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                          Margin="{TemplateBinding Padding}"
+                          RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource MicaHighLightColorBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource MicaHighLightColorBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+
+    <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter x:Name="contentPresenter"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                          Margin="{TemplateBinding Padding}"
+                          RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#C42B1C" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#B4271C" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:MicaWindow}">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundColorBrush}" />
+        <Setter Property="Background" Value="{StaticResource MicaBackgroundColorBrush}"/>
+        <Setter Property="ResizeMode" Value="CanResize" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MicaWindow}">
-                    <Grid>
-
-                        <Border Background="{TemplateBinding Background}"  >
-
-                            <ContentPresenter Content="{TemplateBinding Content}" />
-                        </Border>
-                    </Grid>
+                    <Border x:Name="WindowBorder" BorderThickness="1" BorderBrush="{TemplateBinding Foreground}" Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}" Background="{StaticResource MicaBackgroundColorBrush}">
+                        <Grid>
+                            <Border BorderThickness="1">
+                                <AdornerDecorator>
+                                    <Grid x:Name="LayoutRoot">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="32" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <ContentPresenter Grid.Row="0" Grid.RowSpan="3" Margin="7"/>
+                                        <Rectangle x:Name="HeaderBackground" Height="25" Fill="{DynamicResource MicaBackgroundColorBrush}" VerticalAlignment="Top" Grid.Row="0"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" Grid.Row="0">
+                                            <Button Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}" ToolTip="minimize" Style="{StaticResource WindowButtonStyle}">
+                                                <Button.Content>
+                                                    <Grid Width="46" Height="32">
+                                                        <Path Data="M1 0.5 L0 0.5" Stretch="Uniform" Width="10" Height="10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="1"  />
+                                                    </Grid>
+                                                </Button.Content>
+                                            </Button>
+                                            <Grid Margin="1,0,1,0">
+                                                <Button x:Name="Restore" Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}" ToolTip="restore" Visibility="Collapsed" Style="{StaticResource WindowButtonStyle}">
+                                                    <Button.Content>
+                                                        <Grid Width="46" Height="32" UseLayoutRounding="True">
+                                                            <Path Data="M0 0.2 L0.8 0.2 M0 01 L0.8 1 M0.8 1 L0.8 0.2 M0 0.2 L0 1 M0.3 0 L0.95 0 M01 0.05 L1 0.7" Stretch="Uniform" Width="10" Height="10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                            Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="1"  />
+                                                        </Grid>
+                                                    </Button.Content>
+                                                </Button>
+                                                <Button x:Name="Maximize" Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}" ToolTip="maximize" Style="{StaticResource WindowButtonStyle}">
+                                                    <Button.Content>
+                                                        <Grid Width="46" Height="32">
+                                                            <Path Data="M0.025 0 L0.975 0 M0.025 1 L0.975 1 M1 0.975 L1 0.025 M0 0.025 L0 0.975" Stretch="Uniform" Width="10" Height="10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                            Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="1"  />
+                                                        </Grid>
+                                                    </Button.Content>
+                                                </Button>
+                                            </Grid>
+                                            <Button Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}" ToolTip="close"  Style="{StaticResource CloseButtonStyle}">
+                                                <Button.Content>
+                                                    <Grid Width="46" Height="32">
+                                                        <Path Data="M0,0 L1,1 M0,1 L1,0" Stretch="Uniform" Width="10" Height="10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="1"  />
+                                                    </Grid>
+                                                </Button.Content>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </AdornerDecorator>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" />
             </Setter.Value>
         </Setter>
     </Style>

@@ -1,4 +1,6 @@
-﻿namespace MicaWPF.Helpers;
+﻿using MicaWPF.Controls;
+
+namespace MicaWPF.Helpers;
 
 public static class MicaHelper
 {
@@ -14,7 +16,7 @@ public static class MicaHelper
         DWMWA_MICA_EFFECT = 1029
     }
 
-    private static void SetMica(Window window, WindowsTheme theme, OsVersion osVersion)
+    private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion)
     {
         if (osVersion == OsVersion.Windows11)
         {
@@ -30,28 +32,57 @@ public static class MicaHelper
                 CornerRadius = new CornerRadius(0),
                 GlassFrameThickness = new Thickness(-1),
                 UseAeroCaptionButtons = true
-            }
-            );
+            });
 
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
 
             IntPtr windowHandle = new WindowInteropHelper(window).Handle;
-            _ = theme == WindowsTheme.Dark
-                ? DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)))
-                : DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
+            if (theme == WindowsTheme.Dark)
+            {
+                SetThemeBrushes(window, theme);
+                _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)));
+            }
+            else
+            {
+                SetThemeBrushes(window, theme);
+                _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
+            }
 
             _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_MICA_EFFECT, ref trueValue, Marshal.SizeOf(typeof(int)));
         }
         else
         {
-            window.Background = osVersion == OsVersion.WindowsOld || theme == WindowsTheme.Light
-            ? new SolidColorBrush(Color.FromArgb(0xFF, 243, 243, 243))
-            : new SolidColorBrush(Color.FromArgb(0xFF, 32, 32, 32));
+            if (osVersion == OsVersion.WindowsOld || theme == WindowsTheme.Light)
+            {
+                SetThemeBrushes(window, theme);
+            }
+            else
+            {
+                SetThemeBrushes(window, theme);
+            }
+        }
+
+    }
+
+    private static void SetThemeBrushes(MicaWindow window, WindowsTheme theme)
+    {
+        if (theme == WindowsTheme.Light)
+        {
+            window.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 100, 100, 100));
+            window.ForegroundColor = Color.FromArgb(0xFF, 0, 0, 0);
+            window.HighLightColor = Color.FromArgb(0xFF, 230, 230, 230);
+            window.BackgroundColor = Color.FromArgb(0xFF, 243, 243, 243);
+        }
+        else
+        {
+            window.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 100, 100, 100));
+            window.ForegroundColor = Color.FromArgb(0xFF, 255, 255, 255);
+            window.HighLightColor = Color.FromArgb(0xFF, 41, 41, 41);
+            window.BackgroundColor = Color.FromArgb(0xFF, 32, 32, 32);
         }
     }
 
-
-    public static void EnableMica(this Window window, WindowsTheme theme, bool isThemeAware)
+    public static void EnableMica(this MicaWindow window, WindowsTheme theme, bool isThemeAware)
     {
         OsVersion osVersion = OsHelper.GetOsVersion();
 

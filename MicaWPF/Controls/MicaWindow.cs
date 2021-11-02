@@ -1,4 +1,6 @@
-﻿namespace MicaWPF.Controls;
+﻿using System.Windows.Input;
+
+namespace MicaWPF.Controls;
 
 /// <summary>
 /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
@@ -35,9 +37,16 @@ public class MicaWindow : Window
 
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
 
+    public Color BackgroundColor { set { Resources.Remove("MicaBackgroundColor"); Resources.Add("MicaBackgroundColor", value); } }
+    public Color HighLightColor { set { Resources.Remove("MicaHighLightColor"); Resources.Add("MicaHighLightColor", value); } }
+    public Color ForegroundColor { set { Resources.Remove("ForegroundColor"); Resources.Add("ForegroundColor", value); } }
+
     static MicaWindow()
     {
-        //DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
+        if (OsHelper.GetOsVersion() is not OsVersion.Windows11)
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
+        }
     }
 
     public override void OnApplyTemplate()
@@ -49,5 +58,43 @@ public class MicaWindow : Window
     private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
     {
         this.EnableMica(Theme, IsThemeAware);
+    }
+
+    public MicaWindow()
+    {
+        CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
+        CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
+        CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
+        CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
+    }
+
+    private void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = ResizeMode is ResizeMode.CanResize or ResizeMode.CanResizeWithGrip;
+    }
+
+    private void OnCanMinimizeWindow(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = ResizeMode != ResizeMode.NoResize;
+    }
+
+    private void OnCloseWindow(object target, ExecutedRoutedEventArgs e)
+    {
+        SystemCommands.CloseWindow(this);
+    }
+
+    private void OnMaximizeWindow(object target, ExecutedRoutedEventArgs e)
+    {
+        SystemCommands.MaximizeWindow(this);
+    }
+
+    private void OnMinimizeWindow(object target, ExecutedRoutedEventArgs e)
+    {
+        SystemCommands.MinimizeWindow(this);
+    }
+
+    private void OnRestoreWindow(object target, ExecutedRoutedEventArgs e)
+    {
+        SystemCommands.RestoreWindow(this);
     }
 }
