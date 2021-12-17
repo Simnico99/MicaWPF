@@ -20,7 +20,7 @@ public static class MicaHelper
 
     private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion)
     {
-        if (osVersion == OsVersion.Windows11)
+        if (osVersion is OsVersion.Windows11OldMethod or OsVersion.Windows11NewMethod)
         {
             int trueValue = 0x01;
             int falseValue = 0x00;
@@ -50,7 +50,15 @@ public static class MicaHelper
                 _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
             }
 
-            SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
+            if (osVersion == OsVersion.Windows11NewMethod)
+            {
+                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
+            }
+            else
+            {
+                _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_MICA_EFFECT, ref trueValue, Marshal.SizeOf(typeof(int)));
+            }
+
         }
         else
         {

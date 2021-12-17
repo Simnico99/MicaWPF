@@ -11,5 +11,6 @@ public enum OsVersion
 {
     WindowsOld,
     Windows10,
-    Windows11
+    Windows11OldMethod,
+    Windows11NewMethod
 }
