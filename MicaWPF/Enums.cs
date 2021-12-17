@@ -14,3 +14,11 @@ public enum OsVersion
     Windows11OldMethod,
     Windows11NewMethod
 }
+
+public enum MicaType 
+{
+    None = 1,
+    Mica = 2,
+    Acrylic = 3,
+    Tabbed = 4
+}

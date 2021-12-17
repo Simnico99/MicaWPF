@@ -18,7 +18,7 @@ public static class MicaHelper
         DWMWA_MICA_EFFECT = 1029
     }
 
-    private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion)
+    private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion, MicaType micaType)
     {
         if (osVersion is OsVersion.Windows11OldMethod or OsVersion.Windows11NewMethod)
         {
@@ -52,7 +52,7 @@ public static class MicaHelper
 
             if (osVersion == OsVersion.Windows11NewMethod)
             {
-                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
+                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType);
             }
             else
             {
@@ -92,18 +92,18 @@ public static class MicaHelper
         }
     }
 
-    public static void EnableMica(this MicaWindow window, WindowsTheme theme, bool isThemeAware)
+    public static void EnableMica(this MicaWindow window, WindowsTheme theme, bool isThemeAware, MicaType micaType)
     {
         OsVersion osVersion = OsHelper.GetOsVersion();
 
         if (theme == WindowsTheme.Auto || isThemeAware == true)
         {
             WindowsTheme currentWindowsTheme = ThemeHelper.GetWindowsTheme();
-            SetMica(window, currentWindowsTheme, osVersion);
+            SetMica(window, currentWindowsTheme, osVersion, micaType);
         }
         else
         {
-            SetMica(window, theme, osVersion);
+            SetMica(window, theme, osVersion, micaType);
         }
 
         if (osVersion is not OsVersion.WindowsOld)
@@ -117,7 +117,7 @@ public static class MicaHelper
                         case UserPreferenceCategory.General:
                             Application.Current.Dispatcher.Invoke(() =>
                             {
-                                EnableMica(window, WindowsTheme.Auto, false);
+                                EnableMica(window, WindowsTheme.Auto, false, micaType);
                             });
                             break;
                     }
