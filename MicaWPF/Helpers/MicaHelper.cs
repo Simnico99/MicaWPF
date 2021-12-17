@@ -18,7 +18,7 @@ public static class MicaHelper
         DWMWA_MICA_EFFECT = 1029
     }
 
-    private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion, MicaType micaType)
+    private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion, BackdropType micaType, int captionHeight)
     {
         if (osVersion is OsVersion.Windows11OldMethod or OsVersion.Windows11NewMethod)
         {
@@ -29,7 +29,7 @@ public static class MicaHelper
             window,
             new WindowChrome()
             {
-                CaptionHeight = 20,
+                CaptionHeight = captionHeight,
                 ResizeBorderThickness = new Thickness(8),
                 CornerRadius = new CornerRadius(0),
                 GlassFrameThickness = new Thickness(-1),
@@ -92,7 +92,7 @@ public static class MicaHelper
         }
     }
 
-    public static void EnableMica(this MicaWindow window, WindowsTheme theme, bool isThemeAware, MicaType micaType)
+    public static void EnableMica(this MicaWindow window, WindowsTheme theme = WindowsTheme.Auto, bool isThemeAware = true, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
     {
         OsVersion osVersion = OsHelper.GetOsVersion();
 
@@ -117,7 +117,7 @@ public static class MicaHelper
                         case UserPreferenceCategory.General:
                             Application.Current.Dispatcher.Invoke(() =>
                             {
-                                EnableMica(window, WindowsTheme.Auto, false, micaType);
+                                EnableMica(window, WindowsTheme.Auto, false, micaType, captionHeight);
                             });
                             break;
                     }

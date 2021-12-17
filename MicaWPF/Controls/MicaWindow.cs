@@ -37,7 +37,9 @@ public class MicaWindow : Window
 
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
 
-    public MicaType MicaBackgroundType { get; set; } = MicaType.Mica;
+    public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
+
+    public int CaptionHeight { get; set; } = 20;
 
     public Color BackgroundColor { set { Resources.Remove("MicaBackgroundColor"); Resources.Add("MicaBackgroundColor", value); } }
     public Color HighLightColor { set { Resources.Remove("MicaHighLightColor"); Resources.Add("MicaHighLightColor", value); } }
@@ -60,7 +62,7 @@ public class MicaWindow : Window
 
     private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        this.EnableMica(Theme, IsThemeAware, MicaBackgroundType);
+        this.EnableMica(Theme, IsThemeAware, SystemBackdropType, CaptionHeight);
     }
 
     public MicaWindow()

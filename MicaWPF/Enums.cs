@@ -15,7 +15,7 @@ public enum OsVersion
     Windows11NewMethod
 }
 
-public enum MicaType 
+public enum BackdropType 
 {
     None = 1,
     Mica = 2,
