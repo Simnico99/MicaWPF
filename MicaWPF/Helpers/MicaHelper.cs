@@ -1,4 +1,6 @@
 ﻿using MicaWPF.Controls;
+using static MicaWPF.Helpers.PInvoke.ParameterTypes;
+using static MicaWPF.Helpers.PInvoke.Methods;
 
 namespace MicaWPF.Helpers;
 
@@ -48,7 +50,7 @@ public static class MicaHelper
                 _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
             }
 
-            _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_MICA_EFFECT, ref trueValue, Marshal.SizeOf(typeof(int)));
+            SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, 2);
         }
         else
         {
