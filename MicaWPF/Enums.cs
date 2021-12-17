@@ -11,8 +11,8 @@ public enum OsVersion
 {
     WindowsOld,
     Windows10,
-    Windows11OldMethod,
-    Windows11NewMethod
+    Windows11Before22523, // Before 22523
+    Windows11After22523 // After 22523
 }
 
 public enum BackdropType 

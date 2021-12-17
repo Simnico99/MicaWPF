@@ -20,7 +20,7 @@ public static class MicaHelper
 
     private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion, BackdropType micaType, int captionHeight)
     {
-        if (osVersion is OsVersion.Windows11OldMethod or OsVersion.Windows11NewMethod)
+        if (osVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
             int trueValue = 0x01;
             int falseValue = 0x00;
@@ -50,7 +50,7 @@ public static class MicaHelper
                 _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
             }
 
-            if (osVersion == OsVersion.Windows11NewMethod)
+            if (osVersion == OsVersion.Windows11After22523)
             {
                 SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType);
             }
