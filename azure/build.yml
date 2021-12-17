@@ -2,14 +2,14 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'Installing Nuget 5.11.0'
   inputs:
-    versionSpec: '5.11.0'
+    versionSpec: '6.0.0'
 
 - task: UseDotNet@2
   displayName: 'Use .Net 6.0'
   inputs:
     packageType: 'sdk'
     version: '6.0.x'
-    includePreviewVersions: true
+    includePreviewVersions: false
 
 - task: Cake@2
   displayName: 'Running Cake Build'
