@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MicaWPF.Helpers;
 
-public class PInvoke
+public class PInvokeHelper
 {
     public class ParameterTypes
     {
@@ -15,7 +15,8 @@ public class PInvoke
         public enum DWMWINDOWATTRIBUTE
         {
             DWMWA_USE_IMMERSIVE_DARK_MODE = 20,
-            DWMWA_SYSTEMBACKDROP_TYPE = 38
+            DWMWA_SYSTEMBACKDROP_TYPE = 38,
+            DWMWA_MICA_EFFECT = 1029
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -31,12 +32,10 @@ public class PInvoke
     public static class Methods
     {
         [DllImport("DwmApi.dll")]
-        static extern int DwmExtendFrameIntoClientArea(
-            IntPtr hwnd,
-            ref ParameterTypes.MARGINS pMarInset);
+        private static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref ParameterTypes.MARGINS pMarInset);
 
         [DllImport("dwmapi.dll")]
-        static extern int DwmSetWindowAttribute(IntPtr hwnd, ParameterTypes.DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
+        private static extern int DwmSetWindowAttribute(IntPtr hwnd, ParameterTypes.DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
 
         public static int ExtendFrame(IntPtr hwnd, ParameterTypes.MARGINS margins)
             => DwmExtendFrameIntoClientArea(hwnd, ref margins);

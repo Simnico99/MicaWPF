@@ -1,6 +1,6 @@
 ﻿using MicaWPF.Controls;
-using static MicaWPF.Helpers.PInvoke.ParameterTypes;
-using static MicaWPF.Helpers.PInvoke.Methods;
+using static MicaWPF.Helpers.PInvokeHelper.ParameterTypes;
+using static MicaWPF.Helpers.PInvokeHelper.Methods;
 
 namespace MicaWPF.Helpers;
 
@@ -8,15 +8,7 @@ public static class MicaHelper
 {
     private delegate void NoArgDelegate();
 
-    [DllImport("dwmapi.dll")]
-    private static extern int DwmSetWindowAttribute(IntPtr hwnd, DwmWindowAttribute dwAttribute, ref int pvAttribute, int cbAttribute);
 
-    [Flags]
-    private enum DwmWindowAttribute : uint
-    {
-        DWMWA_USE_IMMERSIVE_DARK_MODE = 20,
-        DWMWA_MICA_EFFECT = 1029
-    }
 
     private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion, BackdropType micaType, int captionHeight)
     {
@@ -25,29 +17,28 @@ public static class MicaHelper
             int trueValue = 0x01;
             int falseValue = 0x00;
 
-            WindowChrome.SetWindowChrome(
-            window,
-            new WindowChrome()
-            {
-                CaptionHeight = captionHeight,
-                ResizeBorderThickness = new Thickness(8),
-                CornerRadius = new CornerRadius(0),
-                GlassFrameThickness = new Thickness(-1),
-                UseAeroCaptionButtons = true
-            });
+            WindowChrome.SetWindowChrome(window,
+                new WindowChrome()
+                {
+                    CaptionHeight = captionHeight,
+                    ResizeBorderThickness = new Thickness(8),
+                    CornerRadius = new CornerRadius(0),
+                    GlassFrameThickness = new Thickness(-1),
+                    UseAeroCaptionButtons = true
+                });
 
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
 
             IntPtr windowHandle = new WindowInteropHelper(window).Handle;
             if (theme == WindowsTheme.Dark)
             {
+                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, trueValue);
                 SetThemeBrushes(window, theme);
-                _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref trueValue, Marshal.SizeOf(typeof(int)));
             }
             else
-            {
+            {   
+                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, falseValue);
                 SetThemeBrushes(window, theme);
-                _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, ref falseValue, Marshal.SizeOf(typeof(int)));
             }
 
             if (osVersion == OsVersion.Windows11After22523)
@@ -56,7 +47,7 @@ public static class MicaHelper
             }
             else
             {
-                _ = DwmSetWindowAttribute(windowHandle, DwmWindowAttribute.DWMWA_MICA_EFFECT, ref trueValue, Marshal.SizeOf(typeof(int)));
+                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, trueValue);
             }
 
         }
@@ -99,11 +90,11 @@ public static class MicaHelper
         if (theme == WindowsTheme.Auto || isThemeAware == true)
         {
             WindowsTheme currentWindowsTheme = ThemeHelper.GetWindowsTheme();
-            SetMica(window, currentWindowsTheme, osVersion, micaType);
+            SetMica(window, currentWindowsTheme, osVersion, micaType, captionHeight);
         }
         else
         {
-            SetMica(window, theme, osVersion, micaType);
+            SetMica(window, theme, osVersion, micaType, captionHeight);
         }
 
         if (osVersion is not OsVersion.WindowsOld)
