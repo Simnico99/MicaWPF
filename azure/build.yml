@@ -1,6 +1,6 @@
 steps:
 - task: NuGetToolInstaller@1
-  displayName: 'Installing Nuget 5.11.0'
+  displayName: 'Installing Nuget 6.0.0'
   inputs:
     versionSpec: '6.0.0'
 
