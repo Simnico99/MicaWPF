@@ -2,14 +2,9 @@
 
 public static class OsHelper
 {
-
-
     public static OsVersion GetOsVersion()
     {
-
-
         Version version = Environment.OSVersion.Version;
-
 
         if (version.Major <= 6)
         {
