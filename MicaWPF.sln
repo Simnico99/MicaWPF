@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF", "MicaWPF\MicaWPF.csproj", "{C2F5AC0D-1A7F-41DB-8F0C-1516A918EDAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicaWPF.Test", "MicaWPF.Test\MicaWPF.Test.csproj", "{B9BDE428-C64F-4E36-BB78-9B7AE1C1AB82}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
