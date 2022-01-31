@@ -1,5 +1,4 @@
-﻿using MicaWPF.Controls;
-using MicaWPF.Services;
+﻿using MicaWPF.Services;
 
 namespace MicaWPF.Helpers;
 

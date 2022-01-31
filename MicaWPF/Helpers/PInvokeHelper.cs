@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 public class PInvokeHelper
 {
@@ -22,10 +16,10 @@ public class PInvokeHelper
         [StructLayout(LayoutKind.Sequential)]
         public struct MARGINS
         {
-            public int cxLeftWidth;     
-            public int cxRightWidth;     
-            public int cyTopHeight;      
-            public int cyBottomHeight;  
+            public int cxLeftWidth;
+            public int cxRightWidth;
+            public int cyTopHeight;
+            public int cyBottomHeight;
         };
     }
 

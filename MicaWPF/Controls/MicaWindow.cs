@@ -47,8 +47,8 @@ public class MicaWindow : Window
 
     static MicaWindow()
     {
-        var osVersion =  OsHelper.GetOsVersion();
-        if (osVersion is not OsVersion.Windows11Before22523 and not OsVersion.Windows11After22523 )
+        var osVersion = OsHelper.GetOsVersion();
+        if (osVersion is not OsVersion.Windows11Before22523 and not OsVersion.Windows11After22523)
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
         }

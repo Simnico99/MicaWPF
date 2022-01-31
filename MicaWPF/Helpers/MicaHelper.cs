@@ -1,15 +1,11 @@
-﻿using MicaWPF.Controls;
+﻿using static MicaWPF.Helpers.PInvokeHelper.Methods;
 using static MicaWPF.Helpers.PInvokeHelper.ParameterTypes;
-using static MicaWPF.Helpers.PInvokeHelper.Methods;
-using MicaWPF.Services;
 
 namespace MicaWPF.Helpers;
 
 public static class MicaHelper
 {
     private delegate void NoArgDelegate();
-
-
 
     private static void SetMica(Window window, WindowsTheme theme, OsVersion osVersion, BackdropType micaType, int captionHeight)
     {

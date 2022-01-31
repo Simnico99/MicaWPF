@@ -15,7 +15,7 @@ public enum OsVersion
     Windows11After22523 // After 22523
 }
 
-public enum BackdropType 
+public enum BackdropType
 {
     None = 1,
     Mica = 2,
