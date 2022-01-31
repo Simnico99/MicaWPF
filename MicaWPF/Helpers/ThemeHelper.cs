@@ -32,14 +32,14 @@ public static class ThemeHelper
         return color;
     }
 
-    private static void ReplaceBrush(MicaWindow window, string ressourceName, SolidColorBrush brush, double opacity = 1)
+    private static void ReplaceBrush(Window window, string ressourceName, SolidColorBrush brush, double opacity = 1)
     {
         brush.SafeEdit().Opacity = opacity;
         window.Resources.Remove(ressourceName);
         window.Resources.Add(ressourceName, brush);
     }
 
-    public static void SetThemeBrushes(MicaWindow window, WindowsTheme theme)
+    public static void SetThemeBrushes(Window window, WindowsTheme theme)
     {
         if (theme == WindowsTheme.Light)
         {
@@ -56,7 +56,7 @@ public static class ThemeHelper
         GenerateRuntimeColors(window, theme);
     }
 
-    public static void GenerateRuntimeColors(MicaWindow window, WindowsTheme theme)
+    public static void GenerateRuntimeColors(Window window, WindowsTheme theme)
     {
         SolidColorBrush accentColor = GetWindowsAccentColor(theme);
 

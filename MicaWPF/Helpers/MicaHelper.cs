@@ -11,7 +11,7 @@ public static class MicaHelper
 
 
 
-    private static void SetMica(MicaWindow window, WindowsTheme theme, OsVersion osVersion, BackdropType micaType, int captionHeight)
+    private static void SetMica(Window window, WindowsTheme theme, OsVersion osVersion, BackdropType micaType, int captionHeight)
     {
         if (osVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
@@ -52,7 +52,7 @@ public static class MicaHelper
         ThemeHelper.SetThemeBrushes(window, theme);
     }
 
-    public static void EnableMica(this MicaWindow window, WindowsTheme theme = WindowsTheme.Auto, bool isThemeAware = true, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
+    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, bool isThemeAware = true, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
     {
         OsVersion osVersion = OsHelper.GetOsVersion();
 
