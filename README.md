@@ -136,5 +136,4 @@ If you already use a custom window you can do this:
 
 ```
 
-### More Info
-There is a demo app you can download in the demo folder if you need a template or to see it in action.
+![Alt](https://repobeats.axiom.co/api/embed/756130021d85947f6cd1d56b08c1f7b358e5d3a5.svg "Repobeats analytics image")
