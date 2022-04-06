@@ -75,7 +75,10 @@ public static class MicaHelper
                         await Task.Delay(500);
                     }
 
-                    EnableMica(window, WindowsTheme.Auto, isThemeAware, micaType, captionHeight, false);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        EnableMica(window, WindowsTheme.Auto, isThemeAware, micaType, captionHeight, false);
+                    });
                 }
             });
         }
