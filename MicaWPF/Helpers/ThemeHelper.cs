@@ -1,4 +1,5 @@
-﻿using MicaWPF.Services;
+﻿using MicaWPF.Controls;
+using MicaWPF.Services;
 
 namespace MicaWPF.Helpers;
 
@@ -43,12 +44,25 @@ public static class ThemeHelper
         if (theme == WindowsTheme.Light)
         {
             window.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 100, 100, 100));
+            if (window is MicaWindow micaWindow)
+            {
+                micaWindow.ForegroundColor = Color.FromArgb(0xFF, 0, 0, 0);
+                micaWindow.HighLightColor = Color.FromArgb(0xFF, 230, 230, 230);
+                micaWindow.BackgroundColor = Color.FromArgb(0xFF, 243, 243, 243);
+            }
 
             ThemeService.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(theme));
         }
         else
         {
             window.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 100, 100, 100));
+            if (window is MicaWindow micaWindow)
+            {
+                micaWindow.ForegroundColor = Color.FromArgb(0xFF, 255, 255, 255);
+                micaWindow.HighLightColor = Color.FromArgb(0xFF, 41, 41, 41);
+                micaWindow.BackgroundColor = Color.FromArgb(0xFF, 32, 32, 32);
+
+            }
 
             ThemeService.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(theme));
         }

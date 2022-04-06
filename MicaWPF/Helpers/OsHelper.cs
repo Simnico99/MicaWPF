@@ -6,6 +6,8 @@ public static class OsHelper
     {
         Version version = WindowsVersionHelper.GetVersion();
 
+        return OsVersion.Windows10;
+
         if (version.Major <= 6)
         {
             return OsVersion.WindowsOld;

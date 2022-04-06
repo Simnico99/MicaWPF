@@ -28,11 +28,11 @@ public static class MicaHelper
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
             IntPtr windowHandle = new WindowInteropHelper(window).Handle;
 
-            if (theme == WindowsTheme.Dark)
+            if (theme == WindowsTheme.Dark && osVersion == OsVersion.Windows11Before22523 || osVersion == OsVersion.Windows11After22523)
             {
                 SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, trueValue);
             }
-            else
+            else if(osVersion == OsVersion.Windows11Before22523 || osVersion == OsVersion.Windows11After22523)
             {
                 SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, falseValue);
             }
