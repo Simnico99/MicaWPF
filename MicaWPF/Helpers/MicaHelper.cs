@@ -1,4 +1,5 @@
-﻿using static MicaWPF.Helpers.PInvokeHelper.Methods;
+﻿using MicaWPF.Controls;
+using static MicaWPF.Helpers.PInvokeHelper.Methods;
 using static MicaWPF.Helpers.PInvokeHelper.ParameterTypes;
 
 namespace MicaWPF.Helpers;
@@ -48,7 +49,7 @@ public static class MicaHelper
         ThemeHelper.SetThemeBrushes(window, theme);
     }
 
-    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, bool isThemeAware = true, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
+    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, bool isThemeAware = true, BackdropType micaType = BackdropType.Mica, int captionHeight = 20, bool waitForManualThemeChange = false)
     {
         OsVersion osVersion = OsHelper.GetOsVersion();
 
@@ -62,23 +63,38 @@ public static class MicaHelper
             SetMica(window, theme, osVersion, micaType, captionHeight);
         }
 
-        if (osVersion is not OsVersion.WindowsOld)
+        if (waitForManualThemeChange)
         {
-            if (isThemeAware is true)
+            _ = Task.Run(async () =>
             {
-                SystemEvents.UserPreferenceChanged += (s, e) =>
+                if (window is MicaWindow micaWindow)
                 {
-                    switch (e.Category)
+                    var oldTheme = theme;
+                    while (oldTheme == micaWindow.Theme)
                     {
-                        case UserPreferenceCategory.General:
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                EnableMica(window, WindowsTheme.Auto, false, micaType, captionHeight);
-                            });
-                            break;
+                        await Task.Delay(500);
                     }
-                };
-            }
+
+                    EnableMica(window, WindowsTheme.Auto, isThemeAware, micaType, captionHeight, false);
+                }
+            });
+        }
+
+
+        if (osVersion is not OsVersion.WindowsOld && isThemeAware)
+        {
+            SystemEvents.UserPreferenceChanged += (s, e) =>
+            {
+                switch (e.Category)
+                {
+                    case UserPreferenceCategory.General:
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            EnableMica(window, WindowsTheme.Auto, false, micaType, captionHeight, true);
+                        });
+                        break;
+                }
+            };
         }
     }
 }

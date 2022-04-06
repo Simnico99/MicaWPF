@@ -35,6 +35,8 @@ public class MicaWindow : Window
 {
     public bool IsThemeAware { get; set; } = true;
 
+    public bool WaitForManualThemeChange { get; set; } = false;
+
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
 
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
@@ -62,7 +64,7 @@ public class MicaWindow : Window
 
     private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        this.EnableMica(Theme, IsThemeAware, SystemBackdropType, CaptionHeight);
+        this.EnableMica(Theme, IsThemeAware, SystemBackdropType, CaptionHeight, WaitForManualThemeChange);
     }
 
     public MicaWindow()
