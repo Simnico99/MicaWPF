@@ -19,7 +19,7 @@
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
-		<Version>1.3.7</Version>
+		<Version>1.3.8</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageIcon>Logo128x128.png</PackageIcon>
 		<Authors>Simnico99</Authors>

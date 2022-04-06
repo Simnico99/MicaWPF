@@ -77,7 +77,7 @@ public static class MicaHelper
 
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        EnableMica(window, WindowsTheme.Auto, isThemeAware, micaType, captionHeight, false);
+                        EnableMica(window, micaWindow.Theme, isThemeAware, micaType, captionHeight, true);
                     });
                 }
             });
@@ -93,7 +93,7 @@ public static class MicaHelper
                     case UserPreferenceCategory.General:
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            EnableMica(window, WindowsTheme.Auto, false, micaType, captionHeight, true);
+                            EnableMica(window, WindowsTheme.Auto, false, micaType, captionHeight, false);
                         });
                         break;
                 }
