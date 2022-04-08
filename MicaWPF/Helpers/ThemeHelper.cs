@@ -11,14 +11,14 @@ public static class ThemeHelper
 
     public static WindowsTheme GetWindowsTheme()
     {
-        using RegistryKey key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
-        object registryValueObject = key?.GetValue(_registryValueName);
+        using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
+        var registryValueObject = key?.GetValue(_registryValueName);
         if (registryValueObject == null)
         {
             return WindowsTheme.Light;
         }
 
-        int registryValue = (int)registryValueObject;
+        var registryValue = (int)registryValueObject;
 
         return registryValue > 0 ? WindowsTheme.Light : WindowsTheme.Dark;
     }
@@ -47,7 +47,7 @@ public static class ThemeHelper
             if (window is MicaWindow micaWindow)
             {
                 micaWindow.ForegroundColor = Color.FromArgb(0xFF, 0, 0, 0);
-                micaWindow.HighLightColor = Color.FromArgb(0xFF, 230, 230, 230);
+                micaWindow.AccentColor = Color.FromArgb(0xFF, 230, 230, 230);
                 micaWindow.BackgroundColor = Color.FromArgb(0xFF, 243, 243, 243);
             }
 
@@ -59,7 +59,7 @@ public static class ThemeHelper
             if (window is MicaWindow micaWindow)
             {
                 micaWindow.ForegroundColor = Color.FromArgb(0xFF, 255, 255, 255);
-                micaWindow.HighLightColor = Color.FromArgb(0xFF, 41, 41, 41);
+                micaWindow.AccentColor = Color.FromArgb(0xFF, 41, 41, 41);
                 micaWindow.BackgroundColor = Color.FromArgb(0xFF, 32, 32, 32);
 
             }
@@ -71,7 +71,7 @@ public static class ThemeHelper
 
     public static void GenerateRuntimeColors(Window window, WindowsTheme theme)
     {
-        SolidColorBrush accentColor = GetWindowsAccentColor(theme);
+        var accentColor = GetWindowsAccentColor(theme);
 
         ReplaceBrush(window, "MicaAccentMidBrush", accentColor);
         ReplaceBrush(window, "MicaAccentDarkBrush", ChangeColorHue(accentColor.Color, 0.5));
@@ -80,7 +80,7 @@ public static class ThemeHelper
 
     public static SolidColorBrush GetWindowsAccentColor(WindowsTheme theme)
     {
-        SolidColorBrush solidGlassColor = SystemParameters.WindowGlassBrush as SolidColorBrush;
+        var solidGlassColor = SystemParameters.WindowGlassBrush as SolidColorBrush;
         if (theme == WindowsTheme.Dark)
         {
             return ChangeColorHue(solidGlassColor.Color, 1.57);
@@ -98,9 +98,9 @@ public static class ThemeHelper
             return new SolidColorBrush();
         }
 
-        byte r = (byte)(factor * color.Value.R).Clamp(0, 255);
-        byte g = (byte)(factor * color.Value.G).Clamp(0, 255);
-        byte b = (byte)(factor * color.Value.B).Clamp(0, 255);
+        var r = (byte)(factor * color.Value.R).Clamp(0, 255);
+        var g = (byte)(factor * color.Value.G).Clamp(0, 255);
+        var b = (byte)(factor * color.Value.B).Clamp(0, 255);
         return new SolidColorBrush(Color.FromArgb(color.Value.A, r, g, b));
     }
 

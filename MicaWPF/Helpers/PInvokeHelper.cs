@@ -32,9 +32,13 @@ public class PInvokeHelper
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, ParameterTypes.DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
 
         public static int ExtendFrame(IntPtr hwnd, ParameterTypes.MARGINS margins)
-            => DwmExtendFrameIntoClientArea(hwnd, ref margins);
+        {
+            return DwmExtendFrameIntoClientArea(hwnd, ref margins);
+        }
 
         public static int SetWindowAttribute(IntPtr hwnd, ParameterTypes.DWMWINDOWATTRIBUTE attribute, int parameter)
-            => DwmSetWindowAttribute(hwnd, attribute, ref parameter, Marshal.SizeOf<int>());
+        {
+            return DwmSetWindowAttribute(hwnd, attribute, ref parameter, Marshal.SizeOf<int>());
+        }
     }
 }

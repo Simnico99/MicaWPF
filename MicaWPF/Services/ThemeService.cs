@@ -50,12 +50,12 @@ public class ThemeService
         }
 
         // find if the target element already has a theme applied
-        List<ThemeResourceDictionary> existingDictionaries =
+        var existingDictionaries =
             (from dictionary in targetElement.Resources.MergedDictionaries.OfType<ThemeResourceDictionary>()
              select dictionary).ToList();
 
         // remove the existing dictionaries
-        foreach (ThemeResourceDictionary thDictionary in existingDictionaries)
+        foreach (var thDictionary in existingDictionaries)
         {
             if (themeDictionary == thDictionary)
             {

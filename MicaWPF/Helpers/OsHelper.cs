@@ -4,7 +4,7 @@ public static class OsHelper
 {
     public static OsVersion GetOsVersion()
     {
-        Version version = WindowsVersionHelper.GetVersion();
+        var version = WindowsVersionHelper.GetVersion();
 
         if (version.Major <= 6)
         {

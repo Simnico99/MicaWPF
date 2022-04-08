@@ -37,17 +37,12 @@ public class MicaWindow : Window
     private readonly DynamicThemeService _dynamicThemeService;
 
     public bool IsThemeAware { get; set; } = true;
-
     public bool IsWaitingForManualThemeChange { get; set; } = false;
-
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
-
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
-
     public int CaptionHeight { get; set; } = 20;
-
     public Color BackgroundColor { set { Resources.Remove("MicaBackgroundColor"); Resources.Add("MicaBackgroundColor", value); } }
-    public Color HighLightColor { set { Resources.Remove("MicaHighLightColor"); Resources.Add("MicaHighLightColor", value); } }
+    public Color AccentColor { set { Resources.Remove("MicaHighLightColor"); Resources.Add("MicaHighLightColor", value); } }
     public Color ForegroundColor { set { Resources.Remove("ForegroundColor"); Resources.Add("ForegroundColor", value); } }
 
     static MicaWindow()
@@ -66,14 +61,16 @@ public class MicaWindow : Window
         {
             _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
         }
+
         if (e.Property.Name is nameof(IsWaitingForManualThemeChange))
         {
             _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
         }
-        if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight)) 
+
+        if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
         {
             this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
-            if (e.Property.Name is nameof(SystemBackdropType)) 
+            if (e.Property.Name is nameof(SystemBackdropType))
             {
                 _dynamicThemeService.SetThemeAware(false);
                 _dynamicThemeService.AwaitManualThemeChange(false);

@@ -1,11 +1,4 @@
 ﻿using MicaWPF.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls.Primitives;
 
 namespace MicaWPF.Services
 {
@@ -72,7 +65,7 @@ namespace MicaWPF.Services
                             Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, micaWindow.Theme, micaType, -1));
                             AwaitManualThemeChange(awaitChange, micaType);
                         }
-                        else 
+                        else
                         {
                             _isWaitingForThemeChange = false;
                         }

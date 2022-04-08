@@ -1,5 +1,4 @@
-﻿using MicaWPF.Controls;
-using static MicaWPF.Helpers.PInvokeHelper.Methods;
+﻿using static MicaWPF.Helpers.PInvokeHelper.Methods;
 using static MicaWPF.Helpers.PInvokeHelper.ParameterTypes;
 
 namespace MicaWPF.Helpers;
@@ -12,23 +11,24 @@ public static class MicaHelper
     {
         if (osVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
-            int trueValue = 0x01;
-            int falseValue = 0x00;
+            var trueValue = 0x01;
+            var falseValue = 0x00;
 
-            if (captionHeight != -1) { 
-            WindowChrome.SetWindowChrome(window,
-                new WindowChrome()
-                {
-                    CaptionHeight = captionHeight,
-                    ResizeBorderThickness = new Thickness(8),
-                    CornerRadius = new CornerRadius(0),
-                    GlassFrameThickness = new Thickness(-1),
-                    UseAeroCaptionButtons = true
-                });
+            if (captionHeight != -1)
+            {
+                WindowChrome.SetWindowChrome(window,
+                    new WindowChrome()
+                    {
+                        CaptionHeight = captionHeight,
+                        ResizeBorderThickness = new Thickness(8),
+                        CornerRadius = new CornerRadius(0),
+                        GlassFrameThickness = new Thickness(-1),
+                        UseAeroCaptionButtons = true
+                    });
             }
 
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
-            IntPtr windowHandle = new WindowInteropHelper(window).Handle;
+            var windowHandle = new WindowInteropHelper(window).Handle;
 
             if (theme == WindowsTheme.Dark)
             {
@@ -53,11 +53,11 @@ public static class MicaHelper
 
     public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
     {
-        OsVersion osVersion = OsHelper.GetOsVersion();
+        var osVersion = OsHelper.GetOsVersion();
 
         if (theme == WindowsTheme.Auto)
         {
-            WindowsTheme currentWindowsTheme = ThemeHelper.GetWindowsTheme();
+            var currentWindowsTheme = ThemeHelper.GetWindowsTheme();
             SetMica(window, currentWindowsTheme, osVersion, micaType, captionHeight);
         }
         else
