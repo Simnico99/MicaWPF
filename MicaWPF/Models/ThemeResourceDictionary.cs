@@ -1,4 +1,4 @@
 ﻿namespace MicaWPF.Models;
 
-public class ThemeResourceDictionary : ResourceDictionary {}
+public class ThemeResourceDictionary : ResourceDictionary { }
 

@@ -56,7 +56,7 @@ public static class MicaHelper
         }
         else
         {
-            SetMica(window, theme,  micaType, captionHeight);
+            SetMica(window, theme, micaType, captionHeight);
         }
     }
 }

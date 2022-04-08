@@ -2,10 +2,10 @@
 
 public static class DefaultColorHelper
 {
-    public static Dictionary<string, SolidColorBrush> LightDefault { get; set; } = new() 
+    public static Dictionary<string, SolidColorBrush> LightDefault { get; set; } = new()
     {
         { "Foreground", new(Color.FromArgb(0xFF, 0, 0, 0)) },
-        { "Background", new(Color.FromArgb(0xFF, 243, 243, 243))},
+        { "Background", new(Color.FromArgb(0xFF, 243, 243, 243)) },
         { "Accent", new(Color.FromArgb(0xFF, 230, 230, 230)) }
     };
 
@@ -16,7 +16,7 @@ public static class DefaultColorHelper
         { "Accent", new(Color.FromArgb(0xFF, 32, 32, 32)) }
     };
 
-    public static bool IsDefaultColor(WindowsTheme theme, string colorKey, SolidColorBrush? colorToCompare) 
+    public static bool IsDefaultColor(WindowsTheme theme, string colorKey, SolidColorBrush? colorToCompare)
     {
         if (theme == WindowsTheme.Auto)
         {
@@ -27,13 +27,13 @@ public static class DefaultColorHelper
         {
             return colorToCompare == LightDefault[colorKey];
         }
-        else 
+        else
         {
             return colorToCompare == DarkDefault[colorKey];
         }
     }
 
-    public static SolidColorBrush GetThemedColor(WindowsTheme theme, string colorKey) 
+    public static SolidColorBrush GetThemedColor(WindowsTheme theme, string colorKey)
     {
         if (theme == WindowsTheme.Light)
         {

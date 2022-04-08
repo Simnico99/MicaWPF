@@ -1,6 +1,4 @@
-﻿using MicaWPF.Controls;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 public static class ThemeHelper
 {
@@ -70,7 +68,7 @@ public static class ThemeHelper
                 }
             }
 
-            ThemeService.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(theme));
+            ThemeDictionnaryHelper.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(theme));
         }
         else
         {
@@ -100,7 +98,7 @@ public static class ThemeHelper
                 }
             }
 
-            ThemeService.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(theme));
+            ThemeDictionnaryHelper.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(theme));
         }
 
         GenerateRuntimeColors(window, theme, color);

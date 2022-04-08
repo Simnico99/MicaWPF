@@ -1,5 +1,5 @@
-﻿using static MicaWPF.Interop.InteropValues;
-using System.Security;
+﻿using System.Security;
+using static MicaWPF.Interop.InteropValues;
 
 namespace MicaWPF.Interop;
 

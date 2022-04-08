@@ -1,11 +1,11 @@
 ﻿namespace MicaWPF.Services;
 
-public class ThemeService
+public static class ThemeDictionnaryHelper
 {
 
     public static readonly DependencyProperty CurrentThemeDictionaryProperty =
      DependencyProperty.RegisterAttached("CurrentThemeDictionary", typeof(Uri),
-     typeof(ThemeService),
+     typeof(ThemeDictionnaryHelper),
      new UIPropertyMetadata(null, CurrentThemeDictionaryChanged));
 
     public static Uri GetCurrentThemeDictionary(DependencyObject obj)
@@ -51,7 +51,7 @@ public class ThemeService
         {
             if (themeDictionary == thDictionary)
             {
-                continue; 
+                continue;
             }
 
             targetElement.Resources.MergedDictionaries.Remove(thDictionary);

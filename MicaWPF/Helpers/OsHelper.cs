@@ -6,15 +6,15 @@ public static class OsHelper
 
     public static OsVersion GlobalOsVersion
     {
-        get 
+        get
         {
-            if(_globalOsVersion is not null)
+            if (_globalOsVersion is not null)
             {
                 return (OsVersion)_globalOsVersion;
             }
             return (OsVersion)GetOsGlobalVersion()!;
         }
-        private set { _globalOsVersion = value; }
+        private set => _globalOsVersion = value;
     }
 
     private static Version? _preciseOsVersion;
@@ -29,7 +29,7 @@ public static class OsHelper
             }
             return GetOsPreciseVersion();
         }
-        private set { _preciseOsVersion = value; }
+        private set => _preciseOsVersion = value;
     }
 
 
