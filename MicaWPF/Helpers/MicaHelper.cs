@@ -15,6 +15,7 @@ public static class MicaHelper
             int trueValue = 0x01;
             int falseValue = 0x00;
 
+            if (captionHeight != -1) { 
             WindowChrome.SetWindowChrome(window,
                 new WindowChrome()
                 {
@@ -24,6 +25,7 @@ public static class MicaHelper
                     GlassFrameThickness = new Thickness(-1),
                     UseAeroCaptionButtons = true
                 });
+            }
 
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
             IntPtr windowHandle = new WindowInteropHelper(window).Handle;
@@ -32,7 +34,7 @@ public static class MicaHelper
             {
                 SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, trueValue);
             }
-            else if(osVersion == OsVersion.Windows11Before22523 || osVersion == OsVersion.Windows11After22523)
+            else if (osVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
             {
                 SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, falseValue);
             }
@@ -49,11 +51,11 @@ public static class MicaHelper
         ThemeHelper.SetThemeBrushes(window, theme);
     }
 
-    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, bool isThemeAware = true, BackdropType micaType = BackdropType.Mica, int captionHeight = 20, bool waitForManualThemeChange = false)
+    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
     {
         OsVersion osVersion = OsHelper.GetOsVersion();
 
-        if (theme == WindowsTheme.Auto || isThemeAware == true)
+        if (theme == WindowsTheme.Auto)
         {
             WindowsTheme currentWindowsTheme = ThemeHelper.GetWindowsTheme();
             SetMica(window, currentWindowsTheme, osVersion, micaType, captionHeight);
@@ -61,43 +63,6 @@ public static class MicaHelper
         else
         {
             SetMica(window, theme, osVersion, micaType, captionHeight);
-        }
-
-        if (waitForManualThemeChange)
-        {
-            _ = Task.Run(async () =>
-            {
-                if (window is MicaWindow micaWindow)
-                {
-                    var oldTheme = theme;
-                    while (oldTheme == micaWindow.Theme)
-                    {
-                        await Task.Delay(500);
-                    }
-
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        EnableMica(window, micaWindow.Theme, isThemeAware, micaType, captionHeight, true);
-                    });
-                }
-            });
-        }
-
-
-        if (osVersion is not OsVersion.WindowsOld && isThemeAware)
-        {
-            SystemEvents.UserPreferenceChanged += (s, e) =>
-            {
-                switch (e.Category)
-                {
-                    case UserPreferenceCategory.General:
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            EnableMica(window, WindowsTheme.Auto, false, micaType, captionHeight, false);
-                        });
-                        break;
-                }
-            };
         }
     }
 }

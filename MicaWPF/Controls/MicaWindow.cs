@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using MicaWPF.Services;
+using System.Windows.Input;
 
 namespace MicaWPF.Controls;
 
@@ -33,9 +34,11 @@ namespace MicaWPF.Controls;
 /// </summary>
 public class MicaWindow : Window
 {
+    private readonly DynamicThemeService _dynamicThemeService;
+
     public bool IsThemeAware { get; set; } = true;
 
-    public bool WaitForManualThemeChange { get; set; } = false;
+    public bool IsWaitingForManualThemeChange { get; set; } = false;
 
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
 
@@ -56,6 +59,31 @@ public class MicaWindow : Window
         }
     }
 
+    protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+        if (e.Property.Name is nameof(IsThemeAware))
+        {
+            _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
+        }
+        if (e.Property.Name is nameof(IsWaitingForManualThemeChange))
+        {
+            _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
+        }
+        if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight)) 
+        {
+            this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
+            if (e.Property.Name is nameof(SystemBackdropType)) 
+            {
+                _dynamicThemeService.SetThemeAware(false);
+                _dynamicThemeService.AwaitManualThemeChange(false);
+
+                _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
+                _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
+            }
+        }
+    }
+
     public override void OnApplyTemplate()
     {
         base.OnApplyTemplate();
@@ -64,11 +92,14 @@ public class MicaWindow : Window
 
     private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        this.EnableMica(Theme, IsThemeAware, SystemBackdropType, CaptionHeight, WaitForManualThemeChange);
+        this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
+        _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
+        _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
     }
 
     public MicaWindow()
     {
+        _dynamicThemeService = new(this);
         CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
