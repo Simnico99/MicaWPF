@@ -1,4 +1,6 @@
-﻿namespace MicaWPF.Helpers;
+﻿using MicaWPF.Controls;
+
+namespace MicaWPF.Helpers;
 
 public static class ThemeHelper
 {
@@ -36,43 +38,88 @@ public static class ThemeHelper
         window.Resources.Add(ressourceName, brush);
     }
 
-    public static void SetThemeBrushes(Window window, WindowsTheme theme)
+    public static void SetThemeBrushes(Window window, WindowsTheme theme, bool UseWindowsAccentColor = true)
     {
+        SolidColorBrush? color = null;
+
         if (theme == WindowsTheme.Light)
         {
-            window.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 100, 100, 100));
+            if (DefaultColorHelper.IsDefaultColor(WindowsTheme.Dark, "Foreground", (SolidColorBrush)window.Foreground))
+            {
+                window.Foreground = DefaultColorHelper.LightDefault["Foreground"];
+            }
+
+            if (DefaultColorHelper.IsDefaultColor(WindowsTheme.Dark, "Background", (SolidColorBrush)window.Background))
+            {
+                window.Background = DefaultColorHelper.LightDefault["Background"];
+            }
+
             if (window is MicaWindow micaWindow)
             {
-                micaWindow.ForegroundColor = Color.FromArgb(0xFF, 0, 0, 0);
-                micaWindow.AccentColor = Color.FromArgb(0xFF, 230, 230, 230);
-                micaWindow.BackgroundColor = Color.FromArgb(0xFF, 243, 243, 243);
+                if (DefaultColorHelper.IsDefaultColor(WindowsTheme.Dark, "Accent", micaWindow.Accent))
+                {
+                    if (!UseWindowsAccentColor)
+                    {
+                        micaWindow.Accent = DefaultColorHelper.LightDefault["Accent"];
+                        color = micaWindow.Accent;
+                    }
+                }
+                else
+                {
+                    color = micaWindow.Accent;
+                }
             }
 
             ThemeService.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(theme));
         }
         else
         {
-            window.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 100, 100, 100));
+            if (DefaultColorHelper.IsDefaultColor(WindowsTheme.Light, "Foreground", (SolidColorBrush)window.Foreground))
+            {
+                window.Foreground = DefaultColorHelper.DarkDefault["Foreground"];
+            }
+
+            if (DefaultColorHelper.IsDefaultColor(WindowsTheme.Light, "Background", (SolidColorBrush)window.Background))
+            {
+                window.Background = DefaultColorHelper.DarkDefault["Background"];
+            }
+
             if (window is MicaWindow micaWindow)
             {
-                micaWindow.ForegroundColor = Color.FromArgb(0xFF, 255, 255, 255);
-                micaWindow.AccentColor = Color.FromArgb(0xFF, 41, 41, 41);
-                micaWindow.BackgroundColor = Color.FromArgb(0xFF, 32, 32, 32);
-
+                if (DefaultColorHelper.IsDefaultColor(WindowsTheme.Light, "Accent", micaWindow.Accent))
+                {
+                    if (!UseWindowsAccentColor)
+                    {
+                        micaWindow.Accent = DefaultColorHelper.DarkDefault["Accent"];
+                        color = micaWindow.Accent;
+                    }
+                }
+                else
+                {
+                    color = micaWindow.Accent;
+                }
             }
 
             ThemeService.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(theme));
         }
-        GenerateRuntimeColors(window, theme);
+
+        GenerateRuntimeColors(window, theme, color);
     }
 
-    public static void GenerateRuntimeColors(Window window, WindowsTheme theme)
+    public static void GenerateRuntimeColors(Window window, WindowsTheme theme, SolidColorBrush? color = null)
     {
-        var accentColor = GetWindowsAccentColor(theme);
+        var accentColor = color;
+        if (color is null)
+        {
+            accentColor = GetWindowsAccentColor(theme);
+        }
 
-        ReplaceBrush(window, "MicaAccentMidBrush", accentColor);
-        ReplaceBrush(window, "MicaAccentDarkBrush", ChangeColorHue(accentColor.Color, 0.5));
-        ReplaceBrush(window, "MicaAccentLightBorderBrush", accentColor, 0.92);
+        if (accentColor is not null)
+        {
+            ReplaceBrush(window, "MicaAccentMidBrush", accentColor);
+            ReplaceBrush(window, "MicaAccentDarkBrush", ChangeColorHue(accentColor.Color, 0.5));
+            ReplaceBrush(window, "MicaAccentLightBorderBrush", accentColor, 0.92);
+        }
     }
 
     public static SolidColorBrush GetWindowsAccentColor(WindowsTheme theme)

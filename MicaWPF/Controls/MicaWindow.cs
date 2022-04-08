@@ -33,19 +33,27 @@ public class MicaWindow : Window
 {
     private readonly DynamicThemeService _dynamicThemeService;
 
+    public static readonly DependencyProperty AccentProperty = DependencyProperty.Register(
+        "Accent", typeof(SolidColorBrush),
+        typeof(MicaWindow)
+        );
+
     public bool IsThemeAware { get; set; } = true;
     public bool IsWaitingForManualThemeChange { get; set; } = false;
+    public bool UseWindowsAccentColor { get; set; } = true;
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
     public int CaptionHeight { get; set; } = 20;
-    public Color BackgroundColor { set { Resources.Remove("MicaBackgroundColor"); Resources.Add("MicaBackgroundColor", value); } }
-    public Color AccentColor { set { Resources.Remove("MicaHighLightColor"); Resources.Add("MicaHighLightColor", value); } }
-    public Color ForegroundColor { set { Resources.Remove("ForegroundColor"); Resources.Add("ForegroundColor", value); } }
+
+    public SolidColorBrush? Accent
+    {
+        get => (SolidColorBrush)GetValue(AccentProperty);
+        set => SetValue(AccentProperty, value);
+    }
 
     static MicaWindow()
     {
-        var osVersion = OsHelper.GetOsGlobalVersion();
-        if (osVersion is not OsVersion.Windows11Before22523 and not OsVersion.Windows11After22523)
+        if (OsHelper.GlobalOsVersion is not OsVersion.Windows11Before22523 and not OsVersion.Windows11After22523)
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
         }
@@ -67,6 +75,7 @@ public class MicaWindow : Window
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
         {
             this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
+            ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
             if (e.Property.Name is nameof(SystemBackdropType))
             {
                 _dynamicThemeService.SetThemeAware(false);
@@ -76,6 +85,11 @@ public class MicaWindow : Window
                 _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
             }
         }
+
+        if (e.Property.Name is nameof(Accent) or nameof(Background) or nameof(Foreground) or nameof(UseWindowsAccentColor)) 
+        {
+            ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
+        }
     }
 
     public override void OnApplyTemplate()
@@ -84,9 +98,29 @@ public class MicaWindow : Window
         Loaded += MicaWindow_Loaded;
     }
 
+    public void SetDefaultColor()
+    {
+        if (Accent is null)
+        {
+            Accent = DefaultColorHelper.GetThemedColor(Theme, "Accent");
+        }
+
+        if (Background is null)
+        {
+            Background = DefaultColorHelper.GetThemedColor(Theme, "Background");
+        }
+
+        if (Foreground is null || ((SolidColorBrush)Foreground).Color == Colors.Black)
+        {
+            Foreground = DefaultColorHelper.GetThemedColor(Theme, "Foreground");
+        }
+    }
+
     private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
     {
         this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
+        SetDefaultColor();
+        ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
         _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
         _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
     }
