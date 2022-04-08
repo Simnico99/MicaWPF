@@ -50,7 +50,7 @@ public static class MicaHelper
 
     public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
     {
-        var osVersion = OsHelper.GetOsVersion();
+        var osVersion = OsHelper.GetOsGlobalVersion();
 
         if (theme == WindowsTheme.Auto)
         {

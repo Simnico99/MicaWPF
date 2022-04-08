@@ -2,7 +2,7 @@
 
 public static class OsHelper
 {
-    private static Version GetWindowsCurrentVersion() 
+    public static Version GetOsPreciseVersion() 
     {
         var osVersionInfo = new InteropValues.OSVERSIONINFOEX { OSVersionInfoSize = Marshal.SizeOf(typeof(InteropValues.OSVERSIONINFOEX)) };
         if (InteropMethods.RtlGetVersion(ref osVersionInfo) != 0)
@@ -13,9 +13,9 @@ public static class OsHelper
         return new Version(osVersionInfo.MajorVersion, osVersionInfo.MinorVersion, osVersionInfo.BuildNumber);
     }
 
-    public static OsVersion GetOsVersion()
+    public static OsVersion GetOsGlobalVersion()
     {
-        var version = GetWindowsCurrentVersion();
+        var version = GetOsPreciseVersion();
 
         if (version.Major <= 6)
         {
