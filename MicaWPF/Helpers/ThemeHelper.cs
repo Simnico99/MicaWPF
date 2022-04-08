@@ -5,14 +5,14 @@ namespace MicaWPF.Helpers;
 
 public static class ThemeHelper
 {
-    private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
+    private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
 
-    private const string _registryValueName = "AppsUseLightTheme";
+    private const string RegistryValueName = "AppsUseLightTheme";
 
     public static WindowsTheme GetWindowsTheme()
     {
-        using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
-        var registryValueObject = key?.GetValue(_registryValueName);
+        using var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
+        var registryValueObject = key?.GetValue(RegistryValueName);
         if (registryValueObject == null)
         {
             return WindowsTheme.Light;

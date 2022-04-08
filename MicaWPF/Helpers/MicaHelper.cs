@@ -1,5 +1,4 @@
-﻿using static MicaWPF.Helpers.PInvokeHelper.Methods;
-using static MicaWPF.Helpers.PInvokeHelper.ParameterTypes;
+﻿using MicaWPF.Interop;
 
 namespace MicaWPF.Helpers;
 
@@ -32,20 +31,20 @@ public static class MicaHelper
 
             if (theme == WindowsTheme.Dark)
             {
-                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, trueValue);
+                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, trueValue);
             }
             else if (osVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
             {
-                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, falseValue);
+                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, falseValue);
             }
 
             if (osVersion == OsVersion.Windows11After22523)
             {
-                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType);
+                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType);
             }
             else
             {
-                SetWindowAttribute(windowHandle, DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, trueValue);
+                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, trueValue);
             }
         }
         ThemeHelper.SetThemeBrushes(window, theme);

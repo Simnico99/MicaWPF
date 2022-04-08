@@ -1,5 +1,5 @@
-﻿using MicaWPF.Services;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using MicaWPF.Services;
 
 namespace MicaWPF.Controls;
 

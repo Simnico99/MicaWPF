@@ -1,81 +1,80 @@
 ﻿using MicaWPF.Controls;
 
-namespace MicaWPF.Services
+namespace MicaWPF.Services;
+
+internal class DynamicThemeService
 {
-    internal class DynamicThemeService
+    private readonly OsVersion _currentOsVersion;
+    private readonly Window _window;
+    private CancellationTokenSource _waitForDynamicThemeCancellationToken = new();
+    private bool _isWaitingForThemeChange = false;
+    private bool _isThemeAware = false;
+
+    public DynamicThemeService(Window window)
     {
-        private readonly OsVersion _currentOsVersion;
-        private readonly Window _window;
-        private CancellationTokenSource _waitForDynamicThemeCancellationToken = new();
-        private bool _isWaitingForThemeChange = false;
-        private bool _isThemeAware = false;
+        _window = window;
+        _currentOsVersion = OsHelper.GetOsVersion();
+    }
 
-        public DynamicThemeService(Window window)
+    public void SetThemeAware(bool isThemeAware, BackdropType micaType = BackdropType.Mica)
+    {
+        if (!_isThemeAware && isThemeAware)
         {
-            _window = window;
-            _currentOsVersion = OsHelper.GetOsVersion();
-        }
-
-        public void SetThemeAware(bool isThemeAware, BackdropType micaType = BackdropType.Mica)
-        {
-            if (!_isThemeAware && isThemeAware)
+            _isThemeAware = true;
+            if (_currentOsVersion is not OsVersion.WindowsOld && isThemeAware)
             {
-                _isThemeAware = true;
-                if (_currentOsVersion is not OsVersion.WindowsOld && isThemeAware)
+                SystemEvents.UserPreferenceChanged += (s, e) =>
                 {
-                    SystemEvents.UserPreferenceChanged += (s, e) =>
+                    switch (e.Category)
                     {
-                        switch (e.Category)
-                        {
-                            case UserPreferenceCategory.General:
-                                Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, WindowsTheme.Auto, micaType, -1));
-                                SetThemeAware(isThemeAware, micaType);
-                                break;
-                        }
-                    };
-                }
-            }
-            else if (_isThemeAware && !isThemeAware)
-            {
-                _isThemeAware = false;
-                var handler = (UserPreferenceChangedEventHandler)Delegate.CreateDelegate(typeof(UserPreferenceChangedEventHandler), this, "UserPreferenceChangedHandler");
-                SystemEvents.UserPreferenceChanged -= handler;
-
+                        case UserPreferenceCategory.General:
+                            Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, WindowsTheme.Auto, micaType, -1));
+                            SetThemeAware(isThemeAware, micaType);
+                            break;
+                    }
+                };
             }
         }
-
-        public void AwaitManualThemeChange(bool awaitChange, BackdropType micaType = BackdropType.Mica)
+        else if (_isThemeAware && !isThemeAware)
         {
-            if (!_isWaitingForThemeChange && awaitChange)
+            _isThemeAware = false;
+            var handler = (UserPreferenceChangedEventHandler)Delegate.CreateDelegate(typeof(UserPreferenceChangedEventHandler), this, "UserPreferenceChangedHandler");
+            SystemEvents.UserPreferenceChanged -= handler;
+
+        }
+    }
+
+    public void AwaitManualThemeChange(bool awaitChange, BackdropType micaType = BackdropType.Mica)
+    {
+        if (!_isWaitingForThemeChange && awaitChange)
+        {
+            _waitForDynamicThemeCancellationToken = new();
+            if (_window is MicaWindow micaWindow)
             {
-                _waitForDynamicThemeCancellationToken = new();
-                if (_window is MicaWindow micaWindow)
+                var oldTheme = micaWindow.Theme;
+                _ = Task.Run(async () =>
                 {
-                    var oldTheme = micaWindow.Theme;
-                    _ = Task.Run(async () =>
+
+                    while (oldTheme == micaWindow.Theme && !_waitForDynamicThemeCancellationToken.IsCancellationRequested)
                     {
+                        await Task.Delay(500);
+                    }
 
-                        while (oldTheme == micaWindow.Theme && !_waitForDynamicThemeCancellationToken.IsCancellationRequested)
-                        {
-                            await Task.Delay(500);
-                        }
-
-                        if (!_waitForDynamicThemeCancellationToken.IsCancellationRequested)
-                        {
-                            Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, micaWindow.Theme, micaType, -1));
-                            AwaitManualThemeChange(awaitChange, micaType);
-                        }
-                        else
-                        {
-                            _isWaitingForThemeChange = false;
-                        }
-                    });
-                }
+                    if (!_waitForDynamicThemeCancellationToken.IsCancellationRequested)
+                    {
+                        Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, micaWindow.Theme, micaType, -1));
+                        AwaitManualThemeChange(awaitChange, micaType);
+                    }
+                    else
+                    {
+                        _isWaitingForThemeChange = false;
+                    }
+                });
             }
-            else if (_isWaitingForThemeChange && !awaitChange)
-            {
-                _waitForDynamicThemeCancellationToken.Cancel();
-            }
+        }
+        else if (_isWaitingForThemeChange && !awaitChange)
+        {
+            _waitForDynamicThemeCancellationToken.Cancel();
         }
     }
 }
