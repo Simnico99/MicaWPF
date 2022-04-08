@@ -46,21 +46,19 @@ public static class OsHelper
 
     private static OsVersion? GetOsGlobalVersion()
     {
-        var version = GetOsPreciseVersion();
-
-        if (version.Major <= 6)
+        if (PreciseOsVersion.Major <= 6)
         {
             return OsVersion.WindowsOld;
         }
-        else if (version.Major >= 10 && version.Build < 22000)
+        else if (PreciseOsVersion.Major >= 10 && PreciseOsVersion.Build < 22000)
         {
             return OsVersion.Windows10;
         }
-        else if (version.Major >= 10 && version.Build >= 22000 && version.Build < 22523)
+        else if (PreciseOsVersion.Major >= 10 && PreciseOsVersion.Build >= 22000 && PreciseOsVersion.Build < 22523)
         {
             return OsVersion.Windows11Before22523;
         }
-        else if (version.Major >= 10 && version.Build >= 22523)
+        else if (PreciseOsVersion.Major >= 10 && PreciseOsVersion.Build >= 22523)
         {
             return OsVersion.Windows11After22523;
         }
