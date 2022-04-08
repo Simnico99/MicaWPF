@@ -1,6 +1,4 @@
-﻿using MicaWPF.Interop;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 public static class MicaHelper
 {

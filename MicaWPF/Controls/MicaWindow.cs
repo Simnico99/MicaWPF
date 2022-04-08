@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-using MicaWPF.Services;
-
-namespace MicaWPF.Controls;
+﻿namespace MicaWPF.Controls;
 
 /// <summary>
 /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.

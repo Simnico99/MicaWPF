@@ -2,9 +2,20 @@
 
 public static class OsHelper
 {
+    private static Version GetWindowsCurrentVersion() 
+    {
+        var osVersionInfo = new InteropValues.OSVERSIONINFOEX { OSVersionInfoSize = Marshal.SizeOf(typeof(InteropValues.OSVERSIONINFOEX)) };
+        if (InteropMethods.RtlGetVersion(ref osVersionInfo) != 0)
+        {
+            throw new Exception("Unsuported OS!");
+        }
+
+        return new Version(osVersionInfo.MajorVersion, osVersionInfo.MinorVersion, osVersionInfo.BuildNumber);
+    }
+
     public static OsVersion GetOsVersion()
     {
-        var version = WindowsVersionHelper.GetVersion();
+        var version = GetWindowsCurrentVersion();
 
         if (version.Major <= 6)
         {

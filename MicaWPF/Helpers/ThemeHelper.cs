@@ -1,7 +1,4 @@
-﻿using MicaWPF.Controls;
-using MicaWPF.Services;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 public static class ThemeHelper
 {

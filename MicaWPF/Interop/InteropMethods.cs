@@ -1,16 +1,24 @@
-﻿namespace MicaWPF.Interop;
+﻿using static MicaWPF.Interop.InteropValues;
+using System.Security;
+
+namespace MicaWPF.Interop;
 
 internal class InteropMethods
 {
-    [DllImport(InteropValues.ExternDll.DwmApi)]
+    [DllImport(ExternDll.DwmApi)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    private static extern int DwmSetWindowAttribute(IntPtr hwnd, InteropValues.DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
 
-    [DllImport(InteropValues.ExternDll.DwmApi)]
+    [DllImport(ExternDll.DwmApi)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    public static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref InteropValues.MARGINS pMarInset);
+    public static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS pMarInset);
 
-    public static int SetWindowAttribute(IntPtr hwnd, InteropValues.DWMWINDOWATTRIBUTE attribute, int parameter)
+    [SecurityCritical]
+    [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    internal static extern int RtlGetVersion(ref OSVERSIONINFOEX versionInfo);
+
+    public static int SetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, int parameter)
     {
         return DwmSetWindowAttribute(hwnd, attribute, ref parameter, Marshal.SizeOf<int>());
     }
