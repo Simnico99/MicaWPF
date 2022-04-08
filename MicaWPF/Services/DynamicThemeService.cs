@@ -11,7 +11,7 @@ internal class DynamicThemeService
     public DynamicThemeService(Window window)
     {
         _window = window;
-        _currentOsVersion = OsHelper.GetOsGlobalVersion();
+        _currentOsVersion = OsHelper.GlobalOsVersion;
     }
 
     public void SetThemeAware(bool isThemeAware, BackdropType micaType = BackdropType.Mica)

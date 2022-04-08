@@ -2,7 +2,38 @@
 
 public static class OsHelper
 {
-    public static Version GetOsPreciseVersion() 
+    private static OsVersion? _globalOsVersion;
+
+    public static OsVersion GlobalOsVersion
+    {
+        get 
+        {
+            if(_globalOsVersion is not null)
+            {
+                return (OsVersion)_globalOsVersion;
+            }
+            return (OsVersion)GetOsGlobalVersion()!;
+        }
+        private set { _globalOsVersion = value; }
+    }
+
+    private static Version? _preciseOsVersion;
+
+    public static Version PreciseOsVersion
+    {
+        get
+        {
+            if (_preciseOsVersion is not null)
+            {
+                return _preciseOsVersion;
+            }
+            return GetOsPreciseVersion();
+        }
+        private set { _preciseOsVersion = value; }
+    }
+
+
+    private static Version GetOsPreciseVersion()
     {
         var osVersionInfo = new InteropValues.OSVERSIONINFOEX { OSVersionInfoSize = Marshal.SizeOf(typeof(InteropValues.OSVERSIONINFOEX)) };
         if (InteropMethods.RtlGetVersion(ref osVersionInfo) != 0)
@@ -10,10 +41,10 @@ public static class OsHelper
             throw new Exception("Unsuported OS!");
         }
 
-        return new Version(osVersionInfo.MajorVersion, osVersionInfo.MinorVersion, osVersionInfo.BuildNumber);
+        return _preciseOsVersion = new Version(osVersionInfo.MajorVersion, osVersionInfo.MinorVersion, osVersionInfo.BuildNumber);
     }
 
-    public static OsVersion GetOsGlobalVersion()
+    private static OsVersion? GetOsGlobalVersion()
     {
         var version = GetOsPreciseVersion();
 
@@ -34,6 +65,6 @@ public static class OsHelper
             return OsVersion.Windows11After22523;
         }
 
-        return OsVersion.WindowsOld;
+        return _globalOsVersion = OsVersion.WindowsOld;
     }
 }

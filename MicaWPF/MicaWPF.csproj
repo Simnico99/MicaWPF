@@ -13,6 +13,7 @@
 		<PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
 		<NeutralLanguage>en</NeutralLanguage>
 		<LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
 		<PackageLicenseFile></PackageLicenseFile>
 	</PropertyGroup>
 

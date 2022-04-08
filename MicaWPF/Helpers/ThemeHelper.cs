@@ -80,11 +80,11 @@ public static class ThemeHelper
         var solidGlassColor = SystemParameters.WindowGlassBrush as SolidColorBrush;
         if (theme == WindowsTheme.Dark)
         {
-            return ChangeColorHue(solidGlassColor.Color, 1.57);
+            return ChangeColorHue(solidGlassColor?.Color, 1.57);
         }
         else
         {
-            return ChangeColorHue(solidGlassColor.Color, 0.9);
+            return ChangeColorHue(solidGlassColor?.Color, 0.9);
         }
     }
 

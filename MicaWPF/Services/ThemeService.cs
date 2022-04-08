@@ -1,9 +1,5 @@
 ﻿namespace MicaWPF.Services;
 
-public class ThemeResourceDictionary : ResourceDictionary
-{
-}
-
 public class ThemeService
 {
 
@@ -24,9 +20,9 @@ public class ThemeService
 
     private static void CurrentThemeDictionaryChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
     {
-        if (obj is FrameworkElement) // works only on FrameworkElement objects
+        if (obj is FrameworkElement frameworkElement)
         {
-            ApplyTheme(obj as FrameworkElement, GetCurrentThemeDictionary(obj));
+            ApplyTheme(frameworkElement, GetCurrentThemeDictionary(obj));
         }
     }
 
@@ -37,29 +33,25 @@ public class ThemeService
             return;
         }
 
-        ThemeResourceDictionary themeDictionary = null;
+        ThemeResourceDictionary? themeDictionary = null;
         if (dictionaryUri != null)
         {
             themeDictionary = new ThemeResourceDictionary
             {
                 Source = dictionaryUri
             };
-
-            // add the new dictionary to the collection of merged dictionaries of the target object
             targetElement.Resources.MergedDictionaries.Insert(0, themeDictionary);
         }
 
-        // find if the target element already has a theme applied
         var existingDictionaries =
             (from dictionary in targetElement.Resources.MergedDictionaries.OfType<ThemeResourceDictionary>()
              select dictionary).ToList();
 
-        // remove the existing dictionaries
         foreach (var thDictionary in existingDictionaries)
         {
             if (themeDictionary == thDictionary)
             {
-                continue;  // don't remove the newly added dictionary
+                continue; 
             }
 
             targetElement.Resources.MergedDictionaries.Remove(thDictionary);
