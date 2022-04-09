@@ -24,26 +24,7 @@ Install-Package MicaWPF
 
 # Preview
 ## Windows 11
-Here are the different type of SystemBackdrop you can have:
-```xaml
-SystemBackdropType="Mica" <!-- This is the default one --> 
-```
 ![Mica_Exemple](https://user-images.githubusercontent.com/80013536/146576610-09cdf07d-0170-4e48-b65d-6612fd7b31fb.png)
-```xaml
-SystemBackdropType="Tabbed"
-```
-![Tabbed_Exemple](https://user-images.githubusercontent.com/80013536/146576612-17d9084a-8f4b-4c57-b986-344d5ead40f4.png)
-```xaml
-SystemBackdropType="Acrylic"
-```
-![Acrylic_Exemple](https://user-images.githubusercontent.com/80013536/146576613-09eac8d0-44f7-41a4-b92a-4244802a7f18.png)
-```xaml
-SystemBackdropType="None"
-```
-![None_Exemple](https://user-images.githubusercontent.com/80013536/146576608-f4300db9-7a45-4bcd-ba13-c79160e2bca8.png)
-
-Also snap layout works with this method:<br/>
-![image](https://user-images.githubusercontent.com/80013536/139436498-ab330947-7df3-4c24-a382-3974ef554db2.png)
 
 ## Windows 10
 Supports falling back to dark or light theme on Windows 10.
