@@ -22,6 +22,9 @@ Download via the Nuget package manager.
 Install-Package MicaWPF
 ```
 
+### Quick Start
+Link to the [Quick Start Guide](https://github.com/Simnico99/MicaWPF/wiki).
+
 # Preview
 ## Windows 11
 ![Mica_Exemple](https://user-images.githubusercontent.com/80013536/146576610-09cdf07d-0170-4e48-b65d-6612fd7b31fb.png)
