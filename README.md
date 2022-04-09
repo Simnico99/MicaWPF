@@ -23,7 +23,7 @@ Install-Package MicaWPF
 ```
 
 ### Quick Start
-Link to the [Quick Start Guide](https://github.com/Simnico99/MicaWPF/wiki).
+Link to the [Guides](https://github.com/Simnico99/MicaWPF/wiki).
 
 # Preview
 ## Windows 11
