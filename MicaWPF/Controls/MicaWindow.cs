@@ -85,11 +85,11 @@ public class MicaWindow : Window
                 _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
             }
         }
+    }
 
-        if (e.Property.Name is nameof(Accent) or nameof(Background) or nameof(Foreground) or nameof(UseWindowsAccentColor))
-        {
-            ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
-        }
+    public void RefreshTheme() 
+    {
+        ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
     }
 
     public override void OnApplyTemplate()
@@ -100,7 +100,7 @@ public class MicaWindow : Window
 
     public void SetDefaultColor()
     {
-        if (Accent is null)
+        if (Accent is null && UseWindowsAccentColor == false)
         {
             Accent = DefaultColorHelper.GetThemedColor(Theme, "Accent");
         }
