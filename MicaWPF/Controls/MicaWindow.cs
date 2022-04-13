@@ -39,8 +39,8 @@ public class MicaWindow : Window
         );
 
     public bool IsThemeAware { get; set; } = true;
+    public bool UseSystemAccent { get; set; } = true;
     public bool IsWaitingForManualThemeChange { get; set; } = false;
-    public bool UseWindowsAccentColor { get; set; } = true;
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
     public int CaptionHeight { get; set; } = 20;
@@ -75,7 +75,6 @@ public class MicaWindow : Window
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
         {
             this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
-            ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
             if (e.Property.Name is nameof(SystemBackdropType))
             {
                 _dynamicThemeService.SetThemeAware(false);
@@ -85,11 +84,11 @@ public class MicaWindow : Window
                 _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
             }
         }
-    }
 
-    public void RefreshTheme() 
-    {
-        ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
+        if (e.Property.Name is nameof(Accent) or nameof(Background) or nameof(Foreground) or nameof(UseSystemAccent))
+        {
+            //this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);
+        }
     }
 
     public override void OnApplyTemplate()
@@ -98,29 +97,9 @@ public class MicaWindow : Window
         Loaded += MicaWindow_Loaded;
     }
 
-    public void SetDefaultColor()
-    {
-        if (Accent is null && UseWindowsAccentColor == false)
-        {
-            Accent = DefaultColorHelper.GetThemedColor(Theme, "Accent");
-        }
-
-        if (Background is null)
-        {
-            Background = DefaultColorHelper.GetThemedColor(Theme, "Background");
-        }
-
-        if (Foreground is null || ((SolidColorBrush)Foreground).Color == Colors.Black)
-        {
-            Foreground = DefaultColorHelper.GetThemedColor(Theme, "Foreground");
-        }
-    }
-
     private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        SetDefaultColor();
-        this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
-        ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
+        this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);
         _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
         _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
     }

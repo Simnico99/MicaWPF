@@ -13,6 +13,10 @@ internal class InteropMethods
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS pMarInset);
 
+    [DllImport(ExternDll.DwmApi, EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    public static extern void DwmGetColorizationParameters(out DWMCOLORIZATIONPARAMS dwParameters);
+
     [SecurityCritical]
     [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]

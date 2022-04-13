@@ -150,11 +150,11 @@ public static class ThemeHelper
     {
         if (windowsTheme == WindowsTheme.Dark)
         {
-            return new Uri("pack://application:,,,/MicaWPF;component/Themes/MicaDark.xaml");
+            return new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaDark.xaml");
         }
         else
         {
-            return new Uri("pack://application:,,,/MicaWPF;component/Themes/MicaLight.xaml");
+            return new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
         }
     }
 }

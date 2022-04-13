@@ -4,7 +4,7 @@ public static class MicaHelper
 {
     private delegate void NoArgDelegate();
 
-    private static void SetMica(Window window, WindowsTheme theme, BackdropType micaType, int captionHeight)
+    private static void SetMica(Window window, WindowsTheme theme, BackdropType micaType, int captionHeight, bool useSystemAccent)
     {
         if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
@@ -27,6 +27,22 @@ public static class MicaHelper
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
             var windowHandle = new WindowInteropHelper(window).Handle;
 
+            if (window is MicaWindow micaWindow)
+            {
+                if (useSystemAccent)
+                {
+                    AccentHelper.Change(AccentHelper.GetColorizationColor(), theme, false);
+                }
+                else
+                {
+                    var accentColor = micaWindow.Accent?.Color;
+                    if (accentColor is not null)
+                    {
+                        AccentHelper.Change((Color)accentColor, theme, false);
+                    }
+                }
+            }
+
             if (theme == WindowsTheme.Dark)
             {
                 InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, trueValue);
@@ -45,18 +61,25 @@ public static class MicaHelper
                 InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, trueValue);
             }
         }
+
+        if (useSystemAccent)
+        {
+            AccentHelper.Change(AccentHelper.GetColorizationColor(), theme, false);
+        }
+
+        ThemeDictionnaryHelper.SetCurrentThemeDictionary(window, ThemeHelper.WindowsThemeToResourceTheme(theme));
     }
 
-    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
+    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, BackdropType micaType = BackdropType.Mica, int captionHeight = 20, bool useSystemAccent = true)
     {
         if (theme == WindowsTheme.Auto)
         {
             var currentWindowsTheme = ThemeHelper.GetWindowsTheme();
-            SetMica(window, currentWindowsTheme, micaType, captionHeight);
+            SetMica(window, currentWindowsTheme, micaType, captionHeight, useSystemAccent);
         }
         else
         {
-            SetMica(window, theme, micaType, captionHeight);
+            SetMica(window, theme, micaType, captionHeight, useSystemAccent);
         }
     }
 }

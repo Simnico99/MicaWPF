@@ -35,6 +35,17 @@ public class InteropValues
         public int cyBottomHeight;
     };
 
+    public struct DWMCOLORIZATIONPARAMS
+    {
+        public uint clrColor;
+        public uint clrAfterGlow;
+        public uint nIntensity;
+        public uint clrAfterGlowBalance;
+        public uint clrBlurBalance;
+        public uint clrGlassReflectionIntensity;
+        public bool fOpaque;
+    }
+
     [StructLayout(LayoutKind.Sequential)]
     internal struct OSVERSIONINFOEX
     {
