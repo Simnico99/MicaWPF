@@ -8,6 +8,7 @@ steps:
     nobuild: true
     includesymbols: true
     versioningScheme: 'off'
+    arguments: '-p:Version=$(buildNumber)'
     buildProperties: 'suffix=-$(buildNumber)'
 
 - task: DotNetCoreCLI@2
@@ -18,6 +19,7 @@ steps:
     packagesToPack: '**/*.csproj'
     nobuild: true
     includesymbols: true
+    arguments: '-p:Version=$(buildTag)'
     versioningScheme: 'off'
 
 - task: NuGetCommand@2
