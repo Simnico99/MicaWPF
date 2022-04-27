@@ -107,7 +107,7 @@
 
     <!--  Elevation border brushes  -->
 
-    <LinearGradientBrush x:Key="MicaWPF.GradientBrushes.ControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+    <LinearGradientBrush x:Key="MicaWPF.GradientBrushes.ControlElevationBorder" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
         <LinearGradientBrush.RelativeTransform>
             <ScaleTransform CenterY="0.0" ScaleY="-1" />
         </LinearGradientBrush.RelativeTransform>
@@ -117,14 +117,14 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="MicaWPF.GradientBrushes.CircleElevationBorderBrush" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="0,1">
+    <LinearGradientBrush x:Key="MicaWPF.GradientBrushes.CircleElevationBorder" MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
             <GradientStop Offset="0.50" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorDefault}" />
             <GradientStop Offset="0.70" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorSecondary}" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="MicaWPF.GradientBrushes.AccentControlElevationBorderBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
+    <LinearGradientBrush x:Key="MicaWPF.GradientBrushes.AccentControlElevationBorder" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,3">
         <LinearGradientBrush.RelativeTransform>
             <ScaleTransform CenterY="0.0" ScaleY="-0" />
         </LinearGradientBrush.RelativeTransform>

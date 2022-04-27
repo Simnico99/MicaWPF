@@ -29,16 +29,12 @@ public static class MicaHelper
 
             if (window is MicaWindow micaWindow)
             {
-                if (useSystemAccent)
-                {
-                    AccentHelper.Change(AccentHelper.GetColorizationColor(), theme, false);
-                }
-                else
+                if(!useSystemAccent)
                 {
                     var accentColor = micaWindow.Accent?.Color;
                     if (accentColor is not null)
                     {
-                        AccentHelper.Change((Color)accentColor, theme, false);
+                        AccentHelper.Change((Color)accentColor, theme);
                     }
                 }
             }
@@ -64,7 +60,8 @@ public static class MicaHelper
 
         if (useSystemAccent)
         {
-            AccentHelper.Change(AccentHelper.GetColorizationColor(), theme, false);
+            var systemColorHandler = new SystemColorsHandler();
+            systemColorHandler.UpdateAccent(theme);
         }
 
         ThemeDictionnaryHelper.SetCurrentThemeDictionary(window, ThemeHelper.WindowsThemeToResourceTheme(theme));

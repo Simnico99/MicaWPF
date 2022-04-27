@@ -80,15 +80,20 @@ public class MicaWindow : Window
                 _dynamicThemeService.SetThemeAware(false);
                 _dynamicThemeService.AwaitManualThemeChange(false);
 
-                _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
-                _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
+                _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
+                _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
             }
         }
+    }
 
-        if (e.Property.Name is nameof(Accent) or nameof(Background) or nameof(Foreground) or nameof(UseSystemAccent))
+    public void UpdateTheme() 
+    {
+        if (Accent is null)
         {
-            //this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);
+            Accent = new SolidColorBrush((Color)this.FindResource("MicaWPF.Colors.SystemAccentColor"));
         }
+
+        this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);
     }
 
     public override void OnApplyTemplate()
@@ -99,9 +104,9 @@ public class MicaWindow : Window
 
     private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);
-        _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
-        _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
+        UpdateTheme();
+        _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
+        _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
     }
 
     public MicaWindow()
