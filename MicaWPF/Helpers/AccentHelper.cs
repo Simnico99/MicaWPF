@@ -91,6 +91,7 @@ internal class AccentHelper
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = secondaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = tertiaryAccent;
 
+
         Application.Current.Resources["MicaWPF.Brushes.SystemAccent"] = secondaryAccent.ToBrush();
         Application.Current.Resources["MicaWPF.Brushes.SystemFillColorAttention"] = secondaryAccent.ToBrush();
         Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorPrimary"] = tertiaryAccent.ToBrush();

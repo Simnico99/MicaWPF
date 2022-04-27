@@ -6,6 +6,9 @@
 
         <!--  Controls  -->
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaNavigation.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaTextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaListViewItem.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
