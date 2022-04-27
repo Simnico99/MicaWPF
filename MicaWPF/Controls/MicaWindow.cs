@@ -98,16 +98,12 @@ public class MicaWindow : Window
 
     public override void OnApplyTemplate()
     {
-        base.OnApplyTemplate();
-        Loaded += MicaWindow_Loaded;
-    }
-
-    private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
-    {
         UpdateTheme();
         _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
         _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
+        base.OnApplyTemplate();
     }
+
 
     public MicaWindow()
     {
