@@ -86,11 +86,11 @@ public class MicaWindow : Window
         }
     }
 
-    public void UpdateTheme() 
+    public void UpdateTheme()
     {
         if (Accent is null)
         {
-            Accent = new SolidColorBrush((Color)this.FindResource("MicaWPF.Colors.SystemAccentColor"));
+            Accent = new SolidColorBrush((Color)FindResource("MicaWPF.Colors.SystemAccentColor"));
         }
 
         this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);

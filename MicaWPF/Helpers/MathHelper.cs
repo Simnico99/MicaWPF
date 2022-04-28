@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 internal static class MathHelper
 {

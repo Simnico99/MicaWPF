@@ -29,7 +29,7 @@ public static class MicaHelper
 
             if (window is MicaWindow micaWindow)
             {
-                if(!useSystemAccent)
+                if (!useSystemAccent)
                 {
                     var accentColor = micaWindow.Accent?.Color;
                     if (accentColor is not null)

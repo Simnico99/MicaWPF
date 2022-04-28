@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MicaWPF.Helpers;
+﻿namespace MicaWPF.Helpers;
 
 public class HSLColor
 {
@@ -26,17 +20,17 @@ public class HSLColor
 
     public static HSLColor FromRGB(byte R, byte G, byte B)
     {
-        float _R = (R / 255f);
-        float _G = (G / 255f);
-        float _B = (B / 255f);
+        var _R = (R / 255f);
+        var _G = (G / 255f);
+        var _B = (B / 255f);
 
-        float _Min = Math.Min(Math.Min(_R, _G), _B);
-        float _Max = Math.Max(Math.Max(_R, _G), _B);
-        float _Delta = _Max - _Min;
+        var _Min = Math.Min(Math.Min(_R, _G), _B);
+        var _Max = Math.Max(Math.Max(_R, _G), _B);
+        var _Delta = _Max - _Min;
 
         float H = 0;
         float S = 0;
-        float L = (float)((_Max + _Min) / 2.0f);
+        var L = (float)((_Max + _Min) / 2.0f);
 
         if (_Delta != 0)
         {
@@ -69,11 +63,31 @@ public class HSLColor
 
     private float Hue_2_RGB(float v1, float v2, float vH)
     {
-        if (vH < 0) vH += 1;
-        if (vH > 1) vH -= 1;
-        if ((6 * vH) < 1) return (v1 + (v2 - v1) * 6 * vH);
-        if ((2 * vH) < 1) return (v2);
-        if ((3 * vH) < 2) return (v1 + (v2 - v1) * ((2 / 3) - vH) * 6);
+        if (vH < 0)
+        {
+            vH += 1;
+        }
+
+        if (vH > 1)
+        {
+            vH -= 1;
+        }
+
+        if ((6 * vH) < 1)
+        {
+            return (v1 + (v2 - v1) * 6 * vH);
+        }
+
+        if ((2 * vH) < 1)
+        {
+            return (v2);
+        }
+
+        if ((3 * vH) < 2)
+        {
+            return (v1 + (v2 - v1) * ((2 / 3) - vH) * 6);
+        }
+
         return (v1);
     }
 
@@ -89,7 +103,7 @@ public class HSLColor
         else
         {
             double t1, t2;
-            double th = Hue / 6.0d;
+            var th = Hue / 6.0d;
 
             if (Luminosity < 0.5d)
             {
@@ -118,11 +132,31 @@ public class HSLColor
     private static double ColorCalc(double c, double t1, double t2)
     {
 
-        if (c < 0) c += 1d;
-        if (c > 1) c -= 1d;
-        if (6.0d * c < 1.0d) return t1 + (t2 - t1) * 6.0d * c;
-        if (2.0d * c < 1.0d) return t2;
-        if (3.0d * c < 2.0d) return t1 + (t2 - t1) * (2.0d / 3.0d - c) * 6.0d;
+        if (c < 0)
+        {
+            c += 1d;
+        }
+
+        if (c > 1)
+        {
+            c -= 1d;
+        }
+
+        if (6.0d * c < 1.0d)
+        {
+            return t1 + (t2 - t1) * 6.0d * c;
+        }
+
+        if (2.0d * c < 1.0d)
+        {
+            return t2;
+        }
+
+        if (3.0d * c < 2.0d)
+        {
+            return t1 + (t2 - t1) * (2.0d / 3.0d - c) * 6.0d;
+        }
+
         return t1;
     }
 }

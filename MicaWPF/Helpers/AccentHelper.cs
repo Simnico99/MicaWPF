@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MicaWPF.Converters;
-using MicaWPF.Extensions;
+﻿using MicaWPF.Extensions;
 
 namespace MicaWPF.Helpers;
 
@@ -32,7 +26,7 @@ internal class AccentHelper
         {
             return HSVColorHelper.RGBFromHSV(Math.Min(hsv.hue + (hueCoefficient * 4), 360), s, Math.Min(hsv.value - 0.05, 1));
         }
-        else if(!isTertiary)
+        else if (!isTertiary)
         {
             return HSVColorHelper.RGBFromHSV(Math.Max(hsv.hue - (hueCoefficient2 * 4), 0), s, Math.Max(hsv.value - 0.095, 0));
         }
@@ -58,7 +52,7 @@ internal class AccentHelper
     {
         InteropMethods.DwmGetColorizationParameters(out var dmwParams);
 
-        byte[] values = BitConverter.GetBytes(dmwParams.clrColor);
+        var values = BitConverter.GetBytes(dmwParams.clrColor);
 
         return Color.FromArgb(
             255,
@@ -73,7 +67,7 @@ internal class AccentHelper
         Color primaryAccent, secondaryAccent, tertiaryAccent;
 
         primaryAccent = systemAccent;
-        secondaryAccent = SetSecondaryVariationsForCurrentColor(ColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), themeType , false);
+        secondaryAccent = SetSecondaryVariationsForCurrentColor(ColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), themeType, false);
         tertiaryAccent = SetSecondaryVariationsForCurrentColor(ColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), themeType, true);
 
         UpdateColorResources(

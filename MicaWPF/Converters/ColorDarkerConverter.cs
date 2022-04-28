@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using System.Windows.Data;
 
 namespace MicaWPF.Converters;
@@ -39,7 +34,7 @@ public class ColorDarkerConverter : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is Color colorValue) 
+        if (value is Color colorValue)
         {
             return ChangeColorBrightness(colorValue, -0.3);
         }
