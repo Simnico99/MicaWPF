@@ -4,6 +4,8 @@
     xmlns:controls="clr-namespace:MicaWPF.Controls"
     xmlns:helpers="clr-namespace:MicaWPF.Converters">
 
+    <helpers:NullConverter x:Key="NullConverter" />
+
     <Style x:Key="MicaTextBoxBase" TargetType="{x:Type controls:MicaTextBox}">
         <Setter Property="Foreground">
             <Setter.Value>
@@ -20,7 +22,7 @@
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.Brushes.ControlElevationBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="Padding" Value="6,4" />
         <Setter Property="FontSize" Value="14" />
@@ -29,27 +31,49 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border
-                        x:Name="MainBorder"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="1,1,1,0"
-                        CornerRadius="4">
+                    <Grid>
                         <Border
-                            x:Name="BottomBorder"
-                            Padding="2"
-                            BorderThickness="0,0,0,2"
+                            x:Name="MainBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1,1,1,0"
                             CornerRadius="4">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlStrokeColorSecondary}" />
-                            </Border.BorderBrush>
-                            <ScrollViewer
-                                x:Name="PART_ContentHost"
-                                Margin="0"
-                                Padding="0"
-                                VerticalAlignment="Center" />
+                            <Border
+                                x:Name="BottomBorder"
+                                Padding="2"
+                                BorderThickness="0,0,0,1"
+                                CornerRadius="4">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlStrongStrokeColorDefault}" />
+                                </Border.BorderBrush>
+                                <Grid>
+
+                                    <Label
+                                        x:Name="WatermarkLabel"
+                                        Margin="8,0"
+                                        Padding="0"
+                                        VerticalAlignment="Center"
+                                        Content="{Binding Watermark, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}"
+                                        Visibility="Hidden" />
+                                    <ScrollViewer
+                                        x:Name="PART_ContentHost"
+                                        Margin="0"
+                                        Padding="0"
+                                        VerticalAlignment="Center" />
+                                </Grid>
+                            </Border>
                         </Border>
-                    </Border>
+                        <Rectangle
+                            x:Name="ColoredRectangle"
+                            Height="1"
+                            Margin="2,0,2,1"
+                            VerticalAlignment="Bottom"
+                            Fill="{DynamicResource MicaWPF.Brushes.SystemAccent}"
+                            Visibility="Collapsed" />
+                    </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="BottomBorder" Property="BorderBrush">
@@ -57,7 +81,17 @@
                                     <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
                                 </Setter.Value>
                             </Setter>
+                            <Setter TargetName="ColoredRectangle" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SolidBackgroundFillColorBase}" />
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
+                        <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text, Converter={StaticResource NullConverter}}" Value="{x:Null}">
+                            <Setter TargetName="WatermarkLabel" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

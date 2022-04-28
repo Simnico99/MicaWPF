@@ -9,15 +9,13 @@ public class MicaListViewItem : ListViewItem
 {
     public static readonly DependencyProperty ItemNameProperty = DependencyProperty.Register(
     "ItemName", typeof(string),
-    typeof(MicaWindow)
+    typeof(MicaListViewItem)
     );
 
     public static readonly DependencyProperty IconLocationProperty = DependencyProperty.Register(
     "IconLocation", typeof(string),
-    typeof(MicaWindow)
+    typeof(MicaListViewItem)
     );
-
-    public string? ItemNoume { get; set; }
 
     public string? ItemName
     {
