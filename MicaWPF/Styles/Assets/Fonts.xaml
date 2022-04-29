@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Small.Light">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Small Light</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Small.Semilight">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Small Semilight</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Small">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Small</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Small.Semibold">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Small Semibold</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Small.Bold">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Small Bold</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Text.Light">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Text Light</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Text.Semilight">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Text Semilight</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Text">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Text</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Text.Semibold">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Text Semibold</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Text.Bold">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Text Bold</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Display.Light">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Display Light</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Display.Semilight">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Display Semilight</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Display">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Display</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Display.Semibold">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Display Semibold</FontFamily>
+    <FontFamily x:Key="MicaWPF.Fonts.Family.SegoeUIVariable.Display.Bold">pack://application:,,,/MicaWPF;component/Fonts/#Segoe UI Variable Display Bold</FontFamily>
+    <FontFamily x:Key="FluentSystemIcons">pack://application:,,,/MicaWPF;component/Fonts/#FluentSystemIcons-Regular</FontFamily>
+    <FontFamily x:Key="FluentSystemIconsFilled">pack://application:,,,/MicaWPF;component/Fonts/#FluentSystemIcons-Filled</FontFamily>
+</ResourceDictionary>

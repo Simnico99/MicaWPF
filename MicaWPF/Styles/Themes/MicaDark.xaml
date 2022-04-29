@@ -10,7 +10,7 @@
     <Color x:Key="MicaWPF.Colors.TextFillColorSecondary">#C5FFFFFF</Color>
     <Color x:Key="MicaWPF.Colors.TextFillColorTertiary">#87FFFFFF</Color>
     <Color x:Key="MicaWPF.Colors.TextFillColorDisabled">#5DFFFFFF</Color>
-    <Color x:Key="MicaWPF.Colors.TextFillColorInverse">#E4000000</Color>
+    <Color x:Key="MicaWPF.Colors.TextFillColorInverse">#FF000000</Color>
 
     <Color x:Key="MicaWPF.Colors.AccentTextFillColorDisabled">#5DFFFFFF</Color>
     <Color x:Key="MicaWPF.Colors.TextOnAccentFillColorSelectedText">#FFFFFF</Color>
