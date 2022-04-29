@@ -77,6 +77,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Border
+                            x:Name="MainBorder"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0"
                             CornerRadius="4">
@@ -93,36 +94,29 @@
                                     VerticalAlignment="Center" />
                             </Border>
                         </Border>
-                        <Border
-                            x:Name="DarkerBorder"
-                            Padding="{TemplateBinding Padding}"
-                            Background="Transparent"
-                            CornerRadius="4" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="DarkerBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Opacity="0.1" Color="#FF797979" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="MainBorder" Property="Opacity" Value="0.9" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="DarkerBorder" Property="Background">
+                            <Setter TargetName="Presenter" Property="TextElement.Foreground">
                                 <Setter.Value>
-                                    <SolidColorBrush Opacity="0.3" Color="#FF797979" />
+                                    <SolidColorBrush Opacity="0.82" Color="{DynamicResource MicaWPF.Colors.TextFillColorInverse}" />
                                 </Setter.Value>
                             </Setter>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
+                            <Setter TargetName="MainBorder" Property="Opacity" Value="0.83" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Brushes.ControlFillColorDisabled}" />
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorDisabled}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Presenter" Property="TextElement.Foreground">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}" />
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorTertiary}" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
