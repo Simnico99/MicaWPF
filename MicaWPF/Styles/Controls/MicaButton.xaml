@@ -46,12 +46,12 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Brushes.ControlFillColorDisabled}" />
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorDisabled}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Presenter" Property="TextElement.Foreground">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}" />
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorTertiary}" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -109,9 +109,10 @@
                             <Setter TargetName="MainBorder" Property="Opacity" Value="0.83" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
                             <Setter Property="Background">
                                 <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorDisabled}" />
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.AccentFillColorDisabled}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Presenter" Property="TextElement.Foreground">
