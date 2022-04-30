@@ -1,4 +1,6 @@
-﻿namespace MicaWPF.Controls;
+﻿using MicaWPF.Symbols;
+
+namespace MicaWPF.Controls;
 
 /// <summary>
 /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
@@ -31,6 +33,26 @@
 /// </summary>
 public class MicaButton : Button
 {
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
+        typeof(FluentSystemIcons.Regular), typeof(Button),
+        new PropertyMetadata(FluentSystemIcons.Regular.Empty));
+
+
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
+        typeof(bool), typeof(Button), new PropertyMetadata(false));
+
+    public FluentSystemIcons.Regular Icon
+    {
+        get => (FluentSystemIcons.Regular)GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
+
+    public bool IconFilled
+    {
+        get => (bool)GetValue(IconFilledProperty);
+        set => SetValue(IconFilledProperty, value);
+    }
+
     static MicaButton()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaButton), new FrameworkPropertyMetadata(typeof(MicaButton)));

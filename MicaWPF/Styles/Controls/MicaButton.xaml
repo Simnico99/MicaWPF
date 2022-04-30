@@ -12,8 +12,6 @@
         <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
         <Setter Property="Padding" Value="30,6" />
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="FontFamily" Value="{StaticResource MicaWPF.Fonts.Family.SegoeUIVariable.Text}" />
-        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -68,8 +66,6 @@
         <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.AccentControlElevationBorder}" />
         <Setter Property="Padding" Value="30,6" />
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="FontFamily" Value="{StaticResource MicaWPF.Fonts.Family.SegoeUIVariable.Text}" />
-        <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

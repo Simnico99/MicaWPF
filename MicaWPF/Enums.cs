@@ -22,3 +22,16 @@ public enum BackdropType
     Acrylic = 3,
     Tabbed = 4
 }
+
+public enum RevealMode
+{
+    Hidden,
+    Visible
+}
+
+
+public enum ElementPosition
+{
+    Left,
+    Right
+}

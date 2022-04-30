@@ -5,10 +5,12 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Assets/Fonts.xaml" />
 
         <!--  Controls  -->
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaSymbolIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaNavigation.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaTextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaListViewItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MicaPasswordBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

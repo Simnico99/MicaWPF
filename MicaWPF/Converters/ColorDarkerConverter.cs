@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Windows.Data;
+﻿using System.Windows.Data;
 
 namespace MicaWPF.Converters;
 
@@ -32,7 +31,7 @@ public class ColorDarkerConverter : IValueConverter
         return Color.FromArgb(color.A, (byte)red, (byte)green, (byte)blue);
     }
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
         if (value is Color colorValue)
         {
@@ -41,7 +40,7 @@ public class ColorDarkerConverter : IValueConverter
         return new object();
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
         if (value is Color colorValue)
         {
