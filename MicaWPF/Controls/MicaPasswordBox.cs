@@ -9,7 +9,7 @@ public class MicaPasswordBox : MicaTextBox
 
     public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register(nameof(Password), typeof(string), typeof(MicaPasswordBox), new PropertyMetadata(string.Empty));
 
-    public static readonly DependencyProperty PasswordCharProperty = DependencyProperty.Register(nameof(PasswordChar), typeof(char), typeof(MicaPasswordBox), new PropertyMetadata('*', OnPasswordCharChanged));
+    public static readonly DependencyProperty PasswordCharProperty = DependencyProperty.Register(nameof(PasswordChar), typeof(char), typeof(MicaPasswordBox), new PropertyMetadata('•', OnPasswordCharChanged));
 
     public static readonly DependencyProperty PasswordRevealModeProperty = DependencyProperty.Register(nameof(PasswordRevealMode), typeof(RevealMode), typeof(MicaPasswordBox), new PropertyMetadata(RevealMode.Hidden, OnPasswordRevealModeChanged));
 
