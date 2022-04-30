@@ -4,7 +4,7 @@
     xmlns:controls="clr-namespace:MicaWPF.Controls"
     xmlns:helpers="clr-namespace:MicaWPF.Converters">
 
-    <helpers:NullConverter x:Key="NullConverter" />
+    <helpers:IsNullConverter x:Key="IsNullConverter" />
 
     <Style x:Key="MicaTextBoxBase" TargetType="{x:Type controls:MicaTextBox}">
         <Setter Property="Foreground">
@@ -88,7 +88,7 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text, Converter={StaticResource NullConverter}}" Value="{x:Null}">
+                        <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text, Converter={StaticResource IsNullConverter}}" Value="True">
                             <Setter TargetName="WatermarkLabel" Property="Visibility" Value="Visible" />
                         </DataTrigger>
 

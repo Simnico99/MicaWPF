@@ -1,4 +1,5 @@
 ﻿using MicaWPF.Mvvm;
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 
@@ -58,6 +59,11 @@ public class MicaPasswordBox : MicaTextBox
 
     public MicaPasswordBox()
     {
+        if (Icon is FluentSystemIcons.Regular.Empty)
+        {
+            Icon = FluentSystemIcons.Regular.Eye24;
+        }
+
         SetValue(TemplateButtonCommandProperty, new RelayCommand(o => Button_OnClick(this, o)));
     }
 

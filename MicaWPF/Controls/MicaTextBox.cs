@@ -12,7 +12,7 @@ public class MicaTextBox : TextBox
     public static readonly DependencyProperty IconPositionProperty = DependencyProperty.Register(
         nameof(IconPosition),
         typeof(ElementPosition), typeof(MicaTextBox),
-        new PropertyMetadata(ElementPosition.Left));
+        new PropertyMetadata(ElementPosition.Right));
 
     public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
         typeof(bool), typeof(MicaTextBox), new PropertyMetadata(false));
