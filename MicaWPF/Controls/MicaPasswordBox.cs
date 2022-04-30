@@ -61,7 +61,7 @@ public class MicaPasswordBox : MicaTextBox
     {
         if (Icon is FluentSystemIcons.Regular.Empty)
         {
-            Icon = FluentSystemIcons.Regular.Eye24;
+            Icon = FluentSystemIcons.Regular.Eye20;
         }
 
         SetValue(TemplateButtonCommandProperty, new RelayCommand(o => Button_OnClick(this, o)));

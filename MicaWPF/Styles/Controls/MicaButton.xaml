@@ -10,6 +10,12 @@
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorDefault}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
+        <Setter Property="HoverBackground" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
+        <Setter Property="MouseButtonPressedBackground">
+            <Setter.Value>
+                <SolidColorBrush Opacity="0.3" Color="{DynamicResource MicaWPF.Colors.ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Padding" Value="30,6" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -18,7 +24,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="{x:Type controls:MicaButton}">
                     <Border
                         x:Name="Border"
                         Padding="{TemplateBinding Padding}"
@@ -33,14 +39,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="Border" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HoverBackground, Mode=OneWay}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Border" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color, Mode=OneWay, Converter={StaticResource ColorDarkerConverter}}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="Border" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MouseButtonPressedBackground, Mode=OneWay}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background">
