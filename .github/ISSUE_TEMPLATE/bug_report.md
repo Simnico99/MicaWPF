@@ -2,7 +2,7 @@
 name: Bug report
 about: Create a report to help us improve
 title: Bug Report
-labels: Needs-Triage
+labels: bug, Needs-Triage
 assignees: Simnico99
 
 ---
