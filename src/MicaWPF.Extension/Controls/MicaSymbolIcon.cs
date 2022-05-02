@@ -11,7 +11,7 @@ public class MicaSymbolIcon : Label
 
     public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled), typeof(bool), typeof(MicaSymbolIcon), new PropertyMetadata(false, OnGlyphChanged));
 
-    static MicaSymbolIcon() 
+    static MicaSymbolIcon()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaSymbolIcon), new FrameworkPropertyMetadata(typeof(MicaSymbolIcon)));
     }

@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using MicaWPF.Extension.Symbols;
+﻿using MicaWPF.Extension.Symbols;
 
 namespace MicaWPF.Extension.Controls;
 public class MicaTextBox : TextBox

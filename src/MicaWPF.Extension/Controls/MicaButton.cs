@@ -33,7 +33,7 @@ namespace MicaWPF.Extension.Controls;
 /// </summary>
 public class MicaButton : Button
 {
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(FluentSystemIcons.Regular), typeof(MicaButton),new PropertyMetadata(FluentSystemIcons.Regular.Empty));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(FluentSystemIcons.Regular), typeof(MicaButton), new PropertyMetadata(FluentSystemIcons.Regular.Empty));
     public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled), typeof(bool), typeof(MicaButton), new PropertyMetadata(false));
     public static readonly DependencyProperty HoverBackgroundProperty = DependencyProperty.Register(nameof(HoverBackground), typeof(SolidColorBrush), typeof(MicaButton));
     public static readonly DependencyProperty MouseButtonPressedBackgroundProperty = DependencyProperty.Register(nameof(MouseButtonPressedBackground), typeof(SolidColorBrush), typeof(MicaButton));
@@ -52,7 +52,7 @@ public class MicaButton : Button
 
     public SolidColorBrush HoverBackground
     {
-        get => (SolidColorBrush) GetValue(IconFilledProperty);
+        get => (SolidColorBrush)GetValue(IconFilledProperty);
         set => SetValue(IconFilledProperty, value);
     }
 
