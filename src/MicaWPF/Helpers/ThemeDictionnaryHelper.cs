@@ -57,4 +57,3 @@ public static class ThemeDictionnaryHelper
         }
     }
 }
-

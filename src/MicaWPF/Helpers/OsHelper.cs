@@ -32,7 +32,6 @@ public static class OsHelper
         private set => _preciseOsVersion = value;
     }
 
-
     private static Version GetOsPreciseVersion()
     {
         var osVersionInfo = new InteropValues.OSVERSIONINFOEX { OSVersionInfoSize = Marshal.SizeOf(typeof(InteropValues.OSVERSIONINFOEX)) };
