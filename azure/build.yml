@@ -37,8 +37,8 @@ steps:
   inputs:
     command: 'build'
     configuration: Release
-    projects: '**/*.csproj'
-    arguments: '/p:VersionSuffix=".$(Build.BuildId)-prerelease"'    
+    projects: '**/*!(Demo).csproj'
+    arguments: '/p:VersionSuffix="$(Build.BuildId)-prerelease"'    
     
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release Mode)
