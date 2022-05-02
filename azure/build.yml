@@ -5,18 +5,34 @@ steps:
     versionSpec: '6.0.0'
 
 - task: UseDotNet@2
+  displayName: 'Use .Net 5.0'
+  inputs:
+    packageType: 'sdk'
+    version: '5.0.x'
+    includePreviewVersions: false
+
+- task: UseDotNet@2
   displayName: 'Use .Net 6.0'
   inputs:
     packageType: 'sdk'
     version: '6.0.x'
     includePreviewVersions: false
 
-- task: Cake@2
-  displayName: 'Running Cake Build'
+- task: DotNetCoreCLI@2
+  displayName: .Net Build (Preview Mode)
+  condition: eq(variables['buildTag'], False)
   inputs:
-    script: 'build.cake'
-    target: 'Test'
-    Version: '1.3.0'
+    command: 'build'
+    projects: '**/(MicaWPF|MicaWPF.Extension).csproj'
+    arguments: '-c Release /property:Version=$(buildNumber).$(Date:yyyyMMdd)$(Build.BuildId)'
+    
+- task: DotNetCoreCLI@2
+  displayName: .Net Build (Release Mode)
+  condition: eq(variables['buildTag'], False)
+  inputs:
+    command: 'build'
+    projects: '**/(MicaWPF|MicaWPF.Extension).csproj'
+    arguments: '-c Release /property:Version=$(buildTag)'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
