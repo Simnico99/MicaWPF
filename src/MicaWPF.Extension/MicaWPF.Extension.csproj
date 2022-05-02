@@ -5,12 +5,12 @@
      <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
      <UseWPF>true</UseWPF>
      <Copyright>Copyright (c) 2021 Simnico99</Copyright>
-     <RepositoryUrl>https://github.com/Simnico99/MicaWPF.Extension</RepositoryUrl>
+     <RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
      <RepositoryType>git</RepositoryType>
      <PackageTags>WPF;Mica;WinUI;</PackageTags>
      <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
      <ImplicitUsings>enable</ImplicitUsings>
-     <PackageProjectUrl>https://github.com/Simnico99/MicaWPF.Extension</PackageProjectUrl>
+     <PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
      <NeutralLanguage>en</NeutralLanguage>
      <LangVersion>10</LangVersion>
      <Nullable>enable</Nullable>

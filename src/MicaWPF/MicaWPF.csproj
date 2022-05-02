@@ -5,12 +5,12 @@
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <UseWPF>true</UseWPF>
     <Copyright>Copyright (c) 2021 Simnico99</Copyright>
-    <RepositoryUrl>https://github.com/Simnico99/MicaWPF.Core</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>WPF;Mica;WinUI;</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ImplicitUsings>enable</ImplicitUsings>
-    <PackageProjectUrl>https://github.com/Simnico99/MicaWPF.Core</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>10</LangVersion>
     <Nullable>enable</Nullable>
@@ -22,6 +22,7 @@
     <PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
     <Authors>Simnico99</Authors>
     <Description>A WPF Library that implement an easy way to use Mica material without WinUI.</Description>
+    <PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,6 +33,10 @@
 
   <ItemGroup>
     <None Include="..\..\Logo\MicaWPFLogo - 128x128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\ReadmeNuget.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
