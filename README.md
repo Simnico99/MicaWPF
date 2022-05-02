@@ -109,21 +109,63 @@ To get a local copy up and running follow these simple steps.
    ```
 
 #### Using source
-1. Clone the repo
+1. Clone the repo.
    ```sh
    git clone https://github.com/Simnico99/MicaWPF.git
    ```
-2. Restore NuGet Packages
+2. Restore NuGet packages.
    ```sh
    nuget restore MicaWPF.sln
    ```
-
+3. Add the project in your project reference.
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+1. To start Change the `<Window><Window/>` for `<mica:MicaWindow></mica:MicaWindow>`.
+2. Add the namespace by adding `xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"`.
+
+Here is an exemple:
+```XAML
+<mica:MicaWindow  
+        x:Class="MicaWPF.DesktopApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:MicaWPF.DesktopApp"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="450" 
+        Width="800" >
+    <Grid>
+
+    </Grid>
+</mica:MicaWindow>
+```
+
+Now get into your Window code:
+1. Add the namespace `using MicaWPF.Controls;`.
+2. Change the Window inherited class to `MicaWindow`.
+
+Here is an exemple of what it might look like using .NET6:
+```CSharp
+using MicaWPF.Controls;
+
+namespace MicaWPF.DesktopApp;
+
+public partial class MainWindow : MicaWindow
+{
+    public MainWindow()
+    {
+        InitializeComponent();
+    }
+}
+
+```
+
 
 _For more examples, please refer to the [Documentation](https://github.com/Simnico99/MicaWPF/wiki)_
 
