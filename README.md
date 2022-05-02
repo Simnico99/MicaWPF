@@ -24,7 +24,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Simnico99/MicaWPF">
-    <img src="/Logo/Logo178x178.png" alt="Logo" width="80" height="80">
+    <img src="/Logo/MicaWPFLogo%20-%2080x80.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">MicaWPF</h3>
