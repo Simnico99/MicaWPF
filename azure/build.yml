@@ -26,28 +26,39 @@ steps:
     includePreviewVersions: false
 
 - task: DotNetCoreCLI@2
-  displayName: Restore
+  displayName: .Net Restore
   inputs:
     command: restore
-    projects: '**/*.csproj'
+    projects: '**/*!(Demo).csproj'
    
 - task: DotNetCoreCLI@2
-  displayName: .Net Build (Preview Mode)
-  condition: eq(variables['buildTag'], False)
+  displayName: .Net Build
   inputs:
     command: 'build'
     configuration: Release
     projects: '**/*!(Demo).csproj'
-    arguments: '/p:VersionSuffix="$(Build.BuildId)-prerelease"'    
-    
+
 - task: DotNetCoreCLI@2
-  displayName: .Net Build (Release Mode)
+  displayName: 'Pack (Prerelease)'
+  condition: eq(variables['buildTag'], False)
+  inputs:
+    command: pack
+    configuration: Release
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
+    nobuild: true
+    packagesToPack: '**/*!(Demo).csproj'
+    buildProperties: 'VersionSuffix=".$(Build.BuildId)-prerelease"'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack (Release)'
   condition: eq(variables['buildTag'], True)
   inputs:
-    command: 'build'
+    command: pack
     configuration: Release
-    projects: '**/*.csproj'
-    arguments: '/p:Version=$(buildTag)'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/release'
+    nobuild: true
+    packagesToPack: '**/*!(Demo).csproj'
+    buildProperties: 'Version=$(buildTag)'    
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
