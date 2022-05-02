@@ -24,7 +24,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Simnico99/MicaWPF">
-    <img src="/Logo/MicaWPFLogo%20-%2080x80.png" alt="Logo" width="80" height="80">
+    <img src="/Logo/MicaWPFLogo%20-%2080x56.png" alt="Logo" width="80" height="56">
   </a>
 
   <h3 align="center">MicaWPF</h3>
@@ -35,8 +35,8 @@
     <a href="https://github.com/Simnico99/MicaWPF/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <!--<a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·                                                                       -->
+    View Demo (Not Yet!)
+    ·
     <a href="https://github.com/Simnico99/MicaWPF/issues/new?template=bug_report.md&title=Bug+Report">Report Bug</a>
     ·
     <a href="https://github.com/Simnico99/MicaWPF/issues/new?template=feature_request.md&title=Feature+Request">Request Feature</a>
