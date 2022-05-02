@@ -1,5 +1,4 @@
 ﻿namespace MicaWPF.Controls;
-
 public class MicaWindow : Window
 {
     private readonly DynamicThemeService _dynamicThemeService;
@@ -46,10 +45,6 @@ public class MicaWindow : Window
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
         {
             this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
-            ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
-                _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
-                _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
-            }
         }
     }
 
