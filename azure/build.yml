@@ -30,7 +30,7 @@ steps:
   condition: eq(variables['buildTag'], False)
   inputs:
     command: 'build'
-    projects: '**/(MicaWPF|MicaWPF.Extension).csproj'
+    projects: '**/*.csproj'
     arguments: '-c Release /property:Version=$(buildNumber).$(Date:yyyyMMdd)$(Build.BuildId)'
     
 - task: DotNetCoreCLI@2
