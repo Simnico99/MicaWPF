@@ -4,7 +4,7 @@ steps:
   condition: eq(variables['buildTag'], False)
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: '**/MicaWPF.csproj'
     nobuild: true
     includesymbols: true
     versioningScheme: 'off'
