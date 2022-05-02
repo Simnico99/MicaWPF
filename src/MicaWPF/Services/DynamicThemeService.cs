@@ -1,4 +1,6 @@
-﻿namespace MicaWPF.Services;
+﻿using MicaWPF.Controls;
+
+namespace MicaWPF.Services;
 
 internal class DynamicThemeService
 {

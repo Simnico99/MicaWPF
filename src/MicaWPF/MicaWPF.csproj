@@ -5,20 +5,19 @@
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <UseWPF>true</UseWPF>
     <Copyright>Copyright (c) 2021 Simnico99</Copyright>
-    <RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Simnico99/MicaWPF.Core</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>WPF;Mica;WinUI;</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ImplicitUsings>enable</ImplicitUsings>
-    <PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Simnico99/MicaWPF.Core</PackageProjectUrl>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>10</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
-    <Version>2.0.0</Version>
+    <Version>3.0.0</Version>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
     <Authors>Simnico99</Authors>
@@ -29,7 +28,6 @@
     <None Remove="Fonts\FluentSystemIcons-Filled.ttf" />
     <None Remove="Fonts\FluentSystemIcons-Regular.ttf" />
     <None Remove="Fonts\SegUIVar.ttf" />
-    <None Remove="ReadmeNuget.md" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,43 +52,11 @@
     <Resource Include="Fonts\SegUIVar.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="ReadmeNuget.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </Resource>
   </ItemGroup>
 
 
   <ItemGroup>
     <Page Update="Styles\Assets\Fonts.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Controls\MicaListViewItem.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Controls\MicaSymbolIcon.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Controls\MicaPasswordBox.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Controls\MicaProgressBar.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Controls\MicaRichTextBox.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Controls\MicaTextBox.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Styles\Controls\MicaNavigation.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -7,14 +7,14 @@
 /// Add this XmlNamespace attribute to the root element of the markup file where it is 
 /// to be used:
 ///
-///     xmlns:MyNamespace="clr-namespace:MicaWPF.Controls"
+///     xmlns:MyNamespace="clr-namespace:MicaWPF.Extension.Controls"
 ///
 ///
 /// Step 1b) Using this custom control in a XAML file that exists in a different project.
 /// Add this XmlNamespace attribute to the root element of the markup file where it is 
 /// to be used:
 ///
-///     xmlns:MyNamespace="clr-namespace:MicaWPF.Controls;assembly=MicaWPF.Controls"
+///     xmlns:MyNamespace="clr-namespace:MicaWPF.Extension.Controls;assembly=MicaWPF.Extension.Controls"
 ///
 /// You will also need to add a project reference from the project where the XAML file lives
 /// to this project and Rebuild to avoid compilation errors:

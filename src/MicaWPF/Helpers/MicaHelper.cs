@@ -1,4 +1,6 @@
-﻿namespace MicaWPF.Helpers;
+﻿using MicaWPF.Controls;
+
+namespace MicaWPF.Helpers;
 
 public static class MicaHelper
 {
