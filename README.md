@@ -167,7 +167,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/TheSimnico99) - email
+Simnico99 - [@TheSimnico99](https://twitter.com/TheSimnico99)
 
 Project Link: [https://github.com/Simnico99](https://github.com/Simnico99)
 
