@@ -35,7 +35,7 @@
     <a href="https://github.com/Simnico99/MicaWPF/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    View Demo (Not Yet!)
+	<a href="https://github.com/Simnico99/MicaWPF/tree/main/src/MicaWPF.Demo">View Demo</a>
     ·
     <a href="https://github.com/Simnico99/MicaWPF/issues/new?template=bug_report.md&title=Bug+Report">Report Bug</a>
     ·

@@ -6,7 +6,7 @@
 
   <h3 align="center">MicaWPF Demo</h3>
 
-## Demo
-
+<p>
 This is the demo project you can use it as a reference or starter for your own MicaWPF app.<br/>
 Just download/clone this project and run it.
+</p>
