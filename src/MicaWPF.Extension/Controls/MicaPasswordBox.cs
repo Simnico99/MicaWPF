@@ -154,7 +154,6 @@ public class MicaPasswordBox : MicaTextBox
 
         var param = parameter as string ?? string.Empty;
 
-
         if (sender is MicaPasswordBox passwordBox)
         {
             switch (param)
@@ -163,11 +162,9 @@ public class MicaPasswordBox : MicaTextBox
                     passwordBox.PasswordRevealMode = passwordBox.PasswordRevealMode == RevealMode.Visible
                     ? RevealMode.Hidden
                     : RevealMode.Visible;
-
                     break;
             }
         }
-
     }
 
     private static void OnPasswordCharChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

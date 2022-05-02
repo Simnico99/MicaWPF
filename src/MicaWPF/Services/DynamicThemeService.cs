@@ -40,7 +40,6 @@ internal class DynamicThemeService
             _isThemeAware = false;
             var handler = (UserPreferenceChangedEventHandler)Delegate.CreateDelegate(typeof(UserPreferenceChangedEventHandler), this, "UserPreferenceChangedHandler");
             SystemEvents.UserPreferenceChanged -= handler;
-
         }
     }
 

@@ -18,9 +18,9 @@ public class ColorDarkerConverter : IValueConverter
         }
         else
         {
-            red = (255 - red) * correctionFactor + red;
-            green = (255 - green) * correctionFactor + green;
-            blue = (255 - blue) * correctionFactor + blue;
+            red = ((255 - red) * correctionFactor) + red;
+            green = ((255 - green) * correctionFactor) + green;
+            blue = ((255 - blue) * correctionFactor) + blue;
         }
 
         red = red.Clamp(0, 255);

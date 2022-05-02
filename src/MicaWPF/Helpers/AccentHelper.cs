@@ -21,7 +21,6 @@ internal class AccentHelper
         var s = hsv.saturation;
         hueCoefficient = 1;
 
-
         if (theme is WindowsTheme.Dark && !isTertiary)
         {
             return HSVColorHelper.RGBFromHSV(Math.Min(hsv.hue + (hueCoefficient * 4), 360), s, Math.Min(hsv.value - 0.05, 1));
@@ -39,13 +38,6 @@ internal class AccentHelper
         {
             return HSVColorHelper.RGBFromHSV(Math.Max(hsv.hue - (hueCoefficient2 * 8), 0), s, Math.Max(hsv.value - 0.195, 0));
         }
-        //Dark Color
-        //HSVColorHelper.RGBFromHSV(Math.Min(hsv.hue + (hueCoefficient * 8), 360), s, Math.Min(hsv.value + 0.3, 1));
-        //HSVColorHelper.RGBFromHSV(Math.Min(hsv.hue + (hueCoefficient * 4), 360), s, Math.Min(hsv.value + 0.15, 1));
-
-        //Light Color
-        //HSVColorHelper.RGBFromHSV(Math.Max(hsv.hue - (hueCoefficient2 * 4), 0), s, Math.Max(hsv.value - 0.2, 0));
-        //HSVColorHelper.RGBFromHSV(Math.Max(hsv.hue - (hueCoefficient2 * 8), 0), s, Math.Max(hsv.value - 0.3, 0));
     }
 
     public static Color GetColorizationColor()
@@ -84,7 +76,6 @@ internal class AccentHelper
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight1"] = primaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = secondaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = tertiaryAccent;
-
 
         Application.Current.Resources["MicaWPF.Brushes.SystemAccent"] = secondaryAccent.ToBrush();
         Application.Current.Resources["MicaWPF.Brushes.SystemFillColorAttention"] = secondaryAccent.ToBrush();

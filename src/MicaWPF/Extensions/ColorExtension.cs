@@ -22,5 +22,4 @@ public static class ColorExtensions
     {
         return new SolidColorBrush { Color = color, Opacity = opacity };
     }
-
 }

@@ -33,7 +33,7 @@ public class InteropValues
         public int cxRightWidth;
         public int cyTopHeight;
         public int cyBottomHeight;
-    };
+    }
 
     public struct DWMCOLORIZATIONPARAMS
     {
