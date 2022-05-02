@@ -38,7 +38,7 @@ steps:
   condition: eq(variables['buildTag'], True)
   inputs:
     command: 'build'
-    projects: '**/(MicaWPF|MicaWPF.Extension).csproj'
+    projects: '**/+(MicaWPF|MicaWPF.Extension)!(Demo).csproj'
     arguments: '-c Release /property:Version=$(buildTag)'
 
 - task: ado-discord-webhook@1
