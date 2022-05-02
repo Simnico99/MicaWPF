@@ -87,7 +87,7 @@ public class MicaWindow : Window
         }
     }
 
-    public void RefreshTheme() 
+    public void RefreshTheme()
     {
         ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
     }

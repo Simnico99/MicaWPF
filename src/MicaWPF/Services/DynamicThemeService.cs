@@ -38,7 +38,6 @@ internal class DynamicThemeService
             _isThemeAware = false;
             var handler = (UserPreferenceChangedEventHandler)Delegate.CreateDelegate(typeof(UserPreferenceChangedEventHandler), this, "UserPreferenceChangedHandler");
             SystemEvents.UserPreferenceChanged -= handler;
-
         }
     }
 
@@ -52,7 +51,6 @@ internal class DynamicThemeService
                 var oldTheme = micaWindow.Theme;
                 _ = Task.Run(async () =>
                 {
-
                     while (oldTheme == micaWindow.Theme && !_waitForDynamicThemeCancellationToken.IsCancellationRequested)
                     {
                         await Task.Delay(500);

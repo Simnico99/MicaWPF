@@ -2,7 +2,6 @@
 
 public static class ThemeDictionnaryHelper
 {
-
     public static readonly DependencyProperty CurrentThemeDictionaryProperty =
      DependencyProperty.RegisterAttached("CurrentThemeDictionary", typeof(Uri),
      typeof(ThemeDictionnaryHelper),
