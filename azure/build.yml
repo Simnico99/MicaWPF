@@ -31,8 +31,17 @@ steps:
   inputs:
     command: 'build'
     configuration: Release
-    projects: '**/*.csproj'
+    projects: 'src/MicaWPF/*.csproj'
     arguments: 'VersionSuffix=".$(Build.BuildId)-prerelease"'
+    
+- task: DotNetCoreCLI@2
+  displayName: .Net Build (Preview Mode)
+  condition: eq(variables['buildTag'], False)
+  inputs:
+    command: 'build'
+    configuration: Release
+    projects: 'src/MicaWPF.Extension/*.csproj'
+    arguments: 'VersionSuffix=".$(Build.BuildId)-prerelease"'    
     
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release Mode)
