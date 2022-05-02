@@ -1,27 +1,4 @@
 steps:
-- task: DotNetCoreCLI@2
-  displayName: Pack metapackage
-  condition: eq(variables['buildTag'], False)
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/MicaWPF.csproj'
-    nobuild: true
-    includesymbols: true
-    versioningScheme: 'off'
-    arguments: '-p:Version=$(buildNumber)'
-    buildProperties: 'suffix=-$(buildNumber)'
-
-- task: DotNetCoreCLI@2
-  displayName: Pack metapackage (Release mode)
-  condition: eq(variables['buildTag'], True)
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/MicaWPF.csproj'
-    nobuild: true
-    includesymbols: true
-    arguments: '-p:Version=$(buildTag)'
-    versioningScheme: 'off'
-
 - task: NuGetCommand@2
   displayName: Push to Artifacts (MicaWPF)
   condition: and(succeeded(), eq(variables['buildTag'], false))
