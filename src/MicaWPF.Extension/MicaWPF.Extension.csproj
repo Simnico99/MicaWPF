@@ -35,9 +35,6 @@
      </None>
    </ItemGroup>
    <ItemGroup>
-     <PackageReference Include="MicaWPFRuntimeComponent" Version="1.0.0" />
-   </ItemGroup>
-   <ItemGroup>
      <ProjectReference Include="..\MicaWPF\MicaWPF.csproj" />
    </ItemGroup>
    <ItemGroup>
