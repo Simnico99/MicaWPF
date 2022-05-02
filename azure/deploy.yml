@@ -23,14 +23,24 @@ steps:
     versioningScheme: 'off'
 
 - task: NuGetCommand@2
-  displayName: Push to Artifacts
+  displayName: Push to Artifacts (MicaWPF)
   condition: and(succeeded(), eq(variables['buildTag'], false))
   inputs:
     command: 'push'
     nuGetFeedType: 'internal'
-    packagesToPush: '**/*.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*(MicaWPF)!(Extension)*.nupkg'
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
     allowPackageConflicts: true
+    
+- task: NuGetCommand@2
+  displayName: Push to Artifacts (MicaWPF.Extension)
+  condition: and(succeeded(), eq(variables['buildTag'], false))
+  inputs:
+    command: 'push'
+    nuGetFeedType: 'internal'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*(MicaWPF.Extension)*.nupkg'
+    publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
+    allowPackageConflicts: true    
 
 - task: NuGetCommand@2
   displayName: Push to NuGet (Release Mode)
