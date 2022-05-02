@@ -26,6 +26,12 @@ steps:
     includePreviewVersions: false
 
 - task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
   displayName: .Net Build (Preview Mode)
   condition: eq(variables['buildTag'], False)
   inputs:
