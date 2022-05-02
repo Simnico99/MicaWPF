@@ -54,7 +54,6 @@ internal class DynamicThemeService
                 var oldTheme = micaWindow.Theme;
                 _ = Task.Run(async () =>
                 {
-
                     while (oldTheme == micaWindow.Theme && !_waitForDynamicThemeCancellationToken.IsCancellationRequested)
                     {
                         await Task.Delay(500);

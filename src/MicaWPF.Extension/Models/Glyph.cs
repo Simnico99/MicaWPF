@@ -4,7 +4,6 @@ namespace MicaWPF.Extension.Models;
 public static class Glyph
 {
     public const FluentSystemIcons.Regular DefaultIcon = FluentSystemIcons.Regular.Heart28;
-
     public const FluentSystemIcons.Filled DefaultFilledIcon = FluentSystemIcons.Filled.Heart28;
 
     public static FluentSystemIcons.Regular Parse(string name)

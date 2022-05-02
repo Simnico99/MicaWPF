@@ -11280,5 +11280,4 @@ public class FluentSystemIcons
         ChatArrowDoubleBack20 = 0xFFFE,
         Check24 = 0xFFFF
     }
-
 }

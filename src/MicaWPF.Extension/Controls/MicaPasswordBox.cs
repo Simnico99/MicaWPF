@@ -2,19 +2,13 @@
 using MicaWPF.Extension.Symbols;
 
 namespace MicaWPF.Extension.Controls;
-
 public class MicaPasswordBox : MicaTextBox
 {
     private bool _takenControl = false;
-
     public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register(nameof(Password), typeof(string), typeof(MicaPasswordBox), new PropertyMetadata(string.Empty));
-
     public static readonly DependencyProperty PasswordCharProperty = DependencyProperty.Register(nameof(PasswordChar), typeof(char), typeof(MicaPasswordBox), new PropertyMetadata('•', OnPasswordCharChanged));
-
     public static readonly DependencyProperty PasswordRevealModeProperty = DependencyProperty.Register(nameof(PasswordRevealMode), typeof(RevealMode), typeof(MicaPasswordBox), new PropertyMetadata(RevealMode.Hidden, OnPasswordRevealModeChanged));
-
     public static readonly DependencyProperty ShowRevealButtonProperty = DependencyProperty.Register(nameof(ShowRevealButton), typeof(bool), typeof(MicaPasswordBox), new PropertyMetadata(true));
-
     public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(nameof(TemplateButtonCommand), typeof(IRelayCommand), typeof(MicaPasswordBox), new PropertyMetadata(null));
 
     public string Password

@@ -3,29 +3,18 @@
 namespace MicaWPF.Extension.Controls;
 public class MicaTextBox : TextBox
 {
-
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon),
-        typeof(FluentSystemIcons.Regular), typeof(TextBox),
-        new PropertyMetadata(FluentSystemIcons.Regular.Empty));
-
-    public static readonly DependencyProperty IconPositionProperty = DependencyProperty.Register(
-        nameof(IconPosition),
-        typeof(ElementPosition), typeof(MicaTextBox),
-        new PropertyMetadata(ElementPosition.Right));
-
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled),
-        typeof(bool), typeof(MicaTextBox), new PropertyMetadata(false));
-
-    public static readonly DependencyProperty IconForegroundProperty =
-        DependencyProperty.RegisterAttached(
-            nameof(IconForeground),
-            typeof(System.Windows.Media.Brush),
-            typeof(MicaTextBox),
-            new FrameworkPropertyMetadata(
-                System.Windows.Media.Brushes.Black,
+    public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(MicaTextBox));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(FluentSystemIcons.Regular), typeof(TextBox), new PropertyMetadata(FluentSystemIcons.Regular.Empty));
+    public static readonly DependencyProperty IconPositionProperty = DependencyProperty.Register(nameof(IconPosition), typeof(ElementPosition), typeof(MicaTextBox), new PropertyMetadata(ElementPosition.Right));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled), typeof(bool), typeof(MicaTextBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.RegisterAttached(nameof(IconForeground), typeof(Brush), typeof(MicaTextBox), new FrameworkPropertyMetadata(Brushes.Black,
                 FrameworkPropertyMetadataOptions.AffectsRender |
                 FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
                 FrameworkPropertyMetadataOptions.Inherits));
+    static MicaTextBox()
+    {
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaTextBox), new FrameworkPropertyMetadata(typeof(MicaTextBox)));
+    }
 
     public FluentSystemIcons.Regular Icon
     {
@@ -39,7 +28,6 @@ public class MicaTextBox : TextBox
         set => SetValue(IconPositionProperty, value);
     }
 
-    /// <inheritdoc />
     public bool IconFilled
     {
         get => (bool)GetValue(IconFilledProperty);
@@ -52,15 +40,9 @@ public class MicaTextBox : TextBox
         set => SetValue(IconForegroundProperty, value);
     }
 
-    public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(MicaTextBox));
-
     public string? Watermark
     {
         get => (string)GetValue(WatermarkProperty);
         set => SetValue(WatermarkProperty, value);
-    }
-    static MicaTextBox()
-    {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaTextBox), new FrameworkPropertyMetadata(typeof(MicaTextBox)));
     }
 }

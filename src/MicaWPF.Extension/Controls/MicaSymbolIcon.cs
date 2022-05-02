@@ -6,9 +6,7 @@ namespace MicaWPF.Extension.Controls;
 public class MicaSymbolIcon : Label
 {
     public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(FluentSystemIcons.Regular), typeof(MicaSymbolIcon), new PropertyMetadata(FluentSystemIcons.Regular.Empty, OnGlyphChanged));
-
     public static readonly DependencyProperty RawSymbolProperty = DependencyProperty.Register(nameof(RawSymbol), typeof(string), typeof(MicaSymbolIcon), new PropertyMetadata("\uEA01"));
-
     public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled), typeof(bool), typeof(MicaSymbolIcon), new PropertyMetadata(false, OnGlyphChanged));
 
     static MicaSymbolIcon()

@@ -28,7 +28,9 @@ public sealed class RelayCommand : IRelayCommand
     /// Creates new instance of <see cref="RelayCommand"/>.
     /// </summary>
     /// <param name="execute">Action to be executed.</param>
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
     public RelayCommand(Action execute) : this(execute, null)
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
     {
         // Delegated to RelayCommand(Action execute, Func<bool> canExecute)
     }
@@ -37,7 +39,9 @@ public sealed class RelayCommand : IRelayCommand
     /// Creates new instance of <see cref="RelayCommand"/>.
     /// </summary>
     /// <param name="execute">Action with <see cref="object"/> parameter to be executed.</param>
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
     public RelayCommand(Action<object> execute) : this(execute, null)
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
     {
         // Delegated to RelayCommand(Action<object> execute, Func<bool> canExecute)
     }
