@@ -30,16 +30,18 @@ steps:
   condition: eq(variables['buildTag'], False)
   inputs:
     command: 'build'
+    configuration: Release
     projects: '**/*.csproj'
-    arguments: '-c Release /--version-suffix=-Preview-$(Build.BuildId)'
+    arguments: 'VersionSuffix=".$(Build.BuildId)-prerelease"'
     
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release Mode)
   condition: eq(variables['buildTag'], True)
   inputs:
     command: 'build'
-    projects: '**/+(MicaWPF|MicaWPF.Extension)!(Demo).csproj'
-    arguments: '-c Release /property:Version=$(buildTag)'
+    configuration: Release
+    projects: '**/*.csproj'
+    arguments: 'Version=$(buildTag)'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
