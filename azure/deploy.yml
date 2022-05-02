@@ -28,7 +28,7 @@ steps:
   inputs:
     command: 'push'
     nuGetFeedType: 'internal'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/MicaWPF!(.Extension)*.nupkg'
+    packagesToPush: '**/MicaWPF!(.Extension)*.nupkg'
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
     allowPackageConflicts: true
     
@@ -38,7 +38,7 @@ steps:
   inputs:
     command: 'push'
     nuGetFeedType: 'internal'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/+(MicaWPF.Extension)*.nupkg'
+    packagesToPush: '**/+(MicaWPF.Extension)*.nupkg'
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
     allowPackageConflicts: true    
 
