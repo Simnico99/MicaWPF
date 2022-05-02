@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF", "MicaWPF\MicaWPF.csproj", "{C2F5AC0D-1A7F-41DB-8F0C-1516A918EDAA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FFC3644-7C33-4F66-9C5C-EA005CD5C54E}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF", "src\MicaWPF\MicaWPF.csproj", "{94483620-45EF-4764-8FF0-3EB8EB2DE66E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,10 +16,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C2F5AC0D-1A7F-41DB-8F0C-1516A918EDAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2F5AC0D-1A7F-41DB-8F0C-1516A918EDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2F5AC0D-1A7F-41DB-8F0C-1516A918EDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2F5AC0D-1A7F-41DB-8F0C-1516A918EDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94483620-45EF-4764-8FF0-3EB8EB2DE66E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94483620-45EF-4764-8FF0-3EB8EB2DE66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94483620-45EF-4764-8FF0-3EB8EB2DE66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94483620-45EF-4764-8FF0-3EB8EB2DE66E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
