@@ -58,11 +58,10 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#usage">Usage</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -121,7 +120,7 @@ To get a local copy up and running follow these simple steps.
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+### Usage
 
 1. To start Change the `<Window><Window/>` for `<mica:MicaWindow></mica:MicaWindow>`.
 2. Add the namespace by adding `xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"`.
