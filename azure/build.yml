@@ -30,24 +30,15 @@ steps:
   inputs:
     command: restore
     projects: '**/*.csproj'
-
+   
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Preview Mode)
   condition: eq(variables['buildTag'], False)
   inputs:
     command: 'build'
     configuration: Release
-    projects: 'src/MicaWPF/*.csproj'
-    arguments: 'VersionSuffix=".$(Build.BuildId)-prerelease"'
-    
-- task: DotNetCoreCLI@2
-  displayName: .Net Build (Preview Mode)
-  condition: eq(variables['buildTag'], False)
-  inputs:
-    command: 'build'
-    configuration: Release
-    projects: 'src/MicaWPF.Extension/*.csproj'
-    arguments: 'VersionSuffix=".$(Build.BuildId)-prerelease"'    
+    projects: '**/*.csproj'
+    arguments: '/p:VersionSuffix=".$(Build.BuildId)-prerelease"'    
     
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release Mode)
@@ -56,7 +47,7 @@ steps:
     command: 'build'
     configuration: Release
     projects: '**/*.csproj'
-    arguments: 'Version=$(buildTag)'
+    arguments: '/p:Version=$(buildTag)'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
