@@ -28,7 +28,7 @@ steps:
     
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release Mode)
-  condition: eq(variables['buildTag'], False)
+  condition: eq(variables['buildTag'], True)
   inputs:
     command: 'build'
     projects: '**/(MicaWPF|MicaWPF.Extension).csproj'
