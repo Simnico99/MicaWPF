@@ -31,7 +31,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.csproj'
-    arguments: '-c Release /property:Version=$(buildNumber).$(Date:yyyyMMdd)$(Build.BuildId)'
+    arguments: '-c Release /--version-suffix=-Preview-$(Build.BuildId)'
     
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release Mode)
