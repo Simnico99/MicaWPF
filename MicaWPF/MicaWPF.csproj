@@ -20,9 +20,9 @@
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<PackageIcon>Logo128x128.png</PackageIcon>
+		<PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
 		<Authors>Simnico99</Authors>
 		<Description>A WPF Library that implement an easy way to use Mica material without WinUI.</Description>
 	</PropertyGroup>
@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\Logo\Logo128x128.png">
+	  <None Include="..\Logo\MicaWPFLogo - 128x128.png">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
