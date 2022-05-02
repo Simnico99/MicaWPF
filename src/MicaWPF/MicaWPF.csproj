@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\Logo\MicaWPFLogo - 128x128.png">
+    <None Include="..\..\Logo\MicaWPFLogo - 128x128.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
