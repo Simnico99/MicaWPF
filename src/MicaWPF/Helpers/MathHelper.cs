@@ -1,8 +1,8 @@
 ﻿namespace MicaWPF.Helpers;
 
-internal static class MathHelper
+public static class MathHelper
 {
-    public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
+    public static T Clamp<T>(this T val, T min, T max) where T : struct, IComparable, IFormattable, IConvertible, IComparable<T>, IEquatable<T>
     {
         if (val.CompareTo(min) < 0)
         {

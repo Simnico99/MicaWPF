@@ -1,34 +1,4 @@
 ﻿namespace MicaWPF.Controls;
-
-/// <summary>
-/// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
-///
-/// Step 1a) Using this custom control in a XAML file that exists in the current project.
-/// Add this XmlNamespace attribute to the root element of the markup file where it is 
-/// to be used:
-///
-///     xmlns:MyNamespace="clr-namespace:MicaWPF.Controls"
-///
-///
-/// Step 1b) Using this custom control in a XAML file that exists in a different project.
-/// Add this XmlNamespace attribute to the root element of the markup file where it is 
-/// to be used:
-///
-///     xmlns:MyNamespace="clr-namespace:MicaWPF.Controls;assembly=MicaWPF.Controls"
-///
-/// You will also need to add a project reference from the project where the XAML file lives
-/// to this project and Rebuild to avoid compilation errors:
-///
-///     Right click on the target project in the Solution Explorer and
-///     "Add Reference"->"Projects"->[Browse to and select this project]
-///
-///
-/// Step 2)
-/// Go ahead and use your control in the XAML file.
-///
-///     <MyNamespace:MicaWindow/>
-///
-/// </summary>
 public class MicaWindow : Window
 {
     private readonly DynamicThemeService _dynamicThemeService;
@@ -39,8 +9,8 @@ public class MicaWindow : Window
         );
 
     public bool IsThemeAware { get; set; } = true;
+    public bool UseSystemAccent { get; set; } = true;
     public bool IsWaitingForManualThemeChange { get; set; } = false;
-    public bool UseWindowsAccentColor { get; set; } = true;
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
     public int CaptionHeight { get; set; } = 20;
@@ -75,54 +45,25 @@ public class MicaWindow : Window
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
         {
             this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
-            ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
-            if (e.Property.Name is nameof(SystemBackdropType))
-            {
-                _dynamicThemeService.SetThemeAware(false);
-                _dynamicThemeService.AwaitManualThemeChange(false);
-
-                _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
-                _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
-            }
         }
     }
 
-    public void RefreshTheme()
+    public void UpdateTheme()
     {
-        ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
+        if (Accent is null)
+        {
+            Accent = new SolidColorBrush((Color)FindResource("MicaWPF.Colors.SystemAccentColor"));
+        }
+
+        this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);
     }
 
     public override void OnApplyTemplate()
     {
+        UpdateTheme();
+        _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
+        _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
         base.OnApplyTemplate();
-        Loaded += MicaWindow_Loaded;
-    }
-
-    public void SetDefaultColor()
-    {
-        if (Accent is null && UseWindowsAccentColor == false)
-        {
-            Accent = DefaultColorHelper.GetThemedColor(Theme, "Accent");
-        }
-
-        if (Background is null)
-        {
-            Background = DefaultColorHelper.GetThemedColor(Theme, "Background");
-        }
-
-        if (Foreground is null || ((SolidColorBrush)Foreground).Color == Colors.Black)
-        {
-            Foreground = DefaultColorHelper.GetThemedColor(Theme, "Foreground");
-        }
-    }
-
-    private void MicaWindow_Loaded(object sender, RoutedEventArgs e)
-    {
-        SetDefaultColor();
-        this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
-        ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
-        _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
-        _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
     }
 
     public MicaWindow()

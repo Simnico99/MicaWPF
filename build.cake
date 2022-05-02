@@ -13,13 +13,13 @@ Task("Build")
     {
         DotNetCoreBuild(solutionFolder, new DotNetCoreBuildSettings
         {
-			Framework = "net6.0-windows",
+			Framework = "net6.0-windows10.0.19041.0",
             NoRestore = true,
             Configuration = configuration
         });
         DotNetCoreBuild(solutionFolder, new DotNetCoreBuildSettings
         {
-			Framework = "net5.0-windows",
+			Framework = "net5.0-windows10.0.19041.0",
             NoRestore = true,
             Configuration = configuration
         });
