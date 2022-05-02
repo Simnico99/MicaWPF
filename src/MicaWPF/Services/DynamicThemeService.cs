@@ -1,7 +1,6 @@
 ﻿using MicaWPF.Controls;
 
 namespace MicaWPF.Services;
-
 internal class DynamicThemeService
 {
     private readonly OsVersion _currentOsVersion;

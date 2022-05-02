@@ -1,0 +1,25 @@
+<local:ThemeResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:MicaWPF.Models">
+
+
+    <SolidColorBrush x:Key="MicaBackgroundBrush" Color="#FF202020" />
+    <SolidColorBrush x:Key="MicaHueLightBrush" Color="#991D1D1D" />
+    <SolidColorBrush x:Key="MicaHueMidBrush" Color="#994D4D4D" />
+    <SolidColorBrush x:Key="MicaHueDarkBrush" Color="#993F3F3F" />
+    <SolidColorBrush x:Key="MicaLightBorderBrush" Color="#991D1D1D" />
+    <SolidColorBrush x:Key="MicaMidBorderBrush" Color="#994D4D4D" />
+    <SolidColorBrush x:Key="MicaDarkBorderBrush" Color="#993F3F3F" />
+    <SolidColorBrush x:Key="MicaHighLightBrush" Color="#FF414141" />
+    <SolidColorBrush x:Key="MicaHighLightButtonBrush" Color="#0BFFFFFF" />
+    <SolidColorBrush x:Key="MicaHighLightDarkButtonBrush" Color="#08A2A2A2" />
+    <SolidColorBrush x:Key="MicaAccentLightBrush" Color="#FF202020" />
+    <SolidColorBrush x:Key="MicaAccentMidBrush" Color="#FF202020" />
+    <SolidColorBrush x:Key="MicaAccentDarkBrush" Color="#FF202020" />
+    <SolidColorBrush x:Key="MicaAccentLightBorderBrush" Color="#FF202020" />
+
+
+    <SolidColorBrush x:Key="MicaForegroundBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="MicaInvertedForegroundBrush" Color="#FF000000" />
+</local:ThemeResourceDictionary>

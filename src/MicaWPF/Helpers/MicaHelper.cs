@@ -1,7 +1,6 @@
 ﻿using MicaWPF.Controls;
 
 namespace MicaWPF.Helpers;
-
 public static class MicaHelper
 {
     private delegate void NoArgDelegate();

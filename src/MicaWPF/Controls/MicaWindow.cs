@@ -46,11 +46,7 @@ public class MicaWindow : Window
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
         {
             this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
-            if (e.Property.Name is nameof(SystemBackdropType))
-            {
-                _dynamicThemeService.SetThemeAware(false);
-                _dynamicThemeService.AwaitManualThemeChange(false);
-
+            ThemeHelper.SetThemeBrushes(this, Theme, UseWindowsAccentColor);
                 _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
                 _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
             }
