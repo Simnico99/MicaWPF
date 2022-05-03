@@ -96,7 +96,7 @@ steps:
   inputs:
     command: pack
     configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
     nobuild: true
     packagesToPack: 'src\MicaWPF\*.csproj'
 
@@ -105,7 +105,7 @@ steps:
   inputs:
     command: pack
     configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
     nobuild: true
     packagesToPack: 'src\MicaWPF.Extension\*.csproj'
 
