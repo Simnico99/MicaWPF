@@ -87,7 +87,17 @@ steps:
     configuration: Release
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
-    packagesToPack: '**\*.csproj;-:**\*Demo.csproj;-:**\*Demo.sln'
+    packagesToPack: 'src\NicaWPF\*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack (Alpha)'
+  condition: eq(variables['buildTag'], False)
+  inputs:
+    command: pack
+    configuration: Release
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
+    nobuild: true
+    packagesToPack: 'src\NicaWPF.Extension\*.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Release)'
