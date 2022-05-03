@@ -5,8 +5,16 @@ steps:
         $packageInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
         Write-Host "Pipeline = $($packageInfo | ConvertTo-Json -Depth 100)"
 
-        $version = $packageInfo.data.versions[$packageInfo.data.versions.length].version
+        $versionList;
+        
+        foreach ($versionlocal in packageInfo.data.versions)
+        {
+              $versionList += [version[]]$$versionlocal.version
+        }
 
+        $sortedVersions = $versionList | Sort-Object | foreach {$_.ToString()}
+        $version = $sortedVersions[0]
+        
         Write-Host $version
 
         $sp = $version.Split(".")
