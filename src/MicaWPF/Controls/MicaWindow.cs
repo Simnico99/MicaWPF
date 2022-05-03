@@ -32,7 +32,6 @@ public class MicaWindow : Window
         if (OsHelper.GlobalOsVersion is not OsVersion.Windows11Before22523 and not OsVersion.Windows11After22523)
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
-            return;
         }
     }
 
@@ -41,12 +40,12 @@ public class MicaWindow : Window
         base.OnPropertyChanged(e);
         if (e.Property.Name is nameof(IsThemeAware))
         {
-            _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
+            _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
         }
 
         if (e.Property.Name is nameof(IsWaitingForManualThemeChange))
         {
-            _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
+            _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
         }
 
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
@@ -58,8 +57,7 @@ public class MicaWindow : Window
         {
             if ((WindowState)e.NewValue == WindowState.Maximized)
             {
-                MarginMaximized = new Thickness(5);
-                UpdateLayout();
+                MarginMaximized = new Thickness(6);
             }
             else
             {
