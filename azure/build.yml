@@ -92,7 +92,7 @@ steps:
     versionEnvVar: '$(buildTag)''
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack MicaWPF'
+  displayName: Pack MicaWPF
   inputs:
     command: pack
     configuration: Release
@@ -101,7 +101,7 @@ steps:
     packagesToPack: 'src\MicaWPF\*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack MicaWPF.Extension'
+  displayName: Pack MicaWPF.Extension
   inputs:
     command: pack
     configuration: Release
