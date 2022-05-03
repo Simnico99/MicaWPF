@@ -1,4 +1,6 @@
-﻿using MicaWPF.Extensions;
+﻿using System.Windows;
+using MicaWPF.Controls;
+using MicaWPF.Extensions;
 
 namespace MicaWPF.Helpers;
 
@@ -54,7 +56,7 @@ internal class AccentHelper
         );
     }
 
-    public static void Change(Color systemAccent, WindowsTheme themeType = WindowsTheme.Light)
+    public static void Change(MicaWindow window, Color systemAccent, WindowsTheme themeType = WindowsTheme.Light)
     {
         Color primaryAccent, secondaryAccent, tertiaryAccent;
 
@@ -66,26 +68,27 @@ internal class AccentHelper
             systemAccent,
             primaryAccent,
             secondaryAccent,
-            tertiaryAccent
-        );
-    }
+            tertiaryAccent,
+            window
+);
+}
 
-    public static void UpdateColorResources(Color systemAccent, Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
+    public static void UpdateColorResources(Color systemAccent, Color primaryAccent, Color secondaryAccent, Color tertiaryAccent, MicaWindow window)
     {
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColor"] = systemAccent;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight1"] = primaryAccent;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = secondaryAccent;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = tertiaryAccent;
+        window.Resources["MicaWPF.Colors.SystemAccentColor"] = systemAccent;
+        window.Resources["MicaWPF.Colors.SystemAccentColorLight1"] = primaryAccent;
+        window.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = secondaryAccent;
+        window.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = tertiaryAccent;
 
-        Application.Current.Resources["MicaWPF.Brushes.SystemAccent"] = secondaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.SystemFillColorAttention"] = secondaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorPrimary"] = tertiaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorSecondary"] = tertiaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorTertiary"] = secondaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentFillColorSelectedTextBackground"] = systemAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentFillColorDefault"] = secondaryAccent.ToBrush();
+        window.Resources["MicaWPF.Brushes.SystemAccent"] = secondaryAccent.ToBrush();
+        window.Resources["MicaWPF.Brushes.SystemFillColorAttention"] = secondaryAccent.ToBrush();
+        window.Resources["MicaWPF.Brushes.AccentTextFillColorPrimary"] = tertiaryAccent.ToBrush();
+        window.Resources["MicaWPF.Brushes.AccentTextFillColorSecondary"] = tertiaryAccent.ToBrush();
+        window.Resources["MicaWPF.Brushes.AccentTextFillColorTertiary"] = secondaryAccent.ToBrush();
+        window.Resources["MicaWPF.Brushes.AccentFillColorSelectedTextBackground"] = systemAccent.ToBrush();
+        window.Resources["MicaWPF.Brushes.AccentFillColorDefault"] = secondaryAccent.ToBrush();
 
-        Application.Current.Resources["MicaWPF.Brushes.AccentFillColorSecondary"] = secondaryAccent.ToBrush(0.9);
-        Application.Current.Resources["MicaWPF.Brushes.AccentFillColorTertiary"] = secondaryAccent.ToBrush(0.8);
+        window.Resources["MicaWPF.Brushes.AccentFillColorSecondary"] = secondaryAccent.ToBrush(0.9);
+        window.Resources["MicaWPF.Brushes.AccentFillColorTertiary"] = secondaryAccent.ToBrush(0.8);
     }
 }

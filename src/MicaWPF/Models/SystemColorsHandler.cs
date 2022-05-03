@@ -1,4 +1,5 @@
-﻿using MicaWPFRuntimeComponent;
+﻿using MicaWPF.Controls;
+using MicaWPFRuntimeComponent;
 
 namespace MicaWPF.Models;
 
@@ -25,15 +26,15 @@ public class SystemColorsHandler
         }
     }
 
-    public void UpdateAccent(WindowsTheme theme = WindowsTheme.Light)
+    public void UpdateAccent(MicaWindow micaWindow, WindowsTheme theme = WindowsTheme.Light)
     {
         switch (theme)
         {
             case WindowsTheme.Dark:
-                AccentHelper.UpdateColorResources(SystemAccentColor, SystemAccentColorLight1, SystemAccentColorLight2, SystemAccentColorLight3);
+                AccentHelper.UpdateColorResources(SystemAccentColor, SystemAccentColorLight1, SystemAccentColorLight2, SystemAccentColorLight3, micaWindow);
                 break;
             default:
-                AccentHelper.UpdateColorResources(SystemAccentColor, SystemAccentColorDark1, SystemAccentColorDark2, SystemAccentColorDark3);
+                AccentHelper.UpdateColorResources(SystemAccentColor, SystemAccentColorDark1, SystemAccentColorDark2, SystemAccentColorDark3, micaWindow);
                 break;
         }
     }

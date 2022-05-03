@@ -37,7 +37,6 @@ public class MicaWindow : Window
 
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
-        base.OnPropertyChanged(e);
         if (e.Property.Name is nameof(IsThemeAware))
         {
             _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
@@ -64,6 +63,7 @@ public class MicaWindow : Window
                 MarginMaximized = new Thickness(0);
             }
         }
+        base.OnPropertyChanged(e);
     }
 
     public void UpdateTheme()

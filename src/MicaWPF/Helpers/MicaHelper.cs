@@ -35,7 +35,7 @@ public static class MicaHelper
                     var accentColor = micaWindow.Accent?.Color;
                     if (accentColor is not null)
                     {
-                        AccentHelper.Change((Color)accentColor, theme);
+                        AccentHelper.Change(micaWindow, (Color)accentColor, theme);
                     }
                 }
             }
@@ -62,7 +62,10 @@ public static class MicaHelper
         if (useSystemAccent)
         {
             var systemColorHandler = new SystemColorsHandler();
-            systemColorHandler.UpdateAccent(theme);
+            if (window is MicaWindow micaWindow)
+            {
+                systemColorHandler.UpdateAccent(micaWindow, theme);
+            }
         }
 
         ThemeDictionnaryHelper.SetCurrentThemeDictionary(window, ThemeHelper.WindowsThemeToResourceTheme(theme));
