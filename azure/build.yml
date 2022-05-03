@@ -9,10 +9,10 @@ steps:
         
         foreach ($versionlocal in packageInfo.data.versions)
         {
-              $versionList += [version[]]$$versionlocal.version
+              $versionList += [version[]]$versionlocal.version
         }
 
-        $sortedVersions = $versionList | Sort-Object | foreach {$_.ToString()}
+        $sortedVersions = $versionList | Sort-Object -Descending | foreach {$_.ToString()}
         $version = $sortedVersions[0]
         
         Write-Host $version
