@@ -29,6 +29,7 @@ steps:
         Write-Host "##vso[task.setvariable variable=majorVersion]$majorVersion"
         Write-Host "##vso[task.setvariable variable=minorVersion]$minorVersion"
         Write-Host "##vso[task.setvariable variable=patchVersion]$patchVersion"
+  displayName: "Fetching Nuget latest version"
   
 - pwsh: |
         Write-Host 'packageVersion: $(packageVersion)'
