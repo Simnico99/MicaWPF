@@ -7,7 +7,7 @@ steps:
 
         $versionList;
         
-        foreach ($versionlocal in packageInfo.data.versions)
+        foreach ($versionlocal in $packageInfo.data.versions)
         {
               $versionList += [version[]]$versionlocal.version
         }
