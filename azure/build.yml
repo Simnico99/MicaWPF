@@ -67,14 +67,14 @@ steps:
   displayName: .Net Restore
   inputs:
     command: restore
-    projects: '**\*.csproj;-:**\*Demo.csproj'
+    projects: '**\*!(Demo).csproj'
    
 - task: DotNetCoreCLI@2
   displayName: .Net Build
   inputs:
     command: 'build'
     configuration: Release
-    projects: '**\*.csproj;-:**\*Demo.csproj'
+    projects: '**\*!(Demo).csproj'
     arguments: '--no-restore'
     versioningScheme: byEnvVar
     versionEnvVar: '$(packageVersion)-Alpha'
