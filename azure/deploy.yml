@@ -44,7 +44,7 @@ steps:
   condition: and(succeeded(), eq(variables['buildTag'], true))
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/(MicaWPF)*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '**/+(MicaWPF)*.nupkg;!**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
 
@@ -53,6 +53,6 @@ steps:
   condition: and(succeeded(), eq(variables['buildTag'], true))
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/(MicaWPF.Extension)*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '**/+(MicaWPF.Extension)*.nupkg;!**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
