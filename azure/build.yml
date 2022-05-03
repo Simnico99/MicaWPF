@@ -75,6 +75,7 @@ steps:
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: 'src\MicaWPF\*.csproj'
+    
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Alpha)'
   condition: eq(variables['buildTag'], False)
