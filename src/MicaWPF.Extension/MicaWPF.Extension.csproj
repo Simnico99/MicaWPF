@@ -18,7 +18,7 @@
    <PropertyGroup>
      <PackageLicenseExpression>MIT</PackageLicenseExpression>
      <PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
-     <Version>3.0.10</Version>
+     <Version>3.0.11</Version>
      <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
      <PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
      <Authors>Simnico99</Authors>
