@@ -75,6 +75,8 @@ steps:
     command: 'build'
     configuration: Release
     projects: '**/*!(Demo).csproj'
+    versioningScheme: byEnvVar
+    versionEnvVar: '$(packageVersion)-Alpha'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Alpha)'
@@ -85,7 +87,6 @@ steps:
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: '**/*!(Demo).csproj'
-    buildProperties: 'Version=$(packageVersion)-Alpha'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Release)'
