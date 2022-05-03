@@ -17,10 +17,6 @@ variables:
   buildConfiguration: 'Release'
   buildNumber: $[ variables['Build.BuildNumber'] ]
   buildTag: $[ startsWith(variables['Build.SourceBranch'], 'refs/tags') ]
-  suffix: $(Date:yyyyMMdd)
-  orgName: 'ZirconCloud'
-  packageId: '99fc4a4d-77f4-49e1-a1f8-893901dafebe'
-  packageVersion: '0.0.0-alpha'
 
 jobs:
 - job: "Windows_Build"
