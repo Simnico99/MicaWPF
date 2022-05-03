@@ -63,7 +63,9 @@ steps:
   inputs:
     command: 'build'
     configuration: Release
-	@@ -80,35 +81,33 @@ steps:
+    projects: '**\*!(Demo).csproj'
+    arguments: '-c Release --no-restore'
+    versioningScheme: byEnvVar
     versionEnvVar: '$(packageVersion).$(buildId)-Alpha'
 
 - task: DotNetCoreCLI@2
