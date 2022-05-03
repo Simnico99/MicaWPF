@@ -1,7 +1,7 @@
 steps:
 - pwsh: |
        
-        $url = "https://feeds.dev.azure.com/$(orgName)/$(System.TeamProject)/_apis/packaging/Feeds/Nuget-Feed/Packages/$(packageId)?api-version=6.0-preview.1"
+        $url = "https://azuresearch-usnc.nuget.org/query?q=MicaWPF&prerelease=false"
         $packageInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
         Write-Host "Pipeline = $($packageInfo | ConvertTo-Json -Depth 100)"
 
