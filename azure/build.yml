@@ -5,7 +5,7 @@ steps:
         $packageInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
         Write-Host "Pipeline = $($packageInfo | ConvertTo-Json -Depth 100)"
 
-        $version = $packageInfo.data.versions[packageInfo.data.versions.length-1].version
+        $version = $packageInfo.data.versions[$packageInfo.data.versions.length-1].version
 
         Write-Host $version
 
@@ -16,7 +16,7 @@ steps:
         $majorVersion = $sp[0]
         $minorVersion = $sp[1]
         $patchVersion = [int]$sp[2] + 1
-        $productVersionBeta = “$majorVersion.$minorVersion.$patchVersion-$(Build.BuildNumber)”
+        $productVersionBeta = “$majorVersion.$minorVersion.$patchVersion.$(Build.BuildId)-Beta”
 
         Write-Host "##vso[task.setvariable variable=packageVersion]$version"
         Write-Host "##vso[task.setvariable variable=majorVersion]$majorVersion"
