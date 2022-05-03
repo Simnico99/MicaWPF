@@ -93,7 +93,7 @@ steps:
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: '**/*!(Demo).csproj'
-     buildProperties: 'Version=$(packageVersion)-Alpha'
+    buildProperties: 'Version=$(packageVersion)-Alpha'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Release)'
