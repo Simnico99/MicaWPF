@@ -72,7 +72,6 @@ public class MicaWindow : Window
     {
         if (Accent is null)
         {
-
             var myResourceDictionary = new ResourceDictionary
             {
                 Source = new Uri("/MicaWPF;component/Styles/Assets/Accent.xaml", UriKind.RelativeOrAbsolute)
