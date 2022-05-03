@@ -263,30 +263,32 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MicaWindow}">
-                    <DockPanel>
-                        <StackPanel
-                            x:Name="TitleStackPanel"
-                            Margin="10,5,5,5"
-                            DockPanel.Dock="Top"
-                            Orientation="Horizontal"
-                            Visibility="Collapsed">
-                            <Image
-                                Height="15"
-                                Margin="5,0,0,0"
-                                VerticalAlignment="Center"
-                                RenderOptions.BitmapScalingMode="HighQuality"
-                                Source="{TemplateBinding Icon}" />
-                            <Label
-                                Margin="5,0,0,0"
-                                VerticalContentAlignment="Center"
-                                Content="{TemplateBinding Title}"
-                                FontSize="12"
-                                Foreground="{TemplateBinding Foreground}" />
-                        </StackPanel>
-                        <Grid DockPanel.Dock="Bottom">
-                            <ContentPresenter />
-                        </Grid>
-                    </DockPanel>
+                    <Grid>
+                        <DockPanel Margin="{TemplateBinding MarginMaximized}">
+                            <StackPanel
+                                x:Name="TitleStackPanel"
+                                Margin="10,5,5,5"
+                                DockPanel.Dock="Top"
+                                Orientation="Horizontal"
+                                Visibility="Collapsed">
+                                <Image
+                                    Height="15"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    RenderOptions.BitmapScalingMode="HighQuality"
+                                    Source="{TemplateBinding Icon}" />
+                                <Label
+                                    Margin="5,0,0,0"
+                                    VerticalContentAlignment="Center"
+                                    Content="{TemplateBinding Title}"
+                                    FontSize="12"
+                                    Foreground="{TemplateBinding Foreground}" />
+                            </StackPanel>
+                            <Grid DockPanel.Dock="Bottom">
+                                <ContentPresenter />
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Icon, Converter={StaticResource IsNullConverter}}" Value="False">
                             <Setter TargetName="TitleStackPanel" Property="Visibility" Value="Visible" />

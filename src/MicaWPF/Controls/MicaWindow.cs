@@ -5,10 +5,8 @@ public class MicaWindow : Window
 {
     private readonly DynamicThemeService _dynamicThemeService;
 
-    public static readonly DependencyProperty AccentProperty = DependencyProperty.Register(
-        "Accent", typeof(SolidColorBrush),
-        typeof(MicaWindow)
-        );
+    public static readonly DependencyProperty AccentProperty = DependencyProperty.Register(nameof(Accent), typeof(SolidColorBrush), typeof(MicaWindow));
+    public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
 
     public bool IsThemeAware { get; set; } = true;
     public bool UseSystemAccent { get; set; } = true;
@@ -21,6 +19,12 @@ public class MicaWindow : Window
     {
         get => (SolidColorBrush)GetValue(AccentProperty);
         set => SetValue(AccentProperty, value);
+    }
+
+    public Thickness? MarginMaximized
+    {
+        get => (Thickness)GetValue(MarginMaximizedProperty);
+        set => SetValue(MarginMaximizedProperty, value);
     }
 
     static MicaWindow()
@@ -48,6 +52,19 @@ public class MicaWindow : Window
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
         {
             this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
+        }
+
+        if (e.Property.Name is nameof(WindowState)) 
+        {
+            if ((WindowState)e.NewValue == WindowState.Maximized)
+            {
+                MarginMaximized = new Thickness(5);
+                UpdateLayout();
+            }
+            else
+            {
+                MarginMaximized = new Thickness(0);
+            }
         }
     }
 
