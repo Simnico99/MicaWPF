@@ -34,24 +34,28 @@ steps:
   displayName: 'Installing Nuget 6.0.0'
   inputs:
     versionSpec: '6.0.0'
+    
 - task: UseDotNet@2
   displayName: 'Use .Net Core 3.1'
   inputs:
     packageType: 'sdk'
     version: '3.1.x'
     includePreviewVersions: false
+    
 - task: UseDotNet@2
   displayName: 'Use .Net 5.0'
   inputs:
     packageType: 'sdk'
     version: '5.0.x'
     includePreviewVersions: false
+    
 - task: UseDotNet@2
   displayName: 'Use .Net 6.0'
   inputs:
     packageType: 'sdk'
     version: '6.0.x'
     includePreviewVersions: false
+    
 - task: DotNetCoreCLI@2
   displayName: .Net Restore
   inputs:
@@ -59,7 +63,8 @@ steps:
     projects: '**\*!(Demo).csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: .Net Build
+  displayName: .Net Build (Alpha)
+  condition: eq(variables['buildTag'], False)
   inputs:
     command: 'build'
     configuration: Release
@@ -67,37 +72,37 @@ steps:
     arguments: '-c Release --no-restore'
     versioningScheme: byEnvVar
     versionEnvVar: '$(packageVersion).$(buildId)-Alpha'
+    
+- task: DotNetCoreCLI@2
+  displayName: .Net Build (Release)
+  condition: eq(variables['buildTag'], True)
+  inputs:
+    command: 'build'
+    configuration: Release
+    projects: '**\*!(Demo).csproj'
+    arguments: '-c Release --no-restore'
+    versioningScheme: byEnvVar
+    versionEnvVar: '$(buildTag)'    
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack (Alpha)'
+  displayName: 'Pack MicaWPF'
   condition: eq(variables['buildTag'], False)
   inputs:
     command: pack
     configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
     nobuild: true
     packagesToPack: 'src\MicaWPF\*.csproj'
     
 - task: DotNetCoreCLI@2
-  displayName: 'Pack (Alpha)'
+  displayName: 'Pack MicaWPF.Extension'
   condition: eq(variables['buildTag'], False)
   inputs:
     command: pack
     configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
     nobuild: true
     packagesToPack: 'src\MicaWPF.Extension\*.csproj'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Pack (Release)'
-  condition: eq(variables['buildTag'], True)
-  inputs:
-    command: pack
-    configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/release'
-    nobuild: true
-    packagesToPack: '**\*.csproj;-:**\*Demo.csproj;-:**\*Demo.sln'
-    buildProperties: 'Version=$(buildTag)'    
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
