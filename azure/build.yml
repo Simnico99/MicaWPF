@@ -1,4 +1,36 @@
 steps:
+- pwsh: |
+       
+        $url = "https://feeds.dev.azure.com/$(orgName)/$(System.TeamProject)/_apis/packaging/Feeds/devops-manual/Packages/$(packageId)?api-version=6.0-preview.1"
+        $packageInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
+        Write-Host "Pipeline = $($packageInfo | ConvertTo-Json -Depth 100)"
+
+        $version = $packageInfo.versions[0].version
+
+        Write-Host $version
+
+        $sp = $version.Split(".")
+
+        echo $sp
+
+        $majorVersion = $sp[0]
+        $minorVersion = $sp[1]
+        $patchVersion = [int]$sp[2] + 1
+        $productVersionBeta = “$majorVersion.$minorVersion.$patchVersion-$(Build.BuildNumber)”
+
+        Write-Host "##vso[task.setvariable variable=packageVersion]$version"
+        Write-Host "##vso[task.setvariable variable=majorVersion]$majorVersion"
+        Write-Host "##vso[task.setvariable variable=minorVersion]$minorVersion"
+        Write-Host "##vso[task.setvariable variable=patchVersion]$patchVersion"
+        Write-Host "##vso[task.setvariable variable=productVersionBeta]$productVersionBeta"
+      name: initial
+- pwsh: |
+        Write-Host 'packageVersion: $(packageVersion)'
+        Write-Host 'majorVersion: $(majorVersion)'
+        Write-Host 'minorVersion: $(minorVersion)'
+        Write-Host 'patchVersion: $(patchVersion)'
+        Write-Host 'productVersionBeta: $(productVersionBeta)'
+
 - task: NuGetToolInstaller@1
   displayName: 'Installing Nuget 6.0.0'
   inputs:
