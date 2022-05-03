@@ -70,7 +70,8 @@ steps:
     projects: '**\*!(Demo).csproj'
    
 - task: DotNetCoreCLI@2
-  displayName: .Net Build
+  displayName: .Net Build (Alpha)
+  condition: eq(variables['buildTag'], False)
   inputs:
     command: 'build'
     configuration: Release
@@ -80,8 +81,18 @@ steps:
     versionEnvVar: '$(packageVersion).$(buildId)-Alpha'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack (Alpha)'
-  condition: eq(variables['buildTag'], False)
+  displayName: .Net Build (Release)
+  condition: eq(variables['buildTag'], True)
+  inputs:
+    command: 'build'
+    configuration: Release
+    projects: '**\*!(Demo).csproj'
+    arguments: '-c Release --no-restore'
+    versioningScheme: byEnvVar
+    versionEnvVar: '$(buildTag)''
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack MicaWPF'
   inputs:
     command: pack
     configuration: Release
@@ -90,25 +101,13 @@ steps:
     packagesToPack: 'src\MicaWPF\*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack (Alpha)'
-  condition: eq(variables['buildTag'], False)
+  displayName: 'Pack MicaWPF.Extension'
   inputs:
     command: pack
     configuration: Release
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: 'src\MicaWPF.Extension\*.csproj'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Pack (Release)'
-  condition: eq(variables['buildTag'], True)
-  inputs:
-    command: pack
-    configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/release'
-    nobuild: true
-    packagesToPack: '**\*.csproj;-:**\*Demo.csproj;-:**\*Demo.sln'
-    buildProperties: 'Version=$(buildTag)'    
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
