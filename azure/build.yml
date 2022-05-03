@@ -22,33 +22,33 @@ steps:
         Write-Host "##vso[task.setvariable variable=packageVersion]$version"
   displayName: "Computing alpha version"
   condition: eq(variables['buildTag'], False)
-  
+
 - task: NuGetToolInstaller@1
   displayName: 'Installing Nuget 6.0.0'
   inputs:
     versionSpec: '6.0.0'
-    
+
 - task: UseDotNet@2
   displayName: 'Use .Net Core 3.1'
   inputs:
     packageType: 'sdk'
     version: '3.1.x'
     includePreviewVersions: false
-    
+
 - task: UseDotNet@2
   displayName: 'Use .Net 5.0'
   inputs:
     packageType: 'sdk'
     version: '5.0.x'
     includePreviewVersions: false
-    
+
 - task: UseDotNet@2
   displayName: 'Use .Net 6.0'
   inputs:
     packageType: 'sdk'
     version: '6.0.x'
     includePreviewVersions: false
-    
+
 - task: DotNetCoreCLI@2
   displayName: .Net Restore
   inputs:
@@ -65,7 +65,7 @@ steps:
     arguments: '-c Release --no-restore'
     versioningScheme: byEnvVar
     versionEnvVar: '$(packageVersion).$(buildId)-Alpha'
-    
+
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release)
   condition: eq(variables['buildTag'], True)
