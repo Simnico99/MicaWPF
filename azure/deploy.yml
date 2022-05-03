@@ -37,7 +37,7 @@ steps:
     nuGetFeedType: 'internal'
     packagesToPush: '**/+(MicaWPF.Extension)*.nupkg'
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
-    allowPackageConflicts: true    
+    allowPackageConflicts: true
 
 - task: NuGetCommand@2
   displayName: Push to NuGet (MicaWPF)
