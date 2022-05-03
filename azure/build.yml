@@ -23,7 +23,6 @@ steps:
         Write-Host "##vso[task.setvariable variable=minorVersion]$minorVersion"
         Write-Host "##vso[task.setvariable variable=patchVersion]$patchVersion"
         Write-Host "##vso[task.setvariable variable=productVersionBeta]$productVersionBeta"
-      name: initial
 - pwsh: |
         Write-Host 'packageVersion: $(packageVersion)'
         Write-Host 'majorVersion: $(majorVersion)'
