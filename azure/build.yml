@@ -4,6 +4,12 @@ steps:
   inputs:
     versionSpec: '6.0.0'
 
+- task: gitversion/setup@0
+  displayName: 'Install GitVersion'
+  inputs:
+    versionSpec: '5.x'
+    updateAssemblyInfo: true
+
 - task: UseDotNet@2
   displayName: 'Use .Net Core 3.1'
   inputs:
@@ -37,6 +43,8 @@ steps:
     command: 'build'
     configuration: Release
     projects: '**/*!(Demo).csproj'
+    versioningScheme: byEnvVar
+    versionEnvVar: 'GitVersion.SemVer'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Prerelease)'
@@ -47,7 +55,6 @@ steps:
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: '**/*!(Demo).csproj'
-    buildProperties: 'Version="$variables["Release.ReleaseName"].$(Build.BuildId)-prerelease"'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Release)'
