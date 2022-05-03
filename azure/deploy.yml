@@ -8,7 +8,7 @@ steps:
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
     nobuild: true
     packagesToPack: 'src\MicaWPF\*.csproj'
-    
+
 - task: DotNetCoreCLI@2
   displayName: 'Pack MicaWPF.Extension'
   condition: eq(variables['buildTag'], False)
@@ -28,7 +28,7 @@ steps:
     packagesToPush: '**/MicaWPF!(.Extension)*.nupkg'
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
     allowPackageConflicts: true
-    
+
 - task: NuGetCommand@2
   displayName: Push to Artifacts (MicaWPF.Extension)
   condition: and(succeeded(), eq(variables['buildTag'], false))
