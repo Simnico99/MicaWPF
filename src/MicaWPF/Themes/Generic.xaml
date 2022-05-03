@@ -114,10 +114,10 @@
                                                     VerticalAlignment="Center"
                                                     RenderOptions.BitmapScalingMode="HighQuality"
                                                     Source="{TemplateBinding Icon}" />
-                                                <Label
+                                                <TextBlock
                                                     Margin="5,0,0,0"
-                                                    VerticalContentAlignment="Center"
-                                                    Content="{TemplateBinding Title}"
+                                                    VerticalAlignment="Center"
+                                                    Text="{TemplateBinding Title}"
                                                     FontSize="12"
                                                     Foreground="{TemplateBinding Foreground}" />
                                             </StackPanel>
@@ -277,10 +277,10 @@
                                     VerticalAlignment="Center"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Source="{TemplateBinding Icon}" />
-                                <Label
+                                <TextBlock
                                     Margin="5,0,0,0"
-                                    VerticalContentAlignment="Center"
-                                    Content="{TemplateBinding Title}"
+                                    VerticalAlignment="Center"
+                                    Text="{TemplateBinding Title}"
                                     FontSize="12"
                                     Foreground="{TemplateBinding Foreground}" />
                             </StackPanel>
