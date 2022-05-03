@@ -77,7 +77,7 @@ steps:
     projects: '**\*!(Demo).csproj'
     arguments: '--no-restore'
     versioningScheme: byEnvVar
-    versionEnvVar: '$(packageVersion)-Alpha'
+    versionEnvVar: '$(packageVersion).$(buildId)-Alpha'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Alpha)'
@@ -87,7 +87,7 @@ steps:
     configuration: Release
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
-    packagesToPack: '**\*.csproj;-:**\*Demo.csproj'
+    packagesToPack: '**\*.csproj;-:**\*Demo.csproj;-:**\*Demo.sln'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Release)'
@@ -97,7 +97,7 @@ steps:
     configuration: Release
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/release'
     nobuild: true
-    packagesToPack: '**\*.csproj;-:**\*Demo.csproj'
+    packagesToPack: '**\*.csproj;-:**\*Demo.csproj;-:**\*Demo.sln'
     buildProperties: 'Version=$(buildTag)'    
 
 - task: ado-discord-webhook@1
