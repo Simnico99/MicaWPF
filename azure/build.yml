@@ -75,27 +75,7 @@ steps:
     projects: '**\*!(Demo).csproj'
     arguments: '-c Release --no-restore'
     versioningScheme: byEnvVar
-    versionEnvVar: '$(buildTag)'    
-
-- task: DotNetCoreCLI@2
-  displayName: 'Pack MicaWPF'
-  condition: eq(variables['buildTag'], False)
-  inputs:
-    command: pack
-    configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
-    nobuild: true
-    packagesToPack: 'src\MicaWPF\*.csproj'
-    
-- task: DotNetCoreCLI@2
-  displayName: 'Pack MicaWPF.Extension'
-  condition: eq(variables['buildTag'], False)
-  inputs:
-    command: pack
-    configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
-    nobuild: true
-    packagesToPack: 'src\MicaWPF.Extension\*.csproj'
+    versionEnvVar: '$(buildTag)'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
