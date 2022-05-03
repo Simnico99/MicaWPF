@@ -47,7 +47,7 @@ steps:
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: '**/*!(Demo).csproj'
-    buildProperties: 'Version="$variables["Release.ReleaseName"].$(Build.BuildId)-prerelease"'
+    buildProperties: 'Version="3.0.0.$(Build.BuildId)-prerelease"'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Release)'
