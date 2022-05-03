@@ -3,28 +3,22 @@ steps:
         $url = "https://azuresearch-usnc.nuget.org/query?q=MicaWPF&prerelease=false"
         $packageInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
         Write-Host "Pipeline = $($packageInfo | ConvertTo-Json -Depth 100)"
-
         $versionList;
         
         foreach ($versionlocal in $packageInfo.data.versions)
         {
               $versionList += [version[]]$versionlocal.version
         }
-
         $sortedVersions = $versionList | Sort-Object -Descending | foreach {$_.ToString()}
         $version = $sortedVersions[0]
         
         Write-Host $version
-
         $sp = $version.Split(".")
-
         echo $sp
-
         $majorVersion = $sp[0]
         $minorVersion = $sp[1]
         $patchVersion = [int]$sp[2] + 1
         $productVersionBeta = “$majorVersion.$minorVersion.$patchVersion.$(Build.BuildId)-Beta”
-
         Write-Host "##vso[task.setvariable variable=packageVersion]$version"
         Write-Host "##vso[task.setvariable variable=majorVersion]$majorVersion"
         Write-Host "##vso[task.setvariable variable=minorVersion]$minorVersion"
@@ -36,78 +30,71 @@ steps:
         Write-Host 'majorVersion: $(majorVersion)'
         Write-Host 'minorVersion: $(minorVersion)'
         Write-Host 'patchVersion: $(patchVersion)'
-
 - task: NuGetToolInstaller@1
   displayName: 'Installing Nuget 6.0.0'
   inputs:
     versionSpec: '6.0.0'
-
 - task: UseDotNet@2
   displayName: 'Use .Net Core 3.1'
   inputs:
     packageType: 'sdk'
     version: '3.1.x'
     includePreviewVersions: false
-
 - task: UseDotNet@2
   displayName: 'Use .Net 5.0'
   inputs:
     packageType: 'sdk'
     version: '5.0.x'
     includePreviewVersions: false
-
 - task: UseDotNet@2
   displayName: 'Use .Net 6.0'
   inputs:
     packageType: 'sdk'
     version: '6.0.x'
     includePreviewVersions: false
-
 - task: DotNetCoreCLI@2
   displayName: .Net Restore
   inputs:
     command: restore
     projects: '**\*!(Demo).csproj'
-   
+
 - task: DotNetCoreCLI@2
-  displayName: .Net Build (Alpha)
-  condition: eq(variables['buildTag'], False)
+  displayName: .Net Build
   inputs:
     command: 'build'
     configuration: Release
-    projects: '**\*!(Demo).csproj'
-    arguments: '-c Release --no-restore'
-    versioningScheme: byEnvVar
+	@@ -80,35 +81,33 @@ steps:
     versionEnvVar: '$(packageVersion).$(buildId)-Alpha'
 
 - task: DotNetCoreCLI@2
-  displayName: .Net Build (Release)
-  condition: eq(variables['buildTag'], True)
-  inputs:
-    command: 'build'
-    configuration: Release
-    projects: '**\*!(Demo).csproj'
-    arguments: '-c Release --no-restore'
-    versioningScheme: byEnvVar
-    versionEnvVar: '$(buildTag)''
-
-- task: DotNetCoreCLI@2
-  displayName: Pack MicaWPF
+  displayName: 'Pack (Alpha)'
+  condition: eq(variables['buildTag'], False)
   inputs:
     command: pack
     configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)\packages'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: 'src\MicaWPF\*.csproj'
-
 - task: DotNetCoreCLI@2
-  displayName: Pack MicaWPF.Extension
+  displayName: 'Pack (Alpha)'
+  condition: eq(variables['buildTag'], False)
   inputs:
     command: pack
     configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)\packages'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: 'src\MicaWPF.Extension\*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack (Release)'
+  condition: eq(variables['buildTag'], True)
+  inputs:
+    command: pack
+    configuration: Release
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages/release'
+    nobuild: true
+    packagesToPack: '**\*.csproj;-:**\*Demo.csproj;-:**\*Demo.sln'
+    buildProperties: 'Version=$(buildTag)'    
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
@@ -131,7 +118,4 @@ steps:
               {
                 "name": "Id",
                 "value": "$(Build.BuildId)",
-                "inline": true
-              }
-            ]
-          }]
+	
