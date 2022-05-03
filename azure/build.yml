@@ -1,6 +1,5 @@
 steps:
 - pwsh: |
-       
         $url = "https://azuresearch-usnc.nuget.org/query?q=MicaWPF&prerelease=false"
         $packageInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
         Write-Host "Pipeline = $($packageInfo | ConvertTo-Json -Depth 100)"
@@ -30,13 +29,12 @@ steps:
         Write-Host "##vso[task.setvariable variable=majorVersion]$majorVersion"
         Write-Host "##vso[task.setvariable variable=minorVersion]$minorVersion"
         Write-Host "##vso[task.setvariable variable=patchVersion]$patchVersion"
-        Write-Host "##vso[task.setvariable variable=productVersionBeta]$productVersionBeta"
+  displayName: 'Fetching Nuget Last Version'
 - pwsh: |
         Write-Host 'packageVersion: $(packageVersion)'
         Write-Host 'majorVersion: $(majorVersion)'
         Write-Host 'minorVersion: $(minorVersion)'
         Write-Host 'patchVersion: $(patchVersion)'
-        Write-Host 'productVersionBeta: $(productVersionBeta)'
 
 - task: NuGetToolInstaller@1
   displayName: 'Installing Nuget 6.0.0'
@@ -84,11 +82,9 @@ steps:
     command: 'build'
     configuration: Release
     projects: '**/*!(Demo).csproj'
-    versioningScheme: byEnvVar
-    versionEnvVar: 'GitVersion.SemVer'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack (Prerelease)'
+  displayName: 'Pack (Alpha)'
   condition: eq(variables['buildTag'], False)
   inputs:
     command: pack
@@ -96,6 +92,7 @@ steps:
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: '**/*!(Demo).csproj'
+     buildProperties: 'Version=$(packageVersion)-Alpha' 
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Release)'
