@@ -47,7 +47,7 @@ steps:
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages/prerelease'
     nobuild: true
     packagesToPack: '**/*!(Demo).csproj'
-    buildProperties: 'Version="3.0.0.$(Build.BuildId)-prerelease"'
+    buildProperties: 'Version="$variables["Release.ReleaseName"].$(Build.BuildId)-prerelease"'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack (Release)'
@@ -63,7 +63,7 @@ steps:
 - task: ado-discord-webhook@1
   displayName: Publish test results
   condition: succeededOrFailed()
-  inputs:1
+  inputs:
     channelId: '892075724847079494'
     webhookKey: 'S3CPGp0vqpF-azkSH-LSxjUf47h3LrTliK7M7QZlJV2GacMn1sQe4OVvpqrItEVd1sBf'
     name: 'Azure DevOps'
