@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF", "src\MicaWPF\MicaWPF.csproj", "{D1A510CB-A91D-484E-9F20-0408DAA2F2C9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46D88}") = "MicaWPF.Extension", "src\MicaWPF.Extension\MicaWPF.Extension.csproj", "{95279028-25AC-4449-B796-A56D2AB73836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF.Extension", "src\MicaWPF.Extension\MicaWPF.Extension.csproj", "{95279028-25AC-4449-B796-A56D2AB73836}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

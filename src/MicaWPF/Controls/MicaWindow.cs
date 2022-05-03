@@ -1,4 +1,6 @@
-﻿namespace MicaWPF.Controls;
+﻿using System.Windows;
+
+namespace MicaWPF.Controls;
 public class MicaWindow : Window
 {
     private readonly DynamicThemeService _dynamicThemeService;
@@ -26,6 +28,7 @@ public class MicaWindow : Window
         if (OsHelper.GlobalOsVersion is not OsVersion.Windows11Before22523 and not OsVersion.Windows11After22523)
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
+            return;
         }
     }
 
@@ -73,6 +76,13 @@ public class MicaWindow : Window
         CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
+
+        var myResourceDictionary = new ResourceDictionary
+        {
+            Source = new Uri("/MicaWPF;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
+        };
+
+        this.Style = myResourceDictionary["MicaWindow11"] as Style;
     }
 
     private void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)

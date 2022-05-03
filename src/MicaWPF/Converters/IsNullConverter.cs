@@ -1,16 +1,11 @@
 ﻿using System.Windows.Data;
 
-namespace MicaWPF.Extension.Converters;
+namespace MicaWPF.Converters;
 public class IsNullConverter : IValueConverter
 {
     public object? Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        if (value != null && value.ToString() == string.Empty)
-        {
-            return true;
-        }
-
-        return false;
+        return (value != null && value.ToString() == string.Empty) || value is null;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
