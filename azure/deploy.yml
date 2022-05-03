@@ -44,7 +44,7 @@ steps:
   condition: and(succeeded(), eq(variables['buildTag'], true))
   inputs:
     command: 'push'
-    packagesToPush: '**/+(MicaWPF)*.nupkg;!**/*.symbols.nupkg'
+    packagesToPush: '**/+(MicaWPF)*.nupkg;!**/*.symbols.nupkg;!**/+(MicaWPF.Extension)*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
 
