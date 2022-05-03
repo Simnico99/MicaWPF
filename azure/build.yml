@@ -20,16 +20,9 @@ steps:
         $patchVersion = [int]$sp[2] + 1
         $productVersionBeta = “$majorVersion.$minorVersion.$patchVersion.$(Build.BuildId)-Beta”
         Write-Host "##vso[task.setvariable variable=packageVersion]$version"
-        Write-Host "##vso[task.setvariable variable=majorVersion]$majorVersion"
-        Write-Host "##vso[task.setvariable variable=minorVersion]$minorVersion"
-        Write-Host "##vso[task.setvariable variable=patchVersion]$patchVersion"
-  displayName: "Fetching Nuget latest version"
+  displayName: "Computing alpha version"
+  condition: eq(variables['buildTag'], False)
   
-- pwsh: |
-        Write-Host 'packageVersion: $(packageVersion)'
-        Write-Host 'majorVersion: $(majorVersion)'
-        Write-Host 'minorVersion: $(minorVersion)'
-        Write-Host 'patchVersion: $(patchVersion)'
 - task: NuGetToolInstaller@1
   displayName: 'Installing Nuget 6.0.0'
   inputs:
