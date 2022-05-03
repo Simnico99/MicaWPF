@@ -18,6 +18,8 @@ variables:
   buildNumber: $[ variables['Build.BuildNumber'] ]
   buildTag: $[ startsWith(variables['Build.SourceBranch'], 'refs/tags') ]
   suffix: $(Date:yyyyMMdd)
+  orgName: 'ZirconCloud'
+  packageId: '99fc4a4d-77f4-49e1-a1f8-893901dafebe'
 
 jobs:
 - job: "Windows_Build"
