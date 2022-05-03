@@ -10,7 +10,7 @@ steps:
     versionSpec: '5.x'
     updateAssemblyInfo: true
 
-- script: echo "GitVersion.SemVer GitVersion.BranchName"
+- script: echo 'GitVersion.SemVer GitVersion.BranchName'
 
 - task: UseDotNet@2
   displayName: 'Use .Net Core 3.1'
