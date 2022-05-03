@@ -165,6 +165,13 @@ public partial class MainWindow : MicaWindow
 
 ```
 
+#### Note For .Net5.0 and .Net6.0
+You will need to change your CSPROJ to include the windows build after the netx.0-windows
+Here is an exemple using .Net6.0 just change the 6 for a 5 on .Net5.0
+```Xaml
+        <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+        <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+```
 
 _For more examples, please refer to the [Documentation](https://github.com/Simnico99/MicaWPF/wiki)_
 
