@@ -5,7 +5,7 @@ steps:
         $packageInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
         Write-Host "Pipeline = $($packageInfo | ConvertTo-Json -Depth 100)"
 
-        $version = $packageInfo.versions[0].version
+        $version = $packageInfo.data.versions[0].version
 
         Write-Host $version
 
