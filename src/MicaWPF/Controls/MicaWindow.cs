@@ -72,7 +72,13 @@ public class MicaWindow : Window
     {
         if (Accent is null)
         {
-            Accent = new SolidColorBrush((Color)FindResource("MicaWPF.Colors.SystemAccentColor"));
+
+            var myResourceDictionary = new ResourceDictionary
+            {
+                Source = new Uri("/MicaWPF;component/Styles/Assets/Accent.xaml", UriKind.RelativeOrAbsolute)
+            };
+
+            Accent = new SolidColorBrush((Color)myResourceDictionary["MicaWPF.Colors.SystemAccentColor"]);
         }
 
         this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);
