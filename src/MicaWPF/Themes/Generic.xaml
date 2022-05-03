@@ -110,16 +110,15 @@
                                                 Visibility="Collapsed">
                                                 <Image
                                                     Height="15"
-                                                    Margin="5,0,0,0"
+                                                    Margin="10,0,0,0"
                                                     VerticalAlignment="Center"
                                                     RenderOptions.BitmapScalingMode="HighQuality"
                                                     Source="{TemplateBinding Icon}" />
-                                                <Label
+                                                <TextBlock
                                                     Margin="5,0,0,0"
-                                                    VerticalContentAlignment="Center"
-                                                    Content="{TemplateBinding Title}"
                                                     FontSize="12"
-                                                    Foreground="{TemplateBinding Foreground}" />
+                                                    Foreground="{TemplateBinding Foreground}"
+                                                    Text="{TemplateBinding Title}" />
                                             </StackPanel>
                                             <Grid DockPanel.Dock="Bottom">
                                                 <ContentPresenter />
@@ -277,12 +276,11 @@
                                     VerticalAlignment="Center"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Source="{TemplateBinding Icon}" />
-                                <Label
-                                    Margin="5,0,0,0"
-                                    VerticalContentAlignment="Center"
-                                    Content="{TemplateBinding Title}"
+                                <TextBlock
+                                    Margin="10,0,0,0"
                                     FontSize="12"
-                                    Foreground="{TemplateBinding Foreground}" />
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Text="{TemplateBinding Title}" />
                             </StackPanel>
                             <Grid DockPanel.Dock="Bottom">
                                 <ContentPresenter />
