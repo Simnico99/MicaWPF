@@ -75,7 +75,7 @@ steps:
     command: 'build'
     configuration: Release
     projects: '**\*!(Demo).csproj'
-    arguments: '-c -Release --no-restore'
+    arguments: '-c Release --no-restore'
     versioningScheme: byEnvVar
     versionEnvVar: '$(packageVersion).$(buildId)-Alpha'
 
