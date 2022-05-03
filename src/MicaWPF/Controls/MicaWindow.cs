@@ -51,7 +51,7 @@ public class MicaWindow : Window
 
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
         {
-            this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
+            UpdateTheme();
         }
 
         if (e.Property.Name is nameof(WindowState)) 
