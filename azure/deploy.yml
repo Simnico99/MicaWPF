@@ -1,4 +1,24 @@
 steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Pack MicaWPF'
+  condition: eq(variables['buildTag'], False)
+  inputs:
+    command: pack
+    configuration: Release
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
+    nobuild: true
+    packagesToPack: 'src\MicaWPF\*.csproj'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'Pack MicaWPF.Extension'
+  condition: eq(variables['buildTag'], False)
+  inputs:
+    command: pack
+    configuration: Release
+    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
+    nobuild: true
+    packagesToPack: 'src\MicaWPF.Extension\*.csproj'
+
 - task: NuGetCommand@2
   displayName: Push to Artifacts (MicaWPF)
   condition: and(succeeded(), eq(variables['buildTag'], false))
@@ -20,10 +40,19 @@ steps:
     allowPackageConflicts: true    
 
 - task: NuGetCommand@2
-  displayName: Push to NuGet (Release Mode)
+  displayName: Push to NuGet (MicaWPF)
   condition: and(succeeded(), eq(variables['buildTag'], true))
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/MicaWPF*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NugetConnection'
+
+- task: NuGetCommand@2
+  displayName: Push to NuGet (MicaWPF.Extension)
+  condition: and(succeeded(), eq(variables['buildTag'], true))
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/MicaWPF.Extension*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
