@@ -1,5 +1,7 @@
 steps:
-- pwsh: |
+- pwsh: 
+  displayName: 'Fetching Nuget Last Version'
+  inputs: |
         $url = "https://azuresearch-usnc.nuget.org/query?q=MicaWPF&prerelease=false"
         $packageInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
         Write-Host "Pipeline = $($packageInfo | ConvertTo-Json -Depth 100)"
@@ -29,7 +31,7 @@ steps:
         Write-Host "##vso[task.setvariable variable=majorVersion]$majorVersion"
         Write-Host "##vso[task.setvariable variable=minorVersion]$minorVersion"
         Write-Host "##vso[task.setvariable variable=patchVersion]$patchVersion"
-  displayName: 'Fetching Nuget Last Version'
+  
 - pwsh: |
         Write-Host 'packageVersion: $(packageVersion)'
         Write-Host 'majorVersion: $(majorVersion)'
