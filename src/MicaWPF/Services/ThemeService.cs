@@ -2,11 +2,12 @@
 namespace MicaWPF.Services;
 public class ThemeService
 {
+    private static readonly ThemeService _themeService = new();
+    private readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
+
     private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
     private const string RegistryValueName = "AppsUseLightTheme";
-
-    private readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
-    private static readonly ThemeService _themeService = new();
+    
     private WindowsTheme _currentTheme;
     private bool _isThemeAware;
     private bool _IsCheckingTheme;
