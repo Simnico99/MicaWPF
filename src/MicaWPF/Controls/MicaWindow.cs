@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace MicaWPF.Controls;
+﻿namespace MicaWPF.Controls;
 public class MicaWindow : Window
 {
     private readonly DynamicThemeService _dynamicThemeService;
@@ -9,7 +7,6 @@ public class MicaWindow : Window
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
 
     public bool IsThemeAware { get; set; } = true;
-    public bool UseSystemAccent { get; set; } = true;
     public bool IsWaitingForManualThemeChange { get; set; } = false;
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
@@ -39,12 +36,12 @@ public class MicaWindow : Window
     {
         if (e.Property.Name is nameof(IsThemeAware))
         {
-            _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
+            _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
         }
 
         if (e.Property.Name is nameof(IsWaitingForManualThemeChange))
         {
-            _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
+            _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
         }
 
         if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
@@ -52,7 +49,7 @@ public class MicaWindow : Window
             UpdateTheme();
         }
 
-        if (e.Property.Name is nameof(WindowState)) 
+        if (e.Property.Name is nameof(WindowState))
         {
             if ((WindowState)e.NewValue == WindowState.Maximized)
             {
@@ -61,31 +58,21 @@ public class MicaWindow : Window
             else
             {
                 MarginMaximized = new Thickness(0);
-            }
+            }z
         }
         base.OnPropertyChanged(e);
     }
 
     public void UpdateTheme()
     {
-        if (Accent is null)
-        {
-            var myResourceDictionary = new ResourceDictionary
-            {
-                Source = new Uri("/MicaWPF;component/Styles/Assets/Accent.xaml", UriKind.RelativeOrAbsolute)
-            };
-
-            Accent = new SolidColorBrush((Color)myResourceDictionary["MicaWPF.Colors.SystemAccentColor"]);
-        }
-
-        this.EnableMica(Theme, SystemBackdropType, CaptionHeight, UseSystemAccent);
+        this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
     }
 
     public override void OnApplyTemplate()
     {
         UpdateTheme();
-        _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType, UseSystemAccent);
-        _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType, UseSystemAccent);
+        _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
+        _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
         base.OnApplyTemplate();
     }
 
@@ -102,7 +89,7 @@ public class MicaWindow : Window
             Source = new Uri("/MicaWPF;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
         };
 
-        this.Style = myResourceDictionary["MicaWindow11"] as Style;
+        Style = myResourceDictionary["MicaWindow11"] as Style;
     }
 
     private void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)

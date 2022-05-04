@@ -22,3 +22,11 @@ public enum BackdropType
     Acrylic = 3,
     Tabbed = 4
 }
+
+public enum AccentBrushType
+{
+    Primary,
+    Secondary,
+    Tertiary,
+    Quaternary
+}

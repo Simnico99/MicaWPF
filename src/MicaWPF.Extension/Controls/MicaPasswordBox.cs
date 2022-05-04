@@ -1,5 +1,4 @@
-﻿using MicaWPF.Extension.Mvvm;
-using MicaWPF.Extension.Symbols;
+﻿using MicaWPF.Extension.Symbols;
 
 namespace MicaWPF.Extension.Controls;
 public class MicaPasswordBox : MicaTextBox
@@ -9,7 +8,6 @@ public class MicaPasswordBox : MicaTextBox
     public static readonly DependencyProperty PasswordCharProperty = DependencyProperty.Register(nameof(PasswordChar), typeof(char), typeof(MicaPasswordBox), new PropertyMetadata('•', OnPasswordCharChanged));
     public static readonly DependencyProperty PasswordRevealModeProperty = DependencyProperty.Register(nameof(PasswordRevealMode), typeof(RevealMode), typeof(MicaPasswordBox), new PropertyMetadata(RevealMode.Hidden, OnPasswordRevealModeChanged));
     public static readonly DependencyProperty ShowRevealButtonProperty = DependencyProperty.Register(nameof(ShowRevealButton), typeof(bool), typeof(MicaPasswordBox), new PropertyMetadata(true));
-    public static readonly DependencyProperty TemplateButtonCommandProperty = DependencyProperty.Register(nameof(TemplateButtonCommand), typeof(IRelayCommand), typeof(MicaPasswordBox), new PropertyMetadata(null));
 
     public string Password
     {
@@ -44,21 +42,12 @@ public class MicaPasswordBox : MicaTextBox
         }
     }
 
-    public IRelayCommand TemplateButtonCommand => (IRelayCommand)GetValue(TemplateButtonCommandProperty);
-
-    static MicaPasswordBox()
-    {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaPasswordBox), new FrameworkPropertyMetadata(typeof(MicaPasswordBox)));
-    }
-
     public MicaPasswordBox()
     {
         if (Icon is FluentSystemIcons.Regular.Empty)
         {
             Icon = FluentSystemIcons.Regular.Eye20;
         }
-
-        SetValue(TemplateButtonCommandProperty, new RelayCommand(o => Button_OnClick(this, o)));
     }
 
     protected override void OnTextChanged(TextChangedEventArgs e)

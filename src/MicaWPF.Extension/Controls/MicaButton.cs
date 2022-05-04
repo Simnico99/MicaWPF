@@ -8,11 +8,6 @@ public class MicaButton : Button
     public static readonly DependencyProperty HoverBackgroundProperty = DependencyProperty.Register(nameof(HoverBackground), typeof(SolidColorBrush), typeof(MicaButton));
     public static readonly DependencyProperty MouseButtonPressedBackgroundProperty = DependencyProperty.Register(nameof(MouseButtonPressedBackground), typeof(SolidColorBrush), typeof(MicaButton));
 
-    static MicaButton()
-    {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaButton), new FrameworkPropertyMetadata(typeof(MicaButton)));
-    }
-
     public FluentSystemIcons.Regular Icon
     {
         get => (FluentSystemIcons.Regular)GetValue(IconProperty);

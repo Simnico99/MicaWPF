@@ -15,7 +15,7 @@ internal class DynamicThemeService
         _currentOsVersion = OsHelper.GlobalOsVersion;
     }
 
-    public void SetThemeAware(bool isThemeAware, BackdropType micaType = BackdropType.Mica, bool useSystemAccent = true)
+    public void SetThemeAware(bool isThemeAware, BackdropType micaType = BackdropType.Mica)
     {
         if (!_isThemeAware && isThemeAware)
         {
@@ -27,8 +27,8 @@ internal class DynamicThemeService
                     switch (e.Category)
                     {
                         case UserPreferenceCategory.General:
-                            Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, WindowsTheme.Auto, micaType, -1, useSystemAccent));
-                            SetThemeAware(isThemeAware, micaType, useSystemAccent);
+                            Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, WindowsTheme.Auto, micaType, -1));
+                            SetThemeAware(isThemeAware, micaType);
                             break;
                     }
                 };
@@ -42,7 +42,7 @@ internal class DynamicThemeService
         }
     }
 
-    public void AwaitManualThemeChange(bool awaitChange, BackdropType micaType = BackdropType.Mica, bool useSystemAccent = true)
+    public void AwaitManualThemeChange(bool awaitChange, BackdropType micaType = BackdropType.Mica)
     {
         if (!_isWaitingForThemeChange && awaitChange)
         {
@@ -60,7 +60,7 @@ internal class DynamicThemeService
                     if (!_waitForDynamicThemeCancellationToken.IsCancellationRequested)
                     {
                         Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, micaWindow.Theme, micaType, -1));
-                        AwaitManualThemeChange(awaitChange, micaType, useSystemAccent);
+                        AwaitManualThemeChange(awaitChange, micaType);
                     }
                     else
                     {

@@ -11,10 +11,6 @@ public class MicaTextBox : TextBox
                 FrameworkPropertyMetadataOptions.AffectsRender |
                 FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
                 FrameworkPropertyMetadataOptions.Inherits));
-    static MicaTextBox()
-    {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaTextBox), new FrameworkPropertyMetadata(typeof(MicaTextBox)));
-    }
 
     public FluentSystemIcons.Regular Icon
     {

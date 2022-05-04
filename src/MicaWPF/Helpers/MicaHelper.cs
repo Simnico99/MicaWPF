@@ -3,15 +3,12 @@
 namespace MicaWPF.Helpers;
 public static class MicaHelper
 {
-    private delegate void NoArgDelegate();
+    private static readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
 
-    private static void SetMica(Window window, WindowsTheme theme, BackdropType micaType, int captionHeight, bool useSystemAccent)
+    private static void SetWindowProperties(Window window, WindowsTheme theme, BackdropType micaType, int captionHeight, bool useSystemAccent)
     {
         if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
-            var trueValue = 0x01;
-            var falseValue = 0x00;
-
             if (captionHeight != -1)
             {
                 WindowChrome.SetWindowChrome(window,
@@ -35,18 +32,18 @@ public static class MicaHelper
                     var accentColor = micaWindow.Accent?.Color;
                     if (accentColor is not null)
                     {
-                        AccentHelper.Change(micaWindow, (Color)accentColor, theme);
+                        _accentColorService.SetAccents((Color)accentColor, theme);
                     }
                 }
             }
 
             if (theme == WindowsTheme.Dark)
             {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, trueValue);
+                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.True);
             }
             else if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
             {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, falseValue);
+                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
             }
 
             if (OsHelper.GlobalOsVersion == OsVersion.Windows11After22523)
@@ -55,16 +52,15 @@ public static class MicaHelper
             }
             else
             {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, trueValue);
+                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, InteropValues.DwmValues.True);
             }
         }
 
         if (useSystemAccent)
         {
-            var systemColorHandler = new SystemColorsHandler();
             if (window is MicaWindow micaWindow)
             {
-                systemColorHandler.UpdateAccent(micaWindow, theme);
+                _accentColorService.UpdateAccentsFromWindows(theme);
             }
         }
 
@@ -76,11 +72,11 @@ public static class MicaHelper
         if (theme == WindowsTheme.Auto)
         {
             var currentWindowsTheme = ThemeHelper.GetWindowsTheme();
-            SetMica(window, currentWindowsTheme, micaType, captionHeight, useSystemAccent);
+            SetWindowProperties(window, currentWindowsTheme, micaType, captionHeight, useSystemAccent);
         }
         else
         {
-            SetMica(window, theme, micaType, captionHeight, useSystemAccent);
+            SetWindowProperties(window, theme, micaType, captionHeight, useSystemAccent);
         }
     }
 }

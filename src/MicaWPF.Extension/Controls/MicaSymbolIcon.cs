@@ -9,11 +9,6 @@ public class MicaSymbolIcon : Label
     public static readonly DependencyProperty RawSymbolProperty = DependencyProperty.Register(nameof(RawSymbol), typeof(string), typeof(MicaSymbolIcon), new PropertyMetadata("\uEA01"));
     public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled), typeof(bool), typeof(MicaSymbolIcon), new PropertyMetadata(false, OnGlyphChanged));
 
-    static MicaSymbolIcon()
-    {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaSymbolIcon), new FrameworkPropertyMetadata(typeof(MicaSymbolIcon)));
-    }
-
     public FluentSystemIcons.Regular Symbol
     {
         get => (FluentSystemIcons.Regular)GetValue(SymbolProperty);

@@ -22,9 +22,4 @@ public class MicaListViewItem : ListViewItem
         get => (string)GetValue(IconLocationProperty);
         set => SetValue(IconLocationProperty, value);
     }
-
-    static MicaListViewItem()
-    {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaListViewItem), new FrameworkPropertyMetadata(typeof(MicaListViewItem)));
-    }
 }

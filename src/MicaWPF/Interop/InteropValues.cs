@@ -18,6 +18,13 @@ public class InteropValues
             DwmApi = "dwmapi.dll";
     }
 
+    public static class DwmValues
+    {
+        public const int
+            True = 0x01,
+            False = 0x00;
+    }
+
     [Flags]
     public enum DWMWINDOWATTRIBUTE
     {
