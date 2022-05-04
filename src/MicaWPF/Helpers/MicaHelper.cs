@@ -49,6 +49,7 @@ public static class MicaHelper
 
     public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
     {
+        _accentColorService.Init();
         if (theme == WindowsTheme.Auto)
         {
             var currentWindowsTheme = ThemeHelper.GetWindowsTheme();

@@ -28,7 +28,7 @@ internal class DynamicThemeService
                 }
                 else
                 {
-                    _accentColorService.SetAccents(_accentColorService.SystemAccentColor, micaWindow.Theme);
+                    _accentColorService.UpdateAccents(_accentColorService.SystemAccentColor, micaWindow.Theme);
                 }
             }
         });

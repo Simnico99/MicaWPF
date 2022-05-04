@@ -6,6 +6,7 @@ namespace MicaWPF.Services;
 public class AccentColorService
 {
     private static readonly AccentColorService _systemColorsHandler = new();
+    private bool _isInit = false;
     public bool AccentUpdateFromWindows { get; private set; }
 
     public Color SystemAccentColor { get; private set; }
@@ -15,6 +16,19 @@ public class AccentColorService
     public Color SystemAccentColorDark1 { get; private set; }
     public Color SystemAccentColorDark2 { get; private set; }
     public Color SystemAccentColorDark3 { get; private set; }
+
+    internal void Init() 
+    {
+        if (!_isInit)
+        {
+            _isInit = true;
+            if (AccentUpdateFromWindows)
+            {
+                UpdateAccentsFromWindows();
+                return;
+            }
+        }
+    }
 
     private AccentColorService() { }
 
@@ -98,6 +112,7 @@ public class AccentColorService
 
     public void UpdateAccentsFromWindows(WindowsTheme windowsTheme = WindowsTheme.Light)
     {
+        _isInit = true;
         AccentUpdateFromWindows = true;
         var uwpColors = new UWPColors();
         var colorsLongString = uwpColors.GetSystemColors();
@@ -112,8 +127,9 @@ public class AccentColorService
         UpdateFromInternalColors(windowsTheme);
     }
 
-    public void SetAccents(Color systemAccent, WindowsTheme windowsTheme = WindowsTheme.Light)
+    public void UpdateAccents(Color systemAccent, WindowsTheme windowsTheme = WindowsTheme.Light)
     {
+        _isInit = true;
         AccentUpdateFromWindows = false;
         SystemAccentColor = systemAccent;
         SystemAccentColorLight1 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Secondary);
