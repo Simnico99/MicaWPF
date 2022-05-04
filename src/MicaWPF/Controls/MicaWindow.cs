@@ -1,28 +1,25 @@
-﻿namespace MicaWPF.Controls;
+﻿using MicaWPF.Extensions;
+
+namespace MicaWPF.Controls;
 public class MicaWindow : Window
 {
-    private readonly DynamicThemeService _dynamicThemeService;
-
-    public static readonly DependencyProperty AccentProperty = DependencyProperty.Register(nameof(Accent), typeof(SolidColorBrush), typeof(MicaWindow));
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
-
-    public bool IsThemeAware { get; set; } = true;
-    public bool IsWaitingForManualThemeChange { get; set; } = false;
-    public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
-    public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
-    public int CaptionHeight { get; set; } = 20;
-
-    public SolidColorBrush? Accent
-    {
-        get => (SolidColorBrush)GetValue(AccentProperty);
-        set => SetValue(AccentProperty, value);
-    }
+    public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow) , new UIPropertyMetadata(true));
 
     public Thickness? MarginMaximized
     {
         get => (Thickness)GetValue(MarginMaximizedProperty);
         set => SetValue(MarginMaximizedProperty, value);
     }
+
+    public bool ChangeTitleColorWhenInactive
+    {
+        get => (bool)GetValue(MarginMaximizedProperty);
+        set => SetValue(MarginMaximizedProperty, value);
+    }
+
+    public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
+    public int CaptionHeight { get; set; } = 20;
 
     static MicaWindow()
     {
@@ -34,21 +31,6 @@ public class MicaWindow : Window
 
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
-        if (e.Property.Name is nameof(IsThemeAware))
-        {
-            _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
-        }
-
-        if (e.Property.Name is nameof(IsWaitingForManualThemeChange))
-        {
-            _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
-        }
-
-        if (e.Property.Name is nameof(Theme) or nameof(SystemBackdropType) or nameof(CaptionHeight))
-        {
-            UpdateTheme();
-        }
-
         if (e.Property.Name is nameof(WindowState))
         {
             if ((WindowState)e.NewValue == WindowState.Maximized)
@@ -63,22 +45,15 @@ public class MicaWindow : Window
         base.OnPropertyChanged(e);
     }
 
-    public void UpdateTheme()
-    {
-        this.EnableMica(Theme, SystemBackdropType, CaptionHeight);
-    }
 
     public override void OnApplyTemplate()
     {
-        UpdateTheme();
-        _dynamicThemeService.SetThemeAware(IsThemeAware, SystemBackdropType);
-        _dynamicThemeService.AwaitManualThemeChange(IsWaitingForManualThemeChange, SystemBackdropType);
+        this.EnableMica(SystemBackdropType, CaptionHeight);
         base.OnApplyTemplate();
     }
 
     public MicaWindow()
     {
-        _dynamicThemeService = new(this);
         CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));

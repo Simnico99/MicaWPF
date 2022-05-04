@@ -40,7 +40,6 @@
         </Setter>
     </Style>
 
-
     <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -77,7 +76,6 @@
     <Style TargetType="{x:Type local:MicaWindow}">
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ApplicationBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
-        <Setter Property="Accent" Value="{DynamicResource MicaWPF.Brushes.SystemAccent}" />
         <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
@@ -115,11 +113,12 @@
                                                     RenderOptions.BitmapScalingMode="HighQuality"
                                                     Source="{TemplateBinding Icon}" />
                                                 <TextBlock
+                                                    x:Name="TitleTextBlock"
                                                     Margin="5,0,0,0"
                                                     VerticalAlignment="Center"
-                                                    Text="{TemplateBinding Title}"
                                                     FontSize="12"
-                                                    Foreground="{TemplateBinding Foreground}" />
+                                                    Foreground="{TemplateBinding Foreground}"
+                                                    Text="{TemplateBinding Title}" />
                                             </StackPanel>
                                             <Grid DockPanel.Dock="Bottom">
                                                 <ContentPresenter />
@@ -229,6 +228,13 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=IsActive}" Value="False" />
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ChangeTitleColorWhenInactive}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="TitleTextBlock" Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorDisabled}" />
+                        </MultiDataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Icon, Converter={StaticResource IsNullConverter}}" Value="False">
                             <Setter TargetName="TitleStackPanel" Property="Visibility" Value="Visible" />
                         </DataTrigger>
@@ -278,11 +284,12 @@
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Source="{TemplateBinding Icon}" />
                                 <TextBlock
+                                    x:Name="TitleTextBlock"
                                     Margin="5,0,0,0"
                                     VerticalAlignment="Center"
-                                    Text="{TemplateBinding Title}"
                                     FontSize="12"
-                                    Foreground="{TemplateBinding Foreground}" />
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Text="{TemplateBinding Title}" />
                             </StackPanel>
                             <Grid DockPanel.Dock="Bottom">
                                 <ContentPresenter />
@@ -296,6 +303,13 @@
                         <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Title, Converter={StaticResource IsNullConverter}}" Value="False">
                             <Setter TargetName="TitleStackPanel" Property="Visibility" Value="Visible" />
                         </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=IsActive}" Value="False" />
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ChangeTitleColorWhenInactive}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="TitleTextBlock" Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorDisabled}" />
+                        </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
