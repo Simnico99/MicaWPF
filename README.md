@@ -1,15 +1,8 @@
 <div align="center">
 
-  <a href="https://www.nuget.org/packages/MicaWPF/latest">![NuGet](https://img.shields.io/nuget/v/MicaWPF.svg?style=flat&logo=NuGet)</a>
-  <a href="https://www.nuget.org/packages/MicaWPF/latest/prerelease">![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg?style=flat&logo=NuGet)</a>
-  <a href="https://www.nuget.org/packages/MicaWPF/">![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg?style=flat&logo=NuGet)</a>
-  <a href="https://www.codefactor.io/repository/github/simnico99/micawpf/overview/main">![CodeFactor](https://img.shields.io/codefactor/grade/github/Simnico99/MicaWPF/main?logo=codefactor&logoColor=%23ffff)</a>
-   <br/>
-  <a href="https://github.com/Simnico99/MicaWPF/graphs/contributors">![Contributors](https://img.shields.io/github/contributors/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/network/members">![Forks](https://img.shields.io/github/forks/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/stargazers">![Stargazers](https://img.shields.io/github/stars/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/issues">![Issues](https://img.shields.io/github/issues/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/blob/main/LICENSE">![License](https://img.shields.io/github/license/Simnico99/MicaWPF?style=flat)</a>
+| <a href="https://www.nuget.org/packages/MicaWPF/latest">![NuGet](https://img.shields.io/nuget/v/MicaWPF.svg?style=flat&logo=NuGet)</a> |  <a href="https://www.nuget.org/packages/MicaWPF/latest/prerelease">![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg?style=flat&logo=NuGet)</a> | <a href="https://www.nuget.org/packages/MicaWPF/">![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg?style=flat&logo=NuGet)</a> | <a href="https://www.codefactor.io/repository/github/simnico99/micawpf/overview/main">![CodeFactor](https://img.shields.io/codefactor/grade/github/Simnico99/MicaWPF/main?logo=codefactor&logoColor=%23ffff)</a> | <a href="https://github.com/Simnico99/MicaWPF/graphs/contributors">![Contributors](https://img.shields.io/github/contributors/Simnico99/MicaWPF?style=flat)</a> |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| <a href="https://github.com/Simnico99/MicaWPF/network/members">![Forks](https://img.shields.io/github/forks/Simnico99/MicaWPF?style=flat)</a> | <a href="https://github.com/Simnico99/MicaWPF/stargazers">![Stargazers](https://img.shields.io/github/stars/Simnico99/MicaWPF?style=flat)</a> | <a href="https://github.com/Simnico99/MicaWPF/issues">![Issues](https://img.shields.io/github/issues/Simnico99/MicaWPF?style=flat)</a> | <a href="https://github.com/Simnico99/MicaWPF/blob/main/LICENSE">![License](https://img.shields.io/github/license/Simnico99/MicaWPF?style=flat)</a> |
 
 </div>
 
