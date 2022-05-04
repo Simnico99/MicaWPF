@@ -1,5 +1,4 @@
-﻿
-namespace MicaWPF.Services;
+﻿namespace MicaWPF.Services;
 public class ThemeService
 {
     private static readonly ThemeService _themeService = new();
@@ -128,6 +127,7 @@ public class ThemeService
     {
         using var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
         var registryValueObject = key?.GetValue(RegistryValueName);
+
         if (registryValueObject == null)
         {
             return WindowsTheme.Light;
@@ -149,7 +149,6 @@ public class ThemeService
             return new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
         }
     }
-
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {

@@ -45,7 +45,6 @@ public class MicaWindow : Window
         base.OnPropertyChanged(e);
     }
 
-
     public override void OnApplyTemplate()
     {
         this.EnableMica(SystemBackdropType, CaptionHeight);
