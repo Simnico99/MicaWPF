@@ -1,7 +1,4 @@
-<!-- Pietro228 Best-README Template https://github.com/Pietro228/Best-README-Template -->
-
 <div align="center">
-
 
   <a href="https://www.nuget.org/packages/MicaWPF/latest">![NuGet](https://img.shields.io/nuget/v/MicaWPF.svg?style=flat&logo=NuGet)</a>
   <a href="https://www.nuget.org/packages/MicaWPF/latest/prerelease">![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg?style=flat&logo=NuGet)</a>
@@ -213,6 +210,5 @@ Project Link: [https://github.com/Simnico99](https://github.com/Simnico99)
 ## Acknowledgements
 
 * [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons)
-* [Best README template](https://github.com/Pietro228/Best-README-Template)
-
+* [Best README template](https://github.com/othneildrew/Best-README-Template)
 ![Alt](https://repobeats.axiom.co/api/embed/756130021d85947f6cd1d56b08c1f7b358e5d3a5.svg "Repobeats analytics image")
