@@ -58,7 +58,7 @@ public class MicaWindow : Window
             else
             {
                 MarginMaximized = new Thickness(0);
-            }z
+            }
         }
         base.OnPropertyChanged(e);
     }
