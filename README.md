@@ -12,13 +12,9 @@
   <a href="https://github.com/Simnico99/MicaWPF/network/members">![Forks](https://img.shields.io/github/forks/Simnico99/MicaWPF?style=flat)</a>
   <a href="https://github.com/Simnico99/MicaWPF/stargazers">![Stargazers](https://img.shields.io/github/stars/Simnico99/MicaWPF?style=flat)</a>
   <a href="https://github.com/Simnico99/MicaWPF/issues">![Issues](https://img.shields.io/github/issues/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/blob/main/LICENSE">![Forks](https://img.shields.io/github/forks/Simnico99/MicaWPF?style=flat)</a>
-  <a href="">![License](https://img.shields.io/github/license/Simnico99/MicaWPF?style=flat)</a>
+  <a href="https://github.com/Simnico99/MicaWPF/blob/main/LICENSE">![License](https://img.shields.io/github/license/Simnico99/MicaWPF?style=flat)</a>
 
 </div>
-
-
-
 
 <!-- PROJECT LOGO -->
 <br />
