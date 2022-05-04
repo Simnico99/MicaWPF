@@ -3,6 +3,7 @@
 namespace MicaWPF.Services;
 internal class DynamicThemeService
 {
+    private readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
     private readonly OsVersion _currentOsVersion;
     private readonly Window _window;
     private CancellationTokenSource _waitForDynamicThemeCancellationToken = new();
@@ -13,6 +14,24 @@ internal class DynamicThemeService
     {
         _window = window;
         _currentOsVersion = OsHelper.GlobalOsVersion;
+    }
+
+    private void UpdateAccent()
+    {
+        Task.Run(() =>
+        {
+            if (_window is MicaWindow micaWindow)
+            {
+                if (_accentColorService.AccentUpdateFromWindows)
+                {
+                    _accentColorService.UpdateAccentsFromWindows(micaWindow.Theme);
+                }
+                else
+                {
+                    _accentColorService.SetAccents(_accentColorService.SystemAccentColor, micaWindow.Theme);
+                }
+            }
+        });
     }
 
     public void SetThemeAware(bool isThemeAware, BackdropType micaType = BackdropType.Mica)
@@ -27,6 +46,7 @@ internal class DynamicThemeService
                     switch (e.Category)
                     {
                         case UserPreferenceCategory.General:
+                            UpdateAccent();
                             Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, WindowsTheme.Auto, micaType, -1));
                             SetThemeAware(isThemeAware, micaType);
                             break;
@@ -59,6 +79,7 @@ internal class DynamicThemeService
 
                     if (!_waitForDynamicThemeCancellationToken.IsCancellationRequested)
                     {
+                        UpdateAccent();
                         Application.Current.Dispatcher.Invoke(() => MicaHelper.EnableMica(_window, micaWindow.Theme, micaType, -1));
                         AwaitManualThemeChange(awaitChange, micaType);
                     }

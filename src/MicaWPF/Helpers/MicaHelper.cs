@@ -5,7 +5,7 @@ public static class MicaHelper
 {
     private static readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
 
-    private static void SetWindowProperties(Window window, WindowsTheme theme, BackdropType micaType, int captionHeight, bool useSystemAccent)
+    private static void SetWindowProperties(Window window, WindowsTheme theme, BackdropType micaType, int captionHeight)
     {
         if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
@@ -24,18 +24,6 @@ public static class MicaHelper
 
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
             var windowHandle = new WindowInteropHelper(window).Handle;
-
-            if (window is MicaWindow micaWindow)
-            {
-                if (!useSystemAccent)
-                {
-                    var accentColor = micaWindow.Accent?.Color;
-                    if (accentColor is not null)
-                    {
-                        _accentColorService.SetAccents((Color)accentColor, theme);
-                    }
-                }
-            }
 
             if (theme == WindowsTheme.Dark)
             {
@@ -56,27 +44,19 @@ public static class MicaHelper
             }
         }
 
-        if (useSystemAccent)
-        {
-            if (window is MicaWindow micaWindow)
-            {
-                _accentColorService.UpdateAccentsFromWindows(theme);
-            }
-        }
-
         ThemeDictionnaryHelper.SetCurrentThemeDictionary(window, ThemeHelper.WindowsThemeToResourceTheme(theme));
     }
 
-    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, BackdropType micaType = BackdropType.Mica, int captionHeight = 20, bool useSystemAccent = true)
+    public static void EnableMica(this Window window, WindowsTheme theme = WindowsTheme.Auto, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
     {
         if (theme == WindowsTheme.Auto)
         {
             var currentWindowsTheme = ThemeHelper.GetWindowsTheme();
-            SetWindowProperties(window, currentWindowsTheme, micaType, captionHeight, useSystemAccent);
+            SetWindowProperties(window, currentWindowsTheme, micaType, captionHeight);
         }
         else
         {
-            SetWindowProperties(window, theme, micaType, captionHeight, useSystemAccent);
+            SetWindowProperties(window, theme, micaType, captionHeight);
         }
     }
 }

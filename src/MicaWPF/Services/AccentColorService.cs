@@ -6,6 +6,7 @@ namespace MicaWPF.Services;
 public class AccentColorService
 {
     private static readonly AccentColorService _systemColorsHandler = new();
+    public bool AccentUpdateFromWindows { get; private set; }
 
     public Color SystemAccentColor { get; private set; }
     public Color SystemAccentColorLight1 { get; private set; }
@@ -25,56 +26,37 @@ public class AccentColorService
         propertyInfo?.SetValue(this, Convert.ChangeType(value, propertyInfo.PropertyType), null);
     }
 
+    private static Color GetOffSet(double hue, double hueCoefficient, double saturation, double value, double valueCoefficient, WindowsTheme windowsTheme)
+    {
+        if (windowsTheme is WindowsTheme.Auto)
+        {
+            windowsTheme = ThemeHelper.GetWindowsTheme();
+        }
+
+        return windowsTheme switch
+        {
+            WindowsTheme.Dark => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value + valueCoefficient, 1)),
+            WindowsTheme.Light => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value - valueCoefficient, 1)),
+            _ => throw new ArgumentOutOfRangeException(nameof(windowsTheme)),
+        };
+    }
+
     private static Color GetThemeColorVariation((double hue, double saturation, double value) hsv, WindowsTheme theme, AccentBrushType accentBrushType)
     {
         var hueCoefficient = 0;
-        var hueCoefficient2 = 0;
         if (1 - hsv.value < 0.15)
         {
             hueCoefficient = 1;
         }
 
-        if (hsv.value - 0.3 < 0)
+        return accentBrushType switch
         {
-            hueCoefficient2 = 1;
-        }
-
-        var s = hsv.saturation;
-
-        switch (accentBrushType)
-        {
-            case AccentBrushType.Primary:
-                return HSVColorHelper.RGBFromHSV(hsv.hue, hsv.saturation, hsv.value);
-            case AccentBrushType.Secondary:
-                if (theme is WindowsTheme.Dark)
-                {
-                    return HSVColorHelper.RGBFromHSV(Math.Min(hsv.hue + (hueCoefficient * 4), 360), s, Math.Min(hsv.value - 0.05, 1));
-                }
-                else
-                {
-                    return HSVColorHelper.RGBFromHSV(Math.Max(hsv.hue - (hueCoefficient2 * 4), 0), s, Math.Max(hsv.value - 0.095, 0));
-                }
-            case AccentBrushType.Tertiary:
-                if (theme is WindowsTheme.Dark)
-                {
-                    return HSVColorHelper.RGBFromHSV(Math.Min(hsv.hue + (hueCoefficient * 8), 360), s, Math.Min(hsv.value + 0.35, 1));
-                }
-                else
-                {
-                    return HSVColorHelper.RGBFromHSV(Math.Max(hsv.hue - (hueCoefficient2 * 8), 0), s, Math.Max(hsv.value - 0.195, 0));
-                }
-            case AccentBrushType.Quaternary:
-                if (theme is WindowsTheme.Dark)
-                {
-                    return HSVColorHelper.RGBFromHSV(Math.Min(hsv.hue + (hueCoefficient * 8), 360), s, Math.Min(hsv.value + 0.65, 1));
-                }
-                else
-                {
-                    return HSVColorHelper.RGBFromHSV(Math.Max(hsv.hue - (hueCoefficient2 * 8), 0), s, Math.Max(hsv.value - 0.295, 0));
-                }
-            default:
-                throw new ArgumentOutOfRangeException(nameof(accentBrushType));
-        }
+            AccentBrushType.Primary => HSVColorHelper.RGBFromHSV(hsv.hue, hsv.saturation, hsv.value),
+            AccentBrushType.Secondary => GetOffSet(hsv.hue, hueCoefficient, hsv.saturation, hsv.value, 0.3, theme),
+            AccentBrushType.Tertiary => GetOffSet(hsv.hue, hueCoefficient, hsv.saturation, hsv.value, 0.35, theme),
+            AccentBrushType.Quaternary => GetOffSet(hsv.hue, hueCoefficient, hsv.saturation, hsv.value, 0.65, theme),
+            _ => throw new ArgumentOutOfRangeException(nameof(accentBrushType)),
+        };
     }
 
     private static void UpdateColorResources(Color systemAccent, Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
@@ -98,6 +80,11 @@ public class AccentColorService
 
     private void UpdateFromInternalColors(WindowsTheme windowsTheme)
     {
+        if (windowsTheme is WindowsTheme.Auto)
+        {
+            windowsTheme = ThemeHelper.GetWindowsTheme();
+        }
+
         switch (windowsTheme)
         {
             case WindowsTheme.Dark:
@@ -111,6 +98,7 @@ public class AccentColorService
 
     public void UpdateAccentsFromWindows(WindowsTheme windowsTheme = WindowsTheme.Light)
     {
+        AccentUpdateFromWindows = true;
         var uwpColors = new UWPColors();
         var colorsLongString = uwpColors.GetSystemColors();
 
@@ -126,6 +114,7 @@ public class AccentColorService
 
     public void SetAccents(Color systemAccent, WindowsTheme windowsTheme = WindowsTheme.Light)
     {
+        AccentUpdateFromWindows = false;
         SystemAccentColor = systemAccent;
         SystemAccentColorLight1 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Secondary);
         SystemAccentColorLight2 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Tertiary);

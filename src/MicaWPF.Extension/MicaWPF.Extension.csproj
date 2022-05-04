@@ -44,9 +44,6 @@
      <Page Update="Styles\Controls\MicaListViewItem.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
      </Page>
-     <Page Update="Styles\Controls\MicaNavigation.xaml">
-       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-     </Page>
      <Page Update="Styles\Controls\MicaPasswordBox.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
      </Page>
