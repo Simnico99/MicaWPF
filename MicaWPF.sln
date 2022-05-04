@@ -12,8 +12,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF", "src\MicaWPF\Mica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF.Extension", "src\MicaWPF.Extension\MicaWPF.Extension.csproj", "{95279028-25AC-4449-B796-A56D2AB73836}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF.Test", "src\MicaWPF.Test\MicaWPF.Test.csproj", "{40E27FBD-C74E-4724-8403-061C543F4E55}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +26,6 @@ Global
 		{95279028-25AC-4449-B796-A56D2AB73836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95279028-25AC-4449-B796-A56D2AB73836}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95279028-25AC-4449-B796-A56D2AB73836}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40E27FBD-C74E-4724-8403-061C543F4E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40E27FBD-C74E-4724-8403-061C543F4E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40E27FBD-C74E-4724-8403-061C543F4E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40E27FBD-C74E-4724-8403-061C543F4E55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
