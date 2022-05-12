@@ -5,12 +5,14 @@ public class MicaWindow : Window
 
     public static readonly DependencyProperty AccentProperty = DependencyProperty.Register(nameof(Accent), typeof(SolidColorBrush), typeof(MicaWindow));
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
+    public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
 
     public bool IsThemeAware { get; set; } = true;
     public bool IsWaitingForManualThemeChange { get; set; } = false;
     public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
     public int CaptionHeight { get; set; } = 20;
+    public UIElement TitleBarContent { get; set; }
 
     public SolidColorBrush? Accent
     {
