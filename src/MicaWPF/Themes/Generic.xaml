@@ -76,7 +76,6 @@
     <Style TargetType="{x:Type local:MicaWindow}">
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ApplicationBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
-        <Setter Property="Accent" Value="{DynamicResource MicaWPF.Brushes.SystemAccent}" />
         <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
