@@ -84,12 +84,15 @@ public class MicaWindow : Window
         CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
-        var myResourceDictionary = new ResourceDictionary
+        if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
-            Source = new Uri("/MicaWPF;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
-        };
+            var myResourceDictionary = new ResourceDictionary
+            {
+                Source = new Uri("/MicaWPF;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
+            };
 
-        Style = myResourceDictionary["MicaWindow11"] as Style;
+            Style = myResourceDictionary["MicaWindow11"] as Style;
+        }
     }
 
     private void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
