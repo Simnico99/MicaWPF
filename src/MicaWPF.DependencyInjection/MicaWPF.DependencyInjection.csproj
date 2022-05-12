@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\MicaWPF\MicaWPF.csproj" />
+    <ProjectReference Include="..\MicaWPF\MicaWPF.csproj" />
   </ItemGroup>
 
 </Project>
