@@ -13,12 +13,14 @@ steps:
         Write-Host $version
         $productVersionBeta = “$version.$(Build.BuildId)-Beta”
         Write-Host "##vso[task.setvariable variable=packageVersion]$productVersionBeta"
+        Write-Host $productVersionBeta
   displayName: "Computing alpha version"
   condition: eq(variables['buildTag'], False)
 
 - pwsh: |
         $productVersion = "$(Build.BuildId)"
         Write-Host "##vso[task.setvariable variable=releaseVersion]$productVersion"
+        Write-Host $productVersion
   displayName: "Computing release version"
   condition: eq(variables['buildTag'], True)
 
