@@ -68,7 +68,7 @@ steps:
   displayName: 'Extract version from tag'
   name: semver
   inputs:
-  failOnInvalidVersion: false
+    failOnInvalidVersion: false
 
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release)
