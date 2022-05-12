@@ -1,6 +1,4 @@
-﻿
-namespace MicaWPF.Services;
-
+﻿namespace MicaWPF.Services;
 public interface IThemeService
 {
     WindowsTheme CurrentTheme { get; }
