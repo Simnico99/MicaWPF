@@ -1,24 +1,10 @@
-<!-- Pietro228 Best-README Template https://github.com/Pietro228/Best-README-Template -->
-
 <div align="center">
 
-
-  <a href="https://www.nuget.org/packages/MicaWPF/latest">![NuGet](https://img.shields.io/nuget/v/MicaWPF.svg?style=flat&logo=NuGet)</a>
-  <a href="https://www.nuget.org/packages/MicaWPF/latest/prerelease">![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg?style=flat&logo=NuGet)</a>
-  <a href="https://www.nuget.org/packages/MicaWPF/">![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg?style=flat&logo=NuGet)</a>
-  <a href="https://www.codefactor.io/repository/github/simnico99/micawpf/overview/main">![CodeFactor](https://img.shields.io/codefactor/grade/github/Simnico99/MicaWPF/main?logo=codefactor&logoColor=%23ffff)</a>
-   <br/>
-  <a href="https://github.com/Simnico99/MicaWPF/graphs/contributors">![Contributors](https://img.shields.io/github/contributors/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/network/members">![Forks](https://img.shields.io/github/forks/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/stargazers">![Stargazers](https://img.shields.io/github/stars/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/issues">![Issues](https://img.shields.io/github/issues/Simnico99/MicaWPF?style=flat)</a>
-  <a href="https://github.com/Simnico99/MicaWPF/blob/main/LICENSE">![Forks](https://img.shields.io/github/forks/Simnico99/MicaWPF?style=flat)</a>
-  <a href="">![License](https://img.shields.io/github/license/Simnico99/MicaWPF?style=flat)</a>
+| <a href="https://www.nuget.org/packages/MicaWPF/latest">![NuGet](https://img.shields.io/nuget/v/MicaWPF.svg?style=flat&logo=NuGet)</a> |  <a href="https://www.nuget.org/packages/MicaWPF/latest/prerelease">![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg?style=flat&logo=NuGet)</a> | <a href="https://www.nuget.org/packages/MicaWPF/">![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg?style=flat&logo=NuGet)</a> | <a href="https://www.codefactor.io/repository/github/simnico99/micawpf/overview/main">![CodeFactor](https://img.shields.io/codefactor/grade/github/Simnico99/MicaWPF/main?logo=codefactor&logoColor=%23ffff)</a> | <a href="https://github.com/Simnico99/MicaWPF/graphs/contributors">![Contributors](https://img.shields.io/github/contributors/Simnico99/MicaWPF?style=flat)</a> |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| <a href="https://github.com/Simnico99/MicaWPF/network/members">![Forks](https://img.shields.io/github/forks/Simnico99/MicaWPF?style=flat)</a> | <a href="https://github.com/Simnico99/MicaWPF/stargazers">![Stargazers](https://img.shields.io/github/stars/Simnico99/MicaWPF?style=flat)</a> | <a href="https://github.com/Simnico99/MicaWPF/issues">![Issues](https://img.shields.io/github/issues/Simnico99/MicaWPF?style=flat)</a> | <a href="https://github.com/Simnico99/MicaWPF/blob/main/LICENSE">![License](https://img.shields.io/github/license/Simnico99/MicaWPF?style=flat)</a> |
 
 </div>
-
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -169,8 +155,8 @@ public partial class MainWindow : MicaWindow
 You will need to change your CSPROJ to include the windows build after the netx.0-windows
 Here is an exemple using .Net6.0 just change the 6 for a 5 on .Net5.0
 ```Xaml
-        <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
-        <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
 ```
 
 _For more examples, please refer to the [Documentation](https://github.com/Simnico99/MicaWPF/wiki)_
@@ -217,6 +203,6 @@ Project Link: [https://github.com/Simnico99](https://github.com/Simnico99)
 ## Acknowledgements
 
 * [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons)
-* [Best README template](https://github.com/Pietro228/Best-README-Template)
+* [Best README template](https://github.com/othneildrew/Best-README-Template)
 
 ![Alt](https://repobeats.axiom.co/api/embed/756130021d85947f6cd1d56b08c1f7b358e5d3a5.svg "Repobeats analytics image")

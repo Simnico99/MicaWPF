@@ -48,7 +48,6 @@
                                     <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlStrongStrokeColorDefault}" />
                                 </Border.BorderBrush>
                                 <Grid>
-
                                     <Label
                                         x:Name="WatermarkLabel"
                                         Margin="8,0"
@@ -93,6 +92,15 @@
                             <Setter TargetName="WatermarkLabel" Property="Visibility" Value="Visible" />
                         </DataTrigger>
 
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.AccentFillColorDisabled}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="BottomBorder" Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDisabled}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

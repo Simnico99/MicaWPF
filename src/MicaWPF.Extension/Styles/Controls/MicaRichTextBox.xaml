@@ -90,7 +90,15 @@
                         <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text, Converter={StaticResource IsNullConverter}}" Value="True">
                             <Setter TargetName="WatermarkLabel" Property="Visibility" Value="Visible" />
                         </DataTrigger>
-
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.AccentFillColorDisabled}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="BottomBorder" Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDisabled}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
