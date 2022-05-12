@@ -17,7 +17,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>3.1.4</Version>
+    <Version>3.1.5</Version>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
     <Authors>Simnico99</Authors>
