@@ -1,7 +1,9 @@
 ﻿using MicaWPF.Extensions;
 using MicaWPFRuntimeComponent;
+
 namespace MicaWPF.Services;
-public class AccentColorService
+
+public class AccentColorService : IAccentColorService
 {
     private static readonly AccentColorService _systemColorsHandler = new();
     private bool _isInit = false;
@@ -34,6 +36,7 @@ public class AccentColorService
     {
         var type = GetType();
         var propertyInfo = type.GetProperty(propertyName);
+
         propertyInfo?.SetValue(this, Convert.ChangeType(value, propertyInfo.PropertyType), null);
     }
 
@@ -54,6 +57,7 @@ public class AccentColorService
         {
             hueCoefficient = 1;
         }
+
         return accentBrushType switch
         {
             AccentBrushType.Primary => HSVColorHelper.RGBFromHSV(hsv.hue, hsv.saturation, hsv.value),
@@ -63,12 +67,14 @@ public class AccentColorService
             _ => throw new ArgumentOutOfRangeException(nameof(accentBrushType)),
         };
     }
+
     private static void UpdateColorResources(Color systemAccent, Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
     {
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColor"] = systemAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight1"] = primaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = secondaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = tertiaryAccent;
+
         Application.Current.Resources["MicaWPF.Brushes.SystemAccent"] = secondaryAccent.ToBrush();
         Application.Current.Resources["MicaWPF.Brushes.SystemFillColorAttention"] = secondaryAccent.ToBrush();
         Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorPrimary"] = tertiaryAccent.ToBrush();
@@ -76,6 +82,7 @@ public class AccentColorService
         Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorTertiary"] = secondaryAccent.ToBrush();
         Application.Current.Resources["MicaWPF.Brushes.AccentFillColorSelectedTextBackground"] = systemAccent.ToBrush();
         Application.Current.Resources["MicaWPF.Brushes.AccentFillColorDefault"] = secondaryAccent.ToBrush();
+
         Application.Current.Resources["MicaWPF.Brushes.AccentFillColorSecondary"] = secondaryAccent.ToBrush(0.9);
         Application.Current.Resources["MicaWPF.Brushes.AccentFillColorTertiary"] = secondaryAccent.ToBrush(0.8);
     }
@@ -106,6 +113,11 @@ public class AccentColorService
             var colorValues = colors.Split(',');
             var colorResult = Color.FromArgb(byte.Parse(colorValues[0]), byte.Parse(colorValues[1]), byte.Parse(colorValues[2]), byte.Parse(colorValues[3]));
             SetColorProperty(colorValues[4], colorResult);
+        }
+
+        if (OsHelper.GlobalOsVersion == OsVersion.Windows10)
+        {
+            UpdateAccents(SystemAccentColor);
         }
 
         UpdateFromInternalColors();

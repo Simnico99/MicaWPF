@@ -5,7 +5,7 @@ public class MicaWindow : Window
 {
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
-    public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow) , new UIPropertyMetadata(true));
+    public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(true));
 
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
     public int CaptionHeight { get; set; } = 20;
@@ -22,7 +22,8 @@ public class MicaWindow : Window
         set => SetValue(MarginMaximizedProperty, value);
     }
 
-    public UIElement TitleBarContent    {
+    public UIElement TitleBarContent
+    {
         get => (UIElement)GetValue(TitleBarContentProperty);
         set => SetValue(TitleBarContentProperty, value);
     }
