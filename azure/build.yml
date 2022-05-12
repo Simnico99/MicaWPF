@@ -18,7 +18,9 @@ steps:
   condition: eq(variables['buildTag'], False)
 
 - pwsh: |
-        $productVersion = "$(Build.BuildId)"
+        $tags = git tag --sort=-creatordate
+        $tag = $tags[0]
+        $productVersion = "$tag"
         Write-Host "##vso[task.setvariable variable=releaseVersion]$productVersion"
         Write-Host $productVersion
   displayName: "Computing release version"
