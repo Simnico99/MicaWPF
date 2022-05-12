@@ -11,15 +11,16 @@ steps:
         $sortedVersions = $versionList | Sort-Object -Descending | foreach {$_.ToString()}
         $version = $sortedVersions[0]
         Write-Host $version
-        $sp = $version.Split(".")
-        echo $sp
-        $majorVersion = $sp[0]
-        $minorVersion = $sp[1]
-        $patchVersion = [int]$sp[2] + 1
-        $productVersionBeta = “$majorVersion.$minorVersion.$patchVersion.$(Build.BuildId)-Beta”
-        Write-Host "##vso[task.setvariable variable=packageVersion]$version"
+        $productVersionBeta = “$version.$(Build.BuildId)-Beta”
+        Write-Host "##vso[task.setvariable variable=packageVersion]$productVersionBeta"
   displayName: "Computing alpha version"
   condition: eq(variables['buildTag'], False)
+
+- pwsh: |
+        $productVersion = "$(Build.BuildId)"
+        Write-Host "##vso[task.setvariable variable=releaseVersion]$productVersion"
+  displayName: "Computing release version"
+  condition: eq(variables['buildTag'], True)
 
 - task: NuGetToolInstaller@1
   displayName: 'Installing Nuget 6.0.0'
@@ -62,13 +63,7 @@ steps:
     projects: '**\*!(Demo).csproj'
     arguments: '-c Release --no-restore'
     versioningScheme: byEnvVar
-    versionEnvVar: '$(packageVersion).$(buildId)'
-
-- task: bjartebore.git-tag-version.version-task.git-tag-version@0
-  displayName: 'Extract version from tag'
-  name: semver
-  inputs:
-    failOnInvalidVersion: false
+    versionEnvVar: '$(productVersionBeta)'
 
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release)
@@ -79,7 +74,7 @@ steps:
     projects: '**\*!(Demo).csproj'
     arguments: '-c Release --no-restore'
     versioningScheme: byEnvVar
-    versionEnvVar: '$(semver.versionMajor).$(semver.versionMinor).$(semver.versionPatch)'
+    versionEnvVar: '$(releaseVersion)'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
