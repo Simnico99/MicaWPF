@@ -119,6 +119,7 @@
                                                     FontSize="12"
                                                     Foreground="{TemplateBinding Foreground}"
                                                     Text="{TemplateBinding Title}" />
+                                                <ContentControl Margin="5,0,0,0" Content="{TemplateBinding TitleBarContent}" />
                                             </StackPanel>
                                             <Grid DockPanel.Dock="Bottom">
                                                 <ContentPresenter />
@@ -290,6 +291,7 @@
                                     FontSize="12"
                                     Foreground="{TemplateBinding Foreground}"
                                     Text="{TemplateBinding Title}" />
+                                <ContentControl Margin="5,0,0,0" Content="{TemplateBinding TitleBarContent}" />
                             </StackPanel>
                             <Grid DockPanel.Dock="Bottom">
                                 <ContentPresenter />
