@@ -27,7 +27,6 @@ public class MicaWindow : Window
         set => SetValue(TitleBarContentProperty, value);
     }
 
-
     static MicaWindow()
     {
         if (OsHelper.GlobalOsVersion is not OsVersion.Windows11Before22523 and not OsVersion.Windows11After22523)
