@@ -7,13 +7,8 @@ public class MicaWindow : Window
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow) , new UIPropertyMetadata(true));
 
-    public bool IsThemeAware { get; set; } = true;
-    public bool IsWaitingForManualThemeChange { get; set; } = false;
-    public WindowsTheme Theme { get; set; } = WindowsTheme.Auto;
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
     public int CaptionHeight { get; set; } = 20;
-
-    public SolidColorBrush? Accent
 
     public Thickness? MarginMaximized
     {
@@ -32,8 +27,6 @@ public class MicaWindow : Window
         set => SetValue(TitleBarContentProperty, value);
     }
 
-    public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
-    public int CaptionHeight { get; set; } = 20;
 
     static MicaWindow()
     {
