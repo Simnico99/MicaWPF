@@ -62,7 +62,13 @@ steps:
     projects: '**\*!(Demo).csproj'
     arguments: '-c Release --no-restore'
     versioningScheme: byEnvVar
-    versionEnvVar: '$(packageVersion).$(buildId)-Alpha'
+    versionEnvVar: '$(packageVersion).$(buildId)'
+
+- task: bjartebore.git-tag-version.version-task.git-tag-version@0
+  displayName: 'Extract version from tag'
+  name: semver
+  inputs:
+  failOnInvalidVersion: false
 
 - task: DotNetCoreCLI@2
   displayName: .Net Build (Release)
@@ -73,7 +79,7 @@ steps:
     projects: '**\*!(Demo).csproj'
     arguments: '-c Release --no-restore'
     versioningScheme: byEnvVar
-    versionEnvVar: '$(buildTag)'
+    versionEnvVar: '$(semver.versionMajor).$(semver.versionMinor).$(semver.versionPatch)'
 
 - task: ado-discord-webhook@1
   displayName: Publish test results
