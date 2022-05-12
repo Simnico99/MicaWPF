@@ -3,7 +3,7 @@ using MicaWPFRuntimeComponent;
 
 namespace MicaWPF.Services;
 
-public class AccentColorService
+public class AccentColorService : IAccentColorService
 {
     private static readonly AccentColorService _systemColorsHandler = new();
     public bool AccentUpdateFromWindows { get; private set; }
@@ -109,7 +109,7 @@ public class AccentColorService
             SetColorProperty(colorValues[4], colorResult);
         }
 
-        UpdateFromInternalColors(windowsTheme);
+        UpdateFromInternalColors();
     }
 
     public void SetAccents(Color systemAccent, WindowsTheme windowsTheme = WindowsTheme.Light)
