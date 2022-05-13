@@ -133,9 +133,9 @@ public class MicaWindow : Window
             case InteropValues.WM_NCHITTEST:
                 try
                 {
-                    var x = lparam.ToInt32() & 0xffff;
                     if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
                     {
+                        var x = lparam.ToInt32() & 0xffff;
                         var y = lparam.ToInt32() >> 16;
                         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
                         var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
@@ -147,8 +147,9 @@ public class MicaWindow : Window
 
                             if (rect.Contains(new Point(x, y)))
                             {
+                                var color = Application.Current.Resources["ControlFillColorSecondary"] ?? Color.FromArgb(21, 255, 255, 255);
+                                _button.Background = new SolidColorBrush((Color)color);
                                 handled = true;
-                                _button.Background = new SolidColorBrush(Color.FromRgb(255,255,255));
                             }
                             else
                             {
