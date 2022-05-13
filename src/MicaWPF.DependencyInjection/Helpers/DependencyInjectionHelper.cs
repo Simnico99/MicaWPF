@@ -20,8 +20,8 @@ public static class DependencyInjectionHelper
 
         builder.ConfigureServices((_, collection) => 
         {
-            collection.AddTransient<IThemeService, ThemeServiceDI>();
-            collection.AddTransient<IAccentColorService, AccentColorServiceDI>();
+            collection.AddSingleton<IThemeService, ThemeServiceDI>();
+            collection.AddSingleton<IAccentColorService, AccentColorServiceDI>();
         });
 
         return builder;
