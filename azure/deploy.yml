@@ -7,17 +7,7 @@ steps:
     configuration: Release
     packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
     nobuild: true
-    packagesToPack: 'src\MicaWPF\*.csproj'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Pack MicaWPF.Extension'
-  condition: eq(variables['buildTag'], False)
-  inputs:
-    command: pack
-    configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
-    nobuild: true
-    packagesToPack: 'src\MicaWPF.Extension\*.csproj'
+    packagesToPack: 'src\**\*.csproj;!src\**\+(MicaWPF.Demo)*.csproj'
 
 - task: NuGetCommand@2
   displayName: Push to Artifacts (MicaWPF)
@@ -25,7 +15,7 @@ steps:
   inputs:
     command: 'push'
     nuGetFeedType: 'internal'
-    packagesToPush: '**/MicaWPF!(.Extension)*.nupkg'
+    packagesToPush: '**/*.nupkg'
     publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
     allowPackageConflicts: true
 
@@ -44,7 +34,7 @@ steps:
   condition: and(succeeded(), eq(variables['buildTag'], true))
   inputs:
     command: 'push'
-    packagesToPush: '**/+(MicaWPF)*.nupkg;!**/*.symbols.nupkg;!**/+(MicaWPF.Extension)*.nupkg'
+    packagesToPush: '**/+(MicaWPF)*.nupkg;!**/*.symbols.nupkg;!**/+(MicaWPF.Extension)*.nupkg;!**/+(MicaWPF.DependencyInjection)*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
 
@@ -56,3 +46,13 @@ steps:
     packagesToPush: '**/+(MicaWPF.Extension)*.nupkg;!**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
+    
+- task: NuGetCommand@2
+  displayName: Push to NuGet (MicaWPF.DependencyInjection)
+  condition: and(succeeded(), eq(variables['buildTag'], true))
+  inputs:
+    command: 'push'
+    packagesToPush: '**/+(MicaWPF.DependencyInjection)*.nupkg;!**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NugetConnection'
+    
