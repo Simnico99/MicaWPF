@@ -192,4 +192,3 @@ public class MicaWindow : Window
         return IntPtr.Zero;
     }
 }
-
