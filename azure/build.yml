@@ -19,7 +19,7 @@ steps:
 
 - pwsh: |
         $tags = git tag --sort=-creatordate
-        $tag = $tags[0]
+        [string] $tag = $tags[0]
         Write-Host "##vso[task.setvariable variable=packageVersion][string]$tag"
         Write-Host $tag
   displayName: "Computing release version"
