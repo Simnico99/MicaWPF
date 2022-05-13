@@ -2,6 +2,10 @@
 
 public class InteropValues
 {
+    public const int
+        WM_NCHITTEST = 0x0084,
+        WM_NCLBUTTONDOWN = 0x00A1;
+
     public static class ExternDll
     {
         public const string

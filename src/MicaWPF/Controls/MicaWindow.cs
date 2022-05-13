@@ -1,8 +1,20 @@
-﻿using MicaWPF.Extensions;
+﻿using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
+using System.Windows.Controls;
+using MicaWPF.Extensions;
 
 namespace MicaWPF.Controls;
 public class MicaWindow : Window
 {
+    #region SnapLayout
+    private const int HTMAXBUTTON = 9;
+    private const string ButtonMax = "Maximize";
+    private const string ButtonRestore = "Restore";
+    private Button? _ButtonMax;
+    private Button? _ButtonRestore;
+    #endregion
+
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(true));
@@ -36,6 +48,12 @@ public class MicaWindow : Window
         }
     }
 
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+        HwndSource.FromHwnd(new WindowInteropHelper(this).EnsureHandle())?.AddHook(HwndSourceHook);
+    }
+
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
         if (e.Property.Name is nameof(WindowState))
@@ -54,6 +72,8 @@ public class MicaWindow : Window
 
     public override void OnApplyTemplate()
     {
+        _ButtonMax = GetTemplateChild(ButtonMax) as Button;
+        _ButtonRestore = GetTemplateChild(ButtonRestore) as Button;
         this.EnableMica(SystemBackdropType, CaptionHeight);
         base.OnApplyTemplate();
     }
@@ -105,4 +125,70 @@ public class MicaWindow : Window
     {
         SystemCommands.RestoreWindow(this);
     }
+
+    private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
+    {
+        switch (msg)
+        {
+            case InteropValues.WM_NCHITTEST:
+                try
+                {
+                    var x = lparam.ToInt32() & 0xffff;
+                    if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
+                    {
+                        var y = lparam.ToInt32() >> 16;
+                        var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
+                        var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
+                        if (_button != null)
+                        {
+                            var rect = new Rect(_button.PointToScreen(
+                            new Point()),
+                            new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
+
+                            if (rect.Contains(new Point(x, y)))
+                            {
+                                handled = true;
+                                _button.Background = new SolidColorBrush(Color.FromRgb(255,255,255));
+                            }
+                            else
+                            {
+                                _button.Background = new SolidColorBrush(Color.FromArgb(0,0,0,0));
+                            }
+                            return new IntPtr(HTMAXBUTTON);
+                        }
+                    }
+                }
+                catch (OverflowException)
+                {
+                    handled = true;
+                }
+                break;
+            case InteropValues.WM_NCLBUTTONDOWN:
+                if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
+                {
+                    var x = lparam.ToInt32() & 0xffff;
+                    var y = lparam.ToInt32() >> 16;
+                    var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
+                    var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
+                    if (_button != null)
+                    {
+                        var rect = new Rect(_button.PointToScreen(
+                        new Point()),
+                        new Size(_button.Width * DPI_SCALE, _button.Height * DPI_SCALE));
+                        if (rect.Contains(new Point(x, y)))
+                        {
+                            handled = true;
+                            var invokeProv = new ButtonAutomationPeer(_button).GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                            invokeProv?.Invoke();
+                        }
+                    }
+                }
+                break;
+            default:
+                handled = false;
+                break;
+        }
+        return IntPtr.Zero;
+    }
 }
+

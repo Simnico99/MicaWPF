@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿using System.ComponentModel;
+using System.Security;
 using static MicaWPF.Interop.InteropValues;
 
 namespace MicaWPF.Interop;
@@ -21,6 +22,24 @@ internal class InteropMethods
     [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     internal static extern int RtlGetVersion(ref OSVERSIONINFOEX versionInfo);
+
+    [DllImport(ExternDll.User32, CharSet = CharSet.Auto)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    public static extern IntPtr GetDC(IntPtr ptr);
+
+    [DllImport(ExternDll.User32, SetLastError = true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    public static extern int ReleaseDC(IntPtr window, IntPtr dc);
+
+    [DllImport(ExternDll.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    public static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+
+    [SecurityCritical]
+    [SuppressUnmanagedCodeSecurity]
+    [DllImport(ExternDll.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    public static extern int GetDeviceCaps(HandleRef hDC, int nIndex);
 
     public static int SetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, int parameter)
     {
