@@ -22,7 +22,6 @@ steps:
         $tag = $tags[0]
         Write-Host "##vso[task.setvariable variable=packageVersion][string]$tag"
         Write-Host $tag
-        Write-Host "$(finalReleaseVersion)"
   displayName: "Computing release version"
   condition: eq(variables['buildTag'], True)
 
