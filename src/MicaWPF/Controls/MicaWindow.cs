@@ -51,7 +51,10 @@ public class MicaWindow : Window
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
-        HwndSource.FromHwnd(new WindowInteropHelper(this).EnsureHandle())?.AddHook(HwndSourceHook);
+        if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523)
+        {
+            HwndSource.FromHwnd(new WindowInteropHelper(this).EnsureHandle())?.AddHook(HwndSourceHook);
+        }
     }
 
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -181,7 +184,7 @@ public class MicaWindow : Window
             case InteropValues.WM_NCHITTEST:
                 try
                 {
-                    if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
+                    if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
                     {
                         return ShowSnapLayout(lparam, ref handled);
                     }
@@ -193,7 +196,7 @@ public class MicaWindow : Window
                 break;
             case InteropValues.WM_NCLBUTTONDOWN:
 
-                if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
+                if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
                 {
                     HideMaximiseAndMinimiseButton(lparam, ref handled);
                 }
