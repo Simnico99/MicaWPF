@@ -126,6 +126,54 @@ public class MicaWindow : Window
         SystemCommands.RestoreWindow(this);
     }
 
+    private IntPtr ShowSnapLayout(IntPtr lparam, ref bool handled)
+    {
+        var x = lparam.ToInt32() & 0xffff;
+        var y = lparam.ToInt32() >> 16;
+        var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
+        var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
+        if (_button != null)
+        {
+            var rect = new Rect(_button.PointToScreen(
+            new Point()),
+            new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
+
+            if (rect.Contains(new Point(x, y)))
+            {
+                var color = (LinearGradientBrush)TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") ?? new LinearGradientBrush();
+                _button.Background = color;
+                handled = true;
+            }
+            else
+            {
+                _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+            }
+            return new IntPtr(HTMAXBUTTON);
+        }
+
+        return new();
+    }
+
+    private void HideMaximiseAndMinimiseButton(IntPtr lparam, ref bool handled)
+    {
+        var x = lparam.ToInt32() & 0xffff;
+        var y = lparam.ToInt32() >> 16;
+        var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
+        var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
+        if (_button != null)
+        {
+            var rect = new Rect(_button.PointToScreen(
+            new Point()),
+            new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
+            if (rect.Contains(new Point(x, y)))
+            {
+                handled = true;
+                var invokeProv = new ButtonAutomationPeer(_button).GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invokeProv?.Invoke();
+            }
+        }
+    }
+
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
         switch (msg)
@@ -135,28 +183,7 @@ public class MicaWindow : Window
                 {
                     if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
                     {
-                        var x = lparam.ToInt32() & 0xffff;
-                        var y = lparam.ToInt32() >> 16;
-                        var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
-                        var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
-                        if (_button != null)
-                        {
-                            var rect = new Rect(_button.PointToScreen(
-                            new Point()),
-                            new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
-
-                            if (rect.Contains(new Point(x, y)))
-                            {
-                                var color = (LinearGradientBrush)TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") ?? new LinearGradientBrush();
-                                _button.Background = color;
-                                handled = true;
-                            }
-                            else
-                            {
-                                _button.Background = new SolidColorBrush(Color.FromArgb(0,0,0,0));
-                            }
-                            return new IntPtr(HTMAXBUTTON);
-                        }
+                        return ShowSnapLayout(lparam, ref handled);
                     }
                 }
                 catch (OverflowException)
@@ -165,24 +192,10 @@ public class MicaWindow : Window
                 }
                 break;
             case InteropValues.WM_NCLBUTTONDOWN:
+
                 if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
                 {
-                    var x = lparam.ToInt32() & 0xffff;
-                    var y = lparam.ToInt32() >> 16;
-                    var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
-                    var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
-                    if (_button != null)
-                    {
-                        var rect = new Rect(_button.PointToScreen(
-                        new Point()),
-                        new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
-                        if (rect.Contains(new Point(x, y)))
-                        {
-                            handled = true;
-                            var invokeProv = new ButtonAutomationPeer(_button).GetPattern(PatternInterface.Invoke) as IInvokeProvider;
-                            invokeProv?.Invoke();
-                        }
-                    }
+                    HideMaximiseAndMinimiseButton(lparam, ref handled);
                 }
                 break;
             default:
