@@ -45,4 +45,3 @@ steps:
     packagesToPush: '**/+(MicaWPF.DependencyInjection)*.nupkg;!**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
-    
