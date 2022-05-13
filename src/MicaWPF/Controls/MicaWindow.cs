@@ -147,8 +147,8 @@ public class MicaWindow : Window
 
                             if (rect.Contains(new Point(x, y)))
                             {
-                                var color = Application.Current.Resources["ControlFillColorSecondary"] ?? Color.FromArgb(21, 255, 255, 255);
-                                _button.Background = new SolidColorBrush((Color)color);
+                                var color = (LinearGradientBrush)TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") ?? new LinearGradientBrush();
+                                _button.Background = color;
                                 handled = true;
                             }
                             else
@@ -175,7 +175,7 @@ public class MicaWindow : Window
                     {
                         var rect = new Rect(_button.PointToScreen(
                         new Point()),
-                        new Size(_button.Width * DPI_SCALE, _button.Height * DPI_SCALE));
+                        new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
                         if (rect.Contains(new Point(x, y)))
                         {
                             handled = true;
