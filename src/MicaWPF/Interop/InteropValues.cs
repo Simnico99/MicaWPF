@@ -91,7 +91,6 @@ public class InteropValues
         }
     }
 
-
     [StructLayout(LayoutKind.Sequential)]
     public struct MINMAXINFO
     {
@@ -100,8 +99,7 @@ public class InteropValues
         public POINT ptMaxPosition;
         public POINT ptMinTrackSize;
         public POINT ptMaxTrackSize;
-    };
-
+    }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
     public class MONITORINFO
@@ -111,7 +109,6 @@ public class InteropValues
         public RECT rcWork = new();
         public int dwFlags = 0;
     }
-
 
     [StructLayout(LayoutKind.Sequential)]
     public struct RECT
@@ -126,12 +123,10 @@ public class InteropValues
             this.Bottom = bottom;
         }
     }
-
     public enum MonitorOptions : uint
     {
         MONITOR_DEFAULTTONULL = 0x00000000,
         MONITOR_DEFAULTTOPRIMARY = 0x00000001,
         MONITOR_DEFAULTTONEAREST = 0x00000002
     }
-
 }
