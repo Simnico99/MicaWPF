@@ -265,20 +265,31 @@
 
     <Style x:Key="MicaWindow11" TargetType="{x:Type local:MicaWindow}">
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
-        <Setter Property="WindowChrome.CaptionHeight" Value="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}" />
+        <Setter Property="ResizeMode" Value="CanResize" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MicaWindow}">
-                    <Border
-                        BorderBrush="{DynamicResource MicaWPF.Brushes.SystemAccent}"
-                        BorderThickness="0"
-                        CornerRadius="8">
-                        <Grid>
-                            <DockPanel Margin="{TemplateBinding MarginMaximized}">
+                    <Grid>
+                        <DockPanel
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Margin="{TemplateBinding MarginMaximized}">
+                            <Grid
+                                x:Name="TitleGrid"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                DockPanel.Dock="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
                                 <DockPanel
                                     x:Name="TitleStackPanel"
-                                    Margin="10,5,5,5"
-                                    DockPanel.Dock="Top"
+                                    Grid.ColumnSpan="2"
+                                    Margin="10,5,145,5"
                                     Visibility="Collapsed">
                                     <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                                         <Image
@@ -296,16 +307,104 @@
                                             Text="{TemplateBinding Title}" />
                                     </StackPanel>
                                     <ContentControl
-                                        Margin="5,0,145,0"
+                                        Margin="5,0,5,0"
                                         Content="{TemplateBinding TitleBarContent}"
                                         DockPanel.Dock="Right" />
                                 </DockPanel>
-                                <Grid DockPanel.Dock="Bottom">
-                                    <ContentPresenter />
-                                </Grid>
-                            </DockPanel>
-                        </Grid>
-                    </Border>
+                                <StackPanel
+                                    x:Name="TitleButtonStackPanel"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Orientation="Horizontal"
+                                    Visibility="Collapsed"
+                                    WindowChrome.IsHitTestVisibleInChrome="True">
+                                    <Button
+                                        Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
+                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                        Style="{StaticResource WindowButtonStyle}">
+                                        <Button.Content>
+                                            <Grid Width="46" Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}">
+                                                <Path
+                                                    Width="10"
+                                                    Height="10"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Data="M1 0.5 L0 0.5"
+                                                    Stretch="Uniform"
+                                                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                    StrokeThickness="1" />
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
+                                    <Grid Margin="1,0,1,0">
+                                        <Button
+                                            x:Name="Restore"
+                                            Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                            Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                            Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                            Style="{StaticResource WindowButtonStyle}"
+                                            Visibility="Collapsed">
+                                            <Button.Content>
+                                                <Grid Width="46" UseLayoutRounding="True">
+                                                    <Path
+                                                        Width="10"
+                                                        Height="10"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Data="M0 0.2 L0.8 0.2 M0 01 L0.8 1 M0.8 1 L0.8 0.2 M0 0.2 L0 1 M0.3 0 L0.95 0 M01 0.05 L1 0.7"
+                                                        Stretch="Uniform"
+                                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                        StrokeThickness="1" />
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                        <Button
+                                            x:Name="Maximize"
+                                            Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                            Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
+                                            Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                            Style="{StaticResource WindowButtonStyle}">
+                                            <Button.Content>
+                                                <Grid Width="46">
+                                                    <Path
+                                                        Width="10"
+                                                        Height="10"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Data="M0.025 0 L0.975 0 M0.025 1 L0.975 1 M1 0.975 L1 0.025 M0 0.025 L0 0.975"
+                                                        Stretch="Uniform"
+                                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                        StrokeThickness="1" />
+                                                </Grid>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
+                                    <Button
+                                        Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                        Style="{StaticResource CloseButtonStyle}">
+                                        <Button.Content>
+                                            <Grid Width="46">
+                                                <Path
+                                                    Width="10"
+                                                    Height="10"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Data="M0,0 L1,1 M0,1 L1,0"
+                                                    Stretch="Uniform"
+                                                    Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"
+                                                    StrokeThickness="1" />
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <Grid DockPanel.Dock="Bottom">
+                                <ContentPresenter />
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Icon, Converter={StaticResource IsNullConverter}}" Value="False">
                             <Setter TargetName="TitleStackPanel" Property="Visibility" Value="Visible" />
@@ -319,6 +418,23 @@
                                 <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ChangeTitleColorWhenInactive}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="TitleTextBlock" Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorDisabled}" />
+                        </MultiDataTrigger>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=TitleBarType}" Value="WinUI" />
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ResizeMode}" Value="CanResize" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="TitleButtonStackPanel" Property="Visibility" Value="Visible" />
+                            <Setter Property="WindowStyle" Value="None" />
+                            <Setter TargetName="TitleStackPanel" Property="Margin" Value="10,5,5,5" />
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

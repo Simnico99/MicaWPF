@@ -18,15 +18,15 @@ public class MicaWindow : Window
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(true));
-    public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindow), new UIPropertyMetadata(20));
+    public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindow), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindow), new UIPropertyMetadata(TitleBarType.Win32));
 
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
 
     public int TitleBarHeight
     {
-        get => (int)GetValue(MarginMaximizedProperty);
-        set => SetValue(MarginMaximizedProperty, value);
+        get => (int)GetValue(TitleBarHeightProperty);
+        set => SetValue(TitleBarHeightProperty, value);
     }
 
     public TitleBarType TitleBarType
@@ -88,6 +88,14 @@ public class MicaWindow : Window
 
     public override void OnApplyTemplate()
     {
+        WindowChrome.SetWindowChrome(this, new WindowChrome() 
+        { 
+            CaptionHeight = TitleBarHeight - 7, 
+            CornerRadius = new CornerRadius(8), 
+            GlassFrameThickness = new Thickness(-1), 
+            ResizeBorderThickness = new Thickness(8)
+        });
+
         this.EnableMica(SystemBackdropType);
         _ButtonMax = GetTemplateChild(ButtonMax) as Button;
         _ButtonRestore = GetTemplateChild(ButtonRestore) as Button;
