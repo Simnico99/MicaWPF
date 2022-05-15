@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MicaWPF.DependencyInjection.Services;
+﻿using MicaWPF.DependencyInjection.Services;
 using MicaWPF.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,7 +13,7 @@ public static class DependencyInjectionHelper
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.ConfigureServices((_, collection) => 
+        builder.ConfigureServices((_, collection) =>
         {
             collection.AddSingleton<IThemeService, ThemeServiceDI>();
             collection.AddSingleton<IAccentColorService, AccentColorServiceDI>();

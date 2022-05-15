@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using MicaWPF.Models;
 using MicaWPF.Services;
 
@@ -23,8 +18,8 @@ internal class ThemeServiceDI : IThemeService
         return _localThemeService.ChangeTheme(windowsTheme);
     }
 
-    public void EnableMica(Window window, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
+    public void EnableMica(Window window, BackdropType micaType = BackdropType.Mica)
     {
-        _localThemeService.EnableMica(window, micaType, captionHeight);
+        _localThemeService.EnableMica(window, micaType);
     }
 }

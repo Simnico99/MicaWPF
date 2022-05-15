@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Automation.Peers;
+﻿using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using MicaWPF.Extensions;
@@ -88,11 +87,11 @@ public class MicaWindow : Window
 
     public override void OnApplyTemplate()
     {
-        WindowChrome.SetWindowChrome(this, new WindowChrome() 
-        { 
-            CaptionHeight = TitleBarHeight - 7, 
-            CornerRadius = new CornerRadius(8), 
-            GlassFrameThickness = new Thickness(-1), 
+        WindowChrome.SetWindowChrome(this, new WindowChrome()
+        {
+            CaptionHeight = TitleBarHeight - 7,
+            CornerRadius = new CornerRadius(8),
+            GlassFrameThickness = new Thickness(-1),
             ResizeBorderThickness = new Thickness(8)
         });
 
