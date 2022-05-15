@@ -27,11 +27,11 @@ public class MicaWindow : Window
         get => (int)GetValue(TitleBarHeightProperty);
         set => SetValue(TitleBarHeightProperty, value);
     }
-
+    
     public TitleBarType TitleBarType
     {
-        get => (TitleBarType)GetValue(MarginMaximizedProperty);
-        set => SetValue(MarginMaximizedProperty, value);
+        get => (TitleBarType)GetValue(TitleBarTypeProperty);
+        set => SetValue(TitleBarTypeProperty, value);
     }
 
     public Thickness? MarginMaximized
