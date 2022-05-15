@@ -134,7 +134,7 @@
                                                 WindowChrome.IsHitTestVisibleInChrome="True">
                                                 <Button
                                                     Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
-                                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                                    Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                     Style="{StaticResource WindowButtonStyle}"
                                                     ToolTip="minimize">
                                                     <Button.Content>
@@ -155,7 +155,7 @@
                                                     <Button
                                                         x:Name="Restore"
                                                         Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
-                                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                                        Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                         Style="{StaticResource WindowButtonStyle}"
                                                         ToolTip="restore"
                                                         Visibility="Collapsed">
@@ -179,7 +179,7 @@
                                                     <Button
                                                         x:Name="Maximize"
                                                         Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
-                                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                                        Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                         Style="{StaticResource WindowButtonStyle}"
                                                         ToolTip="maximize">
                                                         <Button.Content>
@@ -199,7 +199,7 @@
                                                 </Grid>
                                                 <Button
                                                     Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
-                                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                                    Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                     Style="{StaticResource CloseButtonStyle}"
                                                     ToolTip="close">
                                                     <Button.Content>
@@ -321,7 +321,7 @@
                                     WindowChrome.IsHitTestVisibleInChrome="True">
                                     <Button
                                         Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
-                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                        Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                         Style="{StaticResource WindowButtonStyle}">
                                         <Button.Content>
                                             <Grid Width="46" Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}">
@@ -342,7 +342,7 @@
                                             x:Name="Restore"
                                             Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                             Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
-                                            Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                            Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                             Style="{StaticResource WindowButtonStyle}"
                                             Visibility="Collapsed">
                                             <Button.Content>
@@ -363,7 +363,7 @@
                                             x:Name="Maximize"
                                             Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                             Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
-                                            Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                            Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                             Style="{StaticResource WindowButtonStyle}">
                                             <Button.Content>
                                                 <Grid Width="46">
@@ -382,7 +382,7 @@
                                     </Grid>
                                     <Button
                                         Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
-                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                        Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                         Style="{StaticResource CloseButtonStyle}">
                                         <Button.Content>
                                             <Grid Width="46">

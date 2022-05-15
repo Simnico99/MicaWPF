@@ -74,11 +74,11 @@ public class MicaWindow : Window
     {
         if (e.Property.Name is nameof(WindowState))
         {
-            if ((WindowState)e.NewValue == WindowState.Maximized)
+            if ((WindowState)e.NewValue == WindowState.Maximized && TitleBarType == TitleBarType.Win32)
             {
                 MarginMaximized = new Thickness(6);
             }
-            else
+            else if (TitleBarType == TitleBarType.Win32)
             {
                 MarginMaximized = new Thickness(0);
             }
