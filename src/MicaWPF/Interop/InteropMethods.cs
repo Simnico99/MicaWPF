@@ -40,6 +40,18 @@ internal class InteropMethods
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern int GetDeviceCaps(HandleRef hDC, int nIndex);
 
+    [DllImport(ExternDll.User32)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static extern bool GetCursorPos(out POINT lpPoint);
+
+    [DllImport(ExternDll.User32)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    internal static extern bool GetMonitorInfo(IntPtr hMonitor, MONITORINFO lpmi);
+    [DllImport(ExternDll.User32, SetLastError = true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    internal static extern IntPtr MonitorFromPoint(POINT pt, MonitorOptions dwFlags);
+
     public static int SetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, int parameter)
     {
         return DwmSetWindowAttribute(hwnd, attribute, ref parameter, Marshal.SizeOf<int>());

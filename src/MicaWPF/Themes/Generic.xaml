@@ -433,8 +433,8 @@
                                 <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ResizeMode}" Value="CanResize" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="TitleButtonStackPanel" Property="Visibility" Value="Visible" />
-                            <Setter Property="WindowStyle" Value="None" />
                             <Setter TargetName="TitleStackPanel" Property="Margin" Value="10,5,5,5" />
+                            <Setter Property="WindowStyle" Value="None" />
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

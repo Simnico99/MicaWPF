@@ -2,6 +2,7 @@
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using MicaWPF.Extensions;
+using MicaWPF.Interop;
 
 namespace MicaWPF.Controls;
 public class MicaWindow : Window
@@ -27,7 +28,7 @@ public class MicaWindow : Window
         get => (int)GetValue(TitleBarHeightProperty);
         set => SetValue(TitleBarHeightProperty, value);
     }
-    
+
     public TitleBarType TitleBarType
     {
         get => (TitleBarType)GetValue(TitleBarTypeProperty);
@@ -63,7 +64,7 @@ public class MicaWindow : Window
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
-        if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && TitleBarType == TitleBarType.Win32)
+        if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && TitleBarType == TitleBarType.WinUI)
         {
             HwndSource.FromHwnd(new WindowInteropHelper(this).EnsureHandle())?.AddHook(HwndSourceHook);
         }
@@ -117,6 +118,11 @@ public class MicaWindow : Window
 
             Style = myResourceDictionary["MicaWindow11"] as Style;
         }
+
+        this.Left = SystemParameters.WorkArea.Left;
+        this.Top = SystemParameters.WorkArea.Top;
+        this.Height = SystemParameters.WorkArea.Height;
+        this.Width = SystemParameters.WorkArea.Width;
     }
 
     private void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
@@ -197,6 +203,39 @@ public class MicaWindow : Window
         }
     }
 
+    private static void WmGetMinMaxInfo(System.IntPtr hwnd, System.IntPtr lParam)
+    {
+        InteropMethods.GetCursorPos(out var lMousePosition);
+
+        IntPtr lPrimaryScreen = InteropMethods.MonitorFromPoint(new InteropValues.POINT(0, 0), InteropValues.MonitorOptions.MONITOR_DEFAULTTOPRIMARY);
+        InteropValues.MONITORINFO lPrimaryScreenInfo = new();
+        if (InteropMethods.GetMonitorInfo(lPrimaryScreen, lPrimaryScreenInfo) == false)
+        {
+            return;
+        }
+
+        IntPtr lCurrentScreen = InteropMethods.MonitorFromPoint(lMousePosition, InteropValues.MonitorOptions.MONITOR_DEFAULTTONEAREST);
+
+        InteropValues.MINMAXINFO lMmi = (InteropValues.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
+
+        if (lPrimaryScreen.Equals(lCurrentScreen) == true)
+        {
+            lMmi.ptMaxPosition.X = lPrimaryScreenInfo.rcWork.Left;
+            lMmi.ptMaxPosition.Y = lPrimaryScreenInfo.rcWork.Top;
+            lMmi.ptMaxSize.X = lPrimaryScreenInfo.rcWork.Right - lPrimaryScreenInfo.rcWork.Left;
+            lMmi.ptMaxSize.Y = lPrimaryScreenInfo.rcWork.Bottom - lPrimaryScreenInfo.rcWork.Top;
+        }
+        else
+        {
+            lMmi.ptMaxPosition.X = lPrimaryScreenInfo.rcMonitor.Left;
+            lMmi.ptMaxPosition.Y = lPrimaryScreenInfo.rcMonitor.Top;
+            lMmi.ptMaxSize.X = lPrimaryScreenInfo.rcMonitor.Right - lPrimaryScreenInfo.rcMonitor.Left;
+            lMmi.ptMaxSize.Y = lPrimaryScreenInfo.rcMonitor.Bottom - lPrimaryScreenInfo.rcMonitor.Top;
+        }
+
+        Marshal.StructureToPtr(lMmi, lParam, true);
+    }
+
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
         switch (msg)
@@ -215,11 +254,14 @@ public class MicaWindow : Window
                 }
                 break;
             case InteropValues.WM_NCLBUTTONDOWN:
-
                 if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
                 {
                     HideMaximiseAndMinimiseButton(lparam, ref handled);
                 }
+                break;
+            case 0x0024:
+                WmGetMinMaxInfo(hwnd, lparam);
+
                 break;
             default:
                 handled = false;

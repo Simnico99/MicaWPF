@@ -1,10 +1,14 @@
-﻿namespace MicaWPF.Interop;
+﻿using System.Drawing;
+using System.Windows;
+
+namespace MicaWPF.Interop;
 
 public class InteropValues
 {
     public const int
         WM_NCHITTEST = 0x0084,
-        WM_NCLBUTTONDOWN = 0x00A1;
+        WM_NCLBUTTONDOWN = 0x00A1,
+        WM_MAXIMIZE = 0x0024;
 
     public static class ExternDll
     {
@@ -73,4 +77,61 @@ public class InteropValues
         internal byte ProductType;
         internal byte Reserved;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct POINT
+    {
+        public int X;
+        public int Y;
+
+        public POINT(int x, int y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+    }
+
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MINMAXINFO
+    {
+        public POINT ptReserved;
+        public POINT ptMaxSize;
+        public POINT ptMaxPosition;
+        public POINT ptMinTrackSize;
+        public POINT ptMaxTrackSize;
+    };
+
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    public class MONITORINFO
+    {
+        public int cbSize = Marshal.SizeOf(typeof(MONITORINFO));
+        public RECT rcMonitor = new();
+        public RECT rcWork = new();
+        public int dwFlags = 0;
+    }
+
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RECT
+    {
+        public int Left, Top, Right, Bottom;
+
+        public RECT(int left, int top, int right, int bottom)
+        {
+            this.Left = left;
+            this.Top = top;
+            this.Right = right;
+            this.Bottom = bottom;
+        }
+    }
+
+    public enum MonitorOptions : uint
+    {
+        MONITOR_DEFAULTTONULL = 0x00000000,
+        MONITOR_DEFAULTTOPRIMARY = 0x00000001,
+        MONITOR_DEFAULTTONEAREST = 0x00000002
+    }
+
 }
