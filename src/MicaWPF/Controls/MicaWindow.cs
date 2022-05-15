@@ -18,9 +18,22 @@ public class MicaWindow : Window
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(true));
+    public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindow), new UIPropertyMetadata(20));
+    public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindow), new UIPropertyMetadata(TitleBarType.Win32));
 
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
-    public int CaptionHeight { get; set; } = 20;
+
+    public int TitleBarHeight
+    {
+        get => (int)GetValue(MarginMaximizedProperty);
+        set => SetValue(MarginMaximizedProperty, value);
+    }
+
+    public TitleBarType TitleBarType
+    {
+        get => (TitleBarType)GetValue(MarginMaximizedProperty);
+        set => SetValue(MarginMaximizedProperty, value);
+    }
 
     public Thickness? MarginMaximized
     {
@@ -75,9 +88,9 @@ public class MicaWindow : Window
 
     public override void OnApplyTemplate()
     {
+        this.EnableMica(SystemBackdropType);
         _ButtonMax = GetTemplateChild(ButtonMax) as Button;
         _ButtonRestore = GetTemplateChild(ButtonRestore) as Button;
-        this.EnableMica(SystemBackdropType, CaptionHeight);
         base.OnApplyTemplate();
     }
 

@@ -31,6 +31,12 @@ public enum AccentBrushType
     Quaternary
 }
 
+public enum TitleBarType
+{
+    Win32,
+    WinUI
+}
+
 [Flags]
 internal enum Facility
 {

@@ -76,23 +76,10 @@ public class ThemeService : IThemeService
         }
     }
 
-    private void SetWindowMica(Window window, BackdropType micaType, int captionHeight)
+    private void SetWindowMica(Window window, BackdropType micaType)
     {
         if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
-            if (captionHeight != -1)
-            {
-                WindowChrome.SetWindowChrome(window,
-                    new WindowChrome()
-                    {
-                        CaptionHeight = captionHeight,
-                        ResizeBorderThickness = new Thickness(8),
-                        CornerRadius = new CornerRadius(0),
-                        GlassFrameThickness = new Thickness(-1),
-                        UseAeroCaptionButtons = true
-                    });
-            }
-
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
             var windowHandle = new WindowInteropHelper(window).Handle;
 
@@ -158,16 +145,16 @@ public class ThemeService : IThemeService
 
         foreach (var micaEnabledWindow in MicaEnabledWindows)
         {
-            SetWindowMica(micaEnabledWindow.Window, micaEnabledWindow.BackdropType, micaEnabledWindow.CaptionHeight);
+            SetWindowMica(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
         }
 
         return CurrentTheme;
     }
 
-    public void EnableMica(Window window, BackdropType micaType = BackdropType.Mica, int captionHeight = 20)
+    public void EnableMica(Window window, BackdropType micaType = BackdropType.Mica)
     {
         _accentColorService.Init();
-        SetWindowMica(window, micaType, captionHeight);
-        MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType, captionHeight));
+        SetWindowMica(window, micaType);
+        MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType));
     }
 }

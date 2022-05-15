@@ -6,5 +6,5 @@ public interface IThemeService
     ICollection<MicaEnabledWindow> MicaEnabledWindows { get; }
 
     WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto);
-    void EnableMica(Window window, BackdropType micaType = BackdropType.Mica, int captionHeight = 20);
+    void EnableMica(Window window, BackdropType micaType = BackdropType.Mica);
 }
