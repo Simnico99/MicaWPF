@@ -207,12 +207,8 @@ public class MicaWindow : Window
 
     private static void WmGetMinMaxInfo(System.IntPtr hwnd, System.IntPtr lParam)
     {
-        POINT lMousePosition;
-        InteropMethods.GetCursorPos(out lMousePosition);
-
+        InteropMethods.GetCursorPos(out var lMousePosition);
         IntPtr lCurrentScreen = InteropMethods.MonitorFromPoint(lMousePosition, MonitorOptions.MONITOR_DEFAULTTONEAREST);
-
-
         MINMAXINFO lMmi = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
 
         MONITORINFO lCurrentScreenInfo = new MONITORINFO();
@@ -221,7 +217,6 @@ public class MicaWindow : Window
             return;
         }
 
-        //Position relative pour notre fenÃªtre
         lMmi.ptMaxPosition.X = lCurrentScreenInfo.rcWork.Left - lCurrentScreenInfo.rcMonitor.Left;
         lMmi.ptMaxPosition.Y = lCurrentScreenInfo.rcWork.Top - lCurrentScreenInfo.rcMonitor.Top;
         lMmi.ptMaxSize.X = lCurrentScreenInfo.rcWork.Right - lCurrentScreenInfo.rcWork.Left;
@@ -229,7 +224,6 @@ public class MicaWindow : Window
 
         Marshal.StructureToPtr(lMmi, lParam, true);
     }
-
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
