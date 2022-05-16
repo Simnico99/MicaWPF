@@ -14,11 +14,17 @@ public class MicaWindow : Window
     private Button? _ButtonRestore;
     #endregion
 
-    public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
+    internal static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(true));
     public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindow), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindow), new UIPropertyMetadata(TitleBarType.Win32));
+
+    internal Thickness? MarginMaximized
+    {
+        get => (Thickness)GetValue(MarginMaximizedProperty);
+        set => SetValue(MarginMaximizedProperty, value);
+    }
 
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
 
@@ -32,12 +38,6 @@ public class MicaWindow : Window
     {
         get => (TitleBarType)GetValue(TitleBarTypeProperty);
         set => SetValue(TitleBarTypeProperty, value);
-    }
-
-    public Thickness? MarginMaximized
-    {
-        get => (Thickness)GetValue(MarginMaximizedProperty);
-        set => SetValue(MarginMaximizedProperty, value);
     }
 
     public bool ChangeTitleColorWhenInactive
@@ -205,22 +205,24 @@ public class MicaWindow : Window
 
     private static void WmGetMinMaxInfo(System.IntPtr hwnd, System.IntPtr lParam)
     {
-        InteropMethods.GetCursorPos(out var lMousePosition);
-        var lCurrentScreen = InteropMethods.MonitorFromPoint(lMousePosition, InteropValues.MonitorOptions.MONITOR_DEFAULTTONEAREST);
-        var lMmi = (InteropValues.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
+        InteropValues.MINMAXINFO mmi = (InteropValues.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
 
-        var lCurrentScreenInfo = new InteropValues.MONITORINFO();
-        if (InteropMethods.GetMonitorInfo(lCurrentScreen, lCurrentScreenInfo) == false)
+        IntPtr monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
+
+        if (monitor != IntPtr.Zero)
         {
-            return;
+            InteropValues.MONITORINFO monitorInfo = new();
+            monitorInfo.cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO));
+            InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
+            var rcWorkArea = monitorInfo.rcWork;
+            var rcMonitorArea = monitorInfo.rcMonitor;
+            mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
+            mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
+            mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
+            mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
         }
 
-        lMmi.ptMaxPosition.X = lCurrentScreenInfo.rcWork.Left - lCurrentScreenInfo.rcMonitor.Left;
-        lMmi.ptMaxPosition.Y = lCurrentScreenInfo.rcWork.Top - lCurrentScreenInfo.rcMonitor.Top;
-        lMmi.ptMaxSize.X = lCurrentScreenInfo.rcWork.Right - lCurrentScreenInfo.rcWork.Left;
-        lMmi.ptMaxSize.Y = lCurrentScreenInfo.rcWork.Bottom - lCurrentScreenInfo.rcWork.Top;
-
-        Marshal.StructureToPtr(lMmi, lParam, true);
+        Marshal.StructureToPtr(mmi, lParam, true);
     }
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
