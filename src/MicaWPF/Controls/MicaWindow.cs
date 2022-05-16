@@ -78,7 +78,7 @@ public class MicaWindow : Window
             {
                 MarginMaximized = new Thickness(6);
             }
-            else if (TitleBarType == TitleBarType.Win32)
+            else
             {
                 MarginMaximized = new Thickness(0);
             }
