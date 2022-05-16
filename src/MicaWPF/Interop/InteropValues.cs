@@ -1,14 +1,15 @@
-﻿using System.Drawing;
-using System.Windows;
-
-namespace MicaWPF.Interop;
+﻿namespace MicaWPF.Interop;
 
 public class InteropValues
 {
-    public const int
+    public static class HwndSourceMessages
+    {
+        public const int
         WM_NCHITTEST = 0x0084,
         WM_NCLBUTTONDOWN = 0x00A1,
-        WM_MAXIMIZE = 0x0024;
+        WM_MAXIMIZE = 0x0024,
+        WM_GETMINMAXINFO = 0x0024;
+    }
 
     public static class ExternDll
     {
@@ -86,8 +87,8 @@ public class InteropValues
 
         public POINT(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
     }
 
@@ -117,10 +118,10 @@ public class InteropValues
 
         public RECT(int left, int top, int right, int bottom)
         {
-            this.Left = left;
-            this.Top = top;
-            this.Right = right;
-            this.Bottom = bottom;
+            Left = left;
+            Top = top;
+            Right = right;
+            Bottom = bottom;
         }
     }
     public enum MonitorOptions : uint

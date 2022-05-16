@@ -2,8 +2,6 @@
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using MicaWPF.Extensions;
-using MicaWPF.Interop;
-using static MicaWPF.Interop.InteropValues;
 
 namespace MicaWPF.Controls;
 public class MicaWindow : Window
@@ -71,7 +69,7 @@ public class MicaWindow : Window
         }
     }
 
-    private void AddPadding(WindowState windowsState) 
+    private void AddPadding(WindowState windowsState)
     {
         if (windowsState == WindowState.Maximized && TitleBarType == TitleBarType.Win32)
         {
@@ -208,10 +206,10 @@ public class MicaWindow : Window
     private static void WmGetMinMaxInfo(System.IntPtr hwnd, System.IntPtr lParam)
     {
         InteropMethods.GetCursorPos(out var lMousePosition);
-        IntPtr lCurrentScreen = InteropMethods.MonitorFromPoint(lMousePosition, MonitorOptions.MONITOR_DEFAULTTONEAREST);
-        MINMAXINFO lMmi = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
+        var lCurrentScreen = InteropMethods.MonitorFromPoint(lMousePosition, InteropValues.MonitorOptions.MONITOR_DEFAULTTONEAREST);
+        var lMmi = (InteropValues.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
 
-        MONITORINFO lCurrentScreenInfo = new MONITORINFO();
+        var lCurrentScreenInfo = new InteropValues.MONITORINFO();
         if (InteropMethods.GetMonitorInfo(lCurrentScreen, lCurrentScreenInfo) == false)
         {
             return;
@@ -229,7 +227,7 @@ public class MicaWindow : Window
     {
         switch (msg)
         {
-            case InteropValues.WM_NCHITTEST:
+            case InteropValues.HwndSourceMessages.WM_NCHITTEST:
                 try
                 {
                     if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
@@ -242,13 +240,13 @@ public class MicaWindow : Window
                     handled = true;
                 }
                 break;
-            case InteropValues.WM_NCLBUTTONDOWN:
+            case InteropValues.HwndSourceMessages.WM_NCLBUTTONDOWN:
                 if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
                 {
                     HideMaximiseAndMinimiseButton(lparam, ref handled);
                 }
                 break;
-            case 0x0024:
+            case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
                 WmGetMinMaxInfo(hwnd, lparam);
                 break;
             default:
