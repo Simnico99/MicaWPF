@@ -124,7 +124,8 @@
                                                 <ContentControl
                                                     Margin="5,0,5,0"
                                                     Content="{TemplateBinding TitleBarContent}"
-                                                    DockPanel.Dock="Right" />
+                                                    DockPanel.Dock="Right"
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" />
                                             </DockPanel>
                                             <StackPanel
                                                 Grid.Column="2"
@@ -309,7 +310,8 @@
                                     <ContentControl
                                         Margin="5,0,5,0"
                                         Content="{TemplateBinding TitleBarContent}"
-                                        DockPanel.Dock="Right" />
+                                        DockPanel.Dock="Right"
+                                        WindowChrome.IsHitTestVisibleInChrome="True" />
                                 </DockPanel>
                                 <StackPanel
                                     x:Name="TitleButtonStackPanel"
