@@ -203,7 +203,7 @@ public class MicaWindow : Window
         }
     }
 
-    private static void WmGetMinMaxInfo(System.IntPtr hwnd, System.IntPtr lParam)
+    private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
     {
         InteropValues.MINMAXINFO mmi = (InteropValues.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
 
@@ -220,10 +220,13 @@ public class MicaWindow : Window
             mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
             mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
             mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
+            mmi.ptMaxTrackSize.X = mmi.ptMaxSize.X;                                             
+            mmi.ptMaxTrackSize.Y = mmi.ptMaxSize.Y;
         }
 
         Marshal.StructureToPtr(mmi, lParam, true);
     }
+
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
@@ -250,6 +253,7 @@ public class MicaWindow : Window
                 break;
             case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
                 WmGetMinMaxInfo(hwnd, lparam);
+                handled = true;
                 break;
             default:
                 handled = false;
