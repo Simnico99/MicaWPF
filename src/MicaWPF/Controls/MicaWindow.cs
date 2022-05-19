@@ -227,7 +227,6 @@ public class MicaWindow : Window
         Marshal.StructureToPtr(mmi, lParam, true);
     }
 
-
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
     {
         switch (msg)
