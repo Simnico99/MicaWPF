@@ -76,6 +76,13 @@ Windows 10<br/>
 Supports falling back to dark or light theme on Windows 10.
 ![image](https://user-images.githubusercontent.com/80013536/139864645-8a48016b-e369-4c9c-9ca9-73ee7fc10a07.png)<br/>
 
+Here are some exemple controls:
+![image](https://user-images.githubusercontent.com/80013536/169356344-caacaa6d-5ee6-447b-b3b5-35fca1a8939b.png)
+![74d755e6e4ae5fddb0b5fe64d2869e81](https://user-images.githubusercontent.com/80013536/169356493-95e8d389-815a-4227-a6a6-7a422334f627.gif)
+![42cbe5065b53c4e8369f2f4bbeb1311a](https://user-images.githubusercontent.com/80013536/169356743-a4b899c7-ba99-40c9-a5aa-823a5942fd3b.gif)
+![image](https://user-images.githubusercontent.com/80013536/169356891-4b5a2221-64e2-4522-ba1e-a2bae9f04b40.png)
+
+
 ### Built With
 
 * [MicaWPFRuntimeComponent](https://github.com/Simnico99/MicaWPFRuntimeComponent)
