@@ -205,26 +205,30 @@ public class MicaWindow : Window
 
     private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
     {
-        InteropValues.MINMAXINFO mmi = (InteropValues.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
+        var structure = Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
 
-        IntPtr monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
-
-        if (monitor != IntPtr.Zero)
+        if (structure is not null)
         {
-            InteropValues.MONITORINFO monitorInfo = new();
-            monitorInfo.cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO));
-            InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
-            var rcWorkArea = monitorInfo.rcWork;
-            var rcMonitorArea = monitorInfo.rcMonitor;
-            mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
-            mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
-            mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
-            mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
-            mmi.ptMaxTrackSize.X = mmi.ptMaxSize.X;                                             
-            mmi.ptMaxTrackSize.Y = mmi.ptMaxSize.Y;
-        }
+            var mmi = (InteropValues.MINMAXINFO)structure;
+            IntPtr monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
 
-        Marshal.StructureToPtr(mmi, lParam, true);
+            if (monitor != IntPtr.Zero)
+            {
+                InteropValues.MONITORINFO monitorInfo = new();
+                monitorInfo.cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO));
+                InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
+                var rcWorkArea = monitorInfo.rcWork;
+                var rcMonitorArea = monitorInfo.rcMonitor;
+                mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
+                mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
+                mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
+                mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
+                mmi.ptMaxTrackSize.X = mmi.ptMaxSize.X;
+                mmi.ptMaxTrackSize.Y = mmi.ptMaxSize.Y;
+            }
+
+            Marshal.StructureToPtr(mmi, lParam, true);
+        }
     }
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
