@@ -14,7 +14,6 @@ public static class DependencyInjectionHelper
             throw new ArgumentNullException(nameof(builder));
         }
 
-
         builder.ConfigureServices((_, services) =>
         {
             services.Configure(options);
