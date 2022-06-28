@@ -20,6 +20,7 @@ public class MicaWindow : Window
     public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindow), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindow), new UIPropertyMetadata(TitleBarType.Win32));
 
+    private bool _templateApplied = false;
     internal Thickness? MarginMaximized
     {
         get => (Thickness)GetValue(MarginMaximizedProperty);
@@ -81,29 +82,52 @@ public class MicaWindow : Window
         }
     }
 
+    private void ApplyResizeBorderThickness(WindowState windowsState)
+    {
+        if (windowsState == WindowState.Maximized)
+        {
+            WindowChrome.SetWindowChrome(this, new WindowChrome()
+            {
+                CaptionHeight = TitleBarHeight - 7,
+                CornerRadius = new CornerRadius(8),
+                GlassFrameThickness = new Thickness(-1),
+                ResizeBorderThickness = new Thickness(0)
+            });
+        }
+        else
+        {
+            WindowChrome.SetWindowChrome(this, new WindowChrome()
+            {
+                CaptionHeight = TitleBarHeight - 7,
+                CornerRadius = new CornerRadius(8),
+                GlassFrameThickness = new Thickness(-1),
+                ResizeBorderThickness = new Thickness(6)
+            });
+        }
+    }
+
     protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
         if (e.Property.Name is nameof(WindowState))
         {
             AddPadding((WindowState)e.NewValue);
+            ApplyResizeBorderThickness((WindowState)e.NewValue);
         }
         base.OnPropertyChanged(e);
     }
 
     public override void OnApplyTemplate()
     {
-        WindowChrome.SetWindowChrome(this, new WindowChrome()
+        if (_templateApplied == false)
         {
-            CaptionHeight = TitleBarHeight - 7,
-            CornerRadius = new CornerRadius(8),
-            GlassFrameThickness = new Thickness(-1),
-            ResizeBorderThickness = new Thickness(8)
-        });
+            _templateApplied = true;
+            this.EnableMica(SystemBackdropType);
+            _ButtonMax = GetTemplateChild(ButtonMax) as Button;
+            _ButtonRestore = GetTemplateChild(ButtonRestore) as Button;
+        }
 
-        this.EnableMica(SystemBackdropType);
-        _ButtonMax = GetTemplateChild(ButtonMax) as Button;
-        _ButtonRestore = GetTemplateChild(ButtonRestore) as Button;
         AddPadding(WindowState);
+        ApplyResizeBorderThickness(WindowState);
         base.OnApplyTemplate();
     }
 
