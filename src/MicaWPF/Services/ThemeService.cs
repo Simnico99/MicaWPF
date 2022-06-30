@@ -1,4 +1,6 @@
-﻿namespace MicaWPF.Services;
+﻿using MicaWPF.Models;
+
+namespace MicaWPF.Services;
 public class ThemeService : IThemeService
 {
     private static readonly ThemeService _themeService = new();
@@ -103,6 +105,8 @@ public class ThemeService : IThemeService
         }
 
         ThemeDictionnaryHelper.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(CurrentTheme));
+        window.InvalidateVisual();
+        window.UpdateLayout();
     }
 
     public static ThemeService GetCurrent()
