@@ -1,7 +1,6 @@
 <div align="center">
 
 <a href="https://www.nuget.org/packages/MicaWPF/latest">![NuGet](https://img.shields.io/nuget/v/MicaWPF.svg?style=flat&logo=NuGet)</a>
-<a href="https://www.nuget.org/packages/MicaWPF/latest/prerelease">![NuGet(preview)](https://img.shields.io/nuget/vpre/MicaWPF.svg?style=flat&logo=NuGet)</a>
 <a href="https://www.nuget.org/packages/MicaWPF/">![NuGet(download)](https://img.shields.io/nuget/dt/MicaWPF.svg?style=flat&logo=NuGet)</a>
 <a href="https://www.codefactor.io/repository/github/simnico99/micawpf/overview/main">![CodeFactor](https://img.shields.io/codefactor/grade/github/Simnico99/MicaWPF/main?logo=codefactor&logoColor=%23ffff)</a>
 <a href="https://dev.azure.com/ZirconCloud/MicaWPF/_build">![Azure Pipelines](https://dev.azure.com/ZirconCloud/MicaWPF/_apis/build/status/Simnico99.MicaWPF?branchName=refs%2Ftags%2F3.1.29)</a><br/>
