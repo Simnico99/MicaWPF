@@ -8,13 +8,13 @@ namespace MicaWPF.DependencyInjection.Services;
 internal class ThemeServiceDI : IThemeService
 {
     private readonly IThemeService _localThemeService = ThemeService.GetCurrent();
-    private readonly IOptions<MicaWPFOptions> _options;
+    private readonly MicaWPFOptions _options;
 
-    public ThemeServiceDI(IOptions<MicaWPFOptions> options)
+    public ThemeServiceDI(MicaWPFOptions options)
     {
         _options = options;
-        _localThemeService.IsThemeAware = _options.Value.ThemeOptions.IsThemeAware;
-        _localThemeService.ChangeTheme(_options.Value.ThemeOptions.Theme);
+        _localThemeService.IsThemeAware = _options.ThemeOptions.IsThemeAware;
+        _localThemeService.ChangeTheme(_options.ThemeOptions.Theme);
     }
 
     public WindowsTheme CurrentTheme => _localThemeService.CurrentTheme;

@@ -8,16 +8,20 @@ using Microsoft.Extensions.Options;
 namespace MicaWPF.DependencyInjection.Helpers;
 public static class DependencyInjectionHelper
 {
-    public static IHostBuilder UseMicaWPF(this IHostBuilder builder, Action<MicaWPFOptions>? options = null)
+    public static IHostBuilder UseMicaWPF(this IHostBuilder builder, Action<MicaWPFOptions> options)
     {
         if (builder is null)
         {
             throw new ArgumentNullException(nameof(builder));
         }
 
+        var cfg = new MicaWPFOptions();
+
+        options(cfg);
+
         builder.ConfigureServices((_, services) =>
         {
-            services.ConfigureOptions(options);
+            services.AddSingleton(cfg);
             services.AddSingleton<IThemeService, ThemeServiceDI>();
             services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
         });
@@ -27,19 +31,7 @@ public static class DependencyInjectionHelper
 
     public static IHostBuilder UseMicaWPF(this IHostBuilder builder)
     {
-        if (builder is null)
-        {
-            throw new ArgumentNullException(nameof(builder));
-        }
-
-        var options = new MicaWPFOptions();
-
-        builder.ConfigureServices((_, services) =>
-        {
-            services.ConfigureOptions(options);
-            services.AddSingleton<IThemeService, ThemeServiceDI>();
-            services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
-        });
+        builder.UseMicaWPF(x => new MicaWPFOptions());
 
         return builder;
     }

@@ -7,18 +7,18 @@ namespace MicaWPF.DependencyInjection.Services;
 internal class AccentColorServiceDI : IAccentColorService
 {
     private readonly AccentColorService _localThemeService = AccentColorService.GetCurrent();
-    private readonly IOptions<MicaWPFOptions> _options;
+    private readonly MicaWPFOptions _options;
 
-    public AccentColorServiceDI(IOptions<MicaWPFOptions> options)
+    public AccentColorServiceDI(MicaWPFOptions options)
     {
         _options = options;
-        if (_options.Value.AccentOptions.UpdateAccentFromWindows)
+        if (_options.AccentOptions.UpdateAccentFromWindows)
         {
             _localThemeService.UpdateAccentsFromWindows();
         }
         else
         {
-            _localThemeService.UpdateAccents(options.Value.AccentOptions.AccentColor);
+            _localThemeService.UpdateAccents(options.AccentOptions.AccentColor);
         }
     }
 
