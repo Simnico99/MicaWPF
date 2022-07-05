@@ -12,13 +12,14 @@ internal class AccentColorServiceDI : IAccentColorService
     public AccentColorServiceDI(MicaWPFOptions options)
     {
         _options = options;
-        if (_options.AccentOptions.UpdateAccentFromWindows)
+
+        if (_options.UpdateAccentFromWindows)
         {
             _localThemeService.UpdateAccentsFromWindows();
         }
         else
         {
-            _localThemeService.UpdateAccents(options.AccentOptions.AccentColor);
+            _localThemeService.UpdateAccents(options.AccentColor);
         }
     }
 

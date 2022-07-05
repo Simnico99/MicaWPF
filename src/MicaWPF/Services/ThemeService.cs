@@ -73,8 +73,6 @@ public class ThemeService : IThemeService
         else if (!IsThemeAware && _IsCheckingTheme)
         {
             _IsCheckingTheme = false;
-            var handler = (UserPreferenceChangedEventHandler)Delegate.CreateDelegate(typeof(UserPreferenceChangedEventHandler), this, "UserPreferenceChangedHandler");
-            SystemEvents.UserPreferenceChanged -= handler;
         }
     }
 

@@ -13,8 +13,8 @@ internal class ThemeServiceDI : IThemeService
     public ThemeServiceDI(MicaWPFOptions options)
     {
         _options = options;
-        _localThemeService.IsThemeAware = _options.ThemeOptions.IsThemeAware;
-        _localThemeService.ChangeTheme(_options.ThemeOptions.Theme);
+        _localThemeService.IsThemeAware = _options.IsThemeAware;
+        _localThemeService.ChangeTheme(_options.Theme);
     }
 
     public WindowsTheme CurrentTheme => _localThemeService.CurrentTheme;
