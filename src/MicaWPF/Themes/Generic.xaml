@@ -118,7 +118,7 @@
                                                         Margin="5,0,0,0"
                                                         VerticalAlignment="Center"
                                                         FontSize="12"
-                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                                         Text="{TemplateBinding Title}" />
                                                 </StackPanel>
                                                 <ContentControl
@@ -304,7 +304,7 @@
                                             Margin="5,0,0,0"
                                             VerticalAlignment="Center"
                                             FontSize="12"
-                                            Foreground="{TemplateBinding Foreground}"
+                                            Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                             Text="{TemplateBinding Title}" />
                                     </StackPanel>
                                     <ContentControl
