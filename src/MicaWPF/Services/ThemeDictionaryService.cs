@@ -27,7 +27,7 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     /// get current theme resource dictionary
     /// </summary>
     /// <returns></returns>
-    private ResourceDictionary GetThemeResourceDictionary()
+    private static ResourceDictionary? GetThemeResourceDictionary()
     {
         return (from dictionary in Application.Current.Resources.MergedDictionaries
                 where dictionary.Contains("MicaWPF.Colors.ApplicationBackgroundColor")
@@ -38,7 +38,7 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     /// get source uri of current theme resource 
     /// </summary>
     /// <returns>resource uri</returns>
-    private Uri? GetThemeSource()
+    private static Uri? GetThemeSource()
     {
         var theme = GetThemeResourceDictionary();
         if (theme == null)
@@ -69,7 +69,7 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     /// </summary>
     public Uri? ThemeSource
     {
-        get => GetThemeSource();
+        get => ThemeDictionaryService.GetThemeSource();
         set
         {
             if (value != null)

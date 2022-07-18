@@ -1,4 +1,4 @@
-<local:ThemeResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:MicaWPF.Models">
@@ -138,4 +138,4 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Assets/Brushes.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-</local:ThemeResourceDictionary>
+</ResourceDictionary>
