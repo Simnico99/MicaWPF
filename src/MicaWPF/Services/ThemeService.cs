@@ -147,8 +147,9 @@ public class ThemeService : IThemeService
         {
             SetWindowMica(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
             //Force the title bar to refresh.
+            var style = micaEnabledWindow.Window.WindowStyle;
             micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
-            micaEnabledWindow.Window.WindowStyle = WindowStyle.SingleBorderWindow;
+            micaEnabledWindow.Window.WindowStyle = style;
         }
 
         return CurrentTheme;
