@@ -4,6 +4,7 @@ namespace MicaWPF.Services;
 public class ThemeService : IThemeService
 {
     private static readonly ThemeService _themeService = new();
+    private static readonly ThemeDictionaryService _themeManager = ThemeDictionaryService.GetCurrent();
     private readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
 
     private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
@@ -101,10 +102,6 @@ public class ThemeService : IThemeService
                 InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, InteropValues.DwmValues.True);
             }
         }
-
-        ThemeDictionnaryHelper.SetCurrentThemeDictionary(window, WindowsThemeToResourceTheme(CurrentTheme));
-        window.InvalidateVisual();
-        window.UpdateLayout();
     }
 
     public static ThemeService GetCurrent()
@@ -144,10 +141,13 @@ public class ThemeService : IThemeService
         CurrentTheme = windowsTheme;
 
         UpdateAccent();
+        _themeManager.ThemeSource = WindowsThemeToResourceTheme(windowsTheme);
 
         foreach (var micaEnabledWindow in MicaEnabledWindows)
         {
             SetWindowMica(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
+            micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
+            micaEnabledWindow.Window.WindowStyle = WindowStyle.SingleBorderWindow;
         }
 
         return CurrentTheme;
