@@ -2,7 +2,6 @@
 using MicaWPF.DependencyInjection.Options;
 using MicaWPF.Models;
 using MicaWPF.Services;
-using Microsoft.Extensions.Options;
 
 namespace MicaWPF.DependencyInjection.Services;
 internal class ThemeServiceDI : IThemeService

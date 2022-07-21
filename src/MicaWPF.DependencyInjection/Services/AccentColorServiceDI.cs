@@ -1,7 +1,6 @@
 ﻿using System.Windows.Media;
 using MicaWPF.DependencyInjection.Options;
 using MicaWPF.Services;
-using Microsoft.Extensions.Options;
 
 namespace MicaWPF.DependencyInjection.Services;
 internal class AccentColorServiceDI : IAccentColorService

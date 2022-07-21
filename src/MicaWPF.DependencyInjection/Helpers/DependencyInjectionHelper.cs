@@ -3,7 +3,6 @@ using MicaWPF.DependencyInjection.Services;
 using MicaWPF.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 
 namespace MicaWPF.DependencyInjection.Helpers;
 public static class DependencyInjectionHelper

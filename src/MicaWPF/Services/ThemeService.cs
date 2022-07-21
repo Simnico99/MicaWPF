@@ -1,6 +1,4 @@
-﻿using MicaWPF.Models;
-
-namespace MicaWPF.Services;
+﻿namespace MicaWPF.Services;
 public class ThemeService : IThemeService
 {
     private static readonly ThemeService _themeService = new();

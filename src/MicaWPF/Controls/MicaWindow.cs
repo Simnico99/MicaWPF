@@ -72,7 +72,7 @@ public class MicaWindow : Window
 
     private void AddPadding(WindowState windowsState)
     {
-        if (windowsState == WindowState.Maximized && TitleBarType == TitleBarType.Win32 || ResizeMode == ResizeMode.NoResize && TitleBarType == TitleBarType.Win32)
+        if ((windowsState == WindowState.Maximized && TitleBarType == TitleBarType.Win32) || (ResizeMode == ResizeMode.NoResize && TitleBarType == TitleBarType.Win32))
         {
             MarginMaximized = new Thickness(6);
         }
