@@ -16,7 +16,7 @@
                 <SolidColorBrush Opacity="0.3" Color="{DynamicResource MicaWPF.Colors.ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Padding" Value="30,6" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -66,7 +66,7 @@
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorInverse}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.AccentControlElevationBorder}" />
-        <Setter Property="Padding" Value="30,6" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />

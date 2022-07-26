@@ -185,26 +185,22 @@ public class MicaWindow : Window
         var y = lparam.ToInt32() >> 16;
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
         var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
-        if (_button != null)
+
+        var rect = new Rect(_button!.PointToScreen(
+        new Point()),
+        new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
+
+        if (rect.Contains(new Point(x, y)))
         {
-            var rect = new Rect(_button.PointToScreen(
-            new Point()),
-            new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
-
-            if (rect.Contains(new Point(x, y)))
-            {
-                var color = (LinearGradientBrush)TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") ?? new LinearGradientBrush();
-                _button.Background = color;
-                handled = true;
-            }
-            else
-            {
-                _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-            }
-            return new IntPtr(HTMAXBUTTON);
+            var color = (LinearGradientBrush)TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") ?? new LinearGradientBrush();
+            _button.Background = color;
+            handled = true;
         }
-
-        return new();
+        else
+        {
+            _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+        }
+        return new IntPtr(HTMAXBUTTON);
     }
 
     private void HideMaximiseAndMinimiseButton(IntPtr lparam, ref bool handled)
@@ -255,22 +251,18 @@ public class MicaWindow : Window
         }
     }
 
-    private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
+    private readonly IntPtr _intPtrZero = IntPtr.Zero;
+
+    private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr _, IntPtr lparam, ref bool handled)
     {
         switch (msg)
         {
             case InteropValues.HwndSourceMessages.WM_NCHITTEST:
-                try
+                if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
                 {
-                    if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
-                    {
-                        return ShowSnapLayout(lparam, ref handled);
-                    }
+                    return ShowSnapLayout(lparam, ref handled);
                 }
-                catch (OverflowException)
-                {
-                    handled = true;
-                }
+                handled = true;
                 break;
             case InteropValues.HwndSourceMessages.WM_NCLBUTTONDOWN:
                 if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
@@ -283,9 +275,8 @@ public class MicaWindow : Window
                 handled = true;
                 break;
             default:
-                handled = false;
                 break;
         }
-        return IntPtr.Zero;
+        return _intPtrZero;
     }
 }
