@@ -54,24 +54,30 @@ public class ThemeService : IThemeService
         if (IsThemeAware && !_IsCheckingTheme)
         {
             _IsCheckingTheme = true;
-            if (OsHelper.GlobalOsVersion is not OsVersion.WindowsOld && isThemeAware)
+            if (OsHelper.GlobalOsVersion is not OsVersion.WindowsOld && IsThemeAware)
             {
-                SystemEvents.UserPreferenceChanged += (s, e) =>
-                {
-                    switch (e.Category)
-                    {
-                        case UserPreferenceCategory.General:
-                            UpdateAccent();
-                            Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
-                            SetThemeAware(isThemeAware);
-                            break;
-                    }
-                };
+                SystemEvents.UserPreferenceChanged += SystemEventsUserPreferenceChanged;
             }
         }
         else if (!IsThemeAware && _IsCheckingTheme)
         {
+            SystemEvents.UserPreferenceChanged -= SystemEventsUserPreferenceChanged;
             _IsCheckingTheme = false;
+        }
+    }
+
+    private void SystemEventsUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+    {
+        switch (e.Category)
+        {
+            case UserPreferenceCategory.General:
+                if (IsThemeAware)
+                {
+                    UpdateAccent();
+                    Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
+                    SetThemeAware(IsThemeAware);
+                }
+                break;
         }
     }
 
@@ -136,10 +142,17 @@ public class ThemeService : IThemeService
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {
-        CurrentTheme = windowsTheme;
-
+        if (windowsTheme == WindowsTheme.Auto)
+        {
+            CurrentTheme = GetWindowsTheme();
+        }
+        else 
+        {
+            CurrentTheme = windowsTheme;
+        }
+        
         UpdateAccent();
-        _themeManager.ThemeSource = WindowsThemeToResourceTheme(windowsTheme);
+        _themeManager.ThemeSource = WindowsThemeToResourceTheme(CurrentTheme);
 
         foreach (var micaEnabledWindow in MicaEnabledWindows)
         {
