@@ -1,5 +1,4 @@
-﻿using MicaWPF.Models;
-using MicaWPF.Symbols;
+﻿using MicaWPF.Symbols;
 
 namespace MicaWPF.Extensions;
 internal static class FluentSystemIconsExtension

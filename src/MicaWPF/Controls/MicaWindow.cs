@@ -1,6 +1,5 @@
 ﻿using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
-using System.Windows.Controls;
 using MicaWPF.Extensions;
 
 namespace MicaWPF.Controls;
@@ -186,21 +185,26 @@ public class MicaWindow : Window
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
         var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
 
-        var rect = new Rect(_button!.PointToScreen(
-        new Point()),
-        new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
+        if (_button is not null)
+        {
+            var rect = new Rect(_button.PointToScreen(
+            new Point()),
+            new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
 
-        if (rect.Contains(new Point(x, y)))
-        {
-            var color = (LinearGradientBrush)TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") ?? new LinearGradientBrush();
-            _button.Background = color;
-            handled = true;
+            if (rect.Contains(new Point(x, y)))
+            {
+                var color = (LinearGradientBrush)TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") ?? new LinearGradientBrush();
+                _button.Background = color;
+                handled = true;
+            }
+            else
+            {
+                _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+            }
+            return new IntPtr(HTMAXBUTTON);
         }
-        else
-        {
-            _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-        }
-        return new IntPtr(HTMAXBUTTON);
+
+        return IntPtr.Zero;
     }
 
     private void HideMaximiseAndMinimiseButton(IntPtr lparam, ref bool handled)
@@ -234,8 +238,10 @@ public class MicaWindow : Window
 
             if (monitor != IntPtr.Zero)
             {
-                InteropValues.MONITORINFO monitorInfo = new();
-                monitorInfo.cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO));
+                InteropValues.MONITORINFO monitorInfo = new()
+                {
+                    cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO))
+                };
                 InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
                 var rcWorkArea = monitorInfo.rcWork;
                 var rcMonitorArea = monitorInfo.rcMonitor;
@@ -250,8 +256,6 @@ public class MicaWindow : Window
             Marshal.StructureToPtr(mmi, lParam, true);
         }
     }
-
-    private readonly IntPtr _intPtrZero = IntPtr.Zero;
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr _, IntPtr lparam, ref bool handled)
     {
@@ -277,6 +281,7 @@ public class MicaWindow : Window
             default:
                 break;
         }
-        return _intPtrZero;
+
+        return IntPtr.Zero;
     }
 }

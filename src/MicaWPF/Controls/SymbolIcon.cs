@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using MicaWPF.InternalExtensions;
+using MicaWPF.Extensions;
 using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
