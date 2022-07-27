@@ -1,7 +1,7 @@
 ﻿using System.Windows.Shapes;
 
 namespace MicaWPF.Extension.Controls;
-internal class MicaArc : Shape
+public class MicaArc : Shape
 {
     public static readonly DependencyProperty StartAngleProperty =
         DependencyProperty.Register(nameof(StartAngle), typeof(double), typeof(MicaArc),
