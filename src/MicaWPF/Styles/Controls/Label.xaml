@@ -10,7 +10,7 @@
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
+                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True" />
