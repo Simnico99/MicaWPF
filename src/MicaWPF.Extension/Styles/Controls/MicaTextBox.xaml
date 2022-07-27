@@ -29,6 +29,8 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -52,7 +54,10 @@
                                         x:Name="WatermarkLabel"
                                         Margin="8,0"
                                         Padding="0"
-                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
+                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
+                                        HorizontalContentAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
+                                        VerticalContentAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
                                         Content="{Binding Watermark, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
                                         FontSize="{TemplateBinding FontSize}"
                                         Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}"
@@ -61,7 +66,10 @@
                                         x:Name="PART_ContentHost"
                                         Margin="0"
                                         Padding="0"
-                                        VerticalAlignment="Center" />
+                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
+                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
+                                        HorizontalContentAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}"
+                                        VerticalContentAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaTextBox}}}" />
                                 </Grid>
                             </Border>
                         </Border>
