@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:MicaWPF.Extension.Controls">
+    xmlns:controls="clr-namespace:MicaWPF.Expansion.Controls">
 
     <ControlTemplate x:Key="MicaWPF.Styles.Default.MicaExpander.ToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid Margin="{TemplateBinding Padding}" Background="Transparent">

@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:MicaWPF.Extension.Controls"
-    xmlns:helpers="clr-namespace:MicaWPF.Extension.Converters">
+    xmlns:controls="clr-namespace:MicaWPF.Expansion.Controls"
+    xmlns:helpers="clr-namespace:MicaWPF.Expansion.Converters">
 
     <FontFamily x:Key="MicaWPF.Fonts.Family.FluentSystemIcons">pack://application:,,,/MicaWPF;component/Fonts/#FluentSystemIcons-Regular</FontFamily>
 

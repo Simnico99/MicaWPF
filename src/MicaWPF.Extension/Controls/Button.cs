@@ -1,6 +1,6 @@
-﻿using MicaWPF.Extension.Symbols;
+﻿using MicaWPF.Expansion.Symbols;
 
-namespace MicaWPF.Extension.Controls;
+namespace MicaWPF.Expansion.Controls;
 public class Button : System.Windows.Controls.Button
 {
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(FluentSystemIcons.Regular), typeof(Button), new PropertyMetadata(FluentSystemIcons.Regular.Empty));

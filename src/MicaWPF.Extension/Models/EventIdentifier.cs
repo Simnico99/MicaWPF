@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MicaWPF.Extension.Models;
+namespace MicaWPF.Expansion.Models;
 internal class EventIdentifier
 {
     public long Current { get; internal set; } = 0;

@@ -1,6 +1,6 @@
-﻿using MicaWPF.Extension.Symbols;
+﻿using MicaWPF.Expansion.Symbols;
 
-namespace MicaWPF.Extension.Models;
+namespace MicaWPF.Expansion.Models;
 public static class Glyph
 {
     public const FluentSystemIcons.Regular DefaultIcon = FluentSystemIcons.Regular.Heart28;

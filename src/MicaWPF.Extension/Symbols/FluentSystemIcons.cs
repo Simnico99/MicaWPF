@@ -1,4 +1,4 @@
-﻿namespace MicaWPF.Extension.Symbols;
+﻿namespace MicaWPF.Expansion.Symbols;
 public class FluentSystemIcons
 {
     public enum Filled

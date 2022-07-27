@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:MicaWPF.Extension.Controls"
-    xmlns:converters="clr-namespace:MicaWPF.Extension.Converters"
-    xmlns:symbols="clr-namespace:MicaWPF.Extension.Symbols"
+    xmlns:controls="clr-namespace:MicaWPF.Expansion.Controls"
+    xmlns:converters="clr-namespace:MicaWPF.Expansion.Converters"
+    xmlns:symbols="clr-namespace:MicaWPF.Expansion.Symbols"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <Style x:Key="MicaWPF.Styles.Default.ContextMenu" TargetType="{x:Type ContextMenu}">

@@ -1,4 +1,4 @@
-﻿namespace MicaWPF.Extension;
+﻿namespace MicaWPF.Expansion;
 
 public enum RevealMode
 {

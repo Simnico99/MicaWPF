@@ -1,4 +1,4 @@
-﻿namespace MicaWPF.Extension.Controls;
+﻿namespace MicaWPF.Expansion.Controls;
 public class MenuListViewItem : ListViewItem
 {
     public static readonly DependencyProperty ItemNameProperty = DependencyProperty.Register(

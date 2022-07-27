@@ -1,6 +1,6 @@
-﻿using MicaWPF.Extension.Symbols;
+﻿using MicaWPF.Expansion.Symbols;
 
-namespace MicaWPF.Extension.Controls;
+namespace MicaWPF.Expansion.Controls;
 public class TextBox : System.Windows.Controls.TextBox
 {
     public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(TextBox));

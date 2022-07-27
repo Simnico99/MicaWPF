@@ -1,6 +1,6 @@
-﻿using MicaWPF.Extension.Symbols;
+﻿using MicaWPF.Expansion.Symbols;
 
-namespace MicaWPF.Extension.Controls;
+namespace MicaWPF.Expansion.Controls;
 public class PasswordBox : TextBox
 {
     private bool _takenControl = false;

@@ -1,7 +1,7 @@
-﻿using MicaWPF.Extension.Models;
-using MicaWPF.Extension.Symbols;
+﻿using MicaWPF.Expansion.Models;
+using MicaWPF.Expansion.Symbols;
 
-namespace MicaWPF.Extension.InternalExtensions;
+namespace MicaWPF.Expansion.InternalExtensions;
 internal static class FluentSystemIconsExtension
 {
     public static FluentSystemIcons.Filled Swap(this FluentSystemIcons.Regular icon)
