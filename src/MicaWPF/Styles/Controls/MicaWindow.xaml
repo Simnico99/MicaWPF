@@ -73,7 +73,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:MicaWindow}">
+    <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Windows10" TargetType="{x:Type local:MicaWindow}">
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ApplicationBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="ResizeMode" Value="CanResize" />
@@ -264,7 +264,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="MicaWindow11" TargetType="{x:Type local:MicaWindow}">
+    <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Windows11" TargetType="{x:Type local:MicaWindow}">
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="UseLayoutRounding" Value="True" />

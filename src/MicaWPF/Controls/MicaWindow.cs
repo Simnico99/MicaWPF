@@ -132,6 +132,11 @@ public class MicaWindow : Window
 
     public MicaWindow()
     {
+        var myResourceDictionary = new ResourceDictionary
+        {
+            Source = new Uri("/MicaWPF;component/Styles/Controls/MicaWindow.xaml", UriKind.RelativeOrAbsolute)
+        };
+
         CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
@@ -139,12 +144,11 @@ public class MicaWindow : Window
 
         if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
-            var myResourceDictionary = new ResourceDictionary
-            {
-                Source = new Uri("/MicaWPF;component/Themes/Generic.xaml", UriKind.RelativeOrAbsolute)
-            };
-
-            Style = myResourceDictionary["MicaWindow11"] as Style;
+            Style = myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows11"] as Style;
+        }
+        else 
+        {
+            Style = myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows10"] as Style;
         }
     }
 
