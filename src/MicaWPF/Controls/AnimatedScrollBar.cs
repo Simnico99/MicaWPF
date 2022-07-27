@@ -1,40 +1,4 @@
 ﻿using System.Windows.Controls.Primitives;
-/* Unmerged change from project 'MicaWPF (netcoreapp3.1)'
-Before:
-using MicaWPF.Models;
-using System.Windows.Input;
-After:
-using System.Windows.Input;
-using MicaWPF.Models;
-*/
-
-/* Unmerged change from project 'MicaWPF (net6.0-windows10.0.19041.0)'
-Before:
-using MicaWPF.Models;
-using System.Windows.Input;
-After:
-using System.Windows.Input;
-using MicaWPF.Models;
-*/
-
-/* Unmerged change from project 'MicaWPF (net48)'
-Before:
-using MicaWPF.Models;
-using System.Windows.Input;
-After:
-using System.Windows.Input;
-using MicaWPF.Models;
-*/
-
-/* Unmerged change from project 'MicaWPF (net5.0-windows10.0.19041.0)'
-Before:
-using MicaWPF.Models;
-using System.Windows.Input;
-After:
-using System.Windows.Input;
-using MicaWPF.Models;
-*/
-
 
 namespace MicaWPF.Controls;
 public class AnimatedScrollBar : ScrollBar

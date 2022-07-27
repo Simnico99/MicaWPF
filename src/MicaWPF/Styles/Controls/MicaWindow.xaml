@@ -6,7 +6,7 @@
 
     <helpers:IsNullConverter x:Key="IsNullConverter" />
 
-    <Style x:Key="WindowButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Button.Windows" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -40,7 +40,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Button.Close" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -136,7 +136,7 @@
                                                 <Button
                                                     Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
                                                     Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
-                                                    Style="{StaticResource WindowButtonStyle}"
+                                                    Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}"
                                                     ToolTip="minimize">
                                                     <Button.Content>
                                                         <Grid Width="46" Height="32">
@@ -157,7 +157,7 @@
                                                         x:Name="Restore"
                                                         Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
                                                         Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
-                                                        Style="{StaticResource WindowButtonStyle}"
+                                                        Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}"
                                                         ToolTip="restore"
                                                         Visibility="Collapsed">
                                                         <Button.Content>
@@ -181,7 +181,7 @@
                                                         x:Name="Maximize"
                                                         Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
                                                         Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
-                                                        Style="{StaticResource WindowButtonStyle}"
+                                                        Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}"
                                                         ToolTip="maximize">
                                                         <Button.Content>
                                                             <Grid Width="46" Height="32">
@@ -201,7 +201,7 @@
                                                 <Button
                                                     Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
                                                     Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
-                                                    Style="{StaticResource CloseButtonStyle}"
+                                                    Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Close}"
                                                     ToolTip="close">
                                                     <Button.Content>
                                                         <Grid Width="46" Height="32">
@@ -324,7 +324,7 @@
                                     <Button
                                         Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
                                         Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
-                                        Style="{StaticResource WindowButtonStyle}">
+                                        Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}">
                                         <Button.Content>
                                             <Grid Width="46" Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}">
                                                 <Path
@@ -345,7 +345,7 @@
                                             Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                             Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
                                             Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
-                                            Style="{StaticResource WindowButtonStyle}"
+                                            Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}"
                                             Visibility="Collapsed">
                                             <Button.Content>
                                                 <Grid Width="46" UseLayoutRounding="True">
@@ -366,7 +366,7 @@
                                             Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                             Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
                                             Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
-                                            Style="{StaticResource WindowButtonStyle}">
+                                            Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}">
                                             <Button.Content>
                                                 <Grid Width="46">
                                                     <Path
@@ -385,7 +385,7 @@
                                     <Button
                                         Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
                                         Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
-                                        Style="{StaticResource CloseButtonStyle}">
+                                        Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Close}">
                                         <Button.Content>
                                             <Grid Width="46">
                                                 <Path
