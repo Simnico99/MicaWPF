@@ -13,6 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaProgressBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaProgressRing.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaRichTextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaToggleSwitch.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
