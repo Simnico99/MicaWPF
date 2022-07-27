@@ -10,7 +10,7 @@
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorDefault}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
-        <Setter Property="HoverBackground" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
+        <Setter Property="HoverBackground" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorSecondary}" />
         <Setter Property="MouseButtonPressedBackground">
             <Setter.Value>
                 <SolidColorBrush Opacity="0.3" Color="{DynamicResource MicaWPF.Colors.ControlFillColorDefault}" />
@@ -65,7 +65,7 @@
     <Style x:Key="MicaWPF.Styles.AccentedButton" TargetType="{x:Type controls:MicaButton}">
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorInverse}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.AccentControlElevationBorder}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlFillColorSecondary}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="VerticalAlignment" Value="Center" />
