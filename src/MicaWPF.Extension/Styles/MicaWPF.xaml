@@ -11,6 +11,7 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaPasswordBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaSymbolIcon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaProgressBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaProgressRing.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaRichTextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 

@@ -46,6 +46,9 @@
      <Page Update="Styles\Controls\MicaPasswordBox.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
      </Page>
+     <Page Update="Styles\Controls\MicaProgressRing.xaml">
+       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+     </Page>
      <Page Update="Styles\Controls\MicaProgressBar.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
      </Page>

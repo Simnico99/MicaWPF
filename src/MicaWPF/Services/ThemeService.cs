@@ -146,11 +146,11 @@ public class ThemeService : IThemeService
         {
             CurrentTheme = GetWindowsTheme();
         }
-        else 
+        else
         {
             CurrentTheme = windowsTheme;
         }
-        
+
         UpdateAccent();
         _themeManager.ThemeSource = WindowsThemeToResourceTheme(CurrentTheme);
 
