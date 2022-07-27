@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:MicaWPF.Extension.Controls">
 
-    <Style x:Key="DefaultUiToggleSwitchStyle" TargetType="{x:Type controls:MicaToggleSwitch}">
+    <Style TargetType="{x:Type controls:MicaToggleSwitch}">
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
@@ -240,6 +240,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style BasedOn="{StaticResource DefaultUiToggleSwitchStyle}" TargetType="{x:Type controls:MicaToggleSwitch}" />
 </ResourceDictionary>

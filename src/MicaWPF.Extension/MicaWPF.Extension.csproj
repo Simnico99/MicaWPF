@@ -40,11 +40,23 @@
      <Page Update="Styles\Controls\MicaButton.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
      </Page>
+     <Page Update="Styles\Controls\MicaScrollBar.xaml">
+       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+       <SubType>Designer</SubType>
+     </Page>
+     <Page Update="Styles\Controls\MicaScrollViewer.xaml">
+       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+       <SubType>Designer</SubType>
+     </Page>
      <Page Update="Styles\Controls\MicaListViewItem.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
      </Page>
      <Page Update="Styles\Controls\MicaPasswordBox.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+     </Page>
+     <Page Update="Styles\Controls\MicaComboBox.xaml">
+       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+       <SubType>Designer</SubType>
      </Page>
      <Page Update="Styles\Controls\MicaToggleSwitch.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
