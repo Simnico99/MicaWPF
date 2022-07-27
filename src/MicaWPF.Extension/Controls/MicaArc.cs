@@ -78,7 +78,7 @@ public class MicaArc : Shape
         var xRadius = (RenderSize.Width - StrokeThickness) / 2;
         var yRadius = (RenderSize.Height - StrokeThickness) / 2;
 
-        return new Point((xRadius + xRadius) * Math.Cos(radAngle), (yRadius - yRadius) * Math.Sin(radAngle));
+        return new Point(xRadius + (xRadius * Math.Cos(radAngle)), yRadius - (yRadius * Math.Sin(radAngle)));
     }
 
     protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
