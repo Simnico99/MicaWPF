@@ -27,8 +27,8 @@ internal class ThemeServiceDI : IThemeService
         return _localThemeService.ChangeTheme(windowsTheme);
     }
 
-    public void EnableMica(Window window, BackdropType micaType = BackdropType.Mica)
+    public void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica)
     {
-        _localThemeService.EnableMica(window, micaType);
+        _localThemeService.EnableBackdrop(window, micaType);
     }
 }

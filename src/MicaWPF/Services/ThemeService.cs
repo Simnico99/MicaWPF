@@ -81,7 +81,7 @@ public class ThemeService : IThemeService
         }
     }
 
-    private void SetWindowMica(Window window, BackdropType micaType)
+    private void SetWindowBackdrop(Window window, BackdropType micaType)
     {
         if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
         {
@@ -156,7 +156,7 @@ public class ThemeService : IThemeService
 
         foreach (var micaEnabledWindow in MicaEnabledWindows)
         {
-            SetWindowMica(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
+            SetWindowBackdrop(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
             //Force the title bar to refresh.
             var style = micaEnabledWindow.Window.WindowStyle;
             micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
@@ -166,10 +166,10 @@ public class ThemeService : IThemeService
         return CurrentTheme;
     }
 
-    public void EnableMica(Window window, BackdropType micaType = BackdropType.Mica)
+    public void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica)
     {
         _accentColorService.Init();
-        SetWindowMica(window, micaType);
+        SetWindowBackdrop(window, micaType);
         MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType));
     }
 }
