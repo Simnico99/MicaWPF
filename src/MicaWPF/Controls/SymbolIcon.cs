@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using MicaWPF.Expansion.InternalExtensions;
-using MicaWPF.Expansion.Symbols;
+using MicaWPF.InternalExtensions;
+using MicaWPF.Symbols;
 
-namespace MicaWPF.Expansion.Controls;
+namespace MicaWPF.Controls;
 public class SymbolIcon : Label
 {
     public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(FluentSystemIcons.Regular), typeof(SymbolIcon), new PropertyMetadata(FluentSystemIcons.Regular.Empty, OnGlyphChanged));

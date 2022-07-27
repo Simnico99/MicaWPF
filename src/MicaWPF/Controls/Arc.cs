@@ -1,6 +1,6 @@
 ﻿using System.Windows.Shapes;
 
-namespace MicaWPF.Expansion.Controls;
+namespace MicaWPF.Controls;
 public class Arc : Shape
 {
     public static readonly DependencyProperty StartAngleProperty =

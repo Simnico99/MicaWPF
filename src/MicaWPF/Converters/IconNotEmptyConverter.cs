@@ -1,11 +1,17 @@
 ﻿using System.Windows.Data;
+using MicaWPF.Symbols;
 
-namespace MicaWPF.Expansion.Converters;
-public class ProgressThicknessConverter : IValueConverter
+namespace MicaWPF.Converters;
+internal class IconNotEmptyConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        return value is double height ? height / 8 : (object)12.0d;
+        if (value is FluentSystemIcons.Regular icon)
+        {
+            return icon != FluentSystemIcons.Regular.Empty;
+        }
+
+        return false;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

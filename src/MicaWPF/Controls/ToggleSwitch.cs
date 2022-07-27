@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 
-namespace MicaWPF.Expansion.Controls;
+namespace MicaWPF.Controls;
 public class ToggleSwitch : ToggleButton
 {
 }

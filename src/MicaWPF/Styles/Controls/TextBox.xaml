@@ -1,0 +1,127 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MicaWPF.Controls"
+    xmlns:converters="clr-namespace:MicaWPF.Converters;assembly=MicaWPF"
+    xmlns:helpers="clr-namespace:MicaWPF.Converters">
+
+    <converters:IsNullConverter x:Key="IsNullConverter" />
+
+    <ContextMenu x:Key="MicaWPF.Menu.TextBox.ContextMenu">
+        <MenuItem Command="ApplicationCommands.Paste" />
+        <MenuItem Command="ApplicationCommands.Copy" />
+        <MenuItem Command="ApplicationCommands.Cut" />
+    </ContextMenu>
+
+    <Style x:Key="MicaWPF.Styles.Default.TextBox" TargetType="{x:Type controls:TextBox}">
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CaretBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
+        <Setter Property="MinHeight" Value="34" />
+        <Setter Property="Padding" Value="6,4" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="ContextMenu" Value="{StaticResource MicaWPF.Menu.TextBox.ContextMenu}" />
+        <Setter Property="Cursor" Value="IBeam" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Border
+                            x:Name="MainBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1,1,1,0"
+                            CornerRadius="4">
+                            <Border
+                                x:Name="BottomBorder"
+                                Padding="2"
+                                BorderThickness="0,0,0,1"
+                                CornerRadius="4">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlStrongStrokeColorDefault}" />
+                                </Border.BorderBrush>
+                                <Grid>
+                                    <Label
+                                        x:Name="WatermarkLabel"
+                                        Margin="8,0"
+                                        Padding="0"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{Binding Watermark, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:TextBox}}}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}"
+                                        Visibility="Hidden" />
+                                    <ScrollViewer
+                                        x:Name="PART_ContentHost"
+                                        Margin="0"
+                                        Padding="0"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Grid>
+                            </Border>
+                        </Border>
+                        <Rectangle
+                            x:Name="ColoredRectangle"
+                            Height="1"
+                            Margin="2,0,2,1"
+                            VerticalAlignment="Bottom"
+                            Fill="{DynamicResource MicaWPF.Brushes.SystemAccent}"
+                            Visibility="Collapsed" />
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="BottomBorder" Property="BorderBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ColoredRectangle" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="MainBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SolidBackgroundFillColorBase}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text, Converter={StaticResource IsNullConverter}}" Value="True">
+                            <Setter TargetName="WatermarkLabel" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.AccentFillColorDisabled}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="BottomBorder" Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.TextBox}" TargetType="{x:Type controls:TextBox}" />
+</ResourceDictionary>

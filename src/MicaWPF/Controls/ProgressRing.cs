@@ -1,4 +1,4 @@
-﻿namespace MicaWPF.Expansion.Controls;
+﻿namespace MicaWPF.Controls;
 public class ProgressRing : Control
 {
     public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress),

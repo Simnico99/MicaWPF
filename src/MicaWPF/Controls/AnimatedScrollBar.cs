@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
-using MicaWPF.Expansion.Models;
+using MicaWPF.Models;
 using System.Windows.Input;
 
-namespace MicaWPF.Expansion.Controls;
+namespace MicaWPF.Controls;
 public class AnimatedScrollBar : ScrollBar
 {
     private bool _isScrolling = false;

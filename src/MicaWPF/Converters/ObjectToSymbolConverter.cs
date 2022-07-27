@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using MicaWPF.Expansion.InternalExtensions;
-using MicaWPF.Expansion.Symbols;
+using MicaWPF.InternalExtensions;
+using MicaWPF.Symbols;
 
-namespace MicaWPF.Expansion.Converters;
+namespace MicaWPF.Converters;
 
 internal class ObjectToSymbolConverter : IValueConverter
 {

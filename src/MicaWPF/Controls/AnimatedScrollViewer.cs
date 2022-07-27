@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MicaWPF.Expansion.Models;
+using MicaWPF.Models;
 
-namespace MicaWPF.Expansion.Controls;
+namespace MicaWPF.Controls;
 public class AnimatedScrollViewer : ScrollViewer
 {
     private readonly EventIdentifier _verticalIdentifier = new();
