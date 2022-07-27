@@ -17,6 +17,7 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaComboBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaScrollViewer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaScrollBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaExpander.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -225,7 +225,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ActiveToggleRectangle" Property="Fill">
                                 <Setter.Value>
-                                    <SolidColorBrush Opacity="0.6" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />
+                                    <SolidColorBrush Opacity="0.6" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="ActiveToggleEllipse" Property="Fill">

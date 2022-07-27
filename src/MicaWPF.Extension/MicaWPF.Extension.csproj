@@ -58,6 +58,10 @@
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
        <SubType>Designer</SubType>
      </Page>
+     <Page Update="Styles\Controls\MicaExpander.xaml">
+       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+       <SubType>Designer</SubType>
+     </Page>
      <Page Update="Styles\Controls\MicaToggleSwitch.xaml">
        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
        <SubType>Designer</SubType>
