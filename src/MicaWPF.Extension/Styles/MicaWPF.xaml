@@ -5,19 +5,21 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Assets/Fonts.xaml" />
 
         <!--  Controls  -->
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaButton.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaTextBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaListViewItem.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaPasswordBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaSymbolIcon.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaProgressBar.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaProgressRing.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaRichTextBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaToggleSwitch.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaComboBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaScrollViewer.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaScrollBar.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MicaExpander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/MenuListViewItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/PasswordBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/SymbolIcon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/ProgressBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/ProgressRing.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/RichTextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/ToggleSwitch.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/ComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/AnimatedScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/AnimatedScrollBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/Expander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/ToolTip.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Extension;component/Styles/Controls/ContextMenu.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -4,7 +4,7 @@
     xmlns:controls="clr-namespace:MicaWPF.Extension.Controls"
     xmlns:helpers="clr-namespace:MicaWPF.Extension.Converters">
 
-    <ControlTemplate x:Key="HoverTemplate" TargetType="{x:Type controls:MicaListViewItem}">
+    <ControlTemplate x:Key="HoverTemplate" TargetType="{x:Type controls:MenuListViewItem}">
         <Border
             Margin="2"
             Padding="0,4,4,4"
@@ -22,15 +22,15 @@
                     Height="20"
                     Margin="4,0,0,0"
                     RenderOptions.BitmapScalingMode="Fant"
-                    Source="{Binding IconLocation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaListViewItem}}}" />
+                    Source="{Binding IconLocation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MenuListViewItem}}}" />
                 <Label
                     Margin="4,0,0,0"
-                    Content="{Binding ItemName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaListViewItem}}}"
+                    Content="{Binding ItemName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MenuListViewItem}}}"
                     Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
             </StackPanel>
         </Border>
     </ControlTemplate>
-    <ControlTemplate x:Key="SelectedTemplate" TargetType="{x:Type controls:MicaListViewItem}">
+    <ControlTemplate x:Key="SelectedTemplate" TargetType="{x:Type controls:MenuListViewItem}">
         <Border
             Margin="2"
             Padding="0,4,4,4"
@@ -47,15 +47,15 @@
                     Height="20"
                     Margin="4,0,0,0"
                     RenderOptions.BitmapScalingMode="Fant"
-                    Source="{Binding IconLocation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaListViewItem}}}" />
+                    Source="{Binding IconLocation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MenuListViewItem}}}" />
                 <Label
                     Margin="4,0,0,0"
-                    Content="{Binding ItemName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaListViewItem}}}"
+                    Content="{Binding ItemName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MenuListViewItem}}}"
                     Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
             </StackPanel>
         </Border>
     </ControlTemplate>
-    <Style TargetType="{x:Type controls:MicaListViewItem}">
+    <Style x:Key="MicaWPF.Styles.Default.MenuListViewItem" TargetType="{x:Type controls:MenuListViewItem}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -78,10 +78,10 @@
                                 Height="20"
                                 Margin="4,0,0,0"
                                 RenderOptions.BitmapScalingMode="Fant"
-                                Source="{Binding IconLocation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaListViewItem}}}" />
+                                Source="{Binding IconLocation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MenuListViewItem}}}" />
                             <Label
                                 Margin="4,0,0,0"
-                                Content="{Binding ItemName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaListViewItem}}}"
+                                Content="{Binding ItemName, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MenuListViewItem}}}"
                                 Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
                         </StackPanel>
                     </Border>
@@ -105,4 +105,5 @@
         </Style.Triggers>
     </Style>
 
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.MenuListViewItem}" TargetType="{x:Type controls:MenuListViewItem}" />
 </ResourceDictionary>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MicaWPF.Extension.Models;
 
 namespace MicaWPF.Extension.Controls;
-public class MicaScrollViewer : ScrollViewer
+public class AnimatedScrollViewer : ScrollViewer
 {
     private readonly EventIdentifier _verticalIdentifier = new();
 
@@ -22,19 +22,19 @@ public class MicaScrollViewer : ScrollViewer
 
     public static readonly DependencyProperty IsScrollingVerticallyProperty = DependencyProperty.Register(
         nameof(IsScrollingVertically),
-        typeof(bool), typeof(MicaScrollViewer),
+        typeof(bool), typeof(AnimatedScrollViewer),
         new PropertyMetadata(false, IsScrollingVerticallyProperty_OnChanged));
 
     public static readonly DependencyProperty IsScrollingHorizontallyProperty = DependencyProperty.Register(
         nameof(IsScrollingHorizontally),
-        typeof(bool), typeof(MicaScrollViewer), new PropertyMetadata(false, IsScrollingHorizontally_OnChanged));
+        typeof(bool), typeof(AnimatedScrollViewer), new PropertyMetadata(false, IsScrollingHorizontally_OnChanged));
 
     public static readonly DependencyProperty MinimalChangeProperty = DependencyProperty.Register(
         nameof(MinimalChange),
-        typeof(double), typeof(MicaScrollViewer), new PropertyMetadata(40d, MinimalChangeProperty_OnChanged));
+        typeof(double), typeof(AnimatedScrollViewer), new PropertyMetadata(40d, MinimalChangeProperty_OnChanged));
 
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
-        typeof(int), typeof(MicaScrollViewer), new PropertyMetadata(1200, TimeoutProperty_OnChanged));
+        typeof(int), typeof(AnimatedScrollViewer), new PropertyMetadata(1200, TimeoutProperty_OnChanged));
 
     public bool IsScrollingVertically
     {
@@ -101,7 +101,7 @@ public class MicaScrollViewer : ScrollViewer
     private static void IsScrollingVerticallyProperty_OnChanged(DependencyObject d,
         DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MicaScrollViewer scroll)
+        if (d is not AnimatedScrollViewer scroll)
             return;
 
         scroll._scrollingVertically = scroll.IsScrollingVertically;
@@ -109,7 +109,7 @@ public class MicaScrollViewer : ScrollViewer
 
     private static void IsScrollingHorizontally_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MicaScrollViewer scroll)
+        if (d is not AnimatedScrollViewer scroll)
             return;
 
         scroll._scrollingHorizontally = scroll.IsScrollingHorizontally;
@@ -117,7 +117,7 @@ public class MicaScrollViewer : ScrollViewer
 
     private static void MinimalChangeProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MicaScrollViewer scroll)
+        if (d is not AnimatedScrollViewer scroll)
             return;
 
         scroll._minimalChange = scroll.MinimalChange;
@@ -125,7 +125,7 @@ public class MicaScrollViewer : ScrollViewer
 
     private static void TimeoutProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MicaScrollViewer scroll)
+        if (d is not AnimatedScrollViewer scroll)
             return;
 
         scroll._timeout = scroll.Timeout;

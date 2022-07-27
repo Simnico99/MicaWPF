@@ -6,7 +6,7 @@
 
     <helpers:ProgressThicknessConverter x:Key="ProgressThicknessConverter" />
 
-    <Style TargetType="{x:Type controls:MicaProgressRing}">
+    <Style x:Key="MicaWPF.Styles.Default.ProgressRing" TargetType="{x:Type controls:ProgressRing}">
         <Setter Property="Height" Value="60" />
         <Setter Property="Width" Value="60" />
         <Setter Property="Focusable" Value="False" />
@@ -24,15 +24,15 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:MicaProgressRing}">
+                <ControlTemplate TargetType="{x:Type controls:ProgressRing}">
                     <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <controls:MicaArc
+                        <controls:Arc
                             EndAngle="359"
                             StartAngle="0"
                             Stroke="{TemplateBinding CoverRingStroke}"
                             StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
                             Visibility="{TemplateBinding CoverRingVisibility}" />
-                        <controls:MicaArc
+                        <controls:Arc
                             EndAngle="{TemplateBinding EngAngle}"
                             StartAngle="0"
                             Stroke="{TemplateBinding Foreground}"
@@ -45,25 +45,25 @@
             <Trigger Property="IsIndeterminate" Value="True">
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type controls:MicaProgressRing}">
+                        <ControlTemplate TargetType="{x:Type controls:ProgressRing}">
                             <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                                <controls:MicaArc
+                                <controls:Arc
                                     EndAngle="359"
                                     StartAngle="0"
                                     Stroke="{TemplateBinding CoverRingStroke}"
                                     StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
                                     Visibility="{TemplateBinding CoverRingVisibility}" />
-                                <controls:MicaArc
+                                <controls:Arc
                                     x:Name="Arc"
                                     EndAngle="{TemplateBinding IndeterminateAngle}"
                                     RenderTransformOrigin="0.5, 0.5"
                                     StartAngle="0"
                                     Stroke="{TemplateBinding Foreground}"
                                     StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}">
-                                    <controls:MicaArc.RenderTransform>
+                                    <controls:Arc.RenderTransform>
                                         <RotateTransform />
-                                    </controls:MicaArc.RenderTransform>
-                                </controls:MicaArc>
+                                    </controls:Arc.RenderTransform>
+                                </controls:Arc>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="True">
@@ -101,4 +101,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.ProgressRing}" TargetType="{x:Type controls:ProgressRing}" />
 </ResourceDictionary>

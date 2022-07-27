@@ -9,7 +9,7 @@
     <Thickness x:Key="ComboBoxItemMargin">3,2,3,0</Thickness>
     <Thickness x:Key="ComboBoxItemContentMargin">10,8,8,8</Thickness>
 
-    <Style x:Key="DefaultComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
+    <Style x:Key="MicaWPF.Styles.Default.ComboBox.TextBox" TargetType="{x:Type TextBox}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground">
             <Setter.Value>
@@ -42,7 +42,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DefaultComboBoxToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+
+    <Style x:Key="MicaWPF.Styles.Default.ComboBox.ToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground">
             <Setter.Value>
@@ -75,7 +76,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DefaultComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
+    <Style x:Key="MicaWPF.Styles.Default.ComboBoxItem" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
@@ -142,7 +143,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:MicaComboBox}">
+    <Style x:Key="MicaWPF.Styles.Default.ComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
@@ -206,7 +207,7 @@
                                             TextElement.Foreground="{TemplateBinding Foreground}" />
                                     </Grid>
                                     <Grid Grid.Column="1" Margin="{StaticResource ComboBoxChevronMargin}">
-                                        <controls:MicaSymbolIcon
+                                        <controls:SymbolIcon
                                             x:Name="ChevronIcon"
                                             Margin="0"
                                             Padding="0"
@@ -214,13 +215,13 @@
                                             FontSize="11.0"
                                             RenderTransformOrigin="0.5, 0.5"
                                             Symbol="ChevronDown24">
-                                            <controls:MicaSymbolIcon.RenderTransform>
+                                            <controls:SymbolIcon.RenderTransform>
                                                 <RotateTransform Angle="0" />
-                                            </controls:MicaSymbolIcon.RenderTransform>
-                                            <controls:MicaSymbolIcon.Foreground>
+                                            </controls:SymbolIcon.RenderTransform>
+                                            <controls:SymbolIcon.Foreground>
                                                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorSecondary}" />
-                                            </controls:MicaSymbolIcon.Foreground>
-                                        </controls:MicaSymbolIcon>
+                                            </controls:SymbolIcon.Foreground>
+                                        </controls:SymbolIcon>
                                     </Grid>
                                     <Grid
                                         Grid.Column="0"
@@ -234,7 +235,7 @@
                                             Focusable="False"
                                             Foreground="{TemplateBinding Foreground}"
                                             IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                            Style="{StaticResource DefaultComboBoxToggleButtonStyle}" />
+                                            Style="{StaticResource MicaWPF.Styles.Default.ComboBox.ToggleButton}" />
                                     </Grid>
                                     <Grid Grid.Column="0" Margin="{TemplateBinding Padding}">
                                         <TextBox
@@ -244,7 +245,7 @@
                                             FontSize="{TemplateBinding FontSize}"
                                             Foreground="{TemplateBinding Foreground}"
                                             IsReadOnly="{TemplateBinding IsReadOnly}"
-                                            Style="{StaticResource DefaultComboBoxTextBoxStyle}" />
+                                            Style="{StaticResource MicaWPF.Styles.Default.ComboBox.TextBox}" />
                                     </Grid>
                                 </Grid>
                                 <Popup
@@ -269,7 +270,7 @@
                                             <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemFillColorSolidNeutralBackground}" />
                                         </Border.Background>
                                         <Grid>
-                                            <controls:MicaScrollViewer
+                                            <controls:AnimatedScrollViewer
                                                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                                 Margin="0"
                                                 HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -282,7 +283,7 @@
                                                     IsItemsHost="True"
                                                     KeyboardNavigation.DirectionalNavigation="Contained"
                                                     TextElement.FontSize="{TemplateBinding FontSize}" />
-                                            </controls:MicaScrollViewer>
+                                            </controls:AnimatedScrollViewer>
                                         </Grid>
                                     </Border>
                                 </Popup>
@@ -307,7 +308,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ChevronIcon"
-                                            Storyboard.TargetProperty="(controls:MicaSymbolIcon.RenderTransform).(RotateTransform.Angle)"
+                                            Storyboard.TargetProperty="(controls:SymbolIcon.RenderTransform).(RotateTransform.Angle)"
                                             From="0"
                                             To="180"
                                             Duration="00:00:00.167" />
@@ -319,7 +320,7 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Storyboard.TargetName="ChevronIcon"
-                                            Storyboard.TargetProperty="(controls:MicaSymbolIcon.RenderTransform).(RotateTransform.Angle)"
+                                            Storyboard.TargetProperty="(controls:SymbolIcon.RenderTransform).(RotateTransform.Angle)"
                                             From="180"
                                             To="0"
                                             Duration="00:00:00.167" />
@@ -377,5 +378,6 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource DefaultComboBoxItemStyle}" TargetType="{x:Type ComboBoxItem}" />
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.ComboBoxItem}" TargetType="{x:Type ComboBoxItem}" />
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.ComboBox}" TargetType="{x:Type ComboBox}" />
 </ResourceDictionary>

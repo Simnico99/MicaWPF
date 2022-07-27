@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:MicaWPF.Extension.Controls">
 
-    <Style TargetType="{x:Type controls:MicaScrollViewer}">
+    <Style x:Key="MicaWPF.Styles.Default.AnimatedScrollViewer" TargetType="{x:Type controls:AnimatedScrollViewer}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
@@ -12,7 +12,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:MicaScrollViewer}">
+                <ControlTemplate TargetType="{x:Type controls:AnimatedScrollViewer}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -33,7 +33,7 @@
                             <ScrollContentPresenter CanContentScroll="{TemplateBinding CanContentScroll}" />
                         </Border>
 
-                        <controls:MicaScrollBar
+                        <controls:AnimatedScrollBar
                             x:Name="PART_VerticalScrollBar"
                             Grid.Row="0"
                             Grid.Column="1"
@@ -43,7 +43,7 @@
                             Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                             Value="{TemplateBinding VerticalOffset}" />
 
-                        <controls:MicaScrollBar
+                        <controls:AnimatedScrollBar
                             x:Name="PART_HorizontalScrollBar"
                             Grid.Row="1"
                             Grid.Column="0"
@@ -58,4 +58,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.AnimatedScrollViewer}" TargetType="{x:Type controls:AnimatedScrollViewer}" />
 </ResourceDictionary>

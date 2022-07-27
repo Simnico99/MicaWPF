@@ -8,7 +8,7 @@ using MicaWPF.Extension.Models;
 using System.Windows.Input;
 
 namespace MicaWPF.Extension.Controls;
-public class MicaScrollBar : ScrollBar
+public class AnimatedScrollBar : ScrollBar
 {
     private bool _isScrolling = false;
 
@@ -17,14 +17,14 @@ public class MicaScrollBar : ScrollBar
     private readonly EventIdentifier _interactiveIdentifier = new();
 
     public static readonly DependencyProperty IsScrollingProperty = DependencyProperty.Register(nameof(IsScrolling),
-        typeof(bool), typeof(MicaScrollBar), new PropertyMetadata(false, IsScrollingProperty_OnChange));
+        typeof(bool), typeof(AnimatedScrollBar), new PropertyMetadata(false, IsScrollingProperty_OnChange));
 
     public static readonly DependencyProperty IsInteractedProperty = DependencyProperty.Register(
         nameof(IsInteracted),
-        typeof(bool), typeof(MicaScrollBar), new PropertyMetadata(false, IsInteractedProperty_OnChange));
+        typeof(bool), typeof(AnimatedScrollBar), new PropertyMetadata(false, IsInteractedProperty_OnChange));
 
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
-        typeof(int), typeof(MicaScrollBar), new PropertyMetadata(1000));
+        typeof(int), typeof(AnimatedScrollBar), new PropertyMetadata(1000));
 
     public bool IsScrolling
     {
@@ -81,7 +81,7 @@ public class MicaScrollBar : ScrollBar
 
     private static void IsScrollingProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MicaScrollBar bar)
+        if (d is not AnimatedScrollBar bar)
             return;
 
         if (bar._isScrolling == bar.IsScrolling)
@@ -94,7 +94,7 @@ public class MicaScrollBar : ScrollBar
 
     private static void IsInteractedProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MicaScrollBar bar)
+        if (d is not AnimatedScrollBar bar)
             return;
 
         if (bar._isInteracted == bar.IsInteracted)

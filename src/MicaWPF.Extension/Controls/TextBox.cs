@@ -1,13 +1,13 @@
 ﻿using MicaWPF.Extension.Symbols;
 
 namespace MicaWPF.Extension.Controls;
-public class MicaTextBox : TextBox
+public class TextBox : System.Windows.Controls.TextBox
 {
-    public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(MicaTextBox));
-    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(FluentSystemIcons.Regular), typeof(TextBox), new PropertyMetadata(FluentSystemIcons.Regular.Empty));
-    public static readonly DependencyProperty IconPositionProperty = DependencyProperty.Register(nameof(IconPosition), typeof(ElementPosition), typeof(MicaTextBox), new PropertyMetadata(ElementPosition.Right));
-    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled), typeof(bool), typeof(MicaTextBox), new PropertyMetadata(false));
-    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.RegisterAttached(nameof(IconForeground), typeof(Brush), typeof(MicaTextBox), new FrameworkPropertyMetadata(Brushes.Black,
+    public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(TextBox));
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(FluentSystemIcons.Regular), typeof(System.Windows.Controls.TextBox), new PropertyMetadata(FluentSystemIcons.Regular.Empty));
+    public static readonly DependencyProperty IconPositionProperty = DependencyProperty.Register(nameof(IconPosition), typeof(ElementPosition), typeof(TextBox), new PropertyMetadata(ElementPosition.Right));
+    public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled), typeof(bool), typeof(TextBox), new PropertyMetadata(false));
+    public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.RegisterAttached(nameof(IconForeground), typeof(Brush), typeof(TextBox), new FrameworkPropertyMetadata(Brushes.Black,
                 FrameworkPropertyMetadataOptions.AffectsRender |
                 FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
                 FrameworkPropertyMetadataOptions.Inherits));

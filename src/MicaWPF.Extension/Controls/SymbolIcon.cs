@@ -3,11 +3,11 @@ using MicaWPF.Extension.InternalExtensions;
 using MicaWPF.Extension.Symbols;
 
 namespace MicaWPF.Extension.Controls;
-public class MicaSymbolIcon : Label
+public class SymbolIcon : Label
 {
-    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(FluentSystemIcons.Regular), typeof(MicaSymbolIcon), new PropertyMetadata(FluentSystemIcons.Regular.Empty, OnGlyphChanged));
-    public static readonly DependencyProperty RawSymbolProperty = DependencyProperty.Register(nameof(RawSymbol), typeof(string), typeof(MicaSymbolIcon), new PropertyMetadata("\uEA01"));
-    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled), typeof(bool), typeof(MicaSymbolIcon), new PropertyMetadata(false, OnGlyphChanged));
+    public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(FluentSystemIcons.Regular), typeof(SymbolIcon), new PropertyMetadata(FluentSystemIcons.Regular.Empty, OnGlyphChanged));
+    public static readonly DependencyProperty RawSymbolProperty = DependencyProperty.Register(nameof(RawSymbol), typeof(string), typeof(SymbolIcon), new PropertyMetadata("\uEA01"));
+    public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled), typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnGlyphChanged));
 
     public FluentSystemIcons.Regular Symbol
     {
@@ -25,7 +25,7 @@ public class MicaSymbolIcon : Label
 
     private static void OnGlyphChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs eventArgs)
     {
-        if (dependency is not MicaSymbolIcon control)
+        if (dependency is not SymbolIcon control)
         {
             return;
         }

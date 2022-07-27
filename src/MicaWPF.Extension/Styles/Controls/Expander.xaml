@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:MicaWPF.Extension.Controls">
 
-    <ControlTemplate x:Key="DefaultExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+    <ControlTemplate x:Key="MicaWPF.Styles.Default.MicaExpander.ToggleButton" TargetType="{x:Type ToggleButton}">
         <Grid Margin="{TemplateBinding Padding}" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -25,7 +25,7 @@
                 <Grid.RenderTransform>
                     <RotateTransform Angle="0" />
                 </Grid.RenderTransform>
-                <controls:MicaSymbolIcon
+                <controls:SymbolIcon
                     x:Name="ControlChevronIcon"
                     FontSize="16.0"
                     Foreground="{TemplateBinding Foreground}"
@@ -60,7 +60,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style TargetType="{x:Type controls:MicaExpander}">
+    <Style x:Key="MicaWPF.Styles.Default.MicaExpander" TargetType="{x:Type Expander}">
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorDefault}" />
@@ -113,7 +113,7 @@
                                 Foreground="{TemplateBinding Foreground}"
                                 IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 OverridesDefaultStyle="True"
-                                Template="{StaticResource DefaultExpanderToggleButtonStyle}" />
+                                Template="{StaticResource MicaWPF.Styles.Default.MicaExpander.ToggleButton}" />
 
                             <!--  Collapsed content to expand  -->
                             <Border
@@ -188,4 +188,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.MicaExpander}" TargetType="{x:Type Expander}" />
 </ResourceDictionary>

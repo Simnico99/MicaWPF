@@ -1,13 +1,13 @@
 ﻿using MicaWPF.Extension.Symbols;
 
 namespace MicaWPF.Extension.Controls;
-public class MicaPasswordBox : MicaTextBox
+public class PasswordBox : TextBox
 {
     private bool _takenControl = false;
-    public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register(nameof(Password), typeof(string), typeof(MicaPasswordBox), new PropertyMetadata(string.Empty));
-    public static readonly DependencyProperty PasswordCharProperty = DependencyProperty.Register(nameof(PasswordChar), typeof(char), typeof(MicaPasswordBox), new PropertyMetadata('•', OnPasswordCharChanged));
-    public static readonly DependencyProperty PasswordRevealModeProperty = DependencyProperty.Register(nameof(PasswordRevealMode), typeof(RevealMode), typeof(MicaPasswordBox), new PropertyMetadata(RevealMode.Hidden, OnPasswordRevealModeChanged));
-    public static readonly DependencyProperty ShowRevealButtonProperty = DependencyProperty.Register(nameof(ShowRevealButton), typeof(bool), typeof(MicaPasswordBox), new PropertyMetadata(true));
+    public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register(nameof(Password), typeof(string), typeof(PasswordBox), new PropertyMetadata(string.Empty));
+    public static readonly DependencyProperty PasswordCharProperty = DependencyProperty.Register(nameof(PasswordChar), typeof(char), typeof(PasswordBox), new PropertyMetadata('•', OnPasswordCharChanged));
+    public static readonly DependencyProperty PasswordRevealModeProperty = DependencyProperty.Register(nameof(PasswordRevealMode), typeof(RevealMode), typeof(PasswordBox), new PropertyMetadata(RevealMode.Hidden, OnPasswordRevealModeChanged));
+    public static readonly DependencyProperty ShowRevealButtonProperty = DependencyProperty.Register(nameof(ShowRevealButton), typeof(bool), typeof(PasswordBox), new PropertyMetadata(true));
 
     public string Password
     {
@@ -42,7 +42,7 @@ public class MicaPasswordBox : MicaTextBox
         }
     }
 
-    public MicaPasswordBox()
+    public PasswordBox()
     {
         if (Icon is FluentSystemIcons.Regular.Empty)
         {
@@ -143,7 +143,7 @@ public class MicaPasswordBox : MicaTextBox
 
         var param = parameter as string ?? string.Empty;
 
-        if (sender is MicaPasswordBox passwordBox)
+        if (sender is PasswordBox passwordBox)
         {
             switch (param)
             {
@@ -158,7 +158,7 @@ public class MicaPasswordBox : MicaTextBox
 
     private static void OnPasswordCharChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is MicaPasswordBox control)
+        if (d is PasswordBox control)
         {
             control.UpdatePasswordWithNewChar(control.PasswordChar);
         }
@@ -166,7 +166,7 @@ public class MicaPasswordBox : MicaTextBox
 
     private static void OnPasswordRevealModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is MicaPasswordBox control)
+        if (d is PasswordBox control)
         {
             control.UpdateRevealIfPossible(control.PasswordRevealMode);
         }

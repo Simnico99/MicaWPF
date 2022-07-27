@@ -1,14 +1,14 @@
 ﻿namespace MicaWPF.Extension.Controls;
-public class MicaListViewItem : ListViewItem
+public class MenuListViewItem : ListViewItem
 {
     public static readonly DependencyProperty ItemNameProperty = DependencyProperty.Register(
     "ItemName", typeof(string),
-    typeof(MicaListViewItem)
+    typeof(MenuListViewItem)
     );
 
     public static readonly DependencyProperty IconLocationProperty = DependencyProperty.Register(
     "IconLocation", typeof(string),
-    typeof(MicaListViewItem)
+    typeof(MenuListViewItem)
     );
 
     public string? ItemName

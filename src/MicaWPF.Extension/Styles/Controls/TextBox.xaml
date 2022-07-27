@@ -7,7 +7,13 @@
 
     <converters:IsNullConverter x:Key="IsNullConverter" />
 
-    <Style x:Key="MicaRichTextBoxBase" TargetType="{x:Type controls:MicaRichTextBox}">
+    <ContextMenu x:Key="MicaWPF.Menu.TextBox.ContextMenu">
+        <MenuItem Command="ApplicationCommands.Paste" />
+        <MenuItem Command="ApplicationCommands.Copy" />
+        <MenuItem Command="ApplicationCommands.Cut" />
+    </ContextMenu>
+
+    <Style x:Key="MicaWPF.Styles.Default.TextBox" TargetType="{x:Type controls:TextBox}">
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
@@ -29,9 +35,13 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="ContextMenu" Value="{StaticResource MicaWPF.Menu.TextBox.ContextMenu}" />
+        <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type RichTextBox}">
+                <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
                         <Border
                             x:Name="MainBorder"
@@ -48,19 +58,26 @@
                                     <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlStrongStrokeColorDefault}" />
                                 </Border.BorderBrush>
                                 <Grid>
-
                                     <Label
                                         x:Name="WatermarkLabel"
                                         Margin="8,0"
                                         Padding="0"
-                                        Content="{Binding Watermark, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MicaRichTextBox}}}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{Binding Watermark, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:TextBox}}}"
                                         FontSize="{TemplateBinding FontSize}"
                                         Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}"
                                         Visibility="Hidden" />
                                     <ScrollViewer
                                         x:Name="PART_ContentHost"
                                         Margin="0"
-                                        Padding="0" />
+                                        Padding="0"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
                                 </Grid>
                             </Border>
                         </Border>
@@ -90,6 +107,7 @@
                         <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text, Converter={StaticResource IsNullConverter}}" Value="True">
                             <Setter TargetName="WatermarkLabel" Property="Visibility" Value="Visible" />
                         </DataTrigger>
+
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background">
                                 <Setter.Value>
@@ -105,5 +123,5 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource MicaRichTextBoxBase}" TargetType="{x:Type controls:MicaRichTextBox}" />
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.TextBox}" TargetType="{x:Type controls:TextBox}" />
 </ResourceDictionary>

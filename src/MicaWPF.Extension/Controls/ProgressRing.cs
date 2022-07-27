@@ -1,29 +1,29 @@
 ﻿namespace MicaWPF.Extension.Controls;
-public class MicaProgressRing : Control
+public class ProgressRing : Control
 {
     public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress),
-        typeof(double), typeof(MicaProgressRing),
+        typeof(double), typeof(ProgressRing),
         new PropertyMetadata(50d, PropertyChangedCallback));
 
     public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register(
         nameof(IsIndeterminate),
-        typeof(bool), typeof(MicaProgressRing),
+        typeof(bool), typeof(ProgressRing),
         new PropertyMetadata(false));
 
     public static readonly DependencyProperty EngAngleProperty = DependencyProperty.Register(nameof(EngAngle),
-        typeof(double), typeof(MicaProgressRing),
+        typeof(double), typeof(ProgressRing),
         new PropertyMetadata(180.0d));
 
     public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(
         nameof(IndeterminateAngle),
-        typeof(double), typeof(MicaProgressRing),
+        typeof(double), typeof(ProgressRing),
         new PropertyMetadata(180.0d));
 
     public static readonly DependencyProperty CoverRingStrokeProperty =
         DependencyProperty.RegisterAttached(
             nameof(CoverRingStroke),
             typeof(Brush),
-            typeof(MicaProgressRing),
+            typeof(ProgressRing),
             new FrameworkPropertyMetadata(
                 Brushes.Black,
                 FrameworkPropertyMetadataOptions.AffectsRender |
@@ -32,7 +32,7 @@ public class MicaProgressRing : Control
 
     public static readonly DependencyProperty CoverRingVisibilityProperty = DependencyProperty.Register(
         nameof(CoverRingVisibility),
-        typeof(System.Windows.Visibility), typeof(MicaProgressRing),
+        typeof(System.Windows.Visibility), typeof(ProgressRing),
         new PropertyMetadata(System.Windows.Visibility.Visible));
 
     public double Progress
@@ -91,7 +91,7 @@ public class MicaProgressRing : Control
 
     protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MicaProgressRing control)
+        if (d is not ProgressRing control)
             return;
 
         control.UpdateProgressAngle();

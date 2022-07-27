@@ -6,7 +6,7 @@
 
     <helpers:ColorDarkerConverter x:Key="ColorDarkerConverter" />
 
-    <Style TargetType="{x:Type controls:MicaButton}">
+    <Style x:Key="MicaWPF.Styles.Default.Button" TargetType="{x:Type controls:Button}">
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorDefault}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
@@ -24,7 +24,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:MicaButton}">
+                <ControlTemplate TargetType="{x:Type controls:Button}">
                     <Border
                         x:Name="Border"
                         Padding="{TemplateBinding Padding}"
@@ -62,7 +62,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="MicaWPF.Styles.AccentedButton" TargetType="{x:Type controls:MicaButton}">
+    <Style x:Key="MicaWPF.Styles.AccentedButton" TargetType="{x:Type controls:Button}">
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorInverse}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlFillColorSecondary}" />
@@ -126,4 +126,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.Button}" TargetType="{x:Type controls:Button}" />
 </ResourceDictionary>

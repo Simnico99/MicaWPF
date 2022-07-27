@@ -1,14 +1,14 @@
 ﻿using System.Windows.Shapes;
 
 namespace MicaWPF.Extension.Controls;
-public class MicaArc : Shape
+public class Arc : Shape
 {
     public static readonly DependencyProperty StartAngleProperty =
-        DependencyProperty.Register(nameof(StartAngle), typeof(double), typeof(MicaArc),
+        DependencyProperty.Register(nameof(StartAngle), typeof(double), typeof(Arc),
             new PropertyMetadata(0.0d, PropertyChangedCallback));
 
     public static readonly DependencyProperty EndAngleProperty =
-        DependencyProperty.Register(nameof(EndAngle), typeof(double), typeof(MicaArc),
+        DependencyProperty.Register(nameof(EndAngle), typeof(double), typeof(Arc),
             new PropertyMetadata(0.0d, PropertyChangedCallback));
 
     public double StartAngle
@@ -27,15 +27,15 @@ public class MicaArc : Shape
 
     protected override Geometry DefiningGeometry => GetDefiningGeometry();
 
-    static MicaArc()
+    static Arc()
     {
         StrokeStartLineCapProperty.OverrideMetadata(
-            typeof(MicaArc),
+            typeof(Arc),
             new FrameworkPropertyMetadata(PenLineCap.Round)
         );
 
         StrokeEndLineCapProperty.OverrideMetadata(
-            typeof(MicaArc),
+            typeof(Arc),
             new FrameworkPropertyMetadata(PenLineCap.Round)
         );
     }
@@ -83,7 +83,7 @@ public class MicaArc : Shape
 
     protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MicaArc control)
+        if (d is not Arc control)
         {
             return;
         }
