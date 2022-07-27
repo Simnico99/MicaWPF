@@ -29,15 +29,6 @@ steps:
     publishFeedCredentials: 'NugetConnection'
 
 - task: NuGetCommand@2
-  displayName: Push to NuGet (MicaWPF.Expansion)
-  condition: and(succeeded(), eq(variables['buildTag'], true))
-  inputs:
-    command: 'push'
-    packagesToPush: '**/+(MicaWPF.Expansion)*.nupkg;!**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'NugetConnection'
-
-- task: NuGetCommand@2
   displayName: Push to NuGet (MicaWPF.DependencyInjection)
   condition: and(succeeded(), eq(variables['buildTag'], true))
   inputs:
