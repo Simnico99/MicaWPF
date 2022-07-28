@@ -23,6 +23,7 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Label.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ScrollBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ListView.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
