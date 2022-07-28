@@ -21,6 +21,8 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ToolTip.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ContextMenu.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Label.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ScrollBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
