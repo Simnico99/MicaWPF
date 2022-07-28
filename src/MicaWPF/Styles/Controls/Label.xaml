@@ -8,11 +8,7 @@
 
     <Style TargetType="{x:Type Label}">
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 
