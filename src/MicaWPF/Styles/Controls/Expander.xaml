@@ -4,7 +4,7 @@
     xmlns:controls="clr-namespace:MicaWPF.Controls">
 
     <ControlTemplate x:Key="MicaWPF.Styles.Default.MicaExpander.ToggleButton" TargetType="{x:Type ToggleButton}">
-        <Grid Margin="{TemplateBinding Padding}" Background="Transparent">
+        <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -12,6 +12,7 @@
             <ContentPresenter
                 x:Name="ContentPresenter"
                 Grid.Column="0"
+                Margin="{TemplateBinding Padding}"
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                 Content="{TemplateBinding Content}" />
@@ -98,8 +99,6 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-
-                            <!--  Top level controls always visible  -->
                             <ToggleButton
                                 x:Name="ExpanderToggleButton"
                                 Margin="0"
@@ -114,8 +113,6 @@
                                 IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 OverridesDefaultStyle="True"
                                 Template="{StaticResource MicaWPF.Styles.Default.MicaExpander.ToggleButton}" />
-
-                            <!--  Collapsed content to expand  -->
                             <Border
                                 x:Name="ContentPresenterBorder"
                                 Grid.Row="1"

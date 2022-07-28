@@ -71,6 +71,20 @@
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsKeyboardFocusWithin" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.2" Color="{DynamicResource MicaWPF.Colors.ControlFillColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -195,7 +209,10 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0" Margin="{TemplateBinding Padding}">
+                                    <Grid
+                                        Grid.Column="0"
+                                        Margin="{TemplateBinding Padding}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                         <ContentPresenter
                                             Name="PART_ContentPresenter"
                                             HorizontalAlignment="Stretch"
@@ -229,9 +246,9 @@
                                         Margin="0">
                                         <ToggleButton
                                             Name="ToggleButton"
+                                            Height="{TemplateBinding MinHeight}"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            ClickMode="Press"
                                             Focusable="False"
                                             Foreground="{TemplateBinding Foreground}"
                                             IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
@@ -257,7 +274,7 @@
                                     IsOpen="{TemplateBinding IsDropDownOpen}"
                                     Placement="{TemplateBinding Popup.Placement}"
                                     PopupAnimation="{TemplateBinding Popup.PopupAnimation}"
-                                    VerticalOffset="1">
+                                    VerticalOffset="2">
                                     <Border
                                         x:Name="DropDownBorder"
                                         Margin="0"
@@ -354,18 +371,6 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="AccentBorder" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="True" />
-                                <Condition Property="IsMouseOver" Value="True" />
-                                <Condition Property="IsKeyboardFocusWithin" Value="False" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="ContentBorder" Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorSecondary}" />
-                                </Setter.Value>
-                            </Setter>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorDisabled}" />
