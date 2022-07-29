@@ -16,22 +16,25 @@
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                 Content="{TemplateBinding Content}" />
-            <Grid
+            <Border
                 x:Name="ChevronGrid"
                 Grid.Column="1"
-                Margin="0"
+                Margin="0,0,0,11"
+                Padding="8"
                 VerticalAlignment="Center"
                 Background="Transparent"
-                RenderTransformOrigin="0.5, 0.5">
-                <Grid.RenderTransform>
-                    <RotateTransform Angle="0" />
-                </Grid.RenderTransform>
+                CornerRadius="4">
                 <controls:SymbolIcon
                     x:Name="ControlChevronIcon"
-                    FontSize="16.0"
+                    FontSize="12.0"
                     Foreground="{TemplateBinding Foreground}"
-                    Symbol="ChevronDown24" />
-            </Grid>
+                    RenderTransformOrigin="0.5, 0.5"
+                    Symbol="ChevronDown24">
+                    <controls:SymbolIcon.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </controls:SymbolIcon.RenderTransform>
+                </controls:SymbolIcon>
+            </Border>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsChecked" Value="True">
@@ -39,7 +42,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                                Storyboard.TargetName="ChevronGrid"
+                                Storyboard.TargetName="ControlChevronIcon"
                                 Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
                                 To="180"
                                 Duration="00:00:00.167" />
@@ -50,13 +53,17 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                                Storyboard.TargetName="ChevronGrid"
+                                Storyboard.TargetName="ControlChevronIcon"
                                 Storyboard.TargetProperty="(Grid.RenderTransform).(RotateTransform.Angle)"
                                 To="0"
                                 Duration="00:00:00.167" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="ChevronGrid" Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorSecondary}" />
+                <Setter TargetName="ChevronGrid" Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -170,9 +177,6 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorSecondary}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorDisabled}" />
