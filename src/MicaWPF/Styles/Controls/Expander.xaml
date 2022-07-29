@@ -19,7 +19,7 @@
             <Border
                 x:Name="ChevronGrid"
                 Grid.Column="1"
-                Margin="0,0,0,11"
+                Margin="0,0,11,0"
                 Padding="8"
                 VerticalAlignment="Center"
                 Background="Transparent"
