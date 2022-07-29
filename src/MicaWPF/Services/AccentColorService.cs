@@ -115,7 +115,7 @@ public class AccentColorService : IAccentColorService
             SetColorProperty(colorValues[4], colorResult);
         }
 
-        if (OsHelper.GlobalOsVersion == OsVersion.Windows10)
+        if (OsHelper.IsWindows10)
         {
             UpdateAccents(SystemAccentColor);
         }

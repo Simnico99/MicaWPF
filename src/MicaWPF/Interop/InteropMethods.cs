@@ -20,7 +20,7 @@ internal class InteropMethods
     [SecurityCritical]
     [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    internal static extern int RtlGetVersion(ref OSVERSIONINFOEX versionInfo);
+    internal static extern int RtlGetVersion(out OSVERSIONINFOEX versionInfo);
 
     [DllImport(ExternDll.User32, CharSet = CharSet.Auto)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]

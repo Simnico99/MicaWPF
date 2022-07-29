@@ -49,7 +49,7 @@ public class ThemeService : IThemeService
         if (IsThemeAware && !_IsCheckingTheme)
         {
             _IsCheckingTheme = true;
-            if (OsHelper.GlobalOsVersion is not OsVersion.WindowsOld && IsThemeAware)
+            if (OsHelper.IsWindows10_OrGreater && IsThemeAware)
             {
                 SystemEvents.UserPreferenceChanged += SystemEventsUserPreferenceChanged;
             }
@@ -78,7 +78,7 @@ public class ThemeService : IThemeService
 
     private void SetWindowBackdrop(Window window, BackdropType micaType)
     {
-        if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
+        if (OsHelper.IsWindows11_OrGreater)
         {
             window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
             var windowHandle = new WindowInteropHelper(window).Handle;
@@ -87,12 +87,12 @@ public class ThemeService : IThemeService
             {
                 InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.True);
             }
-            else if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
+            else if (OsHelper.IsWindows11_OrGreater)
             {
                 InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
             }
 
-            _ = OsHelper.GlobalOsVersion == OsVersion.Windows11After22523
+            _ = OsHelper.IsWindows11_22523_OrGreater
                 ? InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType)
                 : InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, InteropValues.DwmValues.True);
         }

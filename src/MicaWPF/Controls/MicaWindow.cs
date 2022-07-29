@@ -54,7 +54,7 @@ public class MicaWindow : Window
 
     static MicaWindow()
     {
-        if (OsHelper.GlobalOsVersion is not OsVersion.Windows11Before22523 and not OsVersion.Windows11After22523)
+        if (OsHelper.IsWindows11_OrGreater)
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MicaWindow), new FrameworkPropertyMetadata(typeof(MicaWindow)));
         }
@@ -63,7 +63,7 @@ public class MicaWindow : Window
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
-        if (OsHelper.GlobalOsVersion is OsVersion.Windows11After22523 or OsVersion.Windows11Before22523 && TitleBarType == TitleBarType.WinUI)
+        if (OsHelper.IsWindows11_OrGreater && TitleBarType == TitleBarType.WinUI)
         {
             HwndSource.FromHwnd(new WindowInteropHelper(this).EnsureHandle())?.AddHook(HwndSourceHook);
         }
@@ -135,7 +135,7 @@ public class MicaWindow : Window
         CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
-        Style = OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523
+        Style = OsHelper.IsWindows11_OrGreater
             ? myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows11"] as Style
             : myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows10"] as Style;
     }
