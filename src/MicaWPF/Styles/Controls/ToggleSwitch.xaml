@@ -202,9 +202,53 @@
                                 <Condition Property="IsChecked" Value="False" />
                                 <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
+                            <Setter TargetName="ToggleEllipse" Property="Height" Value="14" />
+                            <Setter TargetName="ToggleEllipse" Property="Width" Value="14" />
                             <Setter TargetName="ToggleRectangle" Property="Fill">
                                 <Setter.Value>
                                     <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ActiveToggleEllipse" Property="Height" Value="14" />
+                            <Setter TargetName="ActiveToggleEllipse" Property="Width" Value="14" />
+                            <Setter TargetName="ActiveToggleRectangle" Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.9" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ActiveToggleEllipse" Property="Height" Value="14" />
+                            <Setter TargetName="ActiveToggleEllipse" Property="Width" Value="14" />
+                            <Setter TargetName="ActiveToggleRectangle" Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True" />
+                                <Condition Property="IsChecked" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ToggleEllipse" Property="Height" Value="14" />
+                            <Setter TargetName="ToggleEllipse" Property="Width" Value="14" />
+                            <Setter TargetName="ToggleRectangle" Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Opacity="0.3" Color="{DynamicResource MicaWPF.Colors.TextFillColorDisabled}" />
                                 </Setter.Value>
                             </Setter>
                         </MultiTrigger>
