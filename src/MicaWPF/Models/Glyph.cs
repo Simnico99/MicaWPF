@@ -8,21 +8,11 @@ public static class Glyph
 
     public static FluentSystemIcons.Regular Parse(string name)
     {
-        if (string.IsNullOrEmpty(name))
-        {
-            return DefaultIcon;
-        }
-
-        return (FluentSystemIcons.Regular)Enum.Parse(typeof(FluentSystemIcons.Regular), name);
+        return string.IsNullOrEmpty(name) ? DefaultIcon : (FluentSystemIcons.Regular)Enum.Parse(typeof(FluentSystemIcons.Regular), name);
     }
 
     public static FluentSystemIcons.Filled ParseFilled(string name)
     {
-        if (string.IsNullOrEmpty(name))
-        {
-            return DefaultFilledIcon;
-        }
-
-        return (FluentSystemIcons.Filled)Enum.Parse(typeof(FluentSystemIcons.Filled), name);
+        return string.IsNullOrEmpty(name) ? DefaultFilledIcon : (FluentSystemIcons.Filled)Enum.Parse(typeof(FluentSystemIcons.Filled), name);
     }
 }

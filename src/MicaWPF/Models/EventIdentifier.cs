@@ -9,7 +9,13 @@ internal class EventIdentifier
         return Current;
     }
 
-    public bool IsEqual(long storedId) => Current == storedId;
+    public bool IsEqual(long storedId)
+    {
+        return Current == storedId;
+    }
 
-    private void UpdateIdentifier() => Current = DateTime.Now.Subtract(new DateTime(1970, 1, 1)).Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+    private void UpdateIdentifier()
+    {
+        Current = DateTime.Now.Subtract(new DateTime(1970, 1, 1)).Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+    }
 }

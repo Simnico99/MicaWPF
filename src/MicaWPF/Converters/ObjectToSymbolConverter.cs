@@ -8,13 +8,9 @@ internal class ObjectToSymbolConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        if (value is FluentSystemIcons.Regular symbol)
-            return symbol;
-
-        if (value is FluentSystemIcons.Filled symbolFilled)
-            return symbolFilled.Swap();
-
-        return FluentSystemIcons.Regular.Empty;
+        return value is FluentSystemIcons.Regular symbol
+            ? symbol
+            : value is FluentSystemIcons.Filled symbolFilled ? symbolFilled.Swap() : (object)FluentSystemIcons.Regular.Empty;
     }
 
     /// <summary>

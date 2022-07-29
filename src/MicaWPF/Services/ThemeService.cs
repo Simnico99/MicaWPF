@@ -24,17 +24,12 @@ public class ThemeService : IThemeService
 
     private WindowsTheme GetTheme()
     {
-        if (_currentTheme == WindowsTheme.Auto)
-        {
-            return GetWindowsTheme();
-        }
-
-        return _currentTheme;
+        return _currentTheme == WindowsTheme.Auto ? GetWindowsTheme() : _currentTheme;
     }
 
     private void UpdateAccent()
     {
-        Task.Run(() =>
+        _ = Task.Run(() =>
         {
             if (_accentColorService.AccentUpdateFromWindows)
             {
@@ -97,14 +92,9 @@ public class ThemeService : IThemeService
                 InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
             }
 
-            if (OsHelper.GlobalOsVersion == OsVersion.Windows11After22523)
-            {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType);
-            }
-            else
-            {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, InteropValues.DwmValues.True);
-            }
+            _ = OsHelper.GlobalOsVersion == OsVersion.Windows11After22523
+                ? InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType)
+                : InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, InteropValues.DwmValues.True);
         }
     }
 
@@ -130,26 +120,14 @@ public class ThemeService : IThemeService
 
     public static Uri WindowsThemeToResourceTheme(WindowsTheme windowsTheme)
     {
-        if (windowsTheme == WindowsTheme.Dark)
-        {
-            return new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaDark.xaml");
-        }
-        else
-        {
-            return new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
-        }
+        return windowsTheme == WindowsTheme.Dark
+            ? new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaDark.xaml")
+            : new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
     }
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {
-        if (windowsTheme == WindowsTheme.Auto)
-        {
-            CurrentTheme = GetWindowsTheme();
-        }
-        else
-        {
-            CurrentTheme = windowsTheme;
-        }
+        CurrentTheme = windowsTheme == WindowsTheme.Auto ? GetWindowsTheme() : windowsTheme;
 
         UpdateAccent();
         _themeManager.ThemeSource = WindowsThemeToResourceTheme(CurrentTheme);

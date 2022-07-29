@@ -58,10 +58,14 @@ public class AnimatedScrollViewer : ScrollViewer
         base.OnScrollChanged(e);
 
         if (e.HorizontalChange > _minimalChange || e.HorizontalChange < -_minimalChange)
+        {
             UpdateHorizontalScrollingState();
+        }
 
         if (e.VerticalChange > _minimalChange || e.VerticalChange < -_minimalChange)
+        {
             UpdateVerticalScrollingState();
+        }
     }
 
     private async void UpdateVerticalScrollingState()
@@ -69,13 +73,19 @@ public class AnimatedScrollViewer : ScrollViewer
         var currentEvent = _verticalIdentifier.GetNext();
 
         if (!_scrollingVertically)
+        {
             IsScrollingVertically = true;
+        }
 
         if (_timeout > -1)
+        {
             await Task.Delay(_timeout < 10000 ? _timeout : 1000);
+        }
 
         if (_verticalIdentifier.IsEqual(currentEvent) && _scrollingVertically)
+        {
             IsScrollingVertically = false;
+        }
     }
 
     private async void UpdateHorizontalScrollingState()
@@ -83,19 +93,25 @@ public class AnimatedScrollViewer : ScrollViewer
         var currentEvent = _horizontalIdentifier.GetNext();
 
         if (!_scrollingHorizontally)
+        {
             IsScrollingHorizontally = true;
+        }
 
         await Task.Delay(Timeout < 10000 ? Timeout : 1000);
 
         if (_horizontalIdentifier.IsEqual(currentEvent) && _scrollingHorizontally)
+        {
             IsScrollingHorizontally = false;
+        }
     }
 
     private static void IsScrollingVerticallyProperty_OnChanged(DependencyObject d,
         DependencyPropertyChangedEventArgs e)
     {
         if (d is not AnimatedScrollViewer scroll)
+        {
             return;
+        }
 
         scroll._scrollingVertically = scroll.IsScrollingVertically;
     }
@@ -103,7 +119,9 @@ public class AnimatedScrollViewer : ScrollViewer
     private static void IsScrollingHorizontally_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not AnimatedScrollViewer scroll)
+        {
             return;
+        }
 
         scroll._scrollingHorizontally = scroll.IsScrollingHorizontally;
     }
@@ -111,7 +129,9 @@ public class AnimatedScrollViewer : ScrollViewer
     private static void MinimalChangeProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not AnimatedScrollViewer scroll)
+        {
             return;
+        }
 
         scroll._minimalChange = scroll.MinimalChange;
     }
@@ -119,7 +139,9 @@ public class AnimatedScrollViewer : ScrollViewer
     private static void TimeoutProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not AnimatedScrollViewer scroll)
+        {
             return;
+        }
 
         scroll._timeout = scroll.Timeout;
     }

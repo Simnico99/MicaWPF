@@ -45,7 +45,7 @@ public class AccentColorService : IAccentColorService
         return windowsTheme switch
         {
             WindowsTheme.Dark => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value + valueCoefficient, 1)),
-            WindowsTheme.Light => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value - valueCoefficient / 2, 1)),
+            WindowsTheme.Light => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value - (valueCoefficient / 2), 1)),
             _ => throw new ArgumentOutOfRangeException(nameof(windowsTheme)),
         };
     }

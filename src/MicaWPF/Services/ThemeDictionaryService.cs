@@ -41,9 +41,7 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     private static Uri? GetThemeSource()
     {
         var theme = GetThemeResourceDictionary();
-        if (theme == null)
-            return null;
-        return theme.Source;
+        return theme?.Source;
     }
 
     /// <summary>

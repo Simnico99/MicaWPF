@@ -33,19 +33,11 @@ public class ColorDarkerConverter : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        if (value is Color colorValue)
-        {
-            return ChangeColorBrightness(colorValue, -0.3);
-        }
-        return new object();
+        return value is Color colorValue ? ChangeColorBrightness(colorValue, -0.3) : new object();
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        if (value is Color colorValue)
-        {
-            return ChangeColorBrightness(colorValue, 0.3);
-        }
-        return new object();
+        return value is Color colorValue ? ChangeColorBrightness(colorValue, 0.3) : new object();
     }
 }

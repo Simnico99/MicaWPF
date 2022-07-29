@@ -71,14 +71,7 @@ public class MicaWindow : Window
 
     private void AddPadding(WindowState windowsState)
     {
-        if (windowsState == WindowState.Maximized && TitleBarType == TitleBarType.Win32)
-        {
-            MarginMaximized = new Thickness(6);
-        }
-        else
-        {
-            MarginMaximized = new Thickness(0);
-        }
+        MarginMaximized = windowsState == WindowState.Maximized && TitleBarType == TitleBarType.Win32 ? new Thickness(6) : new Thickness(0);
     }
 
     private void ApplyResizeBorderThickness(WindowState windowsState)
@@ -142,14 +135,9 @@ public class MicaWindow : Window
         CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
         CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
-        if (OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523)
-        {
-            Style = myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows11"] as Style;
-        }
-        else 
-        {
-            Style = myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows10"] as Style;
-        }
+        Style = OsHelper.GlobalOsVersion is OsVersion.Windows11Before22523 or OsVersion.Windows11After22523
+            ? myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows11"] as Style
+            : myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows10"] as Style;
     }
 
     private void OnCanResizeWindow(object sender, CanExecuteRoutedEventArgs e)
@@ -238,7 +226,7 @@ public class MicaWindow : Window
         if (structure is not null)
         {
             var mmi = (InteropValues.MINMAXINFO)structure;
-            IntPtr monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
+            var monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
 
             if (monitor != IntPtr.Zero)
             {

@@ -31,7 +31,9 @@ public class AnimatedScrollBar : ScrollBar
         set
         {
             if ((bool)GetValue(IsInteractedProperty) != value)
+            {
                 SetValue(IsInteractedProperty, value);
+            }
         }
     }
 
@@ -61,13 +63,19 @@ public class AnimatedScrollBar : ScrollBar
         var shouldScroll = IsMouseOver || _isScrolling;
 
         if (shouldScroll == _isInteracted)
+        {
             return;
+        }
 
         if (!shouldScroll)
+        {
             await Task.Delay(Timeout);
+        }
 
         if (!_interactiveIdentifier.IsEqual(currentEvent))
+        {
             return;
+        }
 
         IsInteracted = shouldScroll;
     }
@@ -75,10 +83,14 @@ public class AnimatedScrollBar : ScrollBar
     private static void IsScrollingProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not AnimatedScrollBar bar)
+        {
             return;
+        }
 
         if (bar._isScrolling == bar.IsScrolling)
+        {
             return;
+        }
 
         bar._isScrolling = !bar._isScrolling;
 
@@ -88,10 +100,14 @@ public class AnimatedScrollBar : ScrollBar
     private static void IsInteractedProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not AnimatedScrollBar bar)
+        {
             return;
+        }
 
         if (bar._isInteracted == bar.IsInteracted)
+        {
             return;
+        }
 
         bar._isInteracted = !bar._isInteracted;
 

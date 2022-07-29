@@ -48,7 +48,7 @@ public class Arc : Shape
             Math.Max(0, (RenderSize.Height - StrokeThickness) / 2)
         );
 
-        using (StreamGeometryContext context = geometryStream.Open())
+        using (var context = geometryStream.Open())
         {
             context.BeginFigure(
                 PointAtAngle(Math.Min(StartAngle, EndAngle)),
