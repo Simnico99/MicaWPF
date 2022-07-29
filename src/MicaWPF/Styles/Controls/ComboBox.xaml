@@ -112,7 +112,7 @@
                             Margin="{TemplateBinding Margin}"
                             Padding="0"
                             VerticalAlignment="Stretch"
-                            CornerRadius="{TemplateBinding Border.CornerRadius}"
+                            CornerRadius="4"
                             SnapsToDevicePixels="True">
                             <Grid>
                                 <ContentPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="Center" />
@@ -141,9 +141,30 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="IsHighlighted" Value="False" />
+                            </MultiTrigger.Conditions>
                             <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
-                        </Trigger>
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorSecondary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="IsHighlighted" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ActiveRectangle" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorTertiary}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground">
                                 <Setter.Value>
