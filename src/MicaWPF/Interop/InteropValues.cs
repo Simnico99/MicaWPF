@@ -69,6 +69,7 @@ public class InteropValues
         internal int MajorVersion;
         internal int MinorVersion;
         internal int BuildNumber;
+        internal int Revision;
         internal int PlatformId;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
         internal string CSDVersion;
