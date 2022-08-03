@@ -23,6 +23,7 @@
                 Padding="8"
                 VerticalAlignment="Center"
                 Background="Transparent"
+                BorderThickness="1"
                 CornerRadius="4">
                 <controls:SymbolIcon
                     x:Name="ControlChevronIcon"
