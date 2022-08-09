@@ -1,0 +1,104 @@
+﻿<ContentControl
+    x:Class="MicaWPF.Dialogs.DefaultContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MicaWPF.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="clr-namespace:MicaWPF.Converters"
+    xmlns:local="clr-namespace:MicaWPF.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="332"
+    MaxHeight="500"
+    d:Visibility="Visible"
+    Visibility="Collapsed"
+    mc:Ignorable="d">
+    <ContentControl.Resources>
+        <helpers:DialogScrollViewerHeightConverter x:Key="DialogScrollViewerHeightConverter" />
+    </ContentControl.Resources>
+
+    <StackPanel VerticalAlignment="Center">
+        <Border
+            Background="{DynamicResource MicaWPF.Brushes.SolidBackgroundFillColorQuarternary}"
+            BorderBrush="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}"
+            BorderThickness="1"
+            CornerRadius="12">
+
+            <DockPanel>
+                <Grid Margin="12" DockPanel.Dock="Top">
+                    <ScrollViewer MaxHeight="{Binding MaxHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}, Converter={StaticResource DialogScrollViewerHeightConverter}}">
+                        <StackPanel>
+                            <Label x:Name="TitleTextLabel" Visibility="Collapsed">
+                                <TextBlock
+                                    x:Name="TitleText"
+                                    FontSize="17"
+                                    FontWeight="SemiBold"
+                                    TextWrapping="WrapWithOverflow" />
+                            </Label>
+                            <Label x:Name="CustomTextLabel" Visibility="Collapsed">
+                                <TextBlock
+                                    x:Name="CustomText"
+                                    FontSize="14"
+                                    TextWrapping="WrapWithOverflow" />
+                            </Label>
+                            <ContentControl x:Name="CustomContent" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+                <Border
+                    x:Name="ButtonBorder"
+                    Padding="12"
+                    Background="{DynamicResource MicaWPF.Brushes.SolidBackgroundFillColorBase}"
+                    BorderBrush="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0,0,12,12"
+                    DockPanel.Dock="Bottom"
+                    Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <controls:ColumnDefinitionExtended
+                                x:Name="LeftColumn"
+                                Width="*"
+                                Visible="False" />
+                            <controls:ColumnDefinitionExtended
+                                x:Name="MiddleColumn"
+                                Width="*"
+                                Visible="False" />
+                            <controls:ColumnDefinitionExtended
+                                x:Name="RightColumn"
+                                Width="*"
+                                Visible="False" />
+                        </Grid.ColumnDefinitions>
+                        <controls:Button
+                            x:Name="PrimaryButton"
+                            Grid.Column="0"
+                            Width="Auto"
+                            Height="30"
+                            Margin="4"
+                            HorizontalAlignment="Stretch"
+                            Click="PrimaryButton_Click"
+                            Style="{StaticResource MicaWPF.Styles.AccentedButton}">
+                            Hoi
+                        </controls:Button>
+                        <controls:Button
+                            x:Name="SecondaryButton"
+                            Grid.Column="1"
+                            Height="30"
+                            Margin="4"
+                            Click="SecondaryButton_Click">
+                            Hoi
+                        </controls:Button>
+                        <controls:Button
+                            x:Name="TertiaryButton"
+                            Grid.Column="2"
+                            Height="30"
+                            Margin="4"
+                            Click="TertiaryButton_Click">
+                            Hoi
+                        </controls:Button>
+                    </Grid>
+                </Border>
+            </DockPanel>
+        </Border>
+    </StackPanel>
+</ContentControl>

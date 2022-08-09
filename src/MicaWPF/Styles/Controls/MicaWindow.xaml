@@ -95,7 +95,7 @@
                                         x:Name="LayoutRoot"
                                         Grid.Row="0"
                                         Grid.RowSpan="3">
-                                        <Grid DockPanel.Dock="Top">
+                                        <Grid Panel.ZIndex="2" DockPanel.Dock="Top">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="*" />
@@ -219,7 +219,7 @@
                                                 </Button>
                                             </StackPanel>
                                         </Grid>
-                                        <Grid DockPanel.Dock="Bottom">
+                                        <Grid Panel.ZIndex="1" DockPanel.Dock="Bottom">
                                             <ContentPresenter />
                                         </Grid>
                                     </DockPanel>
@@ -281,6 +281,7 @@
                             <Grid
                                 x:Name="TitleGrid"
                                 Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
+                                Panel.ZIndex="2"
                                 DockPanel.Dock="Top">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -402,7 +403,8 @@
                                     </Button>
                                 </StackPanel>
                             </Grid>
-                            <Grid DockPanel.Dock="Bottom">
+
+                            <Grid Panel.ZIndex="1" DockPanel.Dock="Bottom">
                                 <AdornerDecorator>
                                     <ContentPresenter />
                                 </AdornerDecorator>
