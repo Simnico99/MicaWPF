@@ -18,13 +18,12 @@ public enum ContentDialogResult
 
 public static class ContentDialog
 {
-    private const string EmptyString = "";
     private const int DefaultWidth = 332;
     private const int DefaultMaxHeight = 500;
 
     private static Grid HookToWindow(MicaWindow micaWindow, ContentControl content)
     {
-        var grid = micaWindow.FindVisualChildrens<AdornerDecorator>().FirstOrDefault()?.FindVisualChildrens<Grid>().FirstOrDefault();
+        var grid = micaWindow.FindVisualChildrens<AdornerDecorator>().FirstOrDefault()?.Child as Grid;
 
         var canvas = new Grid()
         {
