@@ -9,11 +9,12 @@ using MicaWPF.Extensions;
 
 namespace MicaWPF.Dialogs;
 
-public enum ContentDialogResult 
-{ 
+public enum ContentDialogResult
+{
     PrimaryButton,
     SecondaryButton,
-    TertiaryButton
+    TertiaryButton,
+    Empty
 }
 
 public static class ContentDialog
@@ -38,7 +39,7 @@ public static class ContentDialog
         return canvas;
     }
 
-    private static void DeleteDialog(DefaultContentDialog contentDialog, Grid grid) 
+    private static void DeleteDialog(DefaultContentDialog contentDialog, Grid grid)
     {
         ((Grid)contentDialog.Parent).Children.Remove(contentDialog);
         ((Grid)grid.Parent).Children.Remove(grid);
@@ -46,24 +47,29 @@ public static class ContentDialog
 
     public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, object? customContent = null, int maxHeight = DefaultMaxHeight, int width = DefaultWidth)
     {
-        var content = new DefaultContentDialog
+        var result = ContentDialogResult.Empty;
+
+        await Application.Current.Dispatcher.Invoke(async () => 
         {
-            PrimaryButtonText = primaryButtonText,
-            SecondaryButtonText = secondaryButtonText,
-            TertiaryButtonText = tertiarybuttonText,
-            InnerText = text,
-            InnerContent = customContent,
-            InnerTitleText = titleText,
-            MaxHeight = maxHeight,
-            Width = width
-        };
+            var content = new DefaultContentDialog
+            {
+                PrimaryButtonText = primaryButtonText,
+                SecondaryButtonText = secondaryButtonText,
+                TertiaryButtonText = tertiarybuttonText,
+                InnerText = text,
+                InnerContent = customContent,
+                InnerTitleText = titleText,
+                MaxHeight = maxHeight,
+                Width = width
+            };
 
-        var grid = HookToWindow(micaWindow, content);
+            var grid = HookToWindow(micaWindow, content);
 
-        await content.ShowAsync();
+            await content.ShowAsync();
 
-        var result = content.Result;
-        DeleteDialog(content, grid);
+            result = content.Result;
+            DeleteDialog(content, grid);
+        });
 
         return result;
     }

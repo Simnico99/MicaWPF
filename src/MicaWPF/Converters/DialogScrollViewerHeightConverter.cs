@@ -5,7 +5,7 @@ public class DialogScrollViewerHeightConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
-        return value is double height ? height - 60 : (object)500;
+        return value is double height ? height - 100 : (object)500;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
