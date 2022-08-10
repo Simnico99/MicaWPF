@@ -32,9 +32,9 @@ steps:
 
 - pwsh: |
         Write-Host Downloading .Net Framework 4.8.1
-        Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2203306' -Destination "$Env:Temp\Net4.8.1.exe"
+        Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2203306' -Destination "C:\Net4.8.1.exe"
         Write-Host Installing .Net Framework 4.8.1
-        start "$Env:Temp\Net4.8.1.exe" /q /norestart
+        Start-Process "C:\Net4.8.1.exe" -ArgumentList "/q", "/norestart", "/install"
         Write-Host Installed .Net Framework 4.8.1
   displayName: "Use .Net Framework 4.8.1"
 
