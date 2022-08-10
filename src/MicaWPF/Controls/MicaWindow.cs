@@ -268,7 +268,6 @@ public class MicaWindow : Window
                 break;
             case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
                 WmGetMinMaxInfo(hwnd, lparam);
-                handled = true;
                 break;
             default:
                 break;
