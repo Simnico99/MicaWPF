@@ -18,6 +18,7 @@
 
     <StackPanel VerticalAlignment="Center">
         <Border
+            x:Name="MainBorder"
             Background="{DynamicResource MicaWPF.Brushes.SolidBackgroundFillColorQuarternary}"
             BorderBrush="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}"
             BorderThickness="1"

@@ -26,13 +26,13 @@ public partial class DefaultContentDialog : ContentControl
     {
         get
         {
-            return BorderBrush;
+            return MainBorder.BorderBrush;
         }
         set
         {
             if (value is not null)
             {
-                BorderBrush = value;
+                MainBorder.BorderBrush = value;
             }
         }
     }
