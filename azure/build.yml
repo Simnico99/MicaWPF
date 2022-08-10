@@ -34,7 +34,7 @@ steps:
         Write-Host Downloading .Net Framework 4.8.1
         Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2203306' -Destination "C:\Net4.8.1.exe"
         Write-Host Installing .Net Framework 4.8.1
-        Start-Process "C:\Net4.8.1.exe" -ArgumentList "/q", "/norestart", "/install"
+        Start-Process "C:\Net4.8.1.exe" -ArgumentList "/q", "/norestart", "/install" -wait
         Write-Host Installed .Net Framework 4.8.1
   displayName: "Use .Net Framework 4.8.1"
 
