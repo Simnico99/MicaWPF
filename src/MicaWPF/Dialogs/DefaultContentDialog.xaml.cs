@@ -22,6 +22,21 @@ public partial class DefaultContentDialog : ContentControl
     internal ContentDialogResult Result { get; private set; }
     private readonly TaskCompletionSource<bool> taskCompletionSource = new();
 
+    internal Brush? InnerBorderBrush
+    {
+        get
+        {
+            return BorderBrush;
+        }
+        set
+        {
+            if (value is not null)
+            {
+                BorderBrush = value;
+            }
+        }
+    }
+
     internal string? InnerTitleText
     {
         get

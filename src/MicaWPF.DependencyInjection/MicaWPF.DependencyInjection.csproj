@@ -7,7 +7,7 @@
     <Copyright>Copyright (c) 2021 Simnico99</Copyright>
     <RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>WPF;Mica;WinUI;</PackageTags>
+    <PackageTags>WPF;Mica;WinUI;wpfui;</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ImplicitUsings>enable</ImplicitUsings>
     <PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>

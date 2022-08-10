@@ -45,11 +45,11 @@ public static class ContentDialog
         ((Grid)grid.Parent).Children.Remove(grid);
     }
 
-    public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, object? customContent = null, int maxHeight = DefaultMaxHeight, int width = DefaultWidth)
+    public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, object? customContent = null, int maxHeight = DefaultMaxHeight, int width = DefaultWidth, Brush? borderBrush = null)
     {
         var result = ContentDialogResult.Empty;
 
-        await Application.Current.Dispatcher.Invoke(async () => 
+        await Application.Current.Dispatcher.Invoke(async () =>
         {
             var content = new DefaultContentDialog
             {
@@ -59,6 +59,7 @@ public static class ContentDialog
                 InnerText = text,
                 InnerContent = customContent,
                 InnerTitleText = titleText,
+                InnerBorderBrush = borderBrush,
                 MaxHeight = maxHeight,
                 Width = width
             };
