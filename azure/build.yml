@@ -30,6 +30,10 @@ steps:
   inputs:
     versionSpec: '6.x'
 
+- pwsh: |
+        Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2203306'  -Destination "$Env:Temp\Net4.8.1.exe"; & "$Env:Temp\Net4.8.1.exe" /q /norestart
+  displayName: "Use .Net Framework 3.1"
+
 - task: UseDotNet@2
   displayName: 'Use .Net Core 3.1'
   inputs:
