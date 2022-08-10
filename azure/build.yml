@@ -31,7 +31,11 @@ steps:
     versionSpec: '6.x'
 
 - pwsh: |
-        Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2203306'  -Destination "$Env:Temp\Net4.8.1.exe"; & "$Env:Temp\Net4.8.1.exe" /q /norestart
+        Write-Host Downloading .Net 4.8.1
+        Start-BitsTransfer -Source 'https://go.microsoft.com/fwlink/?linkid=2203306' -Destination "C:\Net4.8.1.exe"
+        Write-Host Installing .Net 4.8.1
+        start "C:\Net4.8.1.exe" /q /norestart
+        Write-Host Installing .Net 4.8.1
   displayName: "Use .Net Framework 4.8.1"
 
 - task: UseDotNet@2
