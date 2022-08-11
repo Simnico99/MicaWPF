@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MicaWPFRuntimeComponent" Version="1.0.0" />
+    <PackageReference Include="MicaWPFRuntimeComponent" Version="1.0.8" />
   </ItemGroup>
 
 
