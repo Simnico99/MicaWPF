@@ -1,5 +1,11 @@
-﻿using MicaWPF.Extensions;
+﻿using System.Runtime;
+using MicaWPF.Extensions;
+#if NET5_0_OR_GREATER
 using MicaWPFRuntimeComponent;
+#endif
+#if NETFRAMEWORK || NETCOREAPP3_1
+using Windows.UI.ViewManagement;
+#endif
 
 namespace MicaWPF.Services;
 
@@ -105,6 +111,7 @@ public class AccentColorService : IAccentColorService
         _isInit = true;
         AccentUpdateFromWindows = true;
 
+#if NET5_0_OR_GREATER
         var uwpColors = new UWPColors();
         var colorsLongString = uwpColors.GetSystemColors();
 
@@ -122,6 +129,29 @@ public class AccentColorService : IAccentColorService
 
         UpdateFromInternalColors();
     }
+#endif
+#if NETFRAMEWORK || NETCOREAPP3_1
+        
+        SystemAccentColor = UIColorConverter(UIColorType.Accent);
+        SystemAccentColorDark1 = UIColorConverter(UIColorType.AccentDark1);
+        SystemAccentColorDark2 = UIColorConverter(UIColorType.AccentDark2);
+        SystemAccentColorDark3 = UIColorConverter(UIColorType.AccentDark3);
+
+        SystemAccentColor = UIColorConverter(UIColorType.Accent);
+        SystemAccentColorLight1 = UIColorConverter(UIColorType.AccentLight1);
+        SystemAccentColorLight2 = UIColorConverter(UIColorType.AccentLight2);
+        SystemAccentColorLight3 = UIColorConverter(UIColorType.AccentLight3);
+
+        UpdateFromInternalColors();
+    }
+
+    private Color UIColorConverter(UIColorType colorType)
+{
+        var uiSettings = new UISettings();
+        var color = uiSettings.GetColorValue(colorType);
+        return Color.FromArgb(color.A, color.R, color.G, color.B);
+    }
+#endif
 
     public void UpdateAccents(Color systemAccent)
     {
