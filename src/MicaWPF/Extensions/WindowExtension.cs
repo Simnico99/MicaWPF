@@ -12,4 +12,19 @@ public static class WindowExtension
     {
         ThemeService.GetCurrent().EnableBackdrop(window, backdropType);
     }
+
+    public static async Task RefreshContentAsync(this Window window) 
+    {
+       await Application.Current.Dispatcher.InvokeAsync(() => {
+               foreach (var element in window.FindLogicalChildrens<FrameworkElement>())
+               {
+                   var savedStyle = element.Style;
+                   element.Style = null;
+
+                   element.UpdateDefaultStyle();
+
+                   element.Style = savedStyle;
+               }
+       });
+    }
 }

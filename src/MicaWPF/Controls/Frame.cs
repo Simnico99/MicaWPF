@@ -12,7 +12,7 @@ public class Frame : System.Windows.Controls.Frame
     {
         if (newContent is DependencyObject dependencyObject)
         {
-            foreach (var element in dependencyObject.FindVisualChildrens<FrameworkElement>())
+            foreach (var element in dependencyObject.FindLogicalChildrens<FrameworkElement>())
             {
                 if (element.Style is not null)
                 {
@@ -22,7 +22,7 @@ public class Frame : System.Windows.Controls.Frame
                     }
 
                     var savedStyle = element.Style;
-                    element.Style = null;
+                    element.Style = new(); 
 
                     element.UpdateDefaultStyle();
 

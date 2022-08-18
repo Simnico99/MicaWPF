@@ -70,7 +70,7 @@ public class ThemeService : IThemeService
                 {
                     UpdateAccent();
                     Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
-                    SetThemeAware(IsThemeAware);
+                    SetThemeAware(IsThemeAware); 
                 }
                 break;
         }
@@ -133,7 +133,7 @@ public class ThemeService : IThemeService
         _themeManager.ThemeSource = WindowsThemeToResourceTheme(CurrentTheme);
 
         foreach (var micaEnabledWindow in MicaEnabledWindows)
-        {
+        { 
             SetWindowBackdrop(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
             //Force the title bar to refresh.
             var style = micaEnabledWindow.Window.WindowStyle;

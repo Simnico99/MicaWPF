@@ -97,13 +97,15 @@ public class AccentColorService : IAccentColorService
     {
         switch (ThemeService.GetCurrent().CurrentTheme)
         {
-            case WindowsTheme.Dark:
+            case WindowsTheme.Dark: 
                 UpdateColorResources(SystemAccentColor, SystemAccentColorLight1, SystemAccentColorLight2, SystemAccentColorLight3);
                 break;
             default:
                 UpdateColorResources(SystemAccentColor, SystemAccentColorDark1, SystemAccentColorDark1, SystemAccentColorDark3);
                 break;
         }
+
+        WindowHelper.RefreshAllWindowsContents();
     }
 
     public void UpdateAccentsFromWindows()

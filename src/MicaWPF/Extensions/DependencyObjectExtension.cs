@@ -35,4 +35,27 @@ public static class DependencyObjectExtension
             }
         }
     }
+
+    public static IEnumerable<T> FindLogicalChildrens<T>(this DependencyObject depObj) where T : DependencyObject
+    {
+        if (depObj != null)
+        {
+            foreach (object rawChild in LogicalTreeHelper.GetChildren(depObj))
+            {
+                if (rawChild is DependencyObject)
+                {
+                    DependencyObject child = (DependencyObject)rawChild;
+                    if (child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindLogicalChildrens<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+    }
 }

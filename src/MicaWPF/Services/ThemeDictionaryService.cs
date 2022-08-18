@@ -44,18 +44,7 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
         var oldThemes = GetThemeResourceDictionary();
         var dictionaries = Application.Current.Resources.MergedDictionaries;
 
-        foreach (var MicaEnabledWindow in ThemeService.GetCurrent().MicaEnabledWindows)
-        {
-            foreach (var element in MicaEnabledWindow.Window.FindVisualChildrens<FrameworkElement>())
-            {
-                var savedStyle = element.Style;
-                element.Style = null;
-
-                element.UpdateDefaultStyle();
-
-                element.Style = savedStyle;
-            }
-        }
+        WindowHelper.RefreshAllWindowsContents();
 
         dictionaries.Add(new ResourceDictionary
         {
