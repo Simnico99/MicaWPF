@@ -21,7 +21,6 @@ public class Frame : System.Windows.Controls.Frame
                         await Task.Delay(50);
                     }
 
-
                     var savedStyle = element.Style;
                     element.Style = null;
 
