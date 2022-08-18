@@ -8,18 +8,27 @@ using MicaWPF.Extensions;
 namespace MicaWPF.Controls;
 public class Frame : System.Windows.Controls.Frame
 {
-    protected override void OnContentChanged(object oldContent, object newContent)
+    protected override async void OnContentChanged(object oldContent, object newContent)
     {
         if (newContent is DependencyObject dependencyObject)
         {
             foreach (var element in dependencyObject.FindVisualChildrens<FrameworkElement>())
             {
-                var savedStyle = element.Style;
-                element.Style = null;
+                if (element.Style is not null)
+                {
+                    while (!element.IsLoaded)
+                    {
+                        await Task.Delay(50);
+                    }
 
-                element.UpdateDefaultStyle();
 
-                element.Style = savedStyle;
+                    var savedStyle = element.Style;
+                    element.Style = null;
+
+                    element.UpdateDefaultStyle();
+
+                    element.Style = savedStyle;
+                }
             }
         }
 
