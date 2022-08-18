@@ -8,21 +8,21 @@ using MicaWPF.Extensions;
 namespace MicaWPF.Controls;
 public class Frame : System.Windows.Controls.Frame
 {
-    public Frame()
+    protected override void OnContentChanged(object oldContent, object newContent)
     {
-        Navigated += Frame_Navigated;
-    }
-
-    private void Frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-    {
-        foreach (var element in this.FindVisualChildrens<FrameworkElement>())
+        if (newContent is DependencyObject dependencyObject)
         {
-            var savedStyle = element.Style;
-            element.Style = null;
+            foreach (var element in dependencyObject.FindVisualChildrens<FrameworkElement>())
+            {
+                var savedStyle = element.Style;
+                element.Style = null;
 
-            element.UpdateDefaultStyle();
+                element.UpdateDefaultStyle();
 
-            element.Style = savedStyle;
+                element.Style = savedStyle;
+            }
         }
+
+        base.OnContentChanged(oldContent, newContent);
     }
 }
