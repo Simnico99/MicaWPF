@@ -39,7 +39,6 @@ public static class ColorHelper
         double lambda,
         ComponentSelector selector)
     {
-        return (byte)(selector(endPoint1)
-            + (selector(endPoint2) - selector(endPoint1)) * lambda);
+        return (byte)(selector(endPoint1) + ((selector(endPoint2) - selector(endPoint1))) * lambda);
     }
 }

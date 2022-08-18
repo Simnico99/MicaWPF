@@ -54,15 +54,14 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
                 element.UpdateDefaultStyle();
 
                 element.Style = savedStyle;
-                
             }
         }
-        
 
         dictionaries.Add(new ResourceDictionary
         {
             Source = source
         });
+
         foreach (var oldTheme in oldThemes)
         {
             dictionaries.Remove(oldTheme);

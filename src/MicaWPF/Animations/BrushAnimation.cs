@@ -80,5 +80,4 @@ public class BrushAnimation : AnimationTimeline
         DependencyProperty.Register("From", typeof(Brush), typeof(BrushAnimation));
     public static readonly DependencyProperty ToProperty =
         DependencyProperty.Register("To", typeof(Brush), typeof(BrushAnimation));
-
 }
