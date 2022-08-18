@@ -45,18 +45,7 @@ public class BrushAnimation : AnimationTimeline
         var ColorOriginValue = ((SolidColorBrush)defaultOriginValue).Color;
         var ColorDestinationValue = ((SolidColorBrush)defaultDestinationValue).Color;
 
-        return new VisualBrush(new Border()
-        {
-            Width = 1,
-            Height = 1,
-            //Background = defaultOriginValue,
-            Background = new SolidColorBrush(ColorHelper.InterpolateBetween(ColorOriginValue, ColorDestinationValue, animationClock.CurrentProgress.Value)),
-            //Child = new Border()
-            //{
-            //    Background = defaultDestinationValue,
-            //    Opacity = ((ColorDestinationValue.A / 255.0F) * animationClock.CurrentProgress.Value),
-            //}
-        });
+        return new SolidColorBrush(ColorHelper.InterpolateBetween(ColorOriginValue, ColorDestinationValue, animationClock.CurrentProgress.Value));
     }
 
     protected override Freezable CreateInstanceCore()

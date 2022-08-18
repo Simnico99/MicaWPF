@@ -12,7 +12,7 @@ public class Frame : System.Windows.Controls.Frame
     {
         if (newContent is DependencyObject dependencyObject)
         {
-            foreach (var element in dependencyObject.FindLogicalChildrens<FrameworkElement>())
+            foreach (var element in dependencyObject.FindLogicalChildren<FrameworkElement>())
             {
                 if (element.Style is not null)
                 {

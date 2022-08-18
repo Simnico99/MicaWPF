@@ -24,7 +24,7 @@ public static class ContentDialog
 
     private static Grid HookToWindow(MicaWindow micaWindow, ContentControl content)
     {
-        var grid = micaWindow.FindVisualChildrens<AdornerDecorator>().FirstOrDefault()?.Child as Grid;
+        var grid = micaWindow.FindVisualChildren<AdornerDecorator>().FirstOrDefault()?.Child as Grid;
 
         var canvas = new Grid()
         {
