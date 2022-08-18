@@ -114,7 +114,7 @@ public class MicaWindow : Window
         if (_templateApplied == false)
         {
             _templateApplied = true;
-            this.EnableMica(SystemBackdropType);
+            this.EnableBackdrop(SystemBackdropType);
             _ButtonMax = GetTemplateChild(ButtonMax) as Button;
             _ButtonRestore = GetTemplateChild(ButtonRestore) as Button;
         }

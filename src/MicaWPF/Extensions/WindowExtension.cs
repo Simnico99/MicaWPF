@@ -3,12 +3,12 @@
 namespace MicaWPF.Extensions;
 public static class WindowExtension
 {
-    public static void EnableMica(this Window window, BackdropType backdropType = BackdropType.Mica)
+    public static void EnableBackdrop(this Window window, BackdropType backdropType = BackdropType.Mica)
     {
         ThemeService.GetCurrent().EnableBackdrop(window, backdropType);
     }
 
-    public static void EnableMica(this MicaWindow window, BackdropType backdropType = BackdropType.Mica)
+    public static void EnableBackdrop(this MicaWindow window, BackdropType backdropType = BackdropType.Mica)
     {
         ThemeService.GetCurrent().EnableBackdrop(window, backdropType);
     }
