@@ -18,9 +18,9 @@ public static class ColorHelper
         Color endPoint2,
         double lambda)
     {
-        if (lambda < 0 || lambda > 1)
+        if (lambda is < 0 or > 1)
         {
-            throw new ArgumentOutOfRangeException("lambda");
+            throw new ArgumentOutOfRangeException(nameof(lambda));
         }
 
         var color = Color.FromArgb(
@@ -39,6 +39,6 @@ public static class ColorHelper
         double lambda,
         ComponentSelector selector)
     {
-        return (byte)((selector(endPoint1) + ((selector(endPoint2) - selector(endPoint1)))) * lambda);
+        return (byte)(selector(endPoint1) + ((selector(endPoint2) - selector(endPoint1)) * lambda));
     }
 }
