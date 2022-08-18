@@ -125,6 +125,11 @@ public class ThemeService : IThemeService
             : new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
     }
 
+    public static void RefreshTheme() 
+    {
+        _themeManager.ThemeSource = _themeManager.ThemeSource;
+    }
+
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {
         CurrentTheme = windowsTheme == WindowsTheme.Auto ? GetWindowsTheme() : windowsTheme;

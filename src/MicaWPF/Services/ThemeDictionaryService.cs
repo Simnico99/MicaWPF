@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using MicaWPF.Extensions;
 
 namespace MicaWPF.Services;
 
 public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionaryService
 {
+    private static Uri? _currentThemeSource;
+
     private static readonly ThemeDictionaryService _themeManager = new();
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -41,19 +42,24 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     /// <param name="source"></param>
     public void SetThemeSource(Uri source)
     {
-        var oldThemes = GetThemeResourceDictionary();
-        var dictionaries = Application.Current.Resources.MergedDictionaries;
-
-        WindowHelper.RefreshAllWindowsContents();
-
-        dictionaries.Add(new ResourceDictionary
+        lock (source)
         {
-            Source = source
-        });
+            _currentThemeSource = source;
 
-        foreach (var oldTheme in oldThemes)
-        {
-            dictionaries.Remove(oldTheme);
+            var oldThemes = GetThemeResourceDictionary();
+            var dictionaries = Application.Current.Resources.MergedDictionaries;
+
+            WindowHelper.RefreshAllWindowsContents();
+
+            dictionaries.Add(new ResourceDictionary
+            {
+                Source = source
+            });
+
+            foreach (var oldTheme in oldThemes)
+            {
+                dictionaries.Remove(oldTheme);
+            }
         }
     }
 
@@ -62,6 +68,7 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     /// </summary>
     public Uri? ThemeSource
     {
+        get => _currentThemeSource;
         set
         {
             if (value != null)

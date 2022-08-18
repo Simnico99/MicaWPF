@@ -106,6 +106,7 @@ public class AccentColorService : IAccentColorService
         }
 
         WindowHelper.RefreshAllWindowsContents();
+        ThemeService.RefreshTheme();
     }
 
     public void UpdateAccentsFromWindows()
