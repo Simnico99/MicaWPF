@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using MicaWPF.Extensions;
 
 namespace MicaWPF.Services;
 
@@ -27,21 +28,11 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     /// get current theme resource dictionary
     /// </summary>
     /// <returns></returns>
-    private static ResourceDictionary? GetThemeResourceDictionary()
+    private static List<ResourceDictionary?> GetThemeResourceDictionary()
     {
         return (from dictionary in Application.Current.Resources.MergedDictionaries
                 where dictionary.Contains("MicaWPF.Colors.ApplicationBackgroundColor")
-                select dictionary).FirstOrDefault();
-    }
-
-    /// <summary>
-    /// get source uri of current theme resource 
-    /// </summary>
-    /// <returns>resource uri</returns>
-    private static Uri? GetThemeSource()
-    {
-        var theme = GetThemeResourceDictionary();
-        return theme?.Source;
+                select dictionary).ToList();
     }
 
     /// <summary>
@@ -50,13 +41,29 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     /// <param name="source"></param>
     public void SetThemeSource(Uri source)
     {
-        var oldTheme = GetThemeResourceDictionary();
+        var oldThemes = GetThemeResourceDictionary();
         var dictionaries = Application.Current.Resources.MergedDictionaries;
+
+        foreach (var MicaEnabledWindow in ThemeService.GetCurrent().MicaEnabledWindows)
+        {
+            foreach (var element in MicaEnabledWindow.Window.FindVisualChildrens<FrameworkElement>())
+            {
+                var savedStyle = element.Style;
+                element.Style = null;
+
+                element.UpdateDefaultStyle();
+
+                element.Style = savedStyle;
+                
+            }
+        }
+        
+
         dictionaries.Add(new ResourceDictionary
         {
             Source = source
         });
-        if (oldTheme != null)
+        foreach (var oldTheme in oldThemes)
         {
             dictionaries.Remove(oldTheme);
         }
@@ -67,7 +74,6 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     /// </summary>
     public Uri? ThemeSource
     {
-        get => ThemeDictionaryService.GetThemeSource();
         set
         {
             if (value != null)

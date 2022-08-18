@@ -101,7 +101,7 @@ public class AccentColorService : IAccentColorService
                 UpdateColorResources(SystemAccentColor, SystemAccentColorLight1, SystemAccentColorLight2, SystemAccentColorLight3);
                 break;
             default:
-                UpdateColorResources(SystemAccentColor, SystemAccentColorDark1, SystemAccentColorDark2, SystemAccentColorDark3);
+                UpdateColorResources(SystemAccentColor, SystemAccentColorDark1, SystemAccentColorDark1, SystemAccentColorDark3);
                 break;
         }
     }

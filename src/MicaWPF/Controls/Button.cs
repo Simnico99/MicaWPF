@@ -7,6 +7,7 @@ public class Button : System.Windows.Controls.Button
     public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled), typeof(bool), typeof(Button), new PropertyMetadata(false));
     public static readonly DependencyProperty HoverBackgroundProperty = DependencyProperty.Register(nameof(HoverBackground), typeof(SolidColorBrush), typeof(Button));
     public static readonly DependencyProperty MouseButtonPressedBackgroundProperty = DependencyProperty.Register(nameof(MouseButtonPressedBackground), typeof(SolidColorBrush), typeof(Button));
+    public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(Button));
 
     public FluentSystemIcons.Regular Icon
     {
@@ -24,6 +25,12 @@ public class Button : System.Windows.Controls.Button
     {
         get => (SolidColorBrush)GetValue(IconFilledProperty);
         set => SetValue(IconFilledProperty, value);
+    }
+
+    public CornerRadius CornerRadius
+    {
+        get => (CornerRadius)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
     }
 
     public SolidColorBrush MouseButtonPressedBackground

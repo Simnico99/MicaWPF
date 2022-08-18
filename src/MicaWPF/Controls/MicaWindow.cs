@@ -105,6 +105,7 @@ public class MicaWindow : Window
             AddPadding((WindowState)e.NewValue);
             ApplyResizeBorderThickness((WindowState)e.NewValue);
         }
+
         base.OnPropertyChanged(e);
     }
 

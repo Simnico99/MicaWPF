@@ -3,7 +3,7 @@
 namespace MicaWPF.Services;
 public interface IThemeDictionaryService
 {
-    Uri? ThemeSource { get; set; }
+    Uri? ThemeSource { set; }
 
     event PropertyChangedEventHandler? PropertyChanged;
 

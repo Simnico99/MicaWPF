@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:MicaWPF.Models">
+    xmlns:local="clr-namespace:MicaWPF.Models"
+    xmlns:local1="clr-namespace:MicaWPF.Animations">
 
     <!--  Colors  -->
     <Color x:Key="MicaWPF.Colors.ApplicationBackgroundColor">#202020</Color>
@@ -128,6 +129,57 @@
             <GradientStop Offset="1.0" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorOnAccentDefault}" />
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
+
+    <Storyboard x:Key="MicaWPF.Animations.Button.Default.MouseOver">
+        <local1:BrushAnimation
+            Storyboard.TargetName="ContentBorder"
+            Storyboard.TargetProperty="Background"
+            From="{StaticResource MicaWPF.Brushes.ControlFillColorDefault}"
+            To="{StaticResource MicaWPF.Brushes.ControlFillColorSecondary}"
+            Duration="0:0:0.083" />
+    </Storyboard>
+
+    <Storyboard x:Key="MicaWPF.Animations.Button.Default.Pressed">
+        <local1:BrushAnimation
+            Storyboard.TargetName="ContentBorder"
+            Storyboard.TargetProperty="Background"
+            From="{StaticResource MicaWPF.Brushes.ControlFillColorSecondary}"
+            To="{StaticResource MicaWPF.Brushes.ControlFillColorTertiary}"
+            Duration="0:0:0.083" />
+        <local1:BrushAnimation
+            Storyboard.TargetName="ContentPresenter"
+            Storyboard.TargetProperty="(TextElement.Foreground)"
+            From="{StaticResource MicaWPF.Brushes.TextFillColorPrimary}"
+            To="{StaticResource MicaWPF.Brushes.TextFillColorSecondary}"
+            Duration="0:0:0.083" />
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="BorderBrush">
+            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.ControlStrokeColorDefault}" />
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <Storyboard x:Key="MicaWPF.Animations.Button.Accent.MouseOver">
+        <local1:BrushAnimation
+            Storyboard.TargetName="ContentBorder"
+            Storyboard.TargetProperty="Background"
+            From="{StaticResource MicaWPF.Brushes.AccentFillColorDefault}"
+            To="{StaticResource MicaWPF.Brushes.AccentFillColorSecondary}"
+            Duration="0:0:0.083" />
+    </Storyboard>
+
+    <Storyboard x:Key="MicaWPF.Animations.Button.Accent.Default.Pressed">
+        <local1:BrushAnimation
+            Storyboard.TargetName="ContentPresenter"
+            Storyboard.TargetProperty="(TextElement.Foreground)"
+            From="{StaticResource MicaWPF.Brushes.TextOnAccentFillColorPrimary}"
+            To="{StaticResource MicaWPF.Brushes.TextOnAccentFillColorSecondary}"
+            Duration="0:0:0.083" />
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background">
+            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorTertiary}" />
+        </ObjectAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="BorderBrush">
+            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorTransparent}" />
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Assets/Brushes.xaml" />
