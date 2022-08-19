@@ -55,7 +55,7 @@ internal class InteropMethods
 
     public static void HideAllWindowButton(IntPtr hwnd)
     {
-        SetWindowLong(hwnd, HwndButtonStates.GWL_STYLE, GetWindowLong(hwnd, HwndButtonStates.GWL_STYLE) & ~HwndButtonStates.WS_SYSMENU);
+        SetWindowLong(hwnd, HwndButtons.GWL_STYLE, GetWindowLong(hwnd, HwndButtons.GWL_STYLE) & ~HwndButtons.WS_SYSMENU);
     }
 
     public static int SetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, int parameter)

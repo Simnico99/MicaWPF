@@ -154,7 +154,6 @@ public class MicaWindow : Window
         SystemCommands.CloseWindow(this);
     }
 
-
     private void OnMaximizeWindow(object target, ExecutedRoutedEventArgs e)
     {
         SystemCommands.MaximizeWindow(this);
