@@ -130,6 +130,126 @@
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
 
+    <!--  Brushes  -->
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ApplicationBackground" Color="{StaticResource MicaWPF.Colors.ApplicationBackgroundColor}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemAccent" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorAttention" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorPrimary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight3}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorSecondary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight3}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorTertiary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentFillColorSelectedTextBackground" Color="{StaticResource MicaWPF.Colors.SystemAccentColor}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentFillColorDefault" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+    <SolidColorBrush
+        x:Key="MicaWPF.Brushes.AccentFillColorSecondary"
+        Opacity="0.9"
+        Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+    <SolidColorBrush
+        x:Key="MicaWPF.Brushes.AccentFillColorTertiary"
+        Opacity="0.8"
+        Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextFillColorPrimary" Color="{StaticResource MicaWPF.Colors.TextFillColorPrimary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextFillColorSecondary" Color="{StaticResource MicaWPF.Colors.TextFillColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextFillColorTertiary" Color="{StaticResource MicaWPF.Colors.TextFillColorTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextFillColorDisabled" Color="{StaticResource MicaWPF.Colors.TextFillColorDisabled}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextFillColorInverse" Color="{StaticResource MicaWPF.Colors.TextFillColorInverse}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorDisabled" Color="{StaticResource MicaWPF.Colors.AccentTextFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextOnAccentFillColorSelectedText" Color="{StaticResource MicaWPF.Colors.TextOnAccentFillColorSelectedText}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextOnAccentFillColorPrimary" Color="{StaticResource MicaWPF.Colors.TextOnAccentFillColorPrimary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextOnAccentFillColorSecondary" Color="{StaticResource MicaWPF.Colors.TextOnAccentFillColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.TextOnAccentFillColorDisabled" Color="{StaticResource MicaWPF.Colors.TextOnAccentFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlFillColorDefault" Color="{StaticResource MicaWPF.Colors.ControlFillColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlFillColorSecondary" Color="{StaticResource MicaWPF.Colors.ControlFillColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlFillColorTertiary" Color="{StaticResource MicaWPF.Colors.ControlFillColorTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlFillColorDisabled" Color="{StaticResource MicaWPF.Colors.ControlFillColorDisabled}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlFillColorTransparent" Color="{StaticResource MicaWPF.Colors.ControlFillColorTransparent}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlFillColorInputActive" Color="{StaticResource MicaWPF.Colors.ControlFillColorInputActive}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrongFillColorDefault" Color="{StaticResource MicaWPF.Colors.ControlStrongFillColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrongFillColorDisabled" Color="{StaticResource MicaWPF.Colors.ControlStrongFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlSolidFillColorDefault" Color="{StaticResource MicaWPF.Colors.ControlSolidFillColorDefault}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SubtleFillColorTransparent" Color="{StaticResource MicaWPF.Colors.SubtleFillColorTransparent}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SubtleFillColorSecondary" Color="{StaticResource MicaWPF.Colors.SubtleFillColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SubtleFillColorTertiary" Color="{StaticResource MicaWPF.Colors.SubtleFillColorTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SubtleFillColorDisabled" Color="{StaticResource MicaWPF.Colors.SubtleFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlAltFillColorTransparent" Color="{StaticResource MicaWPF.Colors.ControlAltFillColorTransparent}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlAltFillColorSecondary" Color="{StaticResource MicaWPF.Colors.ControlAltFillColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlAltFillColorTertiary" Color="{StaticResource MicaWPF.Colors.ControlAltFillColorTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlAltFillColorQuarternary" Color="{StaticResource MicaWPF.Colors.ControlAltFillColorQuarternary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlAltFillColorDisabled" Color="{StaticResource MicaWPF.Colors.ControlAltFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlOnImageFillColorDefault" Color="{StaticResource MicaWPF.Colors.ControlOnImageFillColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlOnImageFillColorSecondary" Color="{StaticResource MicaWPF.Colors.ControlOnImageFillColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlOnImageFillColorTertiary" Color="{StaticResource MicaWPF.Colors.ControlOnImageFillColorTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlOnImageFillColorDisabled" Color="{StaticResource MicaWPF.Colors.ControlOnImageFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentFillColorDisabled" Color="{StaticResource MicaWPF.Colors.AccentFillColorDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrokeColorDefault" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrokeColorSecondary" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrokeColorOnAccentDefault" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorOnAccentDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrokeColorOnAccentSecondary" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorOnAccentSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrokeColorOnAccentTertiary" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorOnAccentTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrokeColorOnAccentDisabled" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorOnAccentDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrokeColorForStrongFillWhenOnImage" Color="{StaticResource MicaWPF.Colors.ControlStrokeColorForStrongFillWhenOnImage}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.CardStrokeColorDefault" Color="{StaticResource MicaWPF.Colors.CardStrokeColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.CardStrokeColorDefaultSolid" Color="{StaticResource MicaWPF.Colors.CardStrokeColorDefaultSolid}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrongStrokeColorDefault" Color="{StaticResource MicaWPF.Colors.ControlStrongStrokeColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.ControlStrongStrokeColorDisabled" Color="{StaticResource MicaWPF.Colors.ControlStrongStrokeColorDisabled}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SurfaceStrokeColorDefault" Color="{StaticResource MicaWPF.Colors.SurfaceStrokeColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SurfaceStrokeColorFlyout" Color="{StaticResource MicaWPF.Colors.SurfaceStrokeColorFlyout}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SurfaceStrokeColorInverse" Color="{StaticResource MicaWPF.Colors.SurfaceStrokeColorInverse}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.DividerStrokeColorDefault" Color="{StaticResource MicaWPF.Colors.DividerStrokeColorDefault}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.FocusStrokeColorOuter" Color="{StaticResource MicaWPF.Colors.FocusStrokeColorOuter}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.FocusStrokeColorInner" Color="{StaticResource MicaWPF.Colors.FocusStrokeColorInner}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.CardBackgroundFillColorDefault" Color="{StaticResource MicaWPF.Colors.CardBackgroundFillColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.CardBackgroundFillColorSecondary" Color="{StaticResource MicaWPF.Colors.CardBackgroundFillColorSecondary}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.MenuBorderColorDefault" Color="{StaticResource MicaWPF.Colors.MenuBorderColorDefault}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SmokeFillColorDefault" Color="{StaticResource MicaWPF.Colors.SmokeFillColorDefault}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.LayerFillColorDefault" Color="{StaticResource MicaWPF.Colors.LayerFillColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.LayerFillColorAlt" Color="{StaticResource MicaWPF.Colors.LayerFillColorAlt}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.LayerOnAcrylicFillColorDefault" Color="{StaticResource MicaWPF.Colors.LayerOnAcrylicFillColorDefault}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.LayerOnAccentAcrylicFillColorDefault" Color="{StaticResource MicaWPF.Colors.LayerOnAccentAcrylicFillColorDefault}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SolidBackgroundFillColorBase" Color="{StaticResource MicaWPF.Colors.SolidBackgroundFillColorBase}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SolidBackgroundFillColorSecondary" Color="{StaticResource MicaWPF.Colors.SolidBackgroundFillColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SolidBackgroundFillColorTertiary" Color="{StaticResource MicaWPF.Colors.SolidBackgroundFillColorTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SolidBackgroundFillColorQuarternary" Color="{StaticResource MicaWPF.Colors.SolidBackgroundFillColorQuarternary}" />
+
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorSuccess" Color="{StaticResource MicaWPF.Colors.SystemFillColorSuccess}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorCaution" Color="{StaticResource MicaWPF.Colors.SystemFillColorCaution}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorCritical" Color="{StaticResource MicaWPF.Colors.SystemFillColorCritical}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorNeutral" Color="{StaticResource MicaWPF.Colors.SystemFillColorNeutral}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorSolidNeutral" Color="{StaticResource MicaWPF.Colors.SystemFillColorSolidNeutral}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorAttentionBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorAttentionBackground}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorSuccessBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorSuccessBackground}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorCautionBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorCautionBackground}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorCriticalBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorCriticalBackground}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorNeutralBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorNeutralBackground}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorSolidAttentionBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorSolidAttentionBackground}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorSolidNeutralBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorSolidNeutralBackground}" />
+
+    <!--  Animations  -->
+
     <Storyboard x:Key="MicaWPF.Animations.Button.Default.MouseOver">
         <local1:BrushAnimation
             Storyboard.TargetName="ContentBorder"
@@ -180,8 +300,4 @@
             <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorTransparent}" />
         </ObjectAnimationUsingKeyFrames>
     </Storyboard>
-
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Assets/Brushes.xaml" />
-    </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
