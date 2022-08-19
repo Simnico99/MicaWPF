@@ -74,12 +74,20 @@ public class AccentColorService : IAccentColorService
         };
     }
 
-    private static void UpdateColorResources(Color systemAccent, Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
+    private void UpdateColorResources(Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
     {
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColor"] = systemAccent;
+        
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorPrimary"] = primaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorSecondary"] = secondaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorTertiary"] = tertiaryAccent;
+
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = SystemAccentColorLight3;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = SystemAccentColorLight2;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight1"] = SystemAccentColorLight1;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColor"] = SystemAccentColor;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark1"] = SystemAccentColorDark1;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark2"] = SystemAccentColorDark2;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark3"] = SystemAccentColorDark3;
     }
 
     private void UpdateFromInternalColors()
@@ -87,10 +95,10 @@ public class AccentColorService : IAccentColorService
         switch (ThemeService.GetCurrent().CurrentTheme)
         {
             case WindowsTheme.Dark: 
-                UpdateColorResources(SystemAccentColor, SystemAccentColorLight1, SystemAccentColorLight2, SystemAccentColorLight3);
+                UpdateColorResources(SystemAccentColorLight1, SystemAccentColorLight2, SystemAccentColorLight3);
                 break;
             default:
-                UpdateColorResources(SystemAccentColor, SystemAccentColorDark1, SystemAccentColorDark1, SystemAccentColorDark3);
+                UpdateColorResources(SystemAccentColorDark1, SystemAccentColorDark2, SystemAccentColorDark3);
                 break;
         }
 
