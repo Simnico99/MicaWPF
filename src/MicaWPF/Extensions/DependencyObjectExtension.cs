@@ -40,26 +40,28 @@ public static class DependencyObjectExtension
     {
         if (depObj != null)
         {
-            foreach (object rawChild in LogicalTreeHelper.GetChildren(depObj))
+            foreach (var rawChild in LogicalTreeHelper.GetChildren(depObj))
             {
-                if (rawChild is DependencyObject)
+                if (rawChild is not null)
                 {
-                    DependencyObject child = (DependencyObject)rawChild;
-                    if (child is T)
+                    if (rawChild is DependencyObject child)
                     {
-                        yield return (T)child;
-                    }
+                        if (child is T t)
+                        {
+                            yield return t;
+                        }
 
-                    foreach (T childOfChild in FindLogicalChildren<T>(child))
-                    {
-                        yield return childOfChild;
+                        foreach (T childOfChild in FindLogicalChildren<T>(child))
+                        {
+                            yield return childOfChild;
+                        }
                     }
                 }
             }
         }
     }
 
-    public static void RefreshChildrenStyle(this DependencyObject depObj) 
+    public static void RefreshChildrenStyle(this DependencyObject depObj)
     {
         foreach (var element in depObj.FindLogicalChildren<FrameworkElement>())
         {

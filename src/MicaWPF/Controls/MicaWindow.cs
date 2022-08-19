@@ -9,8 +9,8 @@ public class MicaWindow : Window
     private const int HTMAXBUTTON = 9;
     private const string ButtonMax = "Maximize";
     private const string ButtonRestore = "Restore";
-    private Button? _ButtonMax;
-    private Button? _ButtonRestore;
+    private System.Windows.Controls.Button? _ButtonMax;
+    private System.Windows.Controls.Button? _ButtonRestore;
     #endregion
 
     internal static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
@@ -19,7 +19,6 @@ public class MicaWindow : Window
     public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindow), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindow), new UIPropertyMetadata(TitleBarType.Win32));
 
-    private bool _templateApplied = false;
     internal Thickness? MarginMaximized
     {
         get => (Thickness)GetValue(MarginMaximizedProperty);
@@ -66,12 +65,13 @@ public class MicaWindow : Window
         if (OsHelper.IsWindows11_OrGreater && TitleBarType == TitleBarType.WinUI)
         {
             HwndSource.FromHwnd(new WindowInteropHelper(this).EnsureHandle())?.AddHook(HwndSourceHook);
+            InteropMethods.HideAllWindowButton(new WindowInteropHelper(this).Handle);
         }
     }
 
     private void AddPadding(WindowState windowsState)
     {
-        MarginMaximized = windowsState == WindowState.Maximized && TitleBarType == TitleBarType.Win32 ? new Thickness(6) : new Thickness(0);
+        MarginMaximized = windowsState == WindowState.Maximized ? new Thickness(6) : new Thickness(0);
     }
 
     private void ApplyResizeBorderThickness(WindowState windowsState)
@@ -111,16 +111,14 @@ public class MicaWindow : Window
 
     public override void OnApplyTemplate()
     {
-        if (_templateApplied == false)
-        {
-            _templateApplied = true;
-            this.EnableBackdrop(SystemBackdropType);
-            _ButtonMax = GetTemplateChild(ButtonMax) as Button;
-            _ButtonRestore = GetTemplateChild(ButtonRestore) as Button;
-        }
+        _ButtonMax = GetTemplateChild(ButtonMax) as System.Windows.Controls.Button;
+        _ButtonRestore = GetTemplateChild(ButtonRestore) as System.Windows.Controls.Button;
+
+        this.EnableBackdrop(SystemBackdropType);
 
         AddPadding(WindowState);
         ApplyResizeBorderThickness(WindowState);
+
         base.OnApplyTemplate();
     }
 
@@ -155,6 +153,7 @@ public class MicaWindow : Window
     {
         SystemCommands.CloseWindow(this);
     }
+
 
     private void OnMaximizeWindow(object target, ExecutedRoutedEventArgs e)
     {
@@ -220,35 +219,35 @@ public class MicaWindow : Window
         }
     }
 
-    private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
-    {
-        var structure = Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
+    //private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
+    //{
+    //    var structure = Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
 
-        if (structure is not null)
-        {
-            var mmi = (InteropValues.MINMAXINFO)structure;
-            var monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
+    //    if (structure is not null)
+    //    {
+    //        var mmi = (InteropValues.MINMAXINFO)structure;
+    //        var monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
 
-            if (monitor != IntPtr.Zero)
-            {
-                InteropValues.MONITORINFO monitorInfo = new()
-                {
-                    cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO))
-                };
-                InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
-                var rcWorkArea = monitorInfo.rcWork;
-                var rcMonitorArea = monitorInfo.rcMonitor;
-                mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
-                mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
-                mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
-                mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
-                mmi.ptMaxTrackSize.X = mmi.ptMaxSize.X;
-                mmi.ptMaxTrackSize.Y = mmi.ptMaxSize.Y;
-            }
+    //        if (monitor != IntPtr.Zero)
+    //        {
+    //            InteropValues.MONITORINFO monitorInfo = new()
+    //            {
+    //                cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO))
+    //            };
+    //            InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
+    //            var rcWorkArea = monitorInfo.rcWork;
+    //            var rcMonitorArea = monitorInfo.rcMonitor;
+    //            mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
+    //            mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
+    //            mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
+    //            mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
+    //            mmi.ptMaxTrackSize.X = mmi.ptMaxSize.X;
+    //            mmi.ptMaxTrackSize.Y = mmi.ptMaxSize.Y;
+    //        }
 
-            Marshal.StructureToPtr(mmi, lParam, true);
-        }
-    }
+    //        Marshal.StructureToPtr(mmi, lParam, true);
+    //    }
+    //}
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr _, IntPtr lparam, ref bool handled)
     {
@@ -259,7 +258,6 @@ public class MicaWindow : Window
                 {
                     return ShowSnapLayout(lparam, ref handled);
                 }
-                handled = true;
                 break;
             case InteropValues.HwndSourceMessages.WM_NCLBUTTONDOWN:
                 if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
@@ -267,9 +265,9 @@ public class MicaWindow : Window
                     HideMaximiseAndMinimiseButton(lparam, ref handled);
                 }
                 break;
-            case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
-                WmGetMinMaxInfo(hwnd, lparam);
-                break;
+            //case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
+            //    WmGetMinMaxInfo(hwnd, lparam);
+            //    break;
             default:
                 break;
         }

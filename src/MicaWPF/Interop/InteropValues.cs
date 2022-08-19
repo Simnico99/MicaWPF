@@ -11,6 +11,15 @@ public class InteropValues
         WM_GETMINMAXINFO = 0x0024;
     }
 
+    public static class HwndButtonStates
+    {
+        public const int GWL_STYLE = -16,
+         WS_MAXIMIZEBOX = 0x10000,
+         WS_MINIMIZEBOX = 0x20000,
+         WS_SYSMENU = 0x80000;
+    }
+
+
     public static class ExternDll
     {
         public const string

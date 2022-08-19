@@ -5,6 +5,11 @@ namespace MicaWPF.Interop;
 
 internal class InteropMethods
 {
+    [DllImport(ExternDll.User32)]
+    private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+    [DllImport(ExternDll.User32)]
+    private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
     [DllImport(ExternDll.DwmApi)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
@@ -47,6 +52,11 @@ internal class InteropMethods
     [DllImport(ExternDll.User32)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFO lpmi);
+
+    public static void HideAllWindowButton(IntPtr hwnd)
+    {
+        SetWindowLong(hwnd, HwndButtonStates.GWL_STYLE, GetWindowLong(hwnd, HwndButtonStates.GWL_STYLE) & ~HwndButtonStates.WS_SYSMENU);
+    }
 
     public static int SetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, int parameter)
     {
