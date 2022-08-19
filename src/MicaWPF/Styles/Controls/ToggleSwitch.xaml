@@ -6,7 +6,7 @@
     <Style x:Key="MicaWPF.Styles.Default.ToggleSwitch" TargetType="{x:Type controls:ToggleSwitch}">
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground">
@@ -220,7 +220,7 @@
                             <Setter TargetName="ActiveToggleEllipse" Property="Width" Value="14" />
                             <Setter TargetName="ActiveToggleRectangle" Property="Fill">
                                 <Setter.Value>
-                                    <SolidColorBrush Opacity="0.9" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                                    <SolidColorBrush Opacity="0.9" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                         </MultiTrigger>
@@ -234,7 +234,7 @@
                             <Setter TargetName="ActiveToggleEllipse" Property="Width" Value="14" />
                             <Setter TargetName="ActiveToggleRectangle" Property="Fill">
                                 <Setter.Value>
-                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                                    <SolidColorBrush Opacity="0.8" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                         </MultiTrigger>
@@ -269,7 +269,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ActiveToggleRectangle" Property="Fill">
                                 <Setter.Value>
-                                    <SolidColorBrush Opacity="0.6" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                                    <SolidColorBrush Opacity="0.6" Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="ActiveToggleEllipse" Property="Fill">

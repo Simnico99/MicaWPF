@@ -127,7 +127,7 @@
                                     RadiusY="2"
                                     Visibility="Collapsed">
                                     <Rectangle.Fill>
-                                        <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                                        <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />
                                     </Rectangle.Fill>
                                 </Rectangle>
                             </Grid>
@@ -335,7 +335,7 @@
                             CornerRadius="{TemplateBinding Border.CornerRadius}"
                             Visibility="Collapsed">
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />
                             </Border.BorderBrush>
                         </Border>
                     </Grid>

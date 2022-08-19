@@ -7,7 +7,7 @@
     <Style x:Key="MicaWPF.Styles.Default.ProgressBar" TargetType="{x:Type ProgressBar}">
         <Setter Property="Foreground">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorLight2}" />
+                <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />
             </Setter.Value>
         </Setter>
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}" />

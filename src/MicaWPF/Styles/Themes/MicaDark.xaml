@@ -134,21 +134,21 @@
 
     <SolidColorBrush x:Key="MicaWPF.Brushes.ApplicationBackground" Color="{StaticResource MicaWPF.Colors.ApplicationBackgroundColor}" />
 
-    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemAccent" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
-    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorAttention" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
-    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorPrimary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight3}" />
-    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorSecondary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight3}" />
-    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorTertiary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemAccent" Color="{StaticResource MicaWPF.Colors.SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorAttention" Color="{StaticResource MicaWPF.Colors.SystemAccentColorSecondary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorPrimary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorSecondary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorTertiary}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentTextFillColorTertiary" Color="{StaticResource MicaWPF.Colors.SystemAccentColorSecondary}" />
     <SolidColorBrush x:Key="MicaWPF.Brushes.AccentFillColorSelectedTextBackground" Color="{StaticResource MicaWPF.Colors.SystemAccentColor}" />
-    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentFillColorDefault" Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+    <SolidColorBrush x:Key="MicaWPF.Brushes.AccentFillColorDefault" Color="{StaticResource MicaWPF.Colors.SystemAccentColorSecondary}" />
     <SolidColorBrush
         x:Key="MicaWPF.Brushes.AccentFillColorSecondary"
         Opacity="0.9"
-        Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+        Color="{StaticResource MicaWPF.Colors.SystemAccentColorSecondary}" />
     <SolidColorBrush
         x:Key="MicaWPF.Brushes.AccentFillColorTertiary"
         Opacity="0.8"
-        Color="{StaticResource MicaWPF.Colors.SystemAccentColorLight2}" />
+        Color="{StaticResource MicaWPF.Colors.SystemAccentColorSecondary}" />
 
     <SolidColorBrush x:Key="MicaWPF.Brushes.TextFillColorPrimary" Color="{StaticResource MicaWPF.Colors.TextFillColorPrimary}" />
     <SolidColorBrush x:Key="MicaWPF.Brushes.TextFillColorSecondary" Color="{StaticResource MicaWPF.Colors.TextFillColorSecondary}" />

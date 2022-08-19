@@ -2,9 +2,9 @@
 
     <!--  Colors depending on the theme should be changed by the Manager  -->
     <Color x:Key="MicaWPF.Colors.SystemAccentColor">#3379d9</Color>
-    <Color x:Key="MicaWPF.Colors.SystemAccentColorLight1">#559ce4</Color>
-    <Color x:Key="MicaWPF.Colors.SystemAccentColorLight2">#80b9ee</Color>
-    <Color x:Key="MicaWPF.Colors.SystemAccentColorLight3">#add8ff</Color>
+    <Color x:Key="MicaWPF.Colors.SystemAccentColorPrimary">#559ce4</Color>
+    <Color x:Key="MicaWPF.Colors.SystemAccentColorSecondary">#80b9ee</Color>
+    <Color x:Key="MicaWPF.Colors.SystemAccentColorTertiary">#add8ff</Color>
 
 
 </ResourceDictionary>

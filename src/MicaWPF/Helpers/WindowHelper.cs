@@ -12,9 +12,12 @@ public static class WindowHelper
     {
         await Application.Current.Dispatcher.InvokeAsync(async () =>
         {
-            foreach (Window window in Application.Current.Windows)
+            foreach (var windowObj in Application.Current.Windows)
             {
-               await window.RefreshContentAsync();
+                if (windowObj is Window window and not null)
+                {
+                    await window.RefreshContentAsync();
+                }
             }
         });
     }
@@ -23,9 +26,12 @@ public static class WindowHelper
     {
         _ = Application.Current.Dispatcher.Invoke(async () =>
         {
-            foreach (Window window in Application.Current.Windows)
+            foreach (var windowObj in Application.Current.Windows)
             {
-                await window.RefreshContentAsync();
+                if (windowObj is Window window and not null)
+                {
+                    await window.RefreshContentAsync();
+                }
             }
         });
     }

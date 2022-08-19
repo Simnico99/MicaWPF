@@ -77,20 +77,9 @@ public class AccentColorService : IAccentColorService
     private static void UpdateColorResources(Color systemAccent, Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
     {
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColor"] = systemAccent;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight1"] = primaryAccent;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = secondaryAccent;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = tertiaryAccent;
-
-        Application.Current.Resources["MicaWPF.Brushes.SystemAccent"] = secondaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.SystemFillColorAttention"] = secondaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorPrimary"] = tertiaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorSecondary"] = tertiaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentTextFillColorTertiary"] = secondaryAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentFillColorSelectedTextBackground"] = systemAccent.ToBrush();
-        Application.Current.Resources["MicaWPF.Brushes.AccentFillColorDefault"] = secondaryAccent.ToBrush();
-
-        Application.Current.Resources["MicaWPF.Brushes.AccentFillColorSecondary"] = secondaryAccent.ToBrush(0.9);
-        Application.Current.Resources["MicaWPF.Brushes.AccentFillColorTertiary"] = secondaryAccent.ToBrush(0.8);
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorPrimary"] = primaryAccent;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorSecondary"] = secondaryAccent;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorTertiary"] = tertiaryAccent;
     }
 
     private void UpdateFromInternalColors()
