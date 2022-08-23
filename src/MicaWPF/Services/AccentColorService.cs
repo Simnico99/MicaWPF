@@ -1,4 +1,5 @@
 ﻿using System.Runtime;
+using MicaWPF.Events;
 using MicaWPF.Extensions;
 #if NET5_0_OR_GREATER
 using MicaWPFRuntimeComponent;
@@ -11,6 +12,8 @@ namespace MicaWPF.Services;
 
 public class AccentColorService : IAccentColorService
 {
+    public IWeakEvent<Color> AccentColorChanged { get; } = new WeakEvent<Color>();
+
     private static readonly AccentColorService _systemColorsHandler = new();
     private bool _isInit = false;
     public bool AccentUpdateFromWindows { get; private set; } = true;
@@ -88,6 +91,8 @@ public class AccentColorService : IAccentColorService
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark1"] = SystemAccentColorDark1;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark2"] = SystemAccentColorDark2;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark3"] = SystemAccentColorDark3;
+
+        AccentColorChanged.Publish(SystemAccentColor);
     }
 
     private void UpdateFromInternalColors()

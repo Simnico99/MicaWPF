@@ -81,7 +81,6 @@ public class PasswordBox : TextBox
             return;
         }
 
-        // TODO: Pasting text breaks this loop.
         var newContent = text.Replace(PasswordChar.ToString(), string.Empty);
 
         if (newContent.Length > 1)

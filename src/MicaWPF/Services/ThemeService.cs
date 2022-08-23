@@ -1,6 +1,10 @@
-﻿namespace MicaWPF.Services;
+﻿using MicaWPF.Events;
+
+namespace MicaWPF.Services;
 public class ThemeService : IThemeService
 {
+    public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
+
     private static readonly ThemeService _themeService = new();
     private static readonly ThemeDictionaryService _themeManager = ThemeDictionaryService.GetCurrent();
     private readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
@@ -145,6 +149,8 @@ public class ThemeService : IThemeService
             micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
             micaEnabledWindow.Window.WindowStyle = style;
         }
+
+        ThemeChanged.Publish(CurrentTheme);
 
         return CurrentTheme;
     }
