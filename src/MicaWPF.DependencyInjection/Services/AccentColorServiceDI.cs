@@ -1,5 +1,6 @@
 ﻿using System.Windows.Media;
 using MicaWPF.DependencyInjection.Options;
+using MicaWPF.Events;
 using MicaWPF.Services;
 
 namespace MicaWPF.DependencyInjection.Services;
@@ -7,6 +8,7 @@ internal class AccentColorServiceDI : IAccentColorService
 {
     private readonly AccentColorService _localThemeService = AccentColorService.GetCurrent();
     private readonly MicaWPFOptions _options;
+    public IWeakEvent<Color> AccentColorChanged => _localThemeService.AccentColorChanged;
 
     public AccentColorServiceDI(MicaWPFOptions options)
     {

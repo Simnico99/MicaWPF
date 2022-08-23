@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using MicaWPF.DependencyInjection.Options;
+using MicaWPF.Events;
 using MicaWPF.Models;
 using MicaWPF.Services;
 
@@ -8,6 +9,8 @@ internal class ThemeServiceDI : IThemeService
 {
     private readonly IThemeService _localThemeService = ThemeService.GetCurrent();
     private readonly MicaWPFOptions _options;
+
+    public IWeakEvent<WindowsTheme> ThemeChanged => _localThemeService.ThemeChanged;
 
     public ThemeServiceDI(MicaWPFOptions options)
     {
@@ -21,6 +24,7 @@ internal class ThemeServiceDI : IThemeService
     public bool IsThemeAware { get => _localThemeService.IsThemeAware; set => _localThemeService.IsThemeAware = value; }
 
     public ICollection<MicaEnabledWindow> MicaEnabledWindows => _localThemeService.MicaEnabledWindows;
+
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {
