@@ -5,12 +5,12 @@ public static class WindowExtension
 {
     public static void EnableBackdrop(this Window window, BackdropType backdropType = BackdropType.Mica)
     {
-        ThemeService.GetCurrent().EnableBackdrop(window, backdropType);
+        ThemeService.Current.EnableBackdrop(window, backdropType);
     }
 
     public static void EnableBackdrop(this MicaWindow window, BackdropType backdropType = BackdropType.Mica)
     {
-        ThemeService.GetCurrent().EnableBackdrop(window, backdropType);
+        ThemeService.Current.EnableBackdrop(window, backdropType);
     }
 
     public static async Task RefreshContentAsync(this Window window)

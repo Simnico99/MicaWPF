@@ -3,12 +3,7 @@
 namespace MicaWPF.Services;
 public class ThemeService : IThemeService
 {
-    public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
-
     private static readonly ThemeService _themeService = new();
-    private static readonly ThemeDictionaryService _themeManager = ThemeDictionaryService.GetCurrent();
-    private readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
-
     private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
     private const string RegistryValueName = "AppsUseLightTheme";
 
@@ -16,9 +11,11 @@ public class ThemeService : IThemeService
     private bool _isThemeAware;
     private bool _IsCheckingTheme;
 
+    public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
     public ICollection<MicaEnabledWindow> MicaEnabledWindows { get; private set; } = new List<MicaEnabledWindow>();
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
     public bool IsThemeAware { get => _isThemeAware; set => SetThemeAware(value); }
+    public static ThemeService Current { get => _themeService; }
 
     private ThemeService()
     {
@@ -35,13 +32,13 @@ public class ThemeService : IThemeService
     {
         _ = Task.Run(() =>
         {
-            if (_accentColorService.AccentUpdateFromWindows)
+            if (AccentColorService.Current.AccentUpdateFromWindows)
             {
-                _accentColorService.UpdateAccentsFromWindows();
+                AccentColorService.Current.UpdateAccentsFromWindows();
             }
             else
             {
-                _accentColorService.UpdateAccents(_accentColorService.SystemAccentColor);
+                AccentColorService.Current.UpdateAccents(AccentColorService.Current.SystemAccentColor);
             }
         });
     }
@@ -74,7 +71,7 @@ public class ThemeService : IThemeService
                 {
                     UpdateAccent();
                     Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
-                    SetThemeAware(IsThemeAware); 
+                    SetThemeAware(IsThemeAware);
                 }
                 break;
         }
@@ -102,11 +99,6 @@ public class ThemeService : IThemeService
         }
     }
 
-    public static ThemeService GetCurrent()
-    {
-        return _themeService;
-    }
-
     public static WindowsTheme GetWindowsTheme()
     {
         using var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
@@ -129,9 +121,9 @@ public class ThemeService : IThemeService
             : new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
     }
 
-    public static void RefreshTheme() 
+    public static void RefreshTheme()
     {
-        _themeManager.ThemeSource = _themeManager.ThemeSource;
+        ThemeDictionaryService.Current.ThemeSource = ThemeDictionaryService.Current.ThemeSource;
     }
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
@@ -139,10 +131,10 @@ public class ThemeService : IThemeService
         CurrentTheme = windowsTheme == WindowsTheme.Auto ? GetWindowsTheme() : windowsTheme;
 
         UpdateAccent();
-        _themeManager.ThemeSource = WindowsThemeToResourceTheme(CurrentTheme);
+        ThemeDictionaryService.Current.ThemeSource = WindowsThemeToResourceTheme(CurrentTheme);
 
         foreach (var micaEnabledWindow in MicaEnabledWindows)
-        { 
+        {
             SetWindowBackdrop(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
             //Force the title bar to refresh.
             var style = micaEnabledWindow.Window.WindowStyle;
@@ -157,7 +149,7 @@ public class ThemeService : IThemeService
 
     public void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica)
     {
-        _accentColorService.Init();
+        AccentColorService.Current.Init();
         SetWindowBackdrop(window, micaType);
         MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType));
     }

@@ -12,6 +12,7 @@ public interface IAccentColorService
     Color SystemAccentColorLight1 { get; }
     Color SystemAccentColorLight2 { get; }
     Color SystemAccentColorLight3 { get; }
+
     void UpdateAccents(Color systemAccent);
     void UpdateAccentsFromWindows();
 }

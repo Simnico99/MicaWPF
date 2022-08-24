@@ -11,6 +11,8 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    public static ThemeDictionaryService Current { get => _themeManager; }
+
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -19,12 +21,6 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     private ThemeDictionaryService()
     {
     }
-
-    public static ThemeDictionaryService GetCurrent()
-    {
-        return _themeManager;
-    }
-
     /// <summary>
     /// get current theme resource dictionary
     /// </summary>
