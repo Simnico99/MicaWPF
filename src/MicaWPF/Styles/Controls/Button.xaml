@@ -5,11 +5,9 @@
     xmlns:helpers="clr-namespace:MicaWPF.Converters"
     xmlns:local="clr-namespace:MicaWPF.Animations">
 
-    <helpers:ColorDarkerConverter x:Key="ColorDarkerConverter" />
     <Style x:Key="MicaWPF.Styles.Default.Button" TargetType="{x:Type controls:Button}">
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorDefault}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
         <Setter Property="CornerRadius" Value="4" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="0" />
@@ -22,20 +20,20 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Button}">
                     <Grid>
-                        <Border
+                        <controls:GradientBorder
                             x:Name="ContentBorder"
                             Padding="{TemplateBinding Padding}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
-                            <Border.Background>
+                            <controls:GradientBorder.Background>
                                 <SolidColorBrush x:Name="mainBrush" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color}" />
-                            </Border.Background>
+                            </controls:GradientBorder.Background>
                             <ContentPresenter
                                 x:Name="ContentPresenter"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="Center" />
-                        </Border>
+                        </controls:GradientBorder>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
@@ -80,7 +78,6 @@
     <Style x:Key="MicaWPF.Styles.AccentedButton" TargetType="{x:Type controls:Button}">
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorInverse}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.AccentControlElevationBorder}" />
         <Setter Property="CornerRadius" Value="4" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="0" />
@@ -93,20 +90,20 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Button}">
                     <Grid>
-                        <Border
+                        <controls:GradientBorder
                             x:Name="ContentBorder"
                             Padding="{TemplateBinding Padding}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{TemplateBinding CornerRadius}">
-                            <Border.Background>
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Style="{DynamicResource MicaWPF.Styles.GradientBorder.Accent}">
+                            <controls:GradientBorder.Background>
                                 <SolidColorBrush x:Name="mainBrush" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color}" />
-                            </Border.Background>
+                            </controls:GradientBorder.Background>
                             <ContentPresenter
                                 x:Name="ContentPresenter"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="Center" />
-                        </Border>
+                        </controls:GradientBorder>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
