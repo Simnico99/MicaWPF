@@ -19,8 +19,8 @@ public enum ContentDialogResult
 
 public static class ContentDialog
 {
-    private const int DefaultWidth = 332;
-    private const int DefaultMaxHeight = 500;
+    private const int DefaultWidth = 320;
+    private const int DefaultHeight = 756;
 
     private static Grid HookToWindow(MicaWindow micaWindow, ContentControl content)
     {
@@ -45,7 +45,7 @@ public static class ContentDialog
         ((Grid)grid.Parent).Children.Remove(grid);
     }
 
-    public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, object? customContent = null, int maxHeight = DefaultMaxHeight, int width = DefaultWidth, Brush? borderBrush = null)
+    public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, object? customContent = null, int height = DefaultHeight, int width = DefaultWidth, Brush? borderBrush = null)
     {
         var result = ContentDialogResult.Empty;
 
@@ -60,7 +60,7 @@ public static class ContentDialog
                 InnerContent = customContent,
                 InnerTitleText = titleText,
                 InnerBorderBrush = borderBrush,
-                MaxHeight = maxHeight,
+                Height = height,
                 Width = width
             };
 

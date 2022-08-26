@@ -7,8 +7,10 @@
     xmlns:helpers="clr-namespace:MicaWPF.Converters"
     xmlns:local="clr-namespace:MicaWPF.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="332"
-    MaxHeight="500"
+    MinWidth="320"
+    MinHeight="184"
+    MaxWidth="548"
+    MaxHeight="756"
     d:Visibility="Visible"
     Visibility="Collapsed"
     mc:Ignorable="d">
@@ -19,8 +21,10 @@
     <StackPanel VerticalAlignment="Center">
         <Border
             x:Name="MainBorder"
+            Height="{Binding Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}}"
+            MaxHeight="{Binding MaxHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}}"
             Background="{DynamicResource MicaWPF.Brushes.SolidBackgroundFillColorQuarternary}"
-            BorderBrush="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}"
+            BorderBrush="{DynamicResource MicaWPF.Brushes.SurfaceStrokeColorDefault}"
             BorderThickness="1"
             CornerRadius="12">
             <Border.Effect>
@@ -52,60 +56,62 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
-
-                <Border
-                    x:Name="ButtonBorder"
-                    Padding="12"
-                    Background="{DynamicResource MicaWPF.Brushes.SolidBackgroundFillColorBase}"
-                    BorderBrush="{DynamicResource MicaWPF.Brushes.CardStrokeColorDefault}"
-                    BorderThickness="0,1,0,0"
-                    CornerRadius="0,0,12,12"
-                    DockPanel.Dock="Bottom"
-                    Visibility="Collapsed">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <controls:ColumnDefinitionExtended
-                                x:Name="LeftColumn"
-                                Width="*"
-                                Visible="False" />
-                            <controls:ColumnDefinitionExtended
-                                x:Name="MiddleColumn"
-                                Width="*"
-                                Visible="False" />
-                            <controls:ColumnDefinitionExtended
-                                x:Name="RightColumn"
-                                Width="*"
-                                Visible="False" />
-                        </Grid.ColumnDefinitions>
-                        <controls:Button
-                            x:Name="PrimaryButton"
-                            Grid.Column="0"
-                            Width="Auto"
-                            Height="30"
-                            Margin="4"
-                            HorizontalAlignment="Stretch"
-                            Click="PrimaryButton_Click"
-                            Style="{StaticResource MicaWPF.Styles.AccentedButton}">
-                            Hoi
-                        </controls:Button>
-                        <controls:Button
-                            x:Name="SecondaryButton"
-                            Grid.Column="1"
-                            Height="30"
-                            Margin="4"
-                            Click="SecondaryButton_Click">
-                            Hoi
-                        </controls:Button>
-                        <controls:Button
-                            x:Name="TertiaryButton"
-                            Grid.Column="2"
-                            Height="30"
-                            Margin="4"
-                            Click="TertiaryButton_Click">
-                            Hoi
-                        </controls:Button>
-                    </Grid>
-                </Border>
+                <Grid DockPanel.Dock="Bottom">
+                    <Border
+                        x:Name="ButtonBorder"
+                        Height="63"
+                        Padding="12"
+                        VerticalAlignment="Bottom"
+                        Background="{DynamicResource MicaWPF.Brushes.SolidBackgroundFillColorBase}"
+                        BorderBrush="{DynamicResource MicaWPF.Brushes.CardStrokeColorDefault}"
+                        BorderThickness="0,1,0,0"
+                        CornerRadius="0,0,12,12"
+                        Visibility="Collapsed">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <controls:ColumnDefinitionExtended
+                                    x:Name="LeftColumn"
+                                    Width="*"
+                                    Visible="False" />
+                                <controls:ColumnDefinitionExtended
+                                    x:Name="MiddleColumn"
+                                    Width="*"
+                                    Visible="False" />
+                                <controls:ColumnDefinitionExtended
+                                    x:Name="RightColumn"
+                                    Width="*"
+                                    Visible="False" />
+                            </Grid.ColumnDefinitions>
+                            <controls:Button
+                                x:Name="PrimaryButton"
+                                Grid.Column="0"
+                                Width="Auto"
+                                Height="30"
+                                Margin="4"
+                                HorizontalAlignment="Stretch"
+                                Click="PrimaryButton_Click"
+                                Style="{StaticResource MicaWPF.Styles.AccentedButton}">
+                                Hoi
+                            </controls:Button>
+                            <controls:Button
+                                x:Name="SecondaryButton"
+                                Grid.Column="1"
+                                Height="30"
+                                Margin="4"
+                                Click="SecondaryButton_Click">
+                                Hoi
+                            </controls:Button>
+                            <controls:Button
+                                x:Name="TertiaryButton"
+                                Grid.Column="2"
+                                Height="30"
+                                Margin="4"
+                                Click="TertiaryButton_Click">
+                                Hoi
+                            </controls:Button>
+                        </Grid>
+                    </Border>
+                </Grid>
             </DockPanel>
         </Border>
     </StackPanel>
