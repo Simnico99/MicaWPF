@@ -65,11 +65,17 @@ public static class DependencyObjectExtension
     {
         foreach (var element in depObj.FindLogicalChildren<FrameworkElement>())
         {
-            element.RefreshStyle();
-            if (element is Controls.Frame frame)
+            if (element is Controls.Frame or Frame)
             {
-                ((DependencyObject)frame.Content).RefreshChildrenStyle();
+                depObj.RefreshChildrenStyle();
             }
+
+            if (element is Controls.ToggleSwitch)
+            {
+                return;
+            }
+
+            element.RefreshStyle();
         }
     }
 }
