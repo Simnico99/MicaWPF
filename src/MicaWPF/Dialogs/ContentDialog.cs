@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,20 @@ public enum ContentDialogResult
     Empty
 }
 
-public static class ContentDialog
+public class ContentDialog
 {
-    private const int DefaultWidth = 320;
-    private const int DefaultHeight = 756;
+    public string? Title { get; set; }
+    public string? PrimaryButtonText { get; set; }
+    public string? SecondaryButtonText { get; set; }
+    public string? CloseButtonText { get; set; }
+    public object? Content { get; set; }
+    public Brush? BorderBrush { get; set; }
+    public double Height { get; set; } = Double.NaN;
+    public double Width { get; set; } = 320;
+    public ContentDialogButton DefaultButton { get; set; }
+
+
+    private static readonly Style _accentButtonStyle = (Style)Application.Current.FindResource("MicaWPF.Styles.AccentedButton");
 
     private static Grid HookToWindow(MicaWindow micaWindow, ContentControl content)
     {
@@ -45,7 +56,44 @@ public static class ContentDialog
         ((Grid)grid.Parent).Children.Remove(grid);
     }
 
-    public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, object? customContent = null, int height = DefaultHeight, int width = DefaultWidth, Brush? borderBrush = null)
+    private static MicaWindow FindMicaWindow(MicaWindow? micaWindow)
+    {
+        if (micaWindow is null)
+        {
+            foreach (var window in Application.Current.Windows)
+            {
+                if (window.GetType().Name == "MainWindow")
+                {
+                    if (window.GetType().IsSubclassOf(typeof(MicaWindow)))
+                    {
+                        micaWindow = window as MicaWindow;
+                    }
+                }
+            }
+
+            if (micaWindow is null)
+            {
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.IsEnabled && window.IsVisible)
+                    {
+                        micaWindow = window as MicaWindow;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (micaWindow is null)
+        {
+            throw new ArgumentNullException(nameof(micaWindow), "No MicaWindow could be found automatically please specify one.");
+        }
+
+        return micaWindow;
+    }
+
+    public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, ContentDialogButton? defaultButton = null, object? customContent = null, double height = double.NaN, double width = 320, Brush? borderBrush = null)
     {
         var result = ContentDialogResult.Empty;
 
@@ -64,7 +112,69 @@ public static class ContentDialog
                 Width = width
             };
 
-            var grid = HookToWindow(micaWindow, content);
+            switch (defaultButton)
+            {
+                case ContentDialogButton.Primary:
+                    content.PrimaryButtonStyle = _accentButtonStyle;
+                    break;
+                case ContentDialogButton.Secondary:
+                    content.SecondaryButtonStyle = _accentButtonStyle;
+                    break;
+                case ContentDialogButton.Close:
+                    content.CloseButtonStyle = _accentButtonStyle;
+                    break;
+                default:
+                    break;
+            }
+
+            var grid = HookToWindow(FindMicaWindow(micaWindow), content);
+
+            await content.ShowAsync();
+
+            result = content.Result;
+            DeleteDialog(content, grid);
+        });
+
+        return result;
+    }
+
+
+    public async Task<ContentDialogResult> ShowAsync(MicaWindow? micaWindow = null)
+    {
+        var result = ContentDialogResult.Empty;
+
+        await Application.Current.Dispatcher.Invoke(async () =>
+        {
+            var content = new DefaultContentDialog
+            {
+                PrimaryButtonText = PrimaryButtonText,
+                SecondaryButtonText = SecondaryButtonText,
+                TertiaryButtonText = CloseButtonText,
+                InnerContent = Content,
+                InnerTitleText = Title,
+                InnerBorderBrush = BorderBrush,
+                Height = Height,
+                Width = Width
+            };
+
+
+
+            switch (DefaultButton)
+            {
+                case ContentDialogButton.Primary:
+                    content.PrimaryButtonStyle = _accentButtonStyle;
+                    break;
+                case ContentDialogButton.Secondary:
+                    content.SecondaryButtonStyle = _accentButtonStyle;
+                    break;
+                case ContentDialogButton.Close:
+                    content.CloseButtonStyle = _accentButtonStyle;
+                    break;
+                default:
+                    break;
+            }
+
+            var grid = HookToWindow(FindMicaWindow(micaWindow), content);
 
             await content.ShowAsync();
 

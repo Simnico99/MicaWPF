@@ -42,6 +42,7 @@
                             <Label x:Name="TitleTextLabel" Visibility="Collapsed">
                                 <TextBlock
                                     x:Name="TitleText"
+                                    Margin="-6,0,0,0"
                                     FontSize="17"
                                     FontWeight="SemiBold"
                                     TextWrapping="WrapWithOverflow" />
@@ -89,8 +90,7 @@
                                 Height="30"
                                 Margin="4"
                                 HorizontalAlignment="Stretch"
-                                Click="PrimaryButton_Click"
-                                Style="{StaticResource MicaWPF.Styles.AccentedButton}">
+                                Click="PrimaryButton_Click">
                                 Hoi
                             </controls:Button>
                             <controls:Button

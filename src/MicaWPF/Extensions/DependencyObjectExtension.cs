@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 namespace MicaWPF.Extensions;
 public static class DependencyObjectExtension
 {
+    private static List<Type> ObjectsThatNeedsRefresh { get; set; } = new()
+    {
+        typeof(Controls.Button)
+    };
+
     /// <summary>
     ///     Get all objects of a certain type in a form or a page.
     /// </summary>
@@ -67,15 +72,13 @@ public static class DependencyObjectExtension
         {
             if (element is Controls.Frame or Frame)
             {
-                depObj.RefreshChildrenStyle();
+                element.RefreshChildrenStyle();
             }
 
-            if (element is Controls.ToggleSwitch)
+            if (ObjectsThatNeedsRefresh.Contains(element.GetType()))
             {
-                return;
+                element.RefreshStyle();
             }
-
-            element.RefreshStyle();
         }
     }
 }

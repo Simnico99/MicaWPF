@@ -135,6 +135,31 @@ public partial class DefaultContentDialog : ContentControl
         }
     }
 
+    internal Style PrimaryButtonStyle
+    {
+        get => PrimaryButton.Style;
+        set
+        {
+            PrimaryButton.Style = value;
+        }
+    }
+    internal Style SecondaryButtonStyle
+    {
+        get => SecondaryButton.Style;
+        set
+        {
+            SecondaryButton.Style = value;
+        }
+    }
+    internal Style CloseButtonStyle 
+    {
+        get => TertiaryButton.Style;
+        set
+        {
+            TertiaryButton.Style = value;
+        }
+    }
+
     internal DefaultContentDialog()
     {
         InitializeComponent();

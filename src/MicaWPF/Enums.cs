@@ -1,5 +1,12 @@
 ﻿namespace MicaWPF;
 
+public enum ContentDialogButton 
+{ 
+    Primary,
+    Secondary,
+    Close
+}
+
 public enum RevealMode
 {
     Hidden,
@@ -17,14 +24,6 @@ public enum WindowsTheme
     Light,
     Dark,
     Auto
-}
-
-public enum OsVersion
-{
-    WindowsOld,
-    Windows10,
-    Windows11Before22523, // Before 22523
-    Windows11After22523 // After 22523
 }
 
 public enum BackdropType
