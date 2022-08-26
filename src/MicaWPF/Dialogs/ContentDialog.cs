@@ -136,7 +136,6 @@ public class ContentDialog
         return result;
     }
 
-
     public async Task<ContentDialogResult> ShowAsync(MicaWindow? micaWindow = null)
     {
         var result = ContentDialogResult.Empty;
