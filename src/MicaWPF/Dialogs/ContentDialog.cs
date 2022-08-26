@@ -30,7 +30,6 @@ public class ContentDialog
     public double Width { get; set; } = 320;
     public ContentDialogButton DefaultButton { get; set; }
 
-
     private static readonly Style _accentButtonStyle = (Style)Application.Current.FindResource("MicaWPF.Styles.AccentedButton");
 
     private static Grid HookToWindow(MicaWindow micaWindow, ContentControl content)
@@ -73,7 +72,6 @@ public class ContentDialog
 
             if (micaWindow is null)
             {
-
                 foreach (Window window in Application.Current.Windows)
                 {
                     if (window.IsEnabled && window.IsVisible)
@@ -156,8 +154,6 @@ public class ContentDialog
                 Height = Height,
                 Width = Width
             };
-
-
 
             switch (DefaultButton)
             {
