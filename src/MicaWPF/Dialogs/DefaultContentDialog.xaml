@@ -23,7 +23,14 @@
             BorderBrush="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}"
             BorderThickness="1"
             CornerRadius="12">
-
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="35"
+                    Direction="-90"
+                    Opacity="0.2"
+                    RenderingBias="Quality"
+                    ShadowDepth="30" />
+            </Border.Effect>
             <DockPanel>
                 <Grid Margin="12" DockPanel.Dock="Top">
                     <ScrollViewer MaxHeight="{Binding MaxHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}, Converter={StaticResource DialogScrollViewerHeightConverter}}">
@@ -50,7 +57,7 @@
                     x:Name="ButtonBorder"
                     Padding="12"
                     Background="{DynamicResource MicaWPF.Brushes.SolidBackgroundFillColorBase}"
-                    BorderBrush="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}"
+                    BorderBrush="{DynamicResource MicaWPF.Brushes.CardStrokeColorDefault}"
                     BorderThickness="0,1,0,0"
                     CornerRadius="0,0,12,12"
                     DockPanel.Dock="Bottom"
