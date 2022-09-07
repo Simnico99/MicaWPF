@@ -149,7 +149,7 @@ public class ThemeService : IThemeService
 
     public void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica)
     {
-        AccentColorService.Current.Init();
+        _ = AccentColorService.Current;
         SetWindowBackdrop(window, micaType);
         MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType));
     }

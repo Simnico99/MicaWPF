@@ -21,6 +21,8 @@ internal class AccentColorServiceDI : IAccentColorService
         {
             AccentColorService.Current.UpdateAccents(options.AccentColor);
         }
+
+        AccentColorService.Current.IsTitleBarAndBorderAccentAware = _options.IsTitleBarAndBorderAccentAware;
     }
 
     public bool AccentUpdateFromWindows => AccentColorService.Current.AccentUpdateFromWindows;
