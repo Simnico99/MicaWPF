@@ -26,7 +26,7 @@ public class ContentDialog
     public string? CloseButtonText { get; set; }
     public object? Content { get; set; }
     public Brush? BorderBrush { get; set; }
-    public double Height { get; set; } = Double.NaN;
+    public double Height { get; set; } = double.NaN;
     public double Width { get; set; } = 320;
     public ContentDialogButton DefaultButton { get; set; }
 
@@ -61,12 +61,14 @@ public class ContentDialog
         {
             foreach (var window in Application.Current.Windows)
             {
-                if (window.GetType().Name == "MainWindow")
+                if (window is null || window.GetType().Name != "MainWindow")
                 {
-                    if (window.GetType().IsSubclassOf(typeof(MicaWindow)))
-                    {
-                        micaWindow = window as MicaWindow;
-                    }
+                    continue;
+                }
+
+                if (window.GetType().IsSubclassOf(typeof(MicaWindow)))
+                {
+                    micaWindow = window as MicaWindow;
                 }
             }
 
@@ -74,6 +76,11 @@ public class ContentDialog
             {
                 foreach (Window window in Application.Current.Windows)
                 {
+                    if (window is null)
+                    {
+                        continue;
+                    }
+
                     if (window.IsEnabled && window.IsVisible)
                     {
                         micaWindow = window as MicaWindow;
