@@ -68,7 +68,7 @@
                             Height="1"
                             Margin="2,0,2,1"
                             VerticalAlignment="Bottom"
-                            Fill="{DynamicResource MicaWPF.Brushes.SystemAccent}"
+                            Fill="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}"
                             Visibility="Collapsed" />
                     </Grid>
 

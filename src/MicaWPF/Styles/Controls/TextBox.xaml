@@ -28,6 +28,7 @@
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
+        <Setter Property="SelectionBrush" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}" />
         <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
         <Setter Property="MinHeight" Value="34" />
         <Setter Property="Padding" Value="6,4" />
@@ -50,7 +51,6 @@
                             CornerRadius="4">
                             <Border
                                 x:Name="BottomBorder"
-                                Padding="2"
                                 BorderThickness="0,0,0,1"
                                 CornerRadius="4">
                                 <Border.BorderBrush>
@@ -72,11 +72,7 @@
                                     <ScrollViewer
                                         x:Name="PART_ContentHost"
                                         Margin="0"
-                                        Padding="0"
-                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                        Padding="0" />
                                 </Grid>
                             </Border>
                         </Border>
@@ -85,7 +81,7 @@
                             Height="1"
                             Margin="2,0,2,1"
                             VerticalAlignment="Bottom"
-                            Fill="{DynamicResource MicaWPF.Brushes.SystemAccent}"
+                            Fill="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}"
                             Visibility="Collapsed" />
                     </Grid>
 
