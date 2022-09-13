@@ -265,6 +265,6 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Light/GradientBorder.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Animations/Light/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/VisualStates/Light/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

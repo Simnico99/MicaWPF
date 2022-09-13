@@ -11,7 +11,7 @@
             Storyboard.TargetProperty="Background"
             From="{StaticResource MicaWPF.Brushes.ControlFillColorDefault}"
             To="{StaticResource MicaWPF.Brushes.ControlFillColorSecondary}"
-            Duration="{StaticResource MicaWPF.Animations.Common.FastAnimationAfterDuration}" />
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 
     <Storyboard x:Key="MicaWPF.Animations.Button.Default.Pressed">
@@ -20,19 +20,19 @@
             Storyboard.TargetProperty="Background"
             From="{StaticResource MicaWPF.Brushes.ControlFillColorSecondary}"
             To="{StaticResource MicaWPF.Brushes.ControlFillColorTertiary}"
-            Duration="{StaticResource MicaWPF.Animations.Common.FastAnimationAfterDuration}" />
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
         <anim:BrushAnimation
             Storyboard.TargetName="ContentPresenter"
             Storyboard.TargetProperty="(TextElement.Foreground)"
             From="{StaticResource MicaWPF.Brushes.TextFillColorPrimary}"
             To="{StaticResource MicaWPF.Brushes.TextFillColorSecondary}"
-            Duration="{StaticResource MicaWPF.Animations.Common.FastAnimationAfterDuration}" />
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
         <anim:BrushAnimation
             Storyboard.TargetName="ContentBorder"
             Storyboard.TargetProperty="TopBorderBrush"
             From="{StaticResource MicaWPF.Brushes.ControlStrokeColorSecondary}"
             To="{StaticResource MicaWPF.Brushes.ControlStrokeColorDefault}"
-            Duration="{StaticResource MicaWPF.Animations.Common.FastAnimationAfterDuration}" />
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 
     <Storyboard x:Key="MicaWPF.Animations.Button.Default.Disabled">
@@ -47,22 +47,22 @@
         </ObjectAnimationUsingKeyFrames>
     </Storyboard>
 
-    <Storyboard x:Key="MicaWPF.Animations.Button.Accent.MouseOver">
+    <Storyboard x:Key="MicaWPF.Animations.Button.Default.Accent.MouseOver">
         <anim:BrushAnimation
             Storyboard.TargetName="ContentBorder"
             Storyboard.TargetProperty="Background"
             From="{StaticResource MicaWPF.Brushes.AccentFillColorDefault}"
             To="{StaticResource MicaWPF.Brushes.AccentFillColorSecondary}"
-            Duration="{StaticResource MicaWPF.Animations.Common.FastAnimationAfterDuration}" />
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 
-    <Storyboard x:Key="MicaWPF.Animations.Button.Accent.Default.Pressed">
+    <Storyboard x:Key="MicaWPF.Animations.Button.Default.Accent.Pressed">
         <anim:BrushAnimation
             Storyboard.TargetName="ContentPresenter"
             Storyboard.TargetProperty="(TextElement.Foreground)"
             From="{StaticResource MicaWPF.Brushes.TextOnAccentFillColorPrimary}"
             To="{StaticResource MicaWPF.Brushes.TextOnAccentFillColorSecondary}"
-            Duration="{StaticResource MicaWPF.Animations.Common.FastAnimationAfterDuration}" />
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background">
             <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorTertiary}" />
         </ObjectAnimationUsingKeyFrames>

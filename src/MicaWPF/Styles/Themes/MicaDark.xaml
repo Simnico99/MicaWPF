@@ -260,6 +260,6 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Dark/GradientBorder.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Animations/Dark/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/VisualStates/Dark/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
