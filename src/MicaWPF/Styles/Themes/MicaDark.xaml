@@ -1,9 +1,4 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:MicaWPF.Controls"
-    xmlns:local="clr-namespace:MicaWPF.Models"
-    xmlns:local1="clr-namespace:MicaWPF.Animations">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--  Colors  -->
     <Color x:Key="MicaWPF.Colors.ApplicationBackgroundColor">#202020</Color>
@@ -263,123 +258,8 @@
     <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorSolidAttentionBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorSolidAttentionBackground}" />
     <SolidColorBrush x:Key="MicaWPF.Brushes.SystemFillColorSolidNeutralBackground" Color="{StaticResource MicaWPF.Colors.SystemFillColorSolidNeutralBackground}" />
 
-    <!--  Animations  -->
-
-    <Storyboard x:Key="MicaWPF.Animations.Button.Default.MouseOver">
-        <local1:BrushAnimation
-            Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="Background"
-            From="{StaticResource MicaWPF.Brushes.ControlFillColorDefault}"
-            To="{StaticResource MicaWPF.Brushes.ControlFillColorSecondary}"
-            Duration="0:0:0.083" />
-    </Storyboard>
-
-    <Storyboard x:Key="MicaWPF.Animations.Button.Default.Pressed">
-        <local1:BrushAnimation
-            Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="Background"
-            From="{StaticResource MicaWPF.Brushes.ControlFillColorSecondary}"
-            To="{StaticResource MicaWPF.Brushes.ControlFillColorTertiary}"
-            Duration="0:0:0.083" />
-        <local1:BrushAnimation
-            Storyboard.TargetName="ContentPresenter"
-            Storyboard.TargetProperty="(TextElement.Foreground)"
-            From="{StaticResource MicaWPF.Brushes.TextFillColorPrimary}"
-            To="{StaticResource MicaWPF.Brushes.TextFillColorSecondary}"
-            Duration="0:0:0.083" />
-        <local1:BrushAnimation
-            Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="TopBorderBrush"
-            From="{StaticResource MicaWPF.Brushes.ControlStrokeColorSecondary}"
-            To="{StaticResource MicaWPF.Brushes.ControlStrokeColorDefault}"
-            Duration="0:0:0.083" />
-    </Storyboard>
-
-    <Storyboard x:Key="MicaWPF.Animations.Button.Accent.MouseOver">
-        <local1:BrushAnimation
-            Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="Background"
-            From="{StaticResource MicaWPF.Brushes.AccentFillColorDefault}"
-            To="{StaticResource MicaWPF.Brushes.AccentFillColorSecondary}"
-            Duration="0:0:0.083" />
-    </Storyboard>
-
-    <Storyboard x:Key="MicaWPF.Animations.Button.Accent.Default.Pressed">
-        <local1:BrushAnimation
-            Storyboard.TargetName="ContentPresenter"
-            Storyboard.TargetProperty="(TextElement.Foreground)"
-            From="{StaticResource MicaWPF.Brushes.TextOnAccentFillColorPrimary}"
-            To="{StaticResource MicaWPF.Brushes.TextOnAccentFillColorSecondary}"
-            Duration="0:0:0.083" />
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background">
-            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorTertiary}" />
-        </ObjectAnimationUsingKeyFrames>
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="TopBorderBrush">
-            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorTransparent}" />
-        </ObjectAnimationUsingKeyFrames>
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="BottomBorderBrush">
-            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorTransparent}" />
-        </ObjectAnimationUsingKeyFrames>
-    </Storyboard>
-
-    <!--  Theme Only Styles  -->
-    <Style TargetType="{x:Type controls:GradientBorder}">
-        <Setter Property="TopBorderBrush" Value="{DynamicResource MicaWPF.Brushes.ControlStrokeColorSecondary}" />
-        <Setter Property="BottomBorderBrush" Value="{DynamicResource MicaWPF.Brushes.ControlStrokeColorDefault}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:GradientBorder}">
-                    <Grid>
-                        <Border
-                            Margin="0"
-                            BorderBrush="{TemplateBinding TopBorderBrush}"
-                            BorderThickness="0,1,0,0"
-                            CornerRadius="{TemplateBinding CornerRadius}" />
-                        <Border
-                            Margin="0"
-                            BorderBrush="{TemplateBinding BottomBorderBrush}"
-                            BorderThickness="1,0,1,1"
-                            CornerRadius="{TemplateBinding CornerRadius}" />
-                        <Border
-                            Margin="1"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="0"
-                            CornerRadius="3" />
-                        <ContentPresenter Margin="{TemplateBinding Padding}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="MicaWPF.Styles.GradientBorder.Accent" TargetType="{x:Type controls:GradientBorder}">
-        <Setter Property="TopBorderBrush" Value="{DynamicResource MicaWPF.Brushes.ControlStrokeColorOnAccentDefault}" />
-        <Setter Property="BottomBorderBrush" Value="{DynamicResource MicaWPF.Brushes.ControlStrokeColorOnAccentSecondary}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:GradientBorder}">
-                    <Border
-                        Margin="1"
-                        Background="{TemplateBinding Background}"
-                        BorderThickness="0"
-                        CornerRadius="4">
-                        <Grid Opacity="{TemplateBinding Opacity}">
-                            <Border
-                                Margin="0"
-                                BorderBrush="{TemplateBinding TopBorderBrush}"
-                                BorderThickness="1,1,1,0"
-                                CornerRadius="{TemplateBinding CornerRadius}" />
-                            <Border
-                                Margin="0"
-                                BorderBrush="{TemplateBinding BottomBorderBrush}"
-                                BorderThickness="0,0,0,1"
-                                CornerRadius="{TemplateBinding CornerRadius}" />
-                            <ContentPresenter Margin="{TemplateBinding Padding}" />
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Dark/GradientBorder.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Animations/Dark/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

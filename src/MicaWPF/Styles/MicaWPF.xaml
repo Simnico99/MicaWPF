@@ -25,6 +25,7 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ScrollViewer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ListView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/DataGrid.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Animations/Common_Animations.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -30,7 +30,10 @@
                         Height="{TemplateBinding Height}"
                         RenderTransformOrigin="0.5,0.5">
                         <Grid.RenderTransform>
-                            <RotateTransform Angle="90" />
+                            <TransformGroup>
+                                <RotateTransform Angle="90" />
+                                <ScaleTransform ScaleY="-1" />
+                            </TransformGroup>
                         </Grid.RenderTransform>
                         <controls:Arc
                             EndAngle="359"

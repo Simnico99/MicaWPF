@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    <Duration x:Key="MicaWPF.Animations.Common.FastOutSlowInKeySpline">0,0,0,1</Duration>
+
+    <Duration x:Key="MicaWPF.Animations.Common.NormalAnimationDuration">00:00:00.250</Duration>
+    <Duration x:Key="MicaWPF.Animations.Common.FastAnimationDuration">00:00:00.167</Duration>
+    <Duration x:Key="MicaWPF.Animations.Common.FastAnimationAfterDuration">00:00:00.168</Duration>
+    <Duration x:Key="MicaWPF.Animations.Common.FasterAnimationDuration">00:00:00.083</Duration>
+
+</ResourceDictionary>
