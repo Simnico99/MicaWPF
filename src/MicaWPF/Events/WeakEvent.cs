@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MicaWPF.Events;
-internal class WeakEvent<T> : IWeakEvent<T>
+internal sealed class WeakEvent<T> : IWeakEvent<T>
 {
-    protected readonly object _locker = new();
-    protected readonly List<(Type EventType, Delegate MethodToCall)> _eventRegistrations = new();
+    private readonly object _locker = new();
+    private readonly List<(Type EventType, Delegate MethodToCall)> _eventRegistrations = new();
 
-    public virtual ISubscription Subscribe(Action<T> action)
+    public ISubscription Subscribe(Action<T> action)
     {
         if (action is null)
         {
@@ -29,7 +29,7 @@ internal class WeakEvent<T> : IWeakEvent<T>
         });
     }
 
-    public virtual ConfiguredTaskAwaitable PublishAsync(T data, bool configureAwait = false)
+    public ConfiguredTaskAwaitable PublishAsync(T data, bool configureAwait = false)
     {
         return Task.Run(() =>
         {

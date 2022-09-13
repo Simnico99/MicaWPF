@@ -3,7 +3,7 @@ using static MicaWPF.Interop.InteropValues;
 
 namespace MicaWPF.Interop;
 
-internal class InteropMethods
+internal sealed class InteropMethods
 {
     [DllImport(ExternDll.User32)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]

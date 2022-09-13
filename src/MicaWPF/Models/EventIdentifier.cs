@@ -1,5 +1,5 @@
 ﻿namespace MicaWPF.Models;
-internal class EventIdentifier
+internal sealed class EventIdentifier
 {
     public long Current { get; internal set; } = 0;
     public long GetNext()

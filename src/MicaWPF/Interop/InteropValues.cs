@@ -1,6 +1,6 @@
 ﻿namespace MicaWPF.Interop;
 
-public class InteropValues
+public sealed class InteropValues
 {
     public static class HwndSourceMessages
     {

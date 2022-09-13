@@ -4,7 +4,7 @@ using MicaWPF.Events;
 using MicaWPF.Services;
 
 namespace MicaWPF.DependencyInjection.Services;
-internal class AccentColorServiceDI : IAccentColorService
+internal sealed class AccentColorServiceDI : IAccentColorService
 {
     private readonly MicaWPFOptions _options;
     public IWeakEvent<Color> AccentColorChanged => AccentColorService.Current.AccentColorChanged;

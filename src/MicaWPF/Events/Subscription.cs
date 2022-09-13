@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MicaWPF.Events;
-internal class Subscription : ISubscription
+internal sealed class Subscription : ISubscription
 {
     private readonly Action _removeMethod;
 

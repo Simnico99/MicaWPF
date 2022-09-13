@@ -5,7 +5,7 @@ using MicaWPF.Models;
 using MicaWPF.Services;
 
 namespace MicaWPF.DependencyInjection.Services;
-internal class ThemeServiceDI : IThemeService
+internal sealed class ThemeServiceDI : IThemeService
 {
     private readonly MicaWPFOptions _options;
     public IWeakEvent<WindowsTheme> ThemeChanged => ThemeService.Current.ThemeChanged;
