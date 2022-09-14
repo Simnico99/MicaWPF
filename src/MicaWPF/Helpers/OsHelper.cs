@@ -1,5 +1,8 @@
 ﻿namespace MicaWPF.Helpers;
 
+/// <summary>
+/// Helper class to get the current OS Version.
+/// </summary>
 public static class OsHelper
 {
     private static Version? _versionCache;

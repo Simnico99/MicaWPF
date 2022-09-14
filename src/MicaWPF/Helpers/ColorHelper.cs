@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MicaWPF.Helpers;
 
-namespace MicaWPF.Helpers;
+/// <summary>
+/// An helper class to help with <see cref="Color"/>.
+/// </summary>
 public static class ColorHelper
 {
     private delegate byte ComponentSelector(Color color);
@@ -13,6 +11,11 @@ public static class ColorHelper
     private static readonly ComponentSelector _greenSelector = color => color.G;
     private static readonly ComponentSelector _blueSelector = color => color.B;
 
+    /// <summary>
+    /// Will interpolate between 2 colors.
+    /// </summary>
+    /// <returns>The interpolated <see cref="Color"/>.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">If lambda value is not between 0 or 1.</exception>
     public static Color InterpolateBetween(
         Color endPoint1,
         Color endPoint2,

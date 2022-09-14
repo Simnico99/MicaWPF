@@ -1,5 +1,8 @@
 ﻿namespace MicaWPF.Helpers;
 
+/// <summary>
+/// An helper class to manipulate HSV Colors.
+/// </summary>
 public static class HSVColorHelper
 {
     /// <summary>
@@ -15,6 +18,10 @@ public static class HSVColorHelper
         return (color.GetHue(), max == 0d ? 0d : (max - min) / max, max);
     }
 
+    /// <summary>
+    /// Gets the entire color spectrum.
+    /// </summary>
+    /// <returns>The entire color</returns>
     public static Color[] GetSpectrum()
     {
         var rgbs = new Color[360];
@@ -27,6 +34,10 @@ public static class HSVColorHelper
         return rgbs;
     }
 
+    /// <summary>
+    /// Gets the current hue spectrum from the saturation and value.
+    /// </summary>
+    /// <returns>Colors between the provided staturation and the provided value.</returns>
     public static Color[] HueSpectrum(double saturation, double value)
     {
         var rgbs = new Color[7];
@@ -39,6 +50,10 @@ public static class HSVColorHelper
         return rgbs;
     }
 
+    /// <summary>
+    /// Convert HSV to RGB <see cref="Color"/>
+    /// </summary>
+    /// <returns>Converted HSV color to RGB.</returns>
     public static Color RGBFromHSV(double h, double s, double v)
     {
         if (h > 360 || h < 0 || s > 1 || s < 0 || v > 1 || v < 0)
