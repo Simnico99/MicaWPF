@@ -48,7 +48,6 @@ public class TextBox : System.Windows.Controls.TextBox
     /// <summary>
     /// The foreground of the icon.
     /// </summary>
-
     public Brush IconForeground
     {
         get => (System.Windows.Media.Brush)GetValue(IconForegroundProperty);
