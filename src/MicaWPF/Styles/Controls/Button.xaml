@@ -43,21 +43,6 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.AccentFillColorDisabled}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorTertiary}" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -95,27 +80,55 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
-                                <VisualState x:Name="MouseOver" Storyboard="{DynamicResource MicaWPF.Animations.Button.Default.Accent.MouseOver}" />
-                                <VisualState x:Name="Pressed" Storyboard="{DynamicResource MicaWPF.Animations.Button.Default.Accent.Pressed}" />
-                                <VisualState x:Name="Disabled" Storyboard="{DynamicResource MicaWPF.Animations.Button.Default.Accent.Disabled}" />
+                                <VisualState x:Name="MouseOver" Storyboard="{DynamicResource MicaWPF.Animations.Button.Accent.MouseOver}" />
+                                <VisualState x:Name="Pressed" Storyboard="{DynamicResource MicaWPF.Animations.Button.Accent.Pressed}" />
+                                <VisualState x:Name="Disabled" Storyboard="{DynamicResource MicaWPF.Animations.Button.Accent.Disabled}" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.AccentFillColorDisabled}" />
-                                </Setter.Value>
-                            </Setter>
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorTertiary}" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
+    <Style x:Key="MicaWPF.Styles.TransparentButton" TargetType="{x:Type controls:Button}">
+        <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
+        <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.SubtleFillColorTransparent}" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:Button}">
+                    <Grid>
+                        <Border
+                            x:Name="ContentBorder"
+                            Padding="{TemplateBinding Padding}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <Border.Background>
+                                <SolidColorBrush x:Name="mainBrush" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color}" />
+                            </Border.Background>
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="Center" />
+                        </Border>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver" Storyboard="{DynamicResource MicaWPF.Animations.Button.Transparent.MouseOver}" />
+                                <VisualState x:Name="Pressed" Storyboard="{DynamicResource MicaWPF.Animations.Button.Transparent.Pressed}" />
+                                <VisualState x:Name="Disabled" Storyboard="{DynamicResource MicaWPF.Animations.Button.Transparent.Disabled}" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
