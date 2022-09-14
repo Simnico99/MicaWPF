@@ -2,7 +2,7 @@
 using MicaWPF.Extensions;
 
 namespace MicaWPF.Converters;
-public class ColorDarkerConverter : IValueConverter
+public sealed class ColorDarkerConverter : IValueConverter
 {
     public static Color ChangeColorBrightness(Color color, double correctionFactor)
     {

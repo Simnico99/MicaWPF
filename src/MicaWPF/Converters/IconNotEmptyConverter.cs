@@ -2,7 +2,7 @@
 using MicaWPF.Symbols;
 
 namespace MicaWPF.Converters;
-internal class IconNotEmptyConverter : IValueConverter
+internal sealed class IconNotEmptyConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {

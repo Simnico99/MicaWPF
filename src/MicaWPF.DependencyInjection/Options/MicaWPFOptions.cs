@@ -1,7 +1,7 @@
 ﻿using System.Windows.Media;
 
 namespace MicaWPF.DependencyInjection.Options;
-public class MicaWPFOptions
+public sealed class MicaWPFOptions
 {
     public bool IsTitleBarAndBorderAccentAware { get; set; } = true;
     public bool IsThemeAware { get; set; } = true;

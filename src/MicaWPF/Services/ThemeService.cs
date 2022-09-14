@@ -1,7 +1,7 @@
 ﻿using MicaWPF.Events;
 
 namespace MicaWPF.Services;
-public class ThemeService : IThemeService
+public sealed class ThemeService : IThemeService
 {
     private static readonly ThemeService _themeService = new();
     private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";

@@ -18,7 +18,7 @@ public enum ContentDialogResult
     Empty
 }
 
-public class ContentDialog
+public sealed class ContentDialog
 {
     public string? Title { get; set; }
     public string? PrimaryButtonText { get; set; }

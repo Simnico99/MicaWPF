@@ -1,7 +1,7 @@
 ﻿using System.Windows.Data;
 
 namespace MicaWPF.Converters;
-public class DialogScrollViewerHeightConverter : IValueConverter
+public sealed class DialogScrollViewerHeightConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace MicaWPF.Services;
 
-public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionaryService
+public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionaryService
 {
     private static Uri? _currentThemeSource;
 
@@ -13,7 +13,7 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
 
     public static ThemeDictionaryService Current { get => _themeManager; }
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
+    private void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

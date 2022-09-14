@@ -10,7 +10,7 @@ using Windows.UI.ViewManagement;
 
 namespace MicaWPF.Services;
 
-public class AccentColorService : IAccentColorService
+public sealed class AccentColorService : IAccentColorService
 {
     private const string RegistryKeyPath = @"Software\Microsoft\Windows\DWM";
     private const string RegistryValueName = "ColorPrevalence";

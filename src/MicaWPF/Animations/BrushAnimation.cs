@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 
 namespace MicaWPF.Animations;
-public class BrushAnimation : AnimationTimeline
+public sealed class BrushAnimation : AnimationTimeline
 {
     public override Type TargetPropertyType
     {
