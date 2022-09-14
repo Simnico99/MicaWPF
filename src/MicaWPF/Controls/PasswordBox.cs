@@ -133,28 +133,6 @@ public class PasswordBox : TextBox
             revealMode == RevealMode.Visible ? Password : new string(PasswordChar, Password.Length));
     }
 
-    private void Button_OnClick(object sender, object parameter)
-    {
-        if (parameter == null)
-        {
-            return;
-        }
-
-        var param = parameter as string ?? string.Empty;
-
-        if (sender is PasswordBox passwordBox)
-        {
-            switch (param)
-            {
-                case "reveal":
-                    passwordBox.PasswordRevealMode = passwordBox.PasswordRevealMode == RevealMode.Visible
-                    ? RevealMode.Hidden
-                    : RevealMode.Visible;
-                    break;
-            }
-        }
-    }
-
     private static void OnPasswordCharChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is PasswordBox control)

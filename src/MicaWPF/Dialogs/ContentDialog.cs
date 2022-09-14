@@ -74,7 +74,7 @@ public sealed class ContentDialog
 
             if (micaWindow is null)
             {
-                foreach (Window window in Application.Current.Windows)
+                foreach (Window? window in Application.Current.Windows)
                 {
                     if (window is null)
                     {
