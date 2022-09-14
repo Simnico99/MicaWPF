@@ -1,10 +1,12 @@
-﻿using System.Windows.Shapes;
+﻿using System.ComponentModel;
+using System.Windows.Shapes;
 
 namespace MicaWPF.Controls;
 
 /// <summary>
 /// An arc used to make the <see cref="ProgressRing"/>.
 /// </summary>
+[ToolboxItem(false)]
 public class Arc : Shape
 {
     public static readonly DependencyProperty StartAngleProperty =

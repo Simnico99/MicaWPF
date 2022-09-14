@@ -1,8 +1,11 @@
-﻿namespace MicaWPF.Controls;
+﻿using System.ComponentModel;
+
+namespace MicaWPF.Controls;
 
 /// <summary>
 /// A WinUI <see cref="ProgressRing"/>.
 /// </summary>
+[ToolboxItem(true)]
 public class ProgressRing : Control
 {
     public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress),
@@ -14,7 +17,7 @@ public class ProgressRing : Control
         typeof(bool), typeof(ProgressRing),
         new PropertyMetadata(false));
 
-    public static readonly DependencyProperty EngAngleProperty = DependencyProperty.Register(nameof(EndAngle),
+    public static readonly DependencyProperty EndAngleProperty = DependencyProperty.Register(nameof(EndAngle),
         typeof(double), typeof(ProgressRing),
         new PropertyMetadata(180.0d));
 
@@ -62,8 +65,8 @@ public class ProgressRing : Control
     /// </summary>
     public double EndAngle
     {
-        get => (double)GetValue(EngAngleProperty);
-        set => SetValue(EngAngleProperty, value);
+        get => (double)GetValue(EndAngleProperty);
+        set => SetValue(EndAngleProperty, value);
     }
 
     /// <summary>

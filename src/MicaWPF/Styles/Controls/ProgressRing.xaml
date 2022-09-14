@@ -42,7 +42,7 @@
                             StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
                             Visibility="{TemplateBinding CoverRingVisibility}" />
                         <controls:Arc
-                            EndAngle="{TemplateBinding EngAngle}"
+                            EndAngle="{TemplateBinding EndAngle}"
                             StartAngle="0"
                             Stroke="{TemplateBinding Foreground}"
                             StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}" />

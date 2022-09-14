@@ -1,10 +1,12 @@
-﻿using MicaWPF.Symbols;
+﻿using System.ComponentModel;
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 
 /// <summary>
 /// A WinUI TextBox based on <see cref="System.Windows.Controls.TextBox"/>
 /// </summary>
+[ToolboxItem(true)]
 public class TextBox : System.Windows.Controls.TextBox
 {
     public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(TextBox));

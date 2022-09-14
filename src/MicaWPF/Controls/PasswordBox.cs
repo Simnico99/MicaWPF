@@ -1,10 +1,12 @@
-﻿using MicaWPF.Symbols;
+﻿using System.ComponentModel;
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 
 /// <summary>
 /// A password box with a button to show or hide passwords.
 /// </summary>
+[ToolboxItem(true)]
 public class PasswordBox : TextBox
 {
     private bool _takenControl = false;

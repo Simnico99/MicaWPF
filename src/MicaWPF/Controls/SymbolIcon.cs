@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
+using System.Text;
 using MicaWPF.Extensions;
 using MicaWPF.Symbols;
 
@@ -7,6 +8,7 @@ namespace MicaWPF.Controls;
 /// <summary>
 /// A <see cref="FluentSystemIcons"/>.
 /// </summary>
+[ToolboxItem(true)]
 public class SymbolIcon : Label
 {
     public static readonly DependencyProperty SymbolProperty = DependencyProperty.Register(nameof(Symbol), typeof(FluentSystemIcons.Regular), typeof(SymbolIcon), new PropertyMetadata(FluentSystemIcons.Regular.Empty, OnGlyphChanged));

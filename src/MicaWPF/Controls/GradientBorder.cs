@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace MicaWPF.Controls;
 /// <summary>
 /// A border that has a gradient based on the current theme.
 /// </summary>
+[ToolboxItem(true)]
 public class GradientBorder : UserControl
 {
     public static readonly DependencyProperty BottomBorderBrushProperty = DependencyProperty.Register(nameof(BottomBorderBrush), typeof(Brush), typeof(GradientBorder));

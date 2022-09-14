@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:MicaWPF.Controls"
-    xmlns:helpers="clr-namespace:MicaWPF.Converters">
+    xmlns:controls="clr-namespace:MicaWPF.Controls">
 
     <ControlTemplate x:Key="HoverTemplate" TargetType="{x:Type controls:MenuListViewItem}">
         <Border

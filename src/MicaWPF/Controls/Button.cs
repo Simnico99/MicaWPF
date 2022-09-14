@@ -1,16 +1,16 @@
-﻿using MicaWPF.Symbols;
+﻿using System.ComponentModel;
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 
 /// <summary>
 /// A WinUI button based on <see cref="System.Windows.Controls.Button"/>
 /// </summary>
+[ToolboxItem(true)]
 public class Button : System.Windows.Controls.Button
 {
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(FluentSystemIcons.Regular), typeof(Button), new PropertyMetadata(FluentSystemIcons.Regular.Empty));
     public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled), typeof(bool), typeof(Button), new PropertyMetadata(false));
-    public static readonly DependencyProperty HoverBackgroundProperty = DependencyProperty.Register(nameof(HoverBackground), typeof(SolidColorBrush), typeof(Button));
-    public static readonly DependencyProperty MouseButtonPressedBackgroundProperty = DependencyProperty.Register(nameof(MouseButtonPressedBackground), typeof(SolidColorBrush), typeof(Button));
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(Button));
 
     /// <summary>
