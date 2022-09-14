@@ -1,6 +1,7 @@
 ﻿using MicaWPF.Symbols;
 
 namespace MicaWPF.Extensions;
+
 internal static class FluentSystemIconsExtension
 {
     public static FluentSystemIcons.Filled Swap(this FluentSystemIcons.Regular icon)

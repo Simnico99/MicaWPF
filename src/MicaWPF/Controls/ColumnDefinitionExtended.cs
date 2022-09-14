@@ -5,19 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MicaWPF.Controls;
-internal class ColumnDefinitionExtended : ColumnDefinition
+
+internal sealed class ColumnDefinitionExtended : ColumnDefinition
 {
-        // Variables
         public static DependencyProperty VisibleProperty;
 
-        // Properties
         public bool Visible
         {
             get { return (bool)GetValue(VisibleProperty); }
             set { SetValue(VisibleProperty, value); }
         }
 
-        // Constructors
         static ColumnDefinitionExtended()
         {
             VisibleProperty = DependencyProperty.Register("Visible",
@@ -34,7 +32,6 @@ internal class ColumnDefinitionExtended : ColumnDefinition
                     new CoerceValueCallback(CoerceMinWidth)));
         }
 
-        // Get/Set
         public static void SetVisible(DependencyObject obj, bool nVisible)
         {
             obj.SetValue(VisibleProperty, nVisible);

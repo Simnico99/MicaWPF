@@ -1,6 +1,10 @@
 ﻿using System.Windows.Controls.Primitives;
 
 namespace MicaWPF.Controls;
+
+/// <summary>
+/// Is kinda of a smart <see cref="ScrollBar"/>.
+/// </summary>
 public class AnimatedScrollBar : ScrollBar
 {
     private bool _isScrolling = false;
@@ -19,12 +23,18 @@ public class AnimatedScrollBar : ScrollBar
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
         typeof(int), typeof(AnimatedScrollBar), new PropertyMetadata(1000));
 
+    /// <summary>
+    /// Is currently scrolling.
+    /// </summary>
     public bool IsScrolling
     {
         get => (bool)GetValue(IsScrollingProperty);
         set => SetValue(IsScrollingProperty, value);
     }
 
+    /// <summary>
+    /// Has been interacted with.
+    /// </summary>
     public bool IsInteracted
     {
         get => (bool)GetValue(IsInteractedProperty);
@@ -37,6 +47,9 @@ public class AnimatedScrollBar : ScrollBar
         }
     }
 
+    /// <summary>
+    /// Has timed out.
+    /// </summary>
     public int Timeout
     {
         get => (int)GetValue(TimeoutProperty);

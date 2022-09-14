@@ -1,6 +1,10 @@
 ﻿using System.Windows.Data;
 
 namespace MicaWPF.Converters;
+
+/// <summary>
+/// Converts the current double to a thickness value for the <see cref="MicaWPF.Controls.ProgressRing"/>.
+/// </summary>
 public sealed class ProgressThicknessConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

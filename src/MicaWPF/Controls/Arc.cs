@@ -1,6 +1,10 @@
 ﻿using System.Windows.Shapes;
 
 namespace MicaWPF.Controls;
+
+/// <summary>
+/// An arc used to make the <see cref="ProgressRing"/>.
+/// </summary>
 public class Arc : Shape
 {
     public static readonly DependencyProperty StartAngleProperty =
@@ -11,18 +15,27 @@ public class Arc : Shape
         DependencyProperty.Register(nameof(EndAngle), typeof(double), typeof(Arc),
             new PropertyMetadata(0.0d, PropertyChangedCallback));
 
+    /// <summary>
+    /// The starting angle.
+    /// </summary>
     public double StartAngle
     {
         get => (double)GetValue(StartAngleProperty);
         set => SetValue(StartAngleProperty, value);
     }
 
+    /// <summary>
+    /// The ending angle.
+    /// </summary>
     public double EndAngle
     {
         get => (double)GetValue(EndAngleProperty);
         set => SetValue(EndAngleProperty, value);
     }
 
+    /// <summary>
+    /// Is it a large arc?
+    /// </summary>
     public bool IsLargeArc { get; internal set; } = false;
 
     protected override Geometry DefiningGeometry => GetDefiningGeometry();

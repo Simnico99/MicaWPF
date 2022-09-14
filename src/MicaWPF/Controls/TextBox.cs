@@ -1,6 +1,10 @@
 ﻿using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
+
+/// <summary>
+/// A WinUI TextBox based on <see cref="System.Windows.Controls.TextBox"/>
+/// </summary>
 public class TextBox : System.Windows.Controls.TextBox
 {
     public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(TextBox));
@@ -12,30 +16,46 @@ public class TextBox : System.Windows.Controls.TextBox
                 FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
                 FrameworkPropertyMetadataOptions.Inherits));
 
+    /// <summary>
+    /// The icon shown in the TextBox button.
+    /// </summary>
     public FluentSystemIcons.Regular Icon
     {
         get => (FluentSystemIcons.Regular)GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
+    /// <summary>
+    /// Icon is on the right or left.
+    /// </summary>
     public ElementPosition IconPosition
     {
         get => (ElementPosition)GetValue(IconPositionProperty);
         set => SetValue(IconPositionProperty, value);
     }
 
+    /// <summary>
+    /// Is the Icon filled or not.
+    /// </summary>
     public bool IconFilled
     {
         get => (bool)GetValue(IconFilledProperty);
         set => SetValue(IconFilledProperty, value);
     }
 
-    public System.Windows.Media.Brush IconForeground
+    /// <summary>
+    /// The foreground of the icon.
+    /// </summary>
+
+    public Brush IconForeground
     {
         get => (System.Windows.Media.Brush)GetValue(IconForegroundProperty);
         set => SetValue(IconForegroundProperty, value);
     }
 
+    /// <summary>
+    /// A placeholder text for the TextBox.
+    /// </summary>
     public string? Watermark
     {
         get => (string)GetValue(WatermarkProperty);

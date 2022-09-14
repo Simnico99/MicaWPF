@@ -10,14 +10,9 @@ using MicaWPF.Extensions;
 
 namespace MicaWPF.Dialogs;
 
-public enum ContentDialogResult
-{
-    PrimaryButton,
-    SecondaryButton,
-    TertiaryButton,
-    Empty
-}
-
+/// <summary>
+/// A WinUI style content dialog.
+/// </summary>
 public sealed class ContentDialog
 {
     public string? Title { get; set; }

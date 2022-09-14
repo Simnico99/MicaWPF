@@ -1,5 +1,8 @@
 ﻿namespace MicaWPF.Extensions;
 
+/// <summary>
+/// Extensions for <see cref="Color"/>
+/// </summary>
 public static class ColorExtensions
 {
     /// <summary>

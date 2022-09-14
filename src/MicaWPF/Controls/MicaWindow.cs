@@ -4,6 +4,10 @@ using System.Windows.Automation.Provider;
 using MicaWPF.Extensions;
 
 namespace MicaWPF.Controls;
+
+/// <summary>
+/// A window where custom backdrops are enabled.
+/// </summary>
 public class MicaWindow : Window
 {
     #region SnapLayout
@@ -27,32 +31,50 @@ public class MicaWindow : Window
         set => SetValue(MarginMaximizedProperty, value);
     }
 
+    /// <summary>
+    /// The current type of backdrop the window is using.
+    /// </summary>
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
 
+    /// <summary>
+    /// The height of the title bar.
+    /// </summary>
     public int TitleBarHeight
     {
         get => (int)GetValue(TitleBarHeightProperty);
         set => SetValue(TitleBarHeightProperty, value);
     }
 
+    /// <summary>
+    /// Is showing the accented border.
+    /// </summary>
     public bool UseAccentOnTitleBarAndBorder
     {
         get => (bool)GetValue(UseAccentOnTitleBarAndBorderProperty);
         set => SetValue(UseAccentOnTitleBarAndBorderProperty, value);
     }
 
+    /// <summary>
+    /// The type of title bar used.
+    /// </summary>
     public TitleBarType TitleBarType
     {
         get => (TitleBarType)GetValue(TitleBarTypeProperty);
         set => SetValue(TitleBarTypeProperty, value);
     }
 
+    /// <summary>
+    /// Should the title color change when the window is inactive.
+    /// </summary>
     public bool ChangeTitleColorWhenInactive
     {
         get => (bool)GetValue(MarginMaximizedProperty);
         set => SetValue(MarginMaximizedProperty, value);
     }
 
+    /// <summary>
+    /// Custom <see cref="UIElement"/> that are embeded in the title bar.
+    /// </summary>
     public UIElement TitleBarContent
     {
         get => (UIElement)GetValue(TitleBarContentProperty);

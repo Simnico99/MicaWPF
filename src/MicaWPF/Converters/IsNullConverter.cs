@@ -1,6 +1,10 @@
 ﻿using System.Windows.Data;
 
 namespace MicaWPF.Converters;
+
+/// <summary>
+/// Null to bool.
+/// </summary>
 public sealed class IsNullConverter : IValueConverter
 {
     public object? Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
