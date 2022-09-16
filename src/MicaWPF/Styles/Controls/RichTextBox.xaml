@@ -46,15 +46,6 @@
                                     <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlStrongStrokeColorDefault}" />
                                 </Border.BorderBrush>
                                 <Grid>
-
-                                    <Label
-                                        x:Name="WatermarkLabel"
-                                        Margin="8,0"
-                                        Padding="0"
-                                        Content="{Binding Watermark, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RichTextBox}}}"
-                                        FontSize="{TemplateBinding FontSize}"
-                                        Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}"
-                                        Visibility="Hidden" />
                                     <ScrollViewer
                                         x:Name="PART_ContentHost"
                                         Margin="0"
@@ -85,9 +76,6 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text, Converter={StaticResource IsNullConverter}}" Value="True">
-                            <Setter TargetName="WatermarkLabel" Property="Visibility" Value="Visible" />
-                        </DataTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background">
                                 <Setter.Value>
