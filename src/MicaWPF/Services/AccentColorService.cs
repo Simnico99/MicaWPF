@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using MicaWPF.Controls;
+﻿using MicaWPF.Controls;
 using MicaWPF.Events;
 #if NET5_0_OR_GREATER
 using MicaWPFRuntimeComponent;
@@ -17,11 +16,10 @@ public sealed class AccentColorService : IAccentColorService
 
     public IWeakEvent<Color> AccentColorChanged { get; } = new WeakEvent<Color>();
 
-    private static readonly AccentColorService _accentColorService = new();
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
     public bool AccentUpdateFromWindows { get; private set; } = true;
-    public static AccentColorService Current { get => _accentColorService; }
+    public static AccentColorService Current { get; } = new();
 
     public bool IsTitleBarAndWindowsBorderColored { get; private set; }
     public bool IsTitleBarAndBorderAccentAware { get => _isTitleBarAndBorderAccentAware; set => SetTitleBarAndBorderAccentAware(value); }

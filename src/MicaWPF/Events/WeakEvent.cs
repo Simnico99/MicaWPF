@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 
 namespace MicaWPF.Events;
 internal sealed class WeakEvent<T> : IWeakEvent<T>
@@ -24,7 +19,7 @@ internal sealed class WeakEvent<T> : IWeakEvent<T>
         {
             lock (_locker)
             {
-                _eventRegistrations.Remove((typeof(T), action));
+                _ = _eventRegistrations.Remove((typeof(T), action));
             }
         });
     }

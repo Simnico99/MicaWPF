@@ -1,7 +1,6 @@
-﻿using System.Reflection;
+﻿using MicaWPF.Extensions;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
-using MicaWPF.Extensions;
 
 namespace MicaWPF.Controls;
 
@@ -159,10 +158,10 @@ public class MicaWindow : Window
             Source = new Uri("/MicaWPF;component/Styles/Controls/MicaWindow.xaml", UriKind.RelativeOrAbsolute)
         };
 
-        CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
+        _ = CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
+        _ = CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
+        _ = CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
+        _ = CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
         Style = OsHelper.IsWindows11_OrGreater
             ? myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows11"] as Style
@@ -247,36 +246,6 @@ public class MicaWindow : Window
             }
         }
     }
-
-    //private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
-    //{
-    //    var structure = Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
-
-    //    if (structure is not null)
-    //    {
-    //        var mmi = (InteropValues.MINMAXINFO)structure;
-    //        var monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
-
-    //        if (monitor != IntPtr.Zero)
-    //        {
-    //            InteropValues.MONITORINFO monitorInfo = new()
-    //            {
-    //                cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO))
-    //            };
-    //            InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
-    //            var rcWorkArea = monitorInfo.rcWork;
-    //            var rcMonitorArea = monitorInfo.rcMonitor;
-    //            mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
-    //            mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
-    //            mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
-    //            mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
-    //            mmi.ptMaxTrackSize.X = mmi.ptMaxSize.X;
-    //            mmi.ptMaxTrackSize.Y = mmi.ptMaxSize.Y;
-    //        }
-
-    //        Marshal.StructureToPtr(mmi, lParam, true);
-    //    }
-    //}
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr _, IntPtr lparam, ref bool handled)
     {

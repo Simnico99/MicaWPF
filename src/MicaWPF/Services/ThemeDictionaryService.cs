@@ -7,11 +7,9 @@ public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDicti
 {
     private static Uri? _currentThemeSource;
 
-    private static readonly ThemeDictionaryService _themeManager = new();
-
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public static ThemeDictionaryService Current { get => _themeManager; }
+    public static ThemeDictionaryService Current { get; } = new();
 
     private void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
@@ -54,7 +52,7 @@ public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDicti
 
             foreach (var oldTheme in oldThemes)
             {
-                dictionaries.Remove(oldTheme);
+                _ = dictionaries.Remove(oldTheme);
             }
         }
     }

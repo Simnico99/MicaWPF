@@ -1,6 +1,6 @@
-﻿using System.Windows.Data;
-using MicaWPF.Extensions;
+﻿using MicaWPF.Extensions;
 using MicaWPF.Symbols;
+using System.Windows.Data;
 
 namespace MicaWPF.Converters;
 

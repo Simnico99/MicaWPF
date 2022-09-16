@@ -1,5 +1,5 @@
-﻿using System.Windows.Data;
-using MicaWPF.Symbols;
+﻿using MicaWPF.Symbols;
+using System.Windows.Data;
 
 namespace MicaWPF.Converters;
 internal sealed class IconNotEmptyConverter : IValueConverter

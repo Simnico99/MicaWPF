@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using MicaWPF.Extensions;
+﻿using MicaWPF.Extensions;
+using System.ComponentModel;
 
 namespace MicaWPF.Controls;
 

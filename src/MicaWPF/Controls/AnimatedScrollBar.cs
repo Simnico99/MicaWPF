@@ -60,14 +60,14 @@ public class AnimatedScrollBar : ScrollBar
     {
         base.OnMouseEnter(e);
 
-        UpdateScroll().GetAwaiter();
+        _ = UpdateScroll().GetAwaiter();
     }
 
     protected override void OnMouseLeave(MouseEventArgs e)
     {
         base.OnMouseLeave(e);
 
-        UpdateScroll().GetAwaiter();
+        _ = UpdateScroll().GetAwaiter();
     }
 
     private async Task UpdateScroll()
@@ -107,7 +107,7 @@ public class AnimatedScrollBar : ScrollBar
 
         bar._isScrolling = !bar._isScrolling;
 
-        bar.UpdateScroll().GetAwaiter();
+        _ = bar.UpdateScroll().GetAwaiter();
     }
 
     private static void IsInteractedProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -124,6 +124,6 @@ public class AnimatedScrollBar : ScrollBar
 
         bar._isInteracted = !bar._isInteracted;
 
-        bar.UpdateScroll().GetAwaiter();
+        _ = bar.UpdateScroll().GetAwaiter();
     }
 }

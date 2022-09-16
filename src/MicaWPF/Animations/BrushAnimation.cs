@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
+﻿using System.Windows.Media.Animation;
 
 namespace MicaWPF.Animations;
 
@@ -13,13 +7,7 @@ namespace MicaWPF.Animations;
 /// </summary>
 public sealed class BrushAnimation : AnimationTimeline
 {
-    public override Type TargetPropertyType
-    {
-        get
-        {
-            return typeof(Brush);
-        }
-    }
+    public override Type TargetPropertyType => typeof(Brush);
 
     public override object GetCurrentValue(object defaultOriginValue,
                                            object defaultDestinationValue,
@@ -46,8 +34,8 @@ public sealed class BrushAnimation : AnimationTimeline
             return Brushes.Transparent;
         }
 
-        defaultOriginValue = this.From ?? defaultOriginValue;
-        defaultDestinationValue = this.To ?? defaultDestinationValue;
+        defaultOriginValue = From ?? defaultOriginValue;
+        defaultDestinationValue = To ?? defaultDestinationValue;
 
         if (animationClock.CurrentProgress.Value == 0)
         {
@@ -76,8 +64,8 @@ public sealed class BrushAnimation : AnimationTimeline
     /// </summary>
     public Brush From
     {
-        get { return (Brush)GetValue(FromProperty); }
-        set { SetValue(FromProperty, value); }
+        get => (Brush)GetValue(FromProperty);
+        set => SetValue(FromProperty, value);
     }
 
     /// <summary>
@@ -85,8 +73,8 @@ public sealed class BrushAnimation : AnimationTimeline
     /// </summary>
     public Brush To
     {
-        get { return (Brush)GetValue(ToProperty); }
-        set { SetValue(ToProperty, value); }
+        get => (Brush)GetValue(ToProperty);
+        set => SetValue(ToProperty, value);
     }
 
     public static readonly DependencyProperty FromProperty =

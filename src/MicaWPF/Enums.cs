@@ -14,8 +14,8 @@ public enum ContentDialogResult
 /// <summary>
 /// The button that must be colored on the content dialog.
 /// </summary>
-public enum ContentDialogButton 
-{ 
+public enum ContentDialogButton
+{
     Primary,
     Secondary,
     Close

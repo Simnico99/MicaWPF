@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-using MicaWPF.Controls;
+﻿using MicaWPF.Controls;
 using MicaWPF.Extensions;
+using System.Windows.Documents;
 
 namespace MicaWPF.Dialogs;
 
@@ -37,9 +31,9 @@ public sealed class ContentDialog
             Background = Application.Current.TryFindResource("MicaWPF.Brushes.SmokeFillColorDefault") as SolidColorBrush
         };
 
-        canvas.Children.Add(content);
+        _ = canvas.Children.Add(content);
 
-        grid?.Children.Add(canvas);
+        _ = (grid?.Children.Add(canvas));
 
         return canvas;
     }
@@ -85,12 +79,9 @@ public sealed class ContentDialog
             }
         }
 
-        if (micaWindow is null)
-        {
-            throw new ArgumentNullException(nameof(micaWindow), "No MicaWindow could be found automatically please specify one.");
-        }
-
-        return micaWindow;
+        return micaWindow is null
+            ? throw new ArgumentNullException(nameof(micaWindow), "No MicaWindow could be found automatically please specify one.")
+            : micaWindow;
     }
 
     public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, ContentDialogButton? defaultButton = null, object? customContent = null, double height = double.NaN, double width = 320, Brush? borderBrush = null)

@@ -1,5 +1,5 @@
 ﻿namespace MicaWPF.Converters;
-internal sealed class BrushToColorConverter 
+internal sealed class BrushToColorConverter
 {
     public object Convert(object value)
     {

@@ -18,11 +18,11 @@ public static class DependencyInjectionHelper
 
         options?.Invoke(cfg);
 
-        builder.ConfigureServices((_, services) =>
+        _ = builder.ConfigureServices((_, services) =>
         {
-            services.AddSingleton(cfg);
-            services.AddSingleton<IThemeService, ThemeServiceDI>();
-            services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
+            _ = services.AddSingleton(cfg);
+            _ = services.AddSingleton<IThemeService, ThemeServiceDI>();
+            _ = services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
         });
 
         return builder;

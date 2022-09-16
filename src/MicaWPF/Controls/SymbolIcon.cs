@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using System.Text;
-using MicaWPF.Extensions;
+﻿using MicaWPF.Extensions;
 using MicaWPF.Symbols;
+using System.ComponentModel;
+using System.Text;
 
 namespace MicaWPF.Controls;
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MicaWPF.Extensions;
+﻿namespace MicaWPF.Extensions;
 
 /// <summary>
 /// Extensions for <see cref="DependencyObject"/>.
@@ -69,7 +63,7 @@ public static class DependencyObjectExtension
                             yield return t;
                         }
 
-                        foreach (T childOfChild in FindLogicalChildren<T>(child))
+                        foreach (var childOfChild in FindLogicalChildren<T>(child))
                         {
                             yield return childOfChild;
                         }

@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using MicaWPF.DependencyInjection.Options;
+﻿using MicaWPF.DependencyInjection.Options;
 using MicaWPF.Events;
 using MicaWPF.Models;
 using MicaWPF.Services;
+using System.Windows;
 
 namespace MicaWPF.DependencyInjection.Services;
 internal sealed class ThemeServiceDI : IThemeService
@@ -14,7 +14,7 @@ internal sealed class ThemeServiceDI : IThemeService
     {
         _options = options;
         ThemeService.Current.IsThemeAware = _options.IsThemeAware;
-        ThemeService.Current.ChangeTheme(_options.Theme);
+        _ = ThemeService.Current.ChangeTheme(_options.Theme);
     }
 
     public WindowsTheme CurrentTheme => ThemeService.Current.CurrentTheme;

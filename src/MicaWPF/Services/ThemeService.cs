@@ -3,7 +3,6 @@
 namespace MicaWPF.Services;
 public sealed class ThemeService : IThemeService
 {
-    private static readonly ThemeService _themeService = new();
     private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
     private const string RegistryValueName = "AppsUseLightTheme";
 
@@ -15,7 +14,7 @@ public sealed class ThemeService : IThemeService
     public ICollection<MicaEnabledWindow> MicaEnabledWindows { get; private set; } = new List<MicaEnabledWindow>();
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
     public bool IsThemeAware { get => _isThemeAware; set => SetThemeAware(value); }
-    public static ThemeService Current { get => _themeService; }
+    public static ThemeService Current { get; } = new();
 
     private ThemeService()
     {
@@ -70,7 +69,7 @@ public sealed class ThemeService : IThemeService
                 if (IsThemeAware)
                 {
                     UpdateAccent();
-                    Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
+                    _ = Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
                     SetThemeAware(IsThemeAware);
                 }
                 break;
@@ -86,11 +85,11 @@ public sealed class ThemeService : IThemeService
 
             if (CurrentTheme == WindowsTheme.Dark)
             {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.True);
+                _ = InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.True);
             }
             else if (OsHelper.IsWindows11_OrGreater)
             {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
+                _ = InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
             }
 
             _ = OsHelper.IsWindows11_22523_OrGreater
