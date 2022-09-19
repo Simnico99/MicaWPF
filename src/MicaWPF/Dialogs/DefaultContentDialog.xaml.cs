@@ -5,7 +5,7 @@
 public partial class DefaultContentDialog : ContentControl
 {
     internal ContentDialogResult Result { get; private set; }
-    private readonly TaskCompletionSource<bool> taskCompletionSource = new();
+    private readonly TaskCompletionSource<bool> _taskCompletionSource = new();
 
     internal Brush? InnerBorderBrush
     {
@@ -123,27 +123,27 @@ public partial class DefaultContentDialog : ContentControl
     internal async Task ShowAsync()
     {
         Visibility = Visibility.Visible;
-        _ = await taskCompletionSource.Task;
+        _ = await _taskCompletionSource.Task;
     }
 
     private void PrimaryButton_Click(object sender, RoutedEventArgs e)
     {
         Visibility = Visibility.Collapsed;
         Result = ContentDialogResult.PrimaryButton;
-        _ = taskCompletionSource.TrySetResult(true);
+        _ = _taskCompletionSource.TrySetResult(true);
     }
 
     private void SecondaryButton_Click(object sender, RoutedEventArgs e)
     {
         Visibility = Visibility.Collapsed;
         Result = ContentDialogResult.SecondaryButton;
-        _ = taskCompletionSource.TrySetResult(true);
+        _ = _taskCompletionSource.TrySetResult(true);
     }
 
     private void TertiaryButton_Click(object sender, RoutedEventArgs e)
     {
         Visibility = Visibility.Collapsed;
         Result = ContentDialogResult.TertiaryButton;
-        _ = taskCompletionSource.TrySetResult(true);
+        _ = _taskCompletionSource.TrySetResult(true);
     }
 }

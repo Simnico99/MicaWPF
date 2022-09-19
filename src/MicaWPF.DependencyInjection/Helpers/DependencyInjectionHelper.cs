@@ -20,9 +20,9 @@ public static class DependencyInjectionHelper
 
         _ = builder.ConfigureServices((_, services) =>
         {
-            _ = services.AddSingleton(cfg);
-            _ = services.AddSingleton<IThemeService, ThemeServiceDI>();
-            _ = services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
+            services.AddSingleton(cfg);
+            services.AddSingleton<IThemeService, ThemeServiceDI>();
+            services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
         });
 
         return builder;

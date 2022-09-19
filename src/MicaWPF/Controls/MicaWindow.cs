@@ -10,13 +10,14 @@ namespace MicaWPF.Controls;
 public class MicaWindow : Window
 {
     #region SnapLayout
-    private const int HTMAXBUTTON = 9;
-    private const string ButtonMax = "Maximize";
-    private const string ButtonRestore = "Restore";
-    private System.Windows.Controls.Button? _ButtonMax;
-    private System.Windows.Controls.Button? _ButtonRestore;
+    private const int _hTMAXBUTTON = 9;
+    private const string _buttonMaxName = "Maximize";
+    private const string _buttonRestoreName = "Restore";
+    private System.Windows.Controls.Button? _buttonMax;
+    private System.Windows.Controls.Button? _buttonRestore;
     #endregion
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Is a property.")]
     internal static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
     public static readonly DependencyProperty UseAccentOnTitleBarAndBorderProperty = DependencyProperty.Register(nameof(UseAccentOnTitleBarAndBorder), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(AccentColorService.Current.IsTitleBarAndWindowsBorderColored));
@@ -140,8 +141,8 @@ public class MicaWindow : Window
 
     public override void OnApplyTemplate()
     {
-        _ButtonMax = GetTemplateChild(ButtonMax) as System.Windows.Controls.Button;
-        _ButtonRestore = GetTemplateChild(ButtonRestore) as System.Windows.Controls.Button;
+        _buttonMax = GetTemplateChild(_buttonMaxName) as System.Windows.Controls.Button;
+        _buttonRestore = GetTemplateChild(_buttonRestoreName) as System.Windows.Controls.Button;
 
         this.EnableBackdrop(SystemBackdropType);
 
@@ -203,7 +204,7 @@ public class MicaWindow : Window
         var x = lparam.ToInt32() & 0xffff;
         var y = lparam.ToInt32() >> 16;
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
-        var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
+        var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
 
         if (_button is not null)
         {
@@ -221,7 +222,7 @@ public class MicaWindow : Window
             {
                 _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
             }
-            return new IntPtr(HTMAXBUTTON);
+            return new IntPtr(_hTMAXBUTTON);
         }
 
         return IntPtr.Zero;
@@ -232,7 +233,7 @@ public class MicaWindow : Window
         var x = lparam.ToInt32() & 0xffff;
         var y = lparam.ToInt32() >> 16;
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
-        var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
+        var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
         if (_button != null)
         {
             var rect = new Rect(_button.PointToScreen(
