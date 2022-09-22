@@ -11,16 +11,17 @@ namespace MicaWPF.Services;
 
 public sealed class AccentColorService : IAccentColorService
 {
-    private const string RegistryKeyPath = @"Software\Microsoft\Windows\DWM";
-    private const string RegistryValueName = "ColorPrevalence";
+    private const string _registryKeyPath = @"Software\Microsoft\Windows\DWM";
+    private const string _registryValueName = "ColorPrevalence";
 
     public IWeakEvent<Color> AccentColorChanged { get; } = new WeakEvent<Color>();
 
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
-    public bool AccentUpdateFromWindows { get; private set; } = true;
+    
     public static AccentColorService Current { get; } = new();
 
+    public bool AccentUpdateFromWindows { get; private set; } = true;
     public bool IsTitleBarAndWindowsBorderColored { get; private set; }
     public bool IsTitleBarAndBorderAccentAware { get => _isTitleBarAndBorderAccentAware; set => SetTitleBarAndBorderAccentAware(value); }
     public Color SystemAccentColor { get; private set; }
@@ -116,8 +117,8 @@ public sealed class AccentColorService : IAccentColorService
 
     private static bool GetAccentColorEnabledOnTitleBarAndBorders()
     {
-        using var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
-        var registryValueObject = key?.GetValue(RegistryValueName);
+        using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
+        var registryValueObject = key?.GetValue(_registryValueName);
 
         if (registryValueObject == null)
         {

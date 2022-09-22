@@ -5,7 +5,7 @@
 /// </summary>
 public static class DpiHelper
 {
-    private const double LogicalDpi = 96.0;
+    private const double _logicalDpi = 96.0;
 
     [ThreadStatic]
     private static Matrix _transformToDip;
@@ -23,14 +23,14 @@ public static class DpiHelper
         }
         else
         {
-            DeviceDpiX = LogicalDpi;
-            DeviceDpiY = LogicalDpi;
+            DeviceDpiX = _logicalDpi;
+            DeviceDpiY = _logicalDpi;
         }
 
         var identity = Matrix.Identity;
         var identity2 = Matrix.Identity;
-        identity.Scale(DeviceDpiX / LogicalDpi, DeviceDpiY / LogicalDpi);
-        identity2.Scale(LogicalDpi / DeviceDpiX, LogicalDpi / DeviceDpiY);
+        identity.Scale(DeviceDpiX / _logicalDpi, DeviceDpiY / _logicalDpi);
+        identity2.Scale(_logicalDpi / DeviceDpiX, _logicalDpi / DeviceDpiY);
         TransformFromDevice = new MatrixTransform(identity2);
         TransformFromDevice.Freeze();
         TransformToDevice = new MatrixTransform(identity);
