@@ -133,6 +133,7 @@ public sealed class ContentDialog
                     InnerText = text,
                     InnerContent = customContent,
                     InnerTitleText = titleText,
+                    Icon = Application.Current.MainWindow.Icon,
                 };
             }
 
@@ -202,6 +203,7 @@ public sealed class ContentDialog
                     TertiaryButtonText = CloseButtonText,
                     InnerContent = Content,
                     InnerTitleText = Title,
+                    Icon = Application.Current.MainWindow.Icon,
                 };
             }
 
