@@ -136,7 +136,6 @@ public sealed class ContentDialog
                 };
             }
 
-
             switch (defaultButton)
             {
                 case ContentDialogButton.Primary:
