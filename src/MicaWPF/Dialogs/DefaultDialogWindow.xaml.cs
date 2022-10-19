@@ -1,34 +1,39 @@
-﻿namespace MicaWPF.Dialogs;
+﻿using MicaWPF.Controls;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace MicaWPF.Dialogs;
 /// <summary>
-/// Interaction logic for DefaultContentDialog.xaml
+/// Interaction logic for DefaultDialogWindow.xaml
 /// </summary>
-public partial class DefaultContentDialog : ContentControl, IContentDialog
+public partial class DefaultDialogWindow : MicaWindow, IContentDialog
 {
     private readonly TaskCompletionSource<bool> _taskCompletionSource = new();
     public ContentDialogResult Result { get; private set; }
 
-    public Brush? InnerBorderBrush
+    public Brush? InnerBorderBrush 
     {
-        get => MainBorder.BorderBrush;
-        set
-        {
-            if (value is not null)
-            {
-                MainBorder.BorderBrush = value;
-            }
-        }
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
     }
 
     public string? InnerTitleText
     {
-        get => TitleText.Text;
+        get => Title;
         set
         {
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                TitleTextLabel.Visibility = Visibility.Visible;
-                TitleText.Text = value;
-            }
+            Title = value;
         }
     }
 
@@ -115,7 +120,7 @@ public partial class DefaultContentDialog : ContentControl, IContentDialog
         set => TertiaryButton.Style = value;
     }
 
-    internal DefaultContentDialog()
+    internal DefaultDialogWindow()
     {
         InitializeComponent();
     }

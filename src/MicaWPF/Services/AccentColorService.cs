@@ -19,7 +19,7 @@ public sealed class AccentColorService : IAccentColorService
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
     
-    public static AccentColorService Current { get; } = new();
+    public static AccentColorService Current { get; }
 
     public bool AccentUpdateFromWindows { get; private set; } = true;
     public bool IsTitleBarAndWindowsBorderColored { get; private set; }
@@ -31,6 +31,11 @@ public sealed class AccentColorService : IAccentColorService
     public Color SystemAccentColorDark1 { get; private set; }
     public Color SystemAccentColorDark2 { get; private set; }
     public Color SystemAccentColorDark3 { get; private set; }
+
+    static AccentColorService() 
+    {
+        Current = new();
+    }
 
     private AccentColorService()
     {

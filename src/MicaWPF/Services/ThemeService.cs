@@ -10,11 +10,16 @@ public sealed class ThemeService : IThemeService
     private WindowsTheme _currentTheme;
     private bool _isCheckingTheme;
 
+    public static ThemeService Current { get; }
     public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
     public List<MicaEnabledWindow> MicaEnabledWindows { get; private set; } = new List<MicaEnabledWindow>();
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
     public bool IsThemeAware { get; private set; }
-    public static ThemeService Current { get; } = new();
+
+    static ThemeService()
+    {
+        Current = new();
+    }
 
     private ThemeService()
     {
