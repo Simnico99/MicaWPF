@@ -35,17 +35,9 @@ public sealed class AccentColorService : IAccentColorService
     static AccentColorService() 
     {
         Current = new();
-    }
-
-    private AccentColorService()
-    {
-        if (AccentUpdateFromWindows)
-        {
-            UpdateAccentsFromWindows();
-        }
-
-        IsTitleBarAndWindowsBorderColored = GetAccentColorEnabledOnTitleBarAndBorders();
-        IsTitleBarAndBorderAccentAware = true;
+        Current.UpdateAccentsFromWindows();
+        Current.IsTitleBarAndWindowsBorderColored = GetAccentColorEnabledOnTitleBarAndBorders();
+        Current.IsTitleBarAndBorderAccentAware = true;
     }
 
 #if NET5_0_OR_GREATER

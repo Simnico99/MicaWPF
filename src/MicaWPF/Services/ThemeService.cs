@@ -19,12 +19,7 @@ public sealed class ThemeService : IThemeService
     static ThemeService()
     {
         Current = new();
-    }
-
-    private ThemeService()
-    {
-        CurrentTheme = WindowsTheme.Auto;
-        IsThemeAware = true;
+        Current.ChangeTheme(WindowsTheme.Auto);
     }
 
     private WindowsTheme GetTheme()
