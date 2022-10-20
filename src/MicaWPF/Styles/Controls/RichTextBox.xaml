@@ -6,6 +6,7 @@
     <converters:IsNullConverter x:Key="IsNullConverter" />
 
     <Style x:Key="MicaRichTextBoxBase" TargetType="{x:Type RichTextBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />

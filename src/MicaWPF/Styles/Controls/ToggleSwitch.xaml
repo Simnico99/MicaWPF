@@ -4,6 +4,7 @@
     xmlns:controls="clr-namespace:MicaWPF.Controls">
 
     <Style x:Key="MicaWPF.Styles.Default.ToggleSwitch" TargetType="{x:Type controls:ToggleSwitch}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource MicaWPF.Styles.Default.FocusVisualStyle}" />
         <Setter Property="Background">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColorSecondary}" />

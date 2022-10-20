@@ -1,11 +1,14 @@
-﻿namespace MicaWPF.Converters;
-internal sealed class BrushToColorConverter
+﻿using System.Globalization;
+using System.Windows.Data;
+
+namespace MicaWPF.Converters;
+internal sealed class BrushToColorConverter : IValueConverter
 {
-    public object Convert(object value)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is SolidColorBrush brush)
         {
-            return brush.Color;
+            return Color.FromArgb((byte)(brush.Opacity * brush.Color.A), brush.Color.R, brush.Color.G, brush.Color.B);
         }
 
         if (value is Color)

@@ -4,6 +4,7 @@
     xmlns:controls="clr-namespace:MicaWPF.Controls">
 
     <Style x:Key="MicaWPF.Styles.Default.Button" TargetType="{x:Type controls:Button}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource MicaWPF.Styles.Default.FocusVisualStyle}" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorDefault}" />
         <Setter Property="CornerRadius" Value="4" />
@@ -47,6 +48,7 @@
     </Style>
 
     <Style x:Key="MicaWPF.Styles.AccentedButton" TargetType="{x:Type controls:Button}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource MicaWPF.Styles.Default.FocusVisualStyle}" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorInverse}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}" />
         <Setter Property="CornerRadius" Value="4" />
@@ -63,6 +65,7 @@
                     <Grid>
                         <controls:GradientBorder
                             x:Name="ContentBorder"
+                            Margin="-2"
                             Padding="{TemplateBinding Padding}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
@@ -90,6 +93,7 @@
     </Style>
 
     <Style x:Key="MicaWPF.Styles.TransparentButton" TargetType="{x:Type controls:Button}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource MicaWPF.Styles.Default.FocusVisualStyle}" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.SubtleFillColorTransparent}" />
         <Setter Property="CornerRadius" Value="4" />

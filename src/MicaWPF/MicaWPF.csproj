@@ -45,11 +45,11 @@
     <PackageReference Include="MicaWPFRuntimeComponent" Version="1.1.1" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1' OR '$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net481' OR '$(TargetFramework)'=='net48' OR '$(TargetFramework)'=='net461'" >
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1' OR '$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net481' OR '$(TargetFramework)'=='net48' OR '$(TargetFramework)'=='net461'">
     <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.17134.1000" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net461'" >
+  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
@@ -92,6 +92,9 @@
     <Page Update="Styles\Controls\ComboBox.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\Controls\FocusVisualStyle.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="Styles\Controls\ContextMenu.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

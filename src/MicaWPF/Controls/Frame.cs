@@ -9,6 +9,11 @@ namespace MicaWPF.Controls;
 [ToolboxItem(true)]
 public class Frame : System.Windows.Controls.Frame
 {
+    public Frame() 
+    {
+        FocusVisualStyle = null;
+        Focusable = false;
+    }
     protected override void OnContentChanged(object oldContent, object newContent)
     {
         if (newContent is DependencyObject dependencyObject)

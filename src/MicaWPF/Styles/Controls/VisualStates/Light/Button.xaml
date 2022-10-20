@@ -1,36 +1,35 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:anim="clr-namespace:MicaWPF.Animations">
+    xmlns:anim="clr-namespace:MicaWPF.Animations"
+    xmlns:converters="clr-namespace:MicaWPF.Converters">
+
+    <converters:BrushToColorConverter x:Key="ColorConverter" />
 
     <!--  Default Button  -->
     <Storyboard x:Key="MicaWPF.Animations.Button.Default.MouseOver">
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="Background"
-            From="{StaticResource MicaWPF.Brushes.ControlFillColorDefault}"
-            To="{StaticResource MicaWPF.Brushes.ControlFillColorSecondary}"
+            Storyboard.TargetProperty="Background.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.ControlFillColorSecondary}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 
     <Storyboard x:Key="MicaWPF.Animations.Button.Default.Pressed">
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="Background"
-            From="{StaticResource MicaWPF.Brushes.ControlFillColorSecondary}"
-            To="{StaticResource MicaWPF.Brushes.ControlFillColorTertiary}"
+            Storyboard.TargetProperty="Background.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.ControlFillColorTertiary}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentPresenter"
-            Storyboard.TargetProperty="(TextElement.Foreground)"
-            From="{StaticResource MicaWPF.Brushes.TextFillColorPrimary}"
-            To="{StaticResource MicaWPF.Brushes.TextFillColorSecondary}"
+            Storyboard.TargetProperty="(TextElement.Foreground).Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.TextFillColorSecondary}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="BottomBorderBrush"
-            From="{StaticResource MicaWPF.Brushes.ControlStrokeColorSecondary}"
-            To="{StaticResource MicaWPF.Brushes.ControlStrokeColorDefault}"
+            Storyboard.TargetProperty="BottomBorderBrush.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.ControlStrokeColorDefault}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 
@@ -48,30 +47,34 @@
 
     <!--  Accent Button  -->
     <Storyboard x:Key="MicaWPF.Animations.Button.Accent.MouseOver">
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="Background"
-            From="{StaticResource MicaWPF.Brushes.AccentFillColorDefault}"
-            To="{StaticResource MicaWPF.Brushes.AccentFillColorSecondary}"
+            Storyboard.TargetProperty="Background.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.AccentFillColorSecondary}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 
     <Storyboard x:Key="MicaWPF.Animations.Button.Accent.Pressed">
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentPresenter"
-            Storyboard.TargetProperty="(TextElement.Foreground)"
-            From="{StaticResource MicaWPF.Brushes.TextOnAccentFillColorPrimary}"
-            To="{StaticResource MicaWPF.Brushes.TextOnAccentFillColorSecondary}"
+            Storyboard.TargetProperty="(TextElement.Foreground).Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.TextOnAccentFillColorSecondary}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background">
-            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorTertiary}" />
-        </ObjectAnimationUsingKeyFrames>
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="TopBorderBrush">
-            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorTransparent}" />
-        </ObjectAnimationUsingKeyFrames>
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="BottomBorderBrush">
-            <DiscreteObjectKeyFrame KeyTime="0" Value="{DynamicResource MicaWPF.Brushes.ControlFillColorTransparent}" />
-        </ObjectAnimationUsingKeyFrames>
+        <ColorAnimation
+            Storyboard.TargetName="ContentBorder"
+            Storyboard.TargetProperty="Background.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.AccentFillColorTertiary}, Converter={StaticResource ColorConverter}}"
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
+        <ColorAnimation
+            Storyboard.TargetName="ContentBorder"
+            Storyboard.TargetProperty="TopBorderBrush.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.ControlFillColorTransparent}, Converter={StaticResource ColorConverter}}"
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
+        <ColorAnimation
+            Storyboard.TargetName="ContentBorder"
+            Storyboard.TargetProperty="BottomBorderBrush.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.ControlFillColorTransparent}, Converter={StaticResource ColorConverter}}"
+            Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 
     <Storyboard x:Key="MicaWPF.Animations.Button.Accent.Disabled">
@@ -91,26 +94,23 @@
 
     <!--  Transparent Button  -->
     <Storyboard x:Key="MicaWPF.Animations.Button.Transparent.MouseOver">
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="Background"
-            From="{StaticResource MicaWPF.Brushes.SubtleFillColorTransparent}"
-            To="{StaticResource MicaWPF.Brushes.SubtleFillColorSecondary}"
+            Storyboard.TargetProperty="Background.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.SubtleFillColorSecondary}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 
     <Storyboard x:Key="MicaWPF.Animations.Button.Transparent.Pressed">
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentBorder"
-            Storyboard.TargetProperty="Background"
-            From="{StaticResource MicaWPF.Brushes.SubtleFillColorSecondary}"
-            To="{StaticResource MicaWPF.Brushes.SubtleFillColorTertiary}"
+            Storyboard.TargetProperty="Background.Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.SubtleFillColorTertiary}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
-        <anim:BrushAnimation
+        <ColorAnimation
             Storyboard.TargetName="ContentPresenter"
-            Storyboard.TargetProperty="(TextElement.Foreground)"
-            From="{StaticResource MicaWPF.Brushes.TextFillColorPrimary}"
-            To="{StaticResource MicaWPF.Brushes.TextFillColorSecondary}"
+            Storyboard.TargetProperty="(TextElement.Foreground).Color"
+            To="{Binding Source={StaticResource MicaWPF.Brushes.TextFillColorSecondary}, Converter={StaticResource ColorConverter}}"
             Duration="{StaticResource MicaWPF.Animations.Common.FasterAnimationDuration}" />
     </Storyboard>
 

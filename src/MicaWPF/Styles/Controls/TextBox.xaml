@@ -13,6 +13,7 @@
     </ContextMenu>
 
     <Style x:Key="MicaWPF.Styles.Default.TextBox" TargetType="{x:Type controls:TextBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />

@@ -18,6 +18,7 @@
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/AnimatedScrollViewer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/AnimatedScrollBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Expander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/FocusVisualStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ToolTip.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/ContextMenu.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Label.xaml" />
