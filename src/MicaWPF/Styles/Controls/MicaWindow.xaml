@@ -4,6 +4,7 @@
     xmlns:local="clr-namespace:MicaWPF.Controls">
 
     <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Button.Windows" TargetType="{x:Type Button}">
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -38,6 +39,7 @@
     </Style>
 
     <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Button.Close" TargetType="{x:Type Button}">
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -71,6 +73,7 @@
     </Style>
 
     <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Windows10" TargetType="{x:Type local:MicaWindow}">
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ApplicationBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="ResizeMode" Value="CanResize" />
@@ -86,7 +89,8 @@
                         Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}"
                         Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                         BorderBrush="{DynamicResource MicaWPF.Brushes.SystemFillColorSolidNeutralBackground}"
-                        BorderThickness="2">
+                        BorderThickness="2"
+                        Focusable="False">
                         <Grid>
                             <Border BorderThickness="1">
                                 <DockPanel
@@ -109,12 +113,14 @@
                                                     Height="15"
                                                     Margin="5,0,0,0"
                                                     VerticalAlignment="Center"
+                                                    Focusable="False"
                                                     RenderOptions.BitmapScalingMode="HighQuality"
                                                     Source="{TemplateBinding Icon}" />
                                                 <TextBlock
                                                     x:Name="TitleTextBlock"
                                                     Margin="5,0,0,0"
                                                     VerticalAlignment="Center"
+                                                    Focusable="False"
                                                     FontSize="12"
                                                     Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                                     Text="{TemplateBinding Title}" />
@@ -123,6 +129,7 @@
                                                 Margin="5,0,5,0"
                                                 Content="{TemplateBinding TitleBarContent}"
                                                 DockPanel.Dock="Right"
+                                                Focusable="False"
                                                 WindowChrome.IsHitTestVisibleInChrome="True" />
                                         </DockPanel>
                                         <StackPanel
@@ -133,6 +140,7 @@
                                             WindowChrome.IsHitTestVisibleInChrome="True">
                                             <Button
                                                 Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
+                                                Focusable="False"
                                                 Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                 Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}"
                                                 ToolTip="minimize">
@@ -154,6 +162,7 @@
                                                 <Button
                                                     x:Name="Restore"
                                                     Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                                    Focusable="False"
                                                     Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                     Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}"
                                                     ToolTip="restore"
@@ -178,6 +187,7 @@
                                                 <Button
                                                     x:Name="Maximize"
                                                     Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
+                                                    Focusable="False"
                                                     Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                     Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}"
                                                     ToolTip="maximize">
@@ -198,6 +208,7 @@
                                             </Grid>
                                             <Button
                                                 Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+                                                Focusable="False"
                                                 Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                 Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Close}"
                                                 ToolTip="close">
@@ -282,6 +293,7 @@
     </Style>
 
     <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Windows11" TargetType="{x:Type local:MicaWindow}">
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -321,12 +333,14 @@
                                                 Height="15"
                                                 Margin="5,0,0,0"
                                                 VerticalAlignment="Center"
+                                                Focusable="False"
                                                 RenderOptions.BitmapScalingMode="HighQuality"
                                                 Source="{TemplateBinding Icon}" />
                                             <TextBlock
                                                 x:Name="TitleTextBlock"
                                                 Margin="5,0,0,0"
                                                 VerticalAlignment="Center"
+                                                Focusable="False"
                                                 FontSize="12"
                                                 Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                                 Text="{TemplateBinding Title}" />
@@ -335,6 +349,7 @@
                                             Margin="5,0,5,0"
                                             Content="{TemplateBinding TitleBarContent}"
                                             DockPanel.Dock="Right"
+                                            Focusable="False"
                                             WindowChrome.IsHitTestVisibleInChrome="True" />
                                     </DockPanel>
                                     <StackPanel
@@ -342,11 +357,13 @@
                                         Grid.Column="2"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Top"
+                                        Focusable="False"
                                         Orientation="Horizontal"
                                         Visibility="Collapsed"
                                         WindowChrome.IsHitTestVisibleInChrome="True">
                                         <Button
                                             Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
+                                            Focusable="False"
                                             Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                             Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}">
                                             <Button.Content>
@@ -368,6 +385,7 @@
                                                 x:Name="Restore"
                                                 Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                                 Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                                Focusable="False"
                                                 Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                 Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}"
                                                 Visibility="Collapsed">
@@ -389,6 +407,7 @@
                                                 x:Name="Maximize"
                                                 Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindow}}"
                                                 Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
+                                                Focusable="False"
                                                 Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                                 Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Windows}">
                                                 <Button.Content>
@@ -408,6 +427,7 @@
                                         </Grid>
                                         <Button
                                             Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+                                            Focusable="False"
                                             Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                             Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Close}">
                                             <Button.Content>
