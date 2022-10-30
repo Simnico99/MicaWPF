@@ -7,6 +7,7 @@
     <helpers:ProgressThicknessConverter x:Key="ProgressThicknessConverter" />
 
     <Style x:Key="MicaWPF.Styles.Default.ProgressRing" TargetType="{x:Type controls:ProgressRing}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Height" Value="60" />
         <Setter Property="Width" Value="60" />
         <Setter Property="Focusable" Value="False" />
@@ -30,7 +31,10 @@
                         Height="{TemplateBinding Height}"
                         RenderTransformOrigin="0.5,0.5">
                         <Grid.RenderTransform>
-                            <RotateTransform Angle="90" />
+                            <TransformGroup>
+                                <RotateTransform Angle="90" />
+                                <ScaleTransform ScaleY="-1" />
+                            </TransformGroup>
                         </Grid.RenderTransform>
                         <controls:Arc
                             EndAngle="359"
@@ -39,7 +43,7 @@
                             StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}"
                             Visibility="{TemplateBinding CoverRingVisibility}" />
                         <controls:Arc
-                            EndAngle="{TemplateBinding EngAngle}"
+                            EndAngle="{TemplateBinding EndAngle}"
                             StartAngle="0"
                             Stroke="{TemplateBinding Foreground}"
                             StrokeThickness="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={StaticResource ProgressThicknessConverter}}" />

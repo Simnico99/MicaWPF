@@ -3,11 +3,13 @@ using static MicaWPF.Interop.InteropValues;
 
 namespace MicaWPF.Interop;
 
-internal class InteropMethods
+internal sealed class InteropMethods
 {
     [DllImport(ExternDll.User32)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
     [DllImport(ExternDll.User32)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
     [DllImport(ExternDll.DwmApi)]
@@ -26,6 +28,10 @@ internal class InteropMethods
     [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     internal static extern int RtlGetVersion(out OSVERSIONINFOEX versionInfo);
+
+    [DllImport(ExternDll.User32)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    public static extern IntPtr GetDCEx(IntPtr hwnd, IntPtr hrgnclip, uint fdwOptions);
 
     [DllImport(ExternDll.User32, CharSet = CharSet.Auto)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
@@ -55,7 +61,7 @@ internal class InteropMethods
 
     public static void HideAllWindowButton(IntPtr hwnd)
     {
-        SetWindowLong(hwnd, HwndButtons.GWL_STYLE, GetWindowLong(hwnd, HwndButtons.GWL_STYLE) & ~HwndButtons.WS_SYSMENU);
+        _ = SetWindowLong(hwnd, HwndButtons.GWL_STYLE, GetWindowLong(hwnd, HwndButtons.GWL_STYLE) & ~HwndButtons.WS_SYSMENU);
     }
 
     public static int SetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, int parameter)

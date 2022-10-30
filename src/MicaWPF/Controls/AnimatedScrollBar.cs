@@ -1,6 +1,10 @@
 ﻿using System.Windows.Controls.Primitives;
 
 namespace MicaWPF.Controls;
+
+/// <summary>
+/// Is kinda of a smart <see cref="ScrollBar"/>.
+/// </summary>
 public class AnimatedScrollBar : ScrollBar
 {
     private bool _isScrolling = false;
@@ -19,12 +23,18 @@ public class AnimatedScrollBar : ScrollBar
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
         typeof(int), typeof(AnimatedScrollBar), new PropertyMetadata(1000));
 
+    /// <summary>
+    /// Is currently scrolling.
+    /// </summary>
     public bool IsScrolling
     {
         get => (bool)GetValue(IsScrollingProperty);
         set => SetValue(IsScrollingProperty, value);
     }
 
+    /// <summary>
+    /// Has been interacted with.
+    /// </summary>
     public bool IsInteracted
     {
         get => (bool)GetValue(IsInteractedProperty);
@@ -37,6 +47,9 @@ public class AnimatedScrollBar : ScrollBar
         }
     }
 
+    /// <summary>
+    /// Has timed out.
+    /// </summary>
     public int Timeout
     {
         get => (int)GetValue(TimeoutProperty);
@@ -47,14 +60,14 @@ public class AnimatedScrollBar : ScrollBar
     {
         base.OnMouseEnter(e);
 
-        UpdateScroll().GetAwaiter();
+        _ = UpdateScroll().GetAwaiter();
     }
 
     protected override void OnMouseLeave(MouseEventArgs e)
     {
         base.OnMouseLeave(e);
 
-        UpdateScroll().GetAwaiter();
+        _ = UpdateScroll().GetAwaiter();
     }
 
     private async Task UpdateScroll()
@@ -94,7 +107,7 @@ public class AnimatedScrollBar : ScrollBar
 
         bar._isScrolling = !bar._isScrolling;
 
-        bar.UpdateScroll().GetAwaiter();
+        _ = bar.UpdateScroll().GetAwaiter();
     }
 
     private static void IsInteractedProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -111,6 +124,6 @@ public class AnimatedScrollBar : ScrollBar
 
         bar._isInteracted = !bar._isInteracted;
 
-        bar.UpdateScroll().GetAwaiter();
+        _ = bar.UpdateScroll().GetAwaiter();
     }
 }

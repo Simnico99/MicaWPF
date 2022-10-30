@@ -1,20 +1,26 @@
-﻿using System.Windows.Automation.Peers;
+﻿using MicaWPF.Extensions;
+using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
-using MicaWPF.Extensions;
 
 namespace MicaWPF.Controls;
+
+/// <summary>
+/// A window where custom backdrops are enabled.
+/// </summary>
 public class MicaWindow : Window
 {
     #region SnapLayout
-    private const int HTMAXBUTTON = 9;
-    private const string ButtonMax = "Maximize";
-    private const string ButtonRestore = "Restore";
-    private System.Windows.Controls.Button? _ButtonMax;
-    private System.Windows.Controls.Button? _ButtonRestore;
+    private const int _hTMAXBUTTON = 9;
+    private const string _buttonMaxName = "Maximize";
+    private const string _buttonRestoreName = "Restore";
+    private System.Windows.Controls.Button? _buttonMax;
+    private System.Windows.Controls.Button? _buttonRestore;
     #endregion
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Is a property.")]
     internal static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindow));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
+    public static readonly DependencyProperty UseAccentOnTitleBarAndBorderProperty = DependencyProperty.Register(nameof(UseAccentOnTitleBarAndBorder), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(AccentColorService.Current.IsTitleBarAndWindowsBorderColored));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(true));
     public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindow), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindow), new UIPropertyMetadata(TitleBarType.Win32));
@@ -25,26 +31,50 @@ public class MicaWindow : Window
         set => SetValue(MarginMaximizedProperty, value);
     }
 
+    /// <summary>
+    /// The current type of backdrop the window is using.
+    /// </summary>
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
 
+    /// <summary>
+    /// The height of the title bar.
+    /// </summary>
     public int TitleBarHeight
     {
         get => (int)GetValue(TitleBarHeightProperty);
         set => SetValue(TitleBarHeightProperty, value);
     }
 
+    /// <summary>
+    /// Is showing the accented border.
+    /// </summary>
+    public bool UseAccentOnTitleBarAndBorder
+    {
+        get => (bool)GetValue(UseAccentOnTitleBarAndBorderProperty);
+        set => SetValue(UseAccentOnTitleBarAndBorderProperty, value);
+    }
+
+    /// <summary>
+    /// The type of title bar used.
+    /// </summary>
     public TitleBarType TitleBarType
     {
         get => (TitleBarType)GetValue(TitleBarTypeProperty);
         set => SetValue(TitleBarTypeProperty, value);
     }
 
+    /// <summary>
+    /// Should the title color change when the window is inactive.
+    /// </summary>
     public bool ChangeTitleColorWhenInactive
     {
         get => (bool)GetValue(MarginMaximizedProperty);
         set => SetValue(MarginMaximizedProperty, value);
     }
 
+    /// <summary>
+    /// Custom <see cref="UIElement"/> that are embeded in the title bar.
+    /// </summary>
     public UIElement TitleBarContent
     {
         get => (UIElement)GetValue(TitleBarContentProperty);
@@ -111,8 +141,8 @@ public class MicaWindow : Window
 
     public override void OnApplyTemplate()
     {
-        _ButtonMax = GetTemplateChild(ButtonMax) as System.Windows.Controls.Button;
-        _ButtonRestore = GetTemplateChild(ButtonRestore) as System.Windows.Controls.Button;
+        _buttonMax = GetTemplateChild(_buttonMaxName) as System.Windows.Controls.Button;
+        _buttonRestore = GetTemplateChild(_buttonRestoreName) as System.Windows.Controls.Button;
 
         this.EnableBackdrop(SystemBackdropType);
 
@@ -129,10 +159,10 @@ public class MicaWindow : Window
             Source = new Uri("/MicaWPF;component/Styles/Controls/MicaWindow.xaml", UriKind.RelativeOrAbsolute)
         };
 
-        CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
-        CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
+        _ = CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
+        _ = CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, OnMaximizeWindow, OnCanResizeWindow));
+        _ = CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, OnMinimizeWindow, OnCanMinimizeWindow));
+        _ = CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
         Style = OsHelper.IsWindows11_OrGreater
             ? myResourceDictionary["MicaWPF.Styles.Default.MicaWindow.Windows11"] as Style
@@ -174,7 +204,7 @@ public class MicaWindow : Window
         var x = lparam.ToInt32() & 0xffff;
         var y = lparam.ToInt32() >> 16;
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
-        var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
+        var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
 
         if (_button is not null)
         {
@@ -192,7 +222,7 @@ public class MicaWindow : Window
             {
                 _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
             }
-            return new IntPtr(HTMAXBUTTON);
+            return new IntPtr(_hTMAXBUTTON);
         }
 
         return IntPtr.Zero;
@@ -203,7 +233,7 @@ public class MicaWindow : Window
         var x = lparam.ToInt32() & 0xffff;
         var y = lparam.ToInt32() >> 16;
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
-        var _button = WindowState == WindowState.Maximized ? _ButtonRestore : _ButtonMax;
+        var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
         if (_button != null)
         {
             var rect = new Rect(_button.PointToScreen(
@@ -217,36 +247,6 @@ public class MicaWindow : Window
             }
         }
     }
-
-    //private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
-    //{
-    //    var structure = Marshal.PtrToStructure(lParam, typeof(InteropValues.MINMAXINFO));
-
-    //    if (structure is not null)
-    //    {
-    //        var mmi = (InteropValues.MINMAXINFO)structure;
-    //        var monitor = InteropMethods.MonitorFromWindow(hwnd, 0x00000002);
-
-    //        if (monitor != IntPtr.Zero)
-    //        {
-    //            InteropValues.MONITORINFO monitorInfo = new()
-    //            {
-    //                cbSize = Marshal.SizeOf(typeof(InteropValues.MONITORINFO))
-    //            };
-    //            InteropMethods.GetMonitorInfo(monitor, ref monitorInfo);
-    //            var rcWorkArea = monitorInfo.rcWork;
-    //            var rcMonitorArea = monitorInfo.rcMonitor;
-    //            mmi.ptMaxPosition.X = Math.Abs(rcWorkArea.Left - rcMonitorArea.Left);
-    //            mmi.ptMaxPosition.Y = Math.Abs(rcWorkArea.Top - rcMonitorArea.Top);
-    //            mmi.ptMaxSize.X = Math.Abs(rcWorkArea.Right - rcWorkArea.Left);
-    //            mmi.ptMaxSize.Y = Math.Abs(rcWorkArea.Bottom - rcWorkArea.Top);
-    //            mmi.ptMaxTrackSize.X = mmi.ptMaxSize.X;
-    //            mmi.ptMaxTrackSize.Y = mmi.ptMaxSize.Y;
-    //        }
-
-    //        Marshal.StructureToPtr(mmi, lParam, true);
-    //    }
-    //}
 
     private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr _, IntPtr lparam, ref bool handled)
     {

@@ -1,7 +1,11 @@
 ﻿using System.Windows.Data;
 
 namespace MicaWPF.Converters;
-public class TextToAsteriskConverter : IValueConverter
+
+/// <summary>
+/// Converts the current text to asterisks.
+/// </summary>
+public sealed class TextToAsteriskConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {

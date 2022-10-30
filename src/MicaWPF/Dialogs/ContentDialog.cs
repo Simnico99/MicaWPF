@@ -1,75 +1,240 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-using MicaWPF.Controls;
+﻿using MicaWPF.Controls;
 using MicaWPF.Extensions;
+using System.Windows.Documents;
+using System.Windows.Media.Media3D;
 
 namespace MicaWPF.Dialogs;
 
-public enum ContentDialogResult
+/// <summary>
+/// A WinUI style content dialog.
+/// </summary>
+public sealed class ContentDialog
 {
-    PrimaryButton,
-    SecondaryButton,
-    TertiaryButton,
-    Empty
-}
+    public string? Title { get; set; }
+    public string? PrimaryButtonText { get; set; }
+    public string? SecondaryButtonText { get; set; }
+    public string? CloseButtonText { get; set; }
+    public object? Content { get; set; }
+    public Brush? BorderBrush { get; set; }
+    public double Height { get; set; } = double.NaN;
+    public double Width { get; set; } = 320;
+    public ContentDialogButton DefaultButton { get; set; }
 
-public static class ContentDialog
-{
-    private const int DefaultWidth = 332;
-    private const int DefaultMaxHeight = 500;
+    private static readonly Style _accentButtonStyle = (Style)Application.Current.FindResource("MicaWPF.Styles.AccentedButton");
 
-    private static Grid HookToWindow(MicaWindow micaWindow, ContentControl content)
+    private static FrameworkElement? HookToWindow(MicaWindow? micaWindow, IContentDialog content)
     {
-        var grid = micaWindow.FindVisualChildren<AdornerDecorator>().FirstOrDefault()?.Child as Grid;
-
-        var canvas = new Grid()
+        if (micaWindow is not null)
         {
-            Margin = new Thickness(0, -micaWindow.TitleBarHeight, 0, 0),
-            Background = Application.Current.TryFindResource("MicaWPF.Brushes.SmokeFillColorDefault") as SolidColorBrush
-        };
+            var grid = micaWindow.FindVisualChildren<AdornerDecorator>().FirstOrDefault()?.Child as Grid;
 
-        canvas.Children.Add(content);
+            var canvas = new Grid()
+            {
+                Margin = new Thickness(0, -micaWindow.TitleBarHeight, 0, 0),
+                Background = Application.Current.TryFindResource("MicaWPF.Brushes.SmokeFillColorDefault") as SolidColorBrush
+            };
 
-        grid?.Children.Add(canvas);
+            _ = canvas.Children.Add(content as ContentControl);
 
-        return canvas;
+            _ = (grid?.Children.Add(canvas));
+
+            return canvas;
+        }
+        if (content is DefaultDialogWindow defaultDialogWindow)
+        {
+            defaultDialogWindow.Show();
+        }
+
+        return content as ContentControl;
     }
 
-    private static void DeleteDialog(DefaultContentDialog contentDialog, Grid grid)
+    private static void DeleteDialog(ContentControl contentDialog, Grid grid)
     {
         ((Grid)contentDialog.Parent).Children.Remove(contentDialog);
         ((Grid)grid.Parent).Children.Remove(grid);
     }
 
-    public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, object? customContent = null, int maxHeight = DefaultMaxHeight, int width = DefaultWidth, Brush? borderBrush = null)
+    private static MicaWindow? FindMicaWindow(MicaWindow? micaWindow)
+    {
+        if (micaWindow is null)
+        {
+            foreach (var window in Application.Current.Windows)
+            {
+                if (window is null || window != Application.Current.MainWindow)
+                {
+                    continue;
+                }
+
+                if (window.GetType().IsSubclassOf(typeof(MicaWindow)))
+                {
+                    micaWindow = window as MicaWindow;
+                }
+            }
+
+            if (micaWindow is null)
+            {
+                foreach (Window? window in Application.Current.Windows)
+                {
+                    if (window is null)
+                    {
+                        continue;
+                    }
+
+                    if (window.IsEnabled && window.IsVisible)
+                    {
+                        micaWindow = window as MicaWindow;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (micaWindow is not null && micaWindow.IsVisible)
+        {
+            return micaWindow;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+
+    public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, ContentDialogButton? defaultButton = null, object? customContent = null, double height = double.NaN, double width = 320, Brush? borderBrush = null)
     {
         var result = ContentDialogResult.Empty;
 
         await Application.Current.Dispatcher.Invoke(async () =>
         {
-            var content = new DefaultContentDialog
-            {
-                PrimaryButtonText = primaryButtonText,
-                SecondaryButtonText = secondaryButtonText,
-                TertiaryButtonText = tertiarybuttonText,
-                InnerText = text,
-                InnerContent = customContent,
-                InnerTitleText = titleText,
-                InnerBorderBrush = borderBrush,
-                MaxHeight = maxHeight,
-                Width = width
-            };
+            var hook = FindMicaWindow(micaWindow);
+            IContentDialog? content = null;
 
-            var grid = HookToWindow(micaWindow, content);
+            if (hook is not null)
+            {
+                content = new DefaultContentDialog
+                {
+                    PrimaryButtonText = primaryButtonText,
+                    SecondaryButtonText = secondaryButtonText,
+                    TertiaryButtonText = tertiarybuttonText,
+                    InnerText = text,
+                    InnerContent = customContent,
+                    InnerTitleText = titleText,
+                    InnerBorderBrush = borderBrush,
+                    Height = height,
+                    Width = width
+                };
+            }
+            else 
+            {
+                content = new DefaultDialogWindow
+                {
+                    PrimaryButtonText = primaryButtonText,
+                    SecondaryButtonText = secondaryButtonText,
+                    TertiaryButtonText = tertiarybuttonText,
+                    InnerText = text,
+                    InnerContent = customContent,
+                    InnerTitleText = titleText,
+                    Icon = Application.Current.MainWindow.Icon,
+                };
+            }
+
+            switch (defaultButton)
+            {
+                case ContentDialogButton.Primary:
+                    content.PrimaryButtonStyle = _accentButtonStyle;
+                    break;
+                case ContentDialogButton.Secondary:
+                    content.SecondaryButtonStyle = _accentButtonStyle;
+                    break;
+                case ContentDialogButton.Close:
+                    content.CloseButtonStyle = _accentButtonStyle;
+                    break;
+                default:
+                    break;
+            }
+
+            var adornee = HookToWindow(hook, content);
 
             await content.ShowAsync();
 
             result = content.Result;
-            DeleteDialog(content, grid);
+
+            if (adornee is Grid grid)
+            {
+                DeleteDialog((ContentControl)content, grid);
+            }
+            if (adornee is DefaultDialogWindow defaultDialogWindow)
+            {
+                defaultDialogWindow.Close();
+            }
+        });
+
+        return result;
+    }
+
+    public async Task<ContentDialogResult> ShowAsync(MicaWindow? micaWindow = null)
+    {
+        var result = ContentDialogResult.Empty;
+
+        await Application.Current.Dispatcher.Invoke(async () =>
+        {
+            var hook = FindMicaWindow(micaWindow);
+            IContentDialog? content = null;
+
+            if (hook is not null)
+            {
+                content = new DefaultContentDialog
+                {
+                    PrimaryButtonText = PrimaryButtonText,
+                    SecondaryButtonText = SecondaryButtonText,
+                    TertiaryButtonText = CloseButtonText,
+                    InnerContent = Content,
+                    InnerTitleText = Title,
+                    InnerBorderBrush = BorderBrush,
+                    Height = Height,
+                    Width = Width
+                };
+            }
+            else
+            {
+                content = new DefaultDialogWindow
+                {
+                    PrimaryButtonText = PrimaryButtonText,
+                    SecondaryButtonText = SecondaryButtonText,
+                    TertiaryButtonText = CloseButtonText,
+                    InnerContent = Content,
+                    InnerTitleText = Title,
+                    Icon = Application.Current.MainWindow.Icon,
+                };
+            }
+
+            switch (DefaultButton)
+            {
+                case ContentDialogButton.Primary:
+                    content.PrimaryButtonStyle = _accentButtonStyle;
+                    break;
+                case ContentDialogButton.Secondary:
+                    content.SecondaryButtonStyle = _accentButtonStyle;
+                    break;
+                case ContentDialogButton.Close:
+                    content.CloseButtonStyle = _accentButtonStyle;
+                    break;
+                default:
+                    break;
+            }
+
+            var adornee = HookToWindow(hook, content);
+
+            await content.ShowAsync();
+
+            result = content.Result;
+            if (adornee is Grid grid)
+            {
+                DeleteDialog((ContentControl)content, grid);
+            }
+            if (adornee is DefaultDialogWindow defaultDialogWindow)
+            {
+                defaultDialogWindow.Close();
+            }
         });
 
         return result;

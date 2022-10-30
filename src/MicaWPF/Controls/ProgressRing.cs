@@ -1,4 +1,11 @@
-﻿namespace MicaWPF.Controls;
+﻿using System.ComponentModel;
+
+namespace MicaWPF.Controls;
+
+/// <summary>
+/// A WinUI <see cref="ProgressRing"/>.
+/// </summary>
+[ToolboxItem(true)]
 public class ProgressRing : Control
 {
     public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress),
@@ -10,7 +17,7 @@ public class ProgressRing : Control
         typeof(bool), typeof(ProgressRing),
         new PropertyMetadata(false));
 
-    public static readonly DependencyProperty EngAngleProperty = DependencyProperty.Register(nameof(EngAngle),
+    public static readonly DependencyProperty EndAngleProperty = DependencyProperty.Register(nameof(EndAngle),
         typeof(double), typeof(ProgressRing),
         new PropertyMetadata(180.0d));
 
@@ -35,36 +42,54 @@ public class ProgressRing : Control
         typeof(System.Windows.Visibility), typeof(ProgressRing),
         new PropertyMetadata(System.Windows.Visibility.Visible));
 
+    /// <summary>
+    /// The current progress.
+    /// </summary>
     public double Progress
     {
         get => (double)GetValue(ProgressProperty);
         set => SetValue(ProgressProperty, value);
     }
 
+    /// <summary>
+    /// Is inderteminate.
+    /// </summary>
     public bool IsIndeterminate
     {
         get => (bool)GetValue(IsIndeterminateProperty);
         set => SetValue(IsIndeterminateProperty, value);
     }
 
-    public double EngAngle
+    /// <summary>
+    /// The end angle.
+    /// </summary>
+    public double EndAngle
     {
-        get => (double)GetValue(EngAngleProperty);
-        set => SetValue(EngAngleProperty, value);
+        get => (double)GetValue(EndAngleProperty);
+        set => SetValue(EndAngleProperty, value);
     }
 
+    /// <summary>
+    /// The angle when using the inderteminate progress.
+    /// </summary>
     public double IndeterminateAngle
     {
         get => (double)GetValue(IndeterminateAngleProperty);
         internal set => SetValue(IndeterminateAngleProperty, value);
     }
 
+    /// <summary>
+    /// The background of the ring.
+    /// </summary>
     public Brush CoverRingStroke
     {
         get => (Brush)GetValue(CoverRingStrokeProperty);
         internal set => SetValue(CoverRingStrokeProperty, value);
     }
 
+    /// <summary>
+    /// Is the background ring visible.
+    /// </summary>
     public System.Windows.Visibility CoverRingVisibility
     {
         get => (System.Windows.Visibility)GetValue(CoverRingVisibilityProperty);
@@ -92,7 +117,7 @@ public class ProgressRing : Control
             endAngle = 359;
         }
 
-        EngAngle = endAngle;
+        EndAngle = endAngle;
     }
 
     protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)

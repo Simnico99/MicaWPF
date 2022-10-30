@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:MicaWPF.Controls"
     xmlns:converters="clr-namespace:MicaWPF.Converters">
 
     <converters:IsNullConverter x:Key="IsNullConverter" />
 
     <Style x:Key="MicaRichTextBoxBase" TargetType="{x:Type RichTextBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
@@ -47,15 +47,6 @@
                                     <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlStrongStrokeColorDefault}" />
                                 </Border.BorderBrush>
                                 <Grid>
-
-                                    <Label
-                                        x:Name="WatermarkLabel"
-                                        Margin="8,0"
-                                        Padding="0"
-                                        Content="{Binding Watermark, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RichTextBox}}}"
-                                        FontSize="{TemplateBinding FontSize}"
-                                        Foreground="{DynamicResource MicaWPF.Brushes.TextFillColorTertiary}"
-                                        Visibility="Hidden" />
                                     <ScrollViewer
                                         x:Name="PART_ContentHost"
                                         Margin="0"
@@ -68,7 +59,7 @@
                             Height="1"
                             Margin="2,0,2,1"
                             VerticalAlignment="Bottom"
-                            Fill="{DynamicResource MicaWPF.Brushes.SystemAccent}"
+                            Fill="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}"
                             Visibility="Collapsed" />
                     </Grid>
 
@@ -86,9 +77,6 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text, Converter={StaticResource IsNullConverter}}" Value="True">
-                            <Setter TargetName="WatermarkLabel" Property="Visibility" Value="Visible" />
-                        </DataTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background">
                                 <Setter.Value>

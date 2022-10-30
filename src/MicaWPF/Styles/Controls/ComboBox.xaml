@@ -91,6 +91,7 @@
     </Style>
 
     <Style x:Key="MicaWPF.Styles.Default.ComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
@@ -179,6 +180,7 @@
     </Style>
 
     <Style x:Key="MicaWPF.Styles.Default.ComboBox" TargetType="{x:Type ComboBox}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource MicaWPF.Styles.Default.FocusVisualStyle}" />
         <Setter Property="Foreground">
             <Setter.Value>
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.TextFillColorPrimary}" />
@@ -189,7 +191,6 @@
                 <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.ControlFillColorDefault}" />
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource MicaWPF.GradientBrushes.ControlElevationBorder}" />
         <Setter Property="BorderThickness" Value="1,1,1,1" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
@@ -212,7 +213,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
                     <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border
+                        <controls:GradientBorder
                             x:Name="ContentBorder"
                             Grid.Row="0"
                             MinWidth="{TemplateBinding MinWidth}"
@@ -221,7 +222,6 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding Border.CornerRadius}">
                             <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -326,7 +326,7 @@
                                     </Border>
                                 </Popup>
                             </Grid>
-                        </Border>
+                        </controls:GradientBorder>
                         <Border
                             x:Name="AccentBorder"
                             HorizontalAlignment="Stretch"

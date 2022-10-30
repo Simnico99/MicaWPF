@@ -3,15 +3,15 @@ using System.Runtime.CompilerServices;
 
 namespace MicaWPF.Services;
 
-public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionaryService
+public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionaryService
 {
     private static Uri? _currentThemeSource;
 
-    private static readonly ThemeDictionaryService _themeManager = new();
-
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
+    public static ThemeDictionaryService Current { get; } = new();
+
+    private void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
@@ -19,12 +19,6 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
     private ThemeDictionaryService()
     {
     }
-
-    public static ThemeDictionaryService GetCurrent()
-    {
-        return _themeManager;
-    }
-
     /// <summary>
     /// get current theme resource dictionary
     /// </summary>
@@ -58,7 +52,7 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
 
             foreach (var oldTheme in oldThemes)
             {
-                dictionaries.Remove(oldTheme);
+                _ = dictionaries.Remove(oldTheme);
             }
         }
     }

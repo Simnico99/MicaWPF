@@ -1,60 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MicaWPF.Controls;
 
-namespace MicaWPF.Controls;
-internal class ColumnDefinitionExtended : ColumnDefinition
+internal sealed class ColumnDefinitionExtended : ColumnDefinition
 {
-        // Variables
-        public static DependencyProperty VisibleProperty;
+    public static DependencyProperty VisibleProperty;
 
-        // Properties
-        public bool Visible
-        {
-            get { return (bool)GetValue(VisibleProperty); }
-            set { SetValue(VisibleProperty, value); }
-        }
+    public bool Visible
+    {
+        get => (bool)GetValue(VisibleProperty);
+        set => SetValue(VisibleProperty, value);
+    }
 
-        // Constructors
-        static ColumnDefinitionExtended()
-        {
-            VisibleProperty = DependencyProperty.Register("Visible",
-                typeof(bool),
-                typeof(ColumnDefinitionExtended),
-                new PropertyMetadata(true, new PropertyChangedCallback(OnVisibleChanged)));
+    static ColumnDefinitionExtended()
+    {
+        VisibleProperty = DependencyProperty.Register("Visible",
+            typeof(bool),
+            typeof(ColumnDefinitionExtended),
+            new PropertyMetadata(true, new PropertyChangedCallback(OnVisibleChanged)));
 
-            WidthProperty.OverrideMetadata(typeof(ColumnDefinitionExtended),
-                new FrameworkPropertyMetadata(new GridLength(1, GridUnitType.Star), null,
-                    new CoerceValueCallback(CoerceWidth)));
+        WidthProperty.OverrideMetadata(typeof(ColumnDefinitionExtended),
+            new FrameworkPropertyMetadata(new GridLength(1, GridUnitType.Star), null,
+                new CoerceValueCallback(CoerceWidth)));
 
-            MinWidthProperty.OverrideMetadata(typeof(ColumnDefinitionExtended),
-                new FrameworkPropertyMetadata((double)0, null,
-                    new CoerceValueCallback(CoerceMinWidth)));
-        }
+        MinWidthProperty.OverrideMetadata(typeof(ColumnDefinitionExtended),
+            new FrameworkPropertyMetadata((double)0, null,
+                new CoerceValueCallback(CoerceMinWidth)));
+    }
 
-        // Get/Set
-        public static void SetVisible(DependencyObject obj, bool nVisible)
-        {
-            obj.SetValue(VisibleProperty, nVisible);
-        }
-        public static bool GetVisible(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(VisibleProperty);
-        }
+    public static void SetVisible(DependencyObject obj, bool nVisible)
+    {
+        obj.SetValue(VisibleProperty, nVisible);
+    }
+    public static bool GetVisible(DependencyObject obj)
+    {
+        return (bool)obj.GetValue(VisibleProperty);
+    }
 
-        static void OnVisibleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            obj.CoerceValue(WidthProperty);
-            obj.CoerceValue(MinWidthProperty);
-        }
-        static object CoerceWidth(DependencyObject obj, object nValue)
-        {
-            return (((ColumnDefinitionExtended)obj).Visible) ? nValue : new GridLength(0);
-        }
-        static object CoerceMinWidth(DependencyObject obj, object nValue)
-        {
-            return (((ColumnDefinitionExtended)obj).Visible) ? nValue : (double)0;
-        }
+    private static void OnVisibleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+    {
+        obj.CoerceValue(WidthProperty);
+        obj.CoerceValue(MinWidthProperty);
+    }
+
+    private static object CoerceWidth(DependencyObject obj, object nValue)
+    {
+        return ((ColumnDefinitionExtended)obj).Visible ? nValue : new GridLength(0);
+    }
+
+    private static object CoerceMinWidth(DependencyObject obj, object nValue)
+    {
+        return ((ColumnDefinitionExtended)obj).Visible ? nValue : (double)0;
+    }
 }

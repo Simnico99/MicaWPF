@@ -1,10 +1,10 @@
-﻿using System.Windows.Data;
-using MicaWPF.Extensions;
+﻿using MicaWPF.Extensions;
 using MicaWPF.Symbols;
+using System.Windows.Data;
 
 namespace MicaWPF.Converters;
 
-internal class ObjectToSymbolConverter : IValueConverter
+internal sealed class ObjectToSymbolConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {

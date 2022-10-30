@@ -1,34 +1,31 @@
-﻿using System.Windows;
-using MicaWPF.DependencyInjection.Options;
+﻿using MicaWPF.DependencyInjection.Options;
+using MicaWPF.Events;
 using MicaWPF.Models;
 using MicaWPF.Services;
+using System.Windows;
 
 namespace MicaWPF.DependencyInjection.Services;
-internal class ThemeServiceDI : IThemeService
+internal sealed class ThemeServiceDI : IThemeService
 {
-    private readonly IThemeService _localThemeService = ThemeService.GetCurrent();
     private readonly MicaWPFOptions _options;
+    public IWeakEvent<WindowsTheme> ThemeChanged => ThemeService.Current.ThemeChanged;
+    public List<MicaEnabledWindow> MicaEnabledWindows => ThemeService.Current.MicaEnabledWindows;
+    public WindowsTheme CurrentTheme => ThemeService.Current.CurrentTheme;
+    public bool IsThemeAware => ThemeService.Current.IsThemeAware;
 
     public ThemeServiceDI(MicaWPFOptions options)
     {
         _options = options;
-        _localThemeService.IsThemeAware = _options.IsThemeAware;
-        _localThemeService.ChangeTheme(_options.Theme);
+        _ = ThemeService.Current.ChangeTheme(_options.Theme);
     }
-
-    public WindowsTheme CurrentTheme => _localThemeService.CurrentTheme;
-
-    public bool IsThemeAware { get => _localThemeService.IsThemeAware; set => _localThemeService.IsThemeAware = value; }
-
-    public ICollection<MicaEnabledWindow> MicaEnabledWindows => _localThemeService.MicaEnabledWindows;
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {
-        return _localThemeService.ChangeTheme(windowsTheme);
+        return ThemeService.Current.ChangeTheme(windowsTheme);
     }
 
     public void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica)
     {
-        _localThemeService.EnableBackdrop(window, micaType);
+        ThemeService.Current.EnableBackdrop(window, micaType);
     }
 }

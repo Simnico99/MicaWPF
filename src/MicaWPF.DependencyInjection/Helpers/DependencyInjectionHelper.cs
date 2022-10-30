@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 namespace MicaWPF.DependencyInjection.Helpers;
 public static class DependencyInjectionHelper
 {
-    public static IHostBuilder UseMicaWPF(this IHostBuilder builder, Action<MicaWPFOptions> options)
+    public static IHostBuilder UseMicaWPF(this IHostBuilder builder, Action<MicaWPFOptions>? options = null)
     {
         if (builder is null)
         {
@@ -16,21 +16,14 @@ public static class DependencyInjectionHelper
 
         var cfg = new MicaWPFOptions();
 
-        options(cfg);
+        options?.Invoke(cfg);
 
-        builder.ConfigureServices((_, services) =>
+        _ = builder.ConfigureServices((_, services) =>
         {
             services.AddSingleton(cfg);
             services.AddSingleton<IThemeService, ThemeServiceDI>();
             services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
         });
-
-        return builder;
-    }
-
-    public static IHostBuilder UseMicaWPF(this IHostBuilder builder)
-    {
-        builder.UseMicaWPF(x => new MicaWPFOptions());
 
         return builder;
     }

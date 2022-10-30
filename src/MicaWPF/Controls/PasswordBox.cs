@@ -1,6 +1,12 @@
 ﻿using MicaWPF.Symbols;
+using System.ComponentModel;
 
 namespace MicaWPF.Controls;
+
+/// <summary>
+/// A password box with a button to show or hide passwords.
+/// </summary>
+[ToolboxItem(true)]
 public class PasswordBox : TextBox
 {
     private bool _takenControl = false;
@@ -9,29 +15,45 @@ public class PasswordBox : TextBox
     public static readonly DependencyProperty PasswordRevealModeProperty = DependencyProperty.Register(nameof(PasswordRevealMode), typeof(RevealMode), typeof(PasswordBox), new PropertyMetadata(RevealMode.Hidden, OnPasswordRevealModeChanged));
     public static readonly DependencyProperty ShowRevealButtonProperty = DependencyProperty.Register(nameof(ShowRevealButton), typeof(bool), typeof(PasswordBox), new PropertyMetadata(true));
 
+    /// <summary>
+    /// The current password the user has typed.
+    /// </summary>
     public string Password
     {
         get => (string)GetValue(PasswordProperty);
         internal set => SetValue(PasswordProperty, value);
     }
+
+    /// <summary>
+    /// The character used to hide the password.
+    /// </summary>
     public char PasswordChar
     {
         get => (char)GetValue(PasswordCharProperty);
         set => SetValue(PasswordCharProperty, value);
     }
 
+    /// <summary>
+    /// Is the password revealed or not.
+    /// </summary>
     public RevealMode PasswordRevealMode
     {
         get => (RevealMode)GetValue(PasswordRevealModeProperty);
         set => SetValue(PasswordRevealModeProperty, value);
     }
 
+    /// <summary>
+    /// Should show the reveal button or not.
+    /// </summary>
     public bool ShowRevealButton
     {
         get => (bool)GetValue(ShowRevealButtonProperty);
         set => SetValue(ShowRevealButtonProperty, value);
     }
 
+    /// <summary>
+    /// The current text in the box.
+    /// </summary>
     public new string Text
     {
         get => base.Text;
@@ -81,7 +103,6 @@ public class PasswordBox : TextBox
             return;
         }
 
-        // TODO: Pasting text breaks this loop.
         var newContent = text.Replace(PasswordChar.ToString(), string.Empty);
 
         if (newContent.Length > 1)
@@ -132,28 +153,6 @@ public class PasswordBox : TextBox
 
         SetValue(TextProperty,
             revealMode == RevealMode.Visible ? Password : new string(PasswordChar, Password.Length));
-    }
-
-    private void Button_OnClick(object sender, object parameter)
-    {
-        if (parameter == null)
-        {
-            return;
-        }
-
-        var param = parameter as string ?? string.Empty;
-
-        if (sender is PasswordBox passwordBox)
-        {
-            switch (param)
-            {
-                case "reveal":
-                    passwordBox.PasswordRevealMode = passwordBox.PasswordRevealMode == RevealMode.Visible
-                    ? RevealMode.Hidden
-                    : RevealMode.Visible;
-                    break;
-            }
-        }
     }
 
     private static void OnPasswordCharChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

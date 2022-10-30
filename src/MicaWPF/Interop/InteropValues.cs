@@ -1,6 +1,6 @@
 ﻿namespace MicaWPF.Interop;
 
-public class InteropValues
+public sealed class InteropValues
 {
     public static class HwndSourceMessages
     {
@@ -8,6 +8,9 @@ public class InteropValues
         WM_NCHITTEST = 0x0084,
         WM_NCLBUTTONDOWN = 0x00A1,
         WM_MAXIMIZE = 0x0024,
+        WM_NCPAINT = 0x0085,
+        WM_ERASEBKGND = 0x0014,
+        WM_PAINT = 0x000F,
         WM_GETMINMAXINFO = 0x0024;
     }
 

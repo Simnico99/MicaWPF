@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MicaWPF.Extensions;
 
-namespace MicaWPF.Extensions;
+/// <summary>
+/// Extensions for <see cref="DependencyObject"/>.
+/// </summary>
 public static class DependencyObjectExtension
 {
     /// <summary>
-    ///     Get all objects of a certain type in a form or a page.
+    /// List of type types to refresh on theme change.
+    /// </summary>
+    private static List<Type> ObjectsThatNeedsRefresh { get; set; } = new()
+    {
+        typeof(Controls.Button)
+    };
+
+    /// <summary>
+    ///     Get all objects of a certain type in a <see cref="DependencyObject"/> (Visual only).
     /// </summary>
     /// <returns>
     ///     A <see cref="IEnumerable{T}" /> of the type of object specified.
@@ -36,6 +42,12 @@ public static class DependencyObjectExtension
         }
     }
 
+    /// <summary>
+    ///     Get all objects of a certain type in a <see cref="DependencyObject"/> (Logical only).
+    /// </summary>
+    /// <returns>
+    ///     A <see cref="IEnumerable{T}" /> of the type of object specified.
+    /// </returns>
     public static IEnumerable<T> FindLogicalChildren<T>(this DependencyObject depObj) where T : DependencyObject
     {
         if (depObj != null)
@@ -51,7 +63,7 @@ public static class DependencyObjectExtension
                             yield return t;
                         }
 
-                        foreach (T childOfChild in FindLogicalChildren<T>(child))
+                        foreach (var childOfChild in FindLogicalChildren<T>(child))
                         {
                             yield return childOfChild;
                         }
@@ -61,14 +73,21 @@ public static class DependencyObjectExtension
         }
     }
 
+    /// <summary>
+    /// Refresh the style of logical and visual children in a <see cref="DependencyObject"/>.
+    /// </summary>
     public static void RefreshChildrenStyle(this DependencyObject depObj)
     {
         foreach (var element in depObj.FindLogicalChildren<FrameworkElement>())
         {
-            element.RefreshStyle();
-            if (element is Controls.Frame frame)
+            if (element is Controls.Frame or Frame)
             {
-                ((DependencyObject)frame.Content).RefreshChildrenStyle();
+                element.RefreshChildrenStyle();
+            }
+
+            if (ObjectsThatNeedsRefresh.Contains(element.GetType()))
+            {
+                element.RefreshStyle();
             }
         }
     }

@@ -1,4 +1,8 @@
 ﻿namespace MicaWPF.Controls;
+
+/// <summary>
+/// Kinda of a smart <see cref="ScrollViewer"/>.
+/// </summary>
 public class AnimatedScrollViewer : ScrollViewer
 {
     private readonly EventIdentifier _verticalIdentifier = new();
@@ -29,24 +33,36 @@ public class AnimatedScrollViewer : ScrollViewer
     public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
         typeof(int), typeof(AnimatedScrollViewer), new PropertyMetadata(1200, TimeoutProperty_OnChanged));
 
+    /// <summary>
+    /// Is currently scrolling vertically.
+    /// </summary>
     public bool IsScrollingVertically
     {
         get => (bool)GetValue(IsScrollingVerticallyProperty);
         set => SetValue(IsScrollingVerticallyProperty, value);
     }
 
+    /// <summary>
+    /// Is currently scrolling horizontally.
+    /// </summary>
     public bool IsScrollingHorizontally
     {
         get => (bool)GetValue(IsScrollingHorizontallyProperty);
         set => SetValue(IsScrollingHorizontallyProperty, value);
     }
 
+    /// <summary>
+    /// Is the change minimal?
+    /// </summary>
     public double MinimalChange
     {
         get => (double)GetValue(MinimalChangeProperty);
         set => SetValue(MinimalChangeProperty, value);
     }
 
+    /// <summary>
+    /// Has timed out.
+    /// </summary>
     public int Timeout
     {
         get => (int)GetValue(TimeoutProperty);

@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="MicaWPF.Styles.Default.FocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid Margin="-4" SnapsToDevicePixels="True">
+                        <Rectangle
+                            RadiusX="4"
+                            RadiusY="4"
+                            Stroke="{DynamicResource MicaWPF.Brushes.FocusStrokeColorOuter}"
+                            StrokeThickness="2" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Static SystemParameters.FocusVisualStyleKey}" BasedOn="{StaticResource MicaWPF.Styles.Default.FocusVisualStyle}" />
+</ResourceDictionary>

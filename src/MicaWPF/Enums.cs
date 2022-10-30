@@ -1,17 +1,47 @@
 ﻿namespace MicaWPF;
 
+/// <summary>
+/// Results of a Content Dialog.
+/// </summary>
+public enum ContentDialogResult
+{
+    PrimaryButton,
+    SecondaryButton,
+    TertiaryButton,
+    Empty
+}
+
+/// <summary>
+/// The button that must be colored on the content dialog.
+/// </summary>
+public enum ContentDialogButton
+{
+    Primary,
+    Secondary,
+    Close
+}
+
+/// <summary>
+/// Is the password visible or not.
+/// </summary>
 public enum RevealMode
 {
     Hidden,
     Visible
 }
 
+/// <summary>
+/// Element position.
+/// </summary>
 public enum ElementPosition
 {
     Left,
     Right
 }
 
+/// <summary>
+/// The theme used by Windows.
+/// </summary>
 public enum WindowsTheme
 {
     Light,
@@ -19,14 +49,9 @@ public enum WindowsTheme
     Auto
 }
 
-public enum OsVersion
-{
-    WindowsOld,
-    Windows10,
-    Windows11Before22523, // Before 22523
-    Windows11After22523 // After 22523
-}
-
+/// <summary>
+/// The type of backdrop used by a Window.
+/// </summary>
 public enum BackdropType
 {
     None = 1,
@@ -35,6 +60,9 @@ public enum BackdropType
     Tabbed = 4
 }
 
+/// <summary>
+/// The type of accent brush.
+/// </summary>
 public enum AccentBrushType
 {
     Primary,
@@ -43,23 +71,11 @@ public enum AccentBrushType
     Quaternary
 }
 
+/// <summary>
+/// The type of title bar.
+/// </summary>
 public enum TitleBarType
 {
     Win32,
     WinUI
-}
-
-[Flags]
-internal enum Facility
-{
-    Null,
-    Rpc,
-    Dispatch,
-    Storage,
-    Itf,
-    Win32 = 7,
-    Windows,
-    Control = 10,
-    Ese = 3678,
-    WinCodec = 2200
 }

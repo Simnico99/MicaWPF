@@ -1,33 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace MicaWPF.Dialogs;
+﻿namespace MicaWPF.Dialogs;
 /// <summary>
 /// Interaction logic for DefaultContentDialog.xaml
 /// </summary>
-public partial class DefaultContentDialog : ContentControl
+public partial class DefaultContentDialog : ContentControl, IContentDialog
 {
-    internal ContentDialogResult Result { get; private set; }
-    private readonly TaskCompletionSource<bool> taskCompletionSource = new();
+    private readonly TaskCompletionSource<bool> _taskCompletionSource = new();
+    public ContentDialogResult Result { get; private set; }
 
-    internal Brush? InnerBorderBrush
+    public Brush? InnerBorderBrush
     {
-        get
-        {
-            return MainBorder.BorderBrush;
-        }
+        get => MainBorder.BorderBrush;
         set
         {
             if (value is not null)
@@ -37,12 +19,9 @@ public partial class DefaultContentDialog : ContentControl
         }
     }
 
-    internal string? InnerTitleText
+    public string? InnerTitleText
     {
-        get
-        {
-            return TitleText.Text;
-        }
+        get => TitleText.Text;
         set
         {
             if (!string.IsNullOrWhiteSpace(value))
@@ -53,12 +32,9 @@ public partial class DefaultContentDialog : ContentControl
         }
     }
 
-    internal string? InnerText
+    public string? InnerText
     {
-        get
-        {
-            return CustomText.Text;
-        }
+        get => CustomText.Text;
         set
         {
             if (!string.IsNullOrWhiteSpace(value))
@@ -69,12 +45,9 @@ public partial class DefaultContentDialog : ContentControl
         }
     }
 
-    internal string? PrimaryButtonText
+    public string? PrimaryButtonText
     {
-        get
-        {
-            return PrimaryButton.Content.ToString();
-        }
+        get => PrimaryButton.Content.ToString();
         set
         {
             if (!string.IsNullOrWhiteSpace(value))
@@ -86,12 +59,9 @@ public partial class DefaultContentDialog : ContentControl
         }
     }
 
-    internal string? SecondaryButtonText
+    public string? SecondaryButtonText
     {
-        get
-        {
-            return SecondaryButton.Content.ToString();
-        }
+        get => SecondaryButton.Content.ToString();
         set
         {
             if (!string.IsNullOrWhiteSpace(value))
@@ -103,12 +73,9 @@ public partial class DefaultContentDialog : ContentControl
         }
     }
 
-    internal string? TertiaryButtonText
+    public string? TertiaryButtonText
     {
-        get
-        {
-            return TertiaryButton.Content.ToString();
-        }
+        get => TertiaryButton.Content.ToString();
         set
         {
             if (!string.IsNullOrWhiteSpace(value))
@@ -120,12 +87,9 @@ public partial class DefaultContentDialog : ContentControl
         }
     }
 
-    internal object? InnerContent
+    public object? InnerContent
     {
-        get
-        {
-            return CustomContent.Content;
-        }
+        get => CustomContent.Content;
         set
         {
             if (value is not null)
@@ -135,35 +99,51 @@ public partial class DefaultContentDialog : ContentControl
         }
     }
 
+    public Style PrimaryButtonStyle
+    {
+        get => PrimaryButton.Style;
+        set => PrimaryButton.Style = value;
+    }
+    public Style SecondaryButtonStyle
+    {
+        get => SecondaryButton.Style;
+        set => SecondaryButton.Style = value;
+    }
+    public Style CloseButtonStyle
+    {
+        get => TertiaryButton.Style;
+        set => TertiaryButton.Style = value;
+    }
+
     internal DefaultContentDialog()
     {
         InitializeComponent();
     }
 
-    internal async Task ShowAsync()
+    public async Task ShowAsync()
     {
         Visibility = Visibility.Visible;
-        await taskCompletionSource.Task;
+        _ = await _taskCompletionSource.Task;
     }
 
     private void PrimaryButton_Click(object sender, RoutedEventArgs e)
     {
         Visibility = Visibility.Collapsed;
         Result = ContentDialogResult.PrimaryButton;
-        taskCompletionSource.TrySetResult(true);
+        _ = _taskCompletionSource.TrySetResult(true);
     }
 
     private void SecondaryButton_Click(object sender, RoutedEventArgs e)
     {
         Visibility = Visibility.Collapsed;
         Result = ContentDialogResult.SecondaryButton;
-        taskCompletionSource.TrySetResult(true);
+        _ = _taskCompletionSource.TrySetResult(true);
     }
 
     private void TertiaryButton_Click(object sender, RoutedEventArgs e)
     {
         Visibility = Visibility.Collapsed;
         Result = ContentDialogResult.TertiaryButton;
-        taskCompletionSource.TrySetResult(true);
+        _ = _taskCompletionSource.TrySetResult(true);
     }
 }

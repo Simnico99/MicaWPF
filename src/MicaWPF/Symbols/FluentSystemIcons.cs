@@ -1,6 +1,13 @@
 ﻿namespace MicaWPF.Symbols;
+
+/// <summary>
+/// Icons used by WinUI.
+/// </summary>
 public class FluentSystemIcons
 {
+    /// <summary>
+    /// Filled system icons.
+    /// </summary>
     public enum Filled
     {
         Empty = 0x0,
@@ -5641,6 +5648,9 @@ public class FluentSystemIcons
         ChatArrowBack16 = 0xFFFF
     }
 
+    /// <summary>
+    /// Regular system icons.
+    /// </summary>
     public enum Regular
     {
         Empty = 0x0,
