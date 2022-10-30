@@ -1,13 +1,14 @@
-﻿using System.Windows.Media;
-using MicaWPF.DependencyInjection.Options;
+﻿using MicaWPF.DependencyInjection.Options;
+using MicaWPF.Events;
 using MicaWPF.Models;
 using MicaWPF.Services;
+using System.Windows.Media;
 
 namespace MicaWPF.DependencyInjection.Services;
-internal class AccentColorServiceDI : IAccentColorService
+internal sealed class AccentColorServiceDI : IAccentColorService
 {
-    private readonly AccentColorService _localThemeService = AccentColorService.GetCurrent();
     private readonly MicaWPFOptions _options;
+    public IWeakEvent<AccentColors> AccentColorChanged => AccentColorService.Current.AccentColorChanged;
 
     public AccentColorServiceDI(MicaWPFOptions options)
     {
@@ -15,25 +16,31 @@ internal class AccentColorServiceDI : IAccentColorService
 
         if (_options.UpdateAccentFromWindows)
         {
-            _localThemeService.UpdateAccentsFromWindows();
+            AccentColorService.Current.UpdateAccentsFromWindows();
         }
         else
         {
-            _localThemeService.UpdateAccents(options.AccentColor);
+            AccentColorService.Current.UpdateAccents(options.AccentColor);
         }
+
+        AccentColorService.Current.IsTitleBarAndBorderAccentAware = _options.IsTitleBarAndBorderAccentAware;
     }
 
-    public bool AccentUpdateFromWindows => _localThemeService.AccentUpdateFromWindows;
+    public bool AccentUpdateFromWindows => AccentColorService.Current.AccentUpdateFromWindows;
 
-    public AccentColors AccentColors => _localThemeService.AccentColors;
+    public AccentColors AccentColors => AccentColorService.Current.AccentColors;
+
+    public bool IsTitleBarAndBorderAccentAware { get => AccentColorService.Current.IsTitleBarAndBorderAccentAware; set => AccentColorService.Current.IsTitleBarAndBorderAccentAware = value; }
+
+    public bool IsTitleBarAndWindowsBorderColored => AccentColorService.Current.IsTitleBarAndWindowsBorderColored;
 
     public void UpdateAccents(Color systemAccent)
     {
-        _localThemeService.UpdateAccents(systemAccent);
+        AccentColorService.Current.UpdateAccents(systemAccent);
     }
 
     public void UpdateAccentsFromWindows()
     {
-        _localThemeService.UpdateAccentsFromWindows();
+        AccentColorService.Current.UpdateAccentsFromWindows();
     }
 }

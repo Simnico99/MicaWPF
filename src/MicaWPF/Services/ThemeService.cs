@@ -1,25 +1,25 @@
-﻿namespace MicaWPF.Services;
-public class ThemeService : IThemeService
-{
-    private static readonly ThemeService _themeService = new();
-    private static readonly ThemeDictionaryService _themeManager = ThemeDictionaryService.GetCurrent();
-    private readonly AccentColorService _accentColorService = AccentColorService.GetCurrent();
+﻿using MicaWPF.Events;
+using System.Runtime.InteropServices;
 
-    private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
-    private const string RegistryValueName = "AppsUseLightTheme";
+namespace MicaWPF.Services;
+public sealed class ThemeService : IThemeService
+{
+    private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
+    private const string _registryValueName = "AppsUseLightTheme";
 
     private WindowsTheme _currentTheme;
-    private bool _isThemeAware;
-    private bool _IsCheckingTheme;
+    private bool _isCheckingTheme;
 
-    public ICollection<MicaEnabledWindow> MicaEnabledWindows { get; private set; } = new List<MicaEnabledWindow>();
+    public static ThemeService Current { get; }
+    public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
+    public List<MicaEnabledWindow> MicaEnabledWindows { get; private set; } = new List<MicaEnabledWindow>();
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
-    public bool IsThemeAware { get => _isThemeAware; set => SetThemeAware(value); }
+    public bool IsThemeAware { get; private set; }
 
-    private ThemeService()
+    static ThemeService()
     {
-        CurrentTheme = WindowsTheme.Auto;
-        IsThemeAware = true;
+        Current = new();
+        Current.ChangeTheme(WindowsTheme.Auto);
     }
 
     private WindowsTheme GetTheme()
@@ -31,33 +31,31 @@ public class ThemeService : IThemeService
     {
         _ = Task.Run(() =>
         {
-            if (_accentColorService.AccentUpdateFromWindows)
+            if (AccentColorService.Current.AccentUpdateFromWindows)
             {
-                _accentColorService.UpdateAccentsFromWindows();
+                AccentColorService.Current.UpdateAccentsFromWindows();
             }
             else
             {
-                _accentColorService.UpdateAccents(_accentColorService.AccentColors.SystemAccentColor);
+                AccentColorService.Current.UpdateAccents(AccentColorService.Current.AccentColors.SystemAccentColor);
             }
         });
     }
 
-    private void SetThemeAware(bool isThemeAware)
+    private void SetThemeAware()
     {
-        _isThemeAware = isThemeAware;
-
-        if (IsThemeAware && !_IsCheckingTheme)
+        if (IsThemeAware && !_isCheckingTheme)
         {
-            _IsCheckingTheme = true;
+            _isCheckingTheme = true;
             if (OsHelper.IsWindows10_OrGreater && IsThemeAware)
             {
                 SystemEvents.UserPreferenceChanged += SystemEventsUserPreferenceChanged;
             }
         }
-        else if (!IsThemeAware && _IsCheckingTheme)
+        else if (!IsThemeAware && _isCheckingTheme)
         {
             SystemEvents.UserPreferenceChanged -= SystemEventsUserPreferenceChanged;
-            _IsCheckingTheme = false;
+            _isCheckingTheme = false;
         }
     }
 
@@ -69,8 +67,8 @@ public class ThemeService : IThemeService
                 if (IsThemeAware)
                 {
                     UpdateAccent();
-                    Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
-                    SetThemeAware(IsThemeAware); 
+                    _ = Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
+                    SetThemeAware();
                 }
                 break;
         }
@@ -85,11 +83,11 @@ public class ThemeService : IThemeService
 
             if (CurrentTheme == WindowsTheme.Dark)
             {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.True);
+                _ = InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.True);
             }
             else if (OsHelper.IsWindows11_OrGreater)
             {
-                InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
+                _ = InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
             }
 
             _ = OsHelper.IsWindows11_22523_OrGreater
@@ -98,15 +96,10 @@ public class ThemeService : IThemeService
         }
     }
 
-    public static ThemeService GetCurrent()
-    {
-        return _themeService;
-    }
-
     public static WindowsTheme GetWindowsTheme()
     {
-        using var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
-        var registryValueObject = key?.GetValue(RegistryValueName);
+        using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
+        var registryValueObject = key?.GetValue(_registryValueName);
 
         if (registryValueObject == null)
         {
@@ -125,34 +118,55 @@ public class ThemeService : IThemeService
             : new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
     }
 
-    public static void RefreshTheme() 
+    public static void RefreshTheme()
     {
-        _themeManager.ThemeSource = _themeManager.ThemeSource;
+        ThemeDictionaryService.Current.ThemeSource = ThemeDictionaryService.Current.ThemeSource;
     }
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {
+        IsThemeAware = windowsTheme == WindowsTheme.Auto;
         CurrentTheme = windowsTheme == WindowsTheme.Auto ? GetWindowsTheme() : windowsTheme;
 
         UpdateAccent();
-        _themeManager.ThemeSource = WindowsThemeToResourceTheme(CurrentTheme);
+        ThemeDictionaryService.Current.ThemeSource = WindowsThemeToResourceTheme(CurrentTheme);
 
-        foreach (var micaEnabledWindow in MicaEnabledWindows)
-        { 
-            SetWindowBackdrop(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
-            //Force the title bar to refresh.
-            var style = micaEnabledWindow.Window.WindowStyle;
-            micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
-            micaEnabledWindow.Window.WindowStyle = style;
+        lock (MicaEnabledWindows)
+        {
+#if NET5_0_OR_GREATER
+            foreach (var micaEnabledWindow in CollectionsMarshal.AsSpan(MicaEnabledWindows))
+            {
+                SetWindowBackdrop(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
+                //Force the title bar to refresh.
+                var style = micaEnabledWindow.Window.WindowStyle;
+                micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
+                micaEnabledWindow.Window.WindowStyle = style;
+            }
+#else
+            foreach (var micaEnabledWindow in MicaEnabledWindows)
+            {
+                SetWindowBackdrop(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
+                //Force the title bar to refresh.
+                var style = micaEnabledWindow.Window.WindowStyle;
+                micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
+                micaEnabledWindow.Window.WindowStyle = style;
+            }
+#endif
         }
+
+        ThemeChanged.Publish(CurrentTheme);
 
         return CurrentTheme;
     }
 
     public void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica)
     {
-        _accentColorService.Init();
+        _ = AccentColorService.Current;
         SetWindowBackdrop(window, micaType);
-        MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType));
+
+        lock (MicaEnabledWindows)
+        {
+            MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType));
+        }
     }
 }

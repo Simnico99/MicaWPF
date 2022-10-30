@@ -7,7 +7,6 @@ public interface IThemeService
     bool IsThemeAware { get; }
     List<MicaEnabledWindow> MicaEnabledWindows { get; }
     IWeakEvent<WindowsTheme> ThemeChanged { get; }
-
     WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto);
     void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica);
 }

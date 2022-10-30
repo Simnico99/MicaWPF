@@ -1,4 +1,6 @@
 ﻿using System.Runtime;
+using MicaWPF.Controls;
+using MicaWPF.Events;
 using MicaWPF.Extensions;
 #if NET5_0_OR_GREATER
 using MicaWPFRuntimeComponent;
@@ -11,22 +13,26 @@ namespace MicaWPF.Services;
 
 public class AccentColorService : IAccentColorService
 {
+    private const string _registryKeyPath = @"Software\Microsoft\Windows\DWM";
+    private const string _registryValueName = "ColorPrevalence";
+
     private static readonly AccentColorService _systemColorsHandler = new();
-    private bool _isInit = false;
+    private bool _isTitleBarAndBorderAccentAware;
+    private bool _isCheckingTitleBarAndBorderAccent;
+
     public bool AccentUpdateFromWindows { get; private set; } = true;
     public AccentColors AccentColors { get; private set; } = new();
+    public IWeakEvent<AccentColors> AccentColorChanged { get; } = new WeakEvent<AccentColors>();
+    public bool IsTitleBarAndWindowsBorderColored { get; private set; }
+    public bool IsTitleBarAndBorderAccentAware { get => _isTitleBarAndBorderAccentAware; set => SetTitleBarAndBorderAccentAware(value); }
+    public static AccentColorService Current { get; }
 
-    internal void Init()
+    static AccentColorService()
     {
-        if (!_isInit)
-        {
-            _isInit = true;
-            if (AccentUpdateFromWindows)
-            {
-                UpdateAccentsFromWindows();
-                return;
-            }
-        }
+        Current = new();
+        Current.UpdateAccentsFromWindows();
+        Current.IsTitleBarAndWindowsBorderColored = GetAccentColorEnabledOnTitleBarAndBorders();
+        Current.IsTitleBarAndBorderAccentAware = true;
     }
 
     private AccentColorService() { }
@@ -73,11 +79,13 @@ public class AccentColorService : IAccentColorService
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark1"] = AccentColors.SystemAccentColorDark1;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark2"] = AccentColors.SystemAccentColorDark2;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark3"] = AccentColors.SystemAccentColorDark3;
+
+        AccentColorChanged.Publish(AccentColors);
     }
 
     private void UpdateFromInternalColors()
     {
-        switch (ThemeService.GetCurrent().CurrentTheme)
+        switch (ThemeService.Current.CurrentTheme)
         {
             case WindowsTheme.Dark:
                 UpdateColorResources(AccentColors.SystemAccentColorLight1, AccentColors.SystemAccentColorLight2, AccentColors.SystemAccentColorLight3);
@@ -91,9 +99,70 @@ public class AccentColorService : IAccentColorService
         ThemeService.RefreshTheme();
     }
 
+    private static bool GetAccentColorEnabledOnTitleBarAndBorders()
+    {
+        using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
+        var registryValueObject = key?.GetValue(_registryValueName);
+
+        if (registryValueObject == null)
+        {
+            return false;
+        }
+
+        var registryValue = (int)registryValueObject;
+
+        return registryValue > 0;
+    }
+
+    private void SetAccentColorOnTitleBarAndBorders(bool isEnabled)
+    {
+        IsTitleBarAndWindowsBorderColored = isEnabled;
+        var windows = Application.Current.Windows;
+        foreach (var window in windows)
+        {
+            if (window is MicaWindow micaWindow)
+            {
+                micaWindow.UseAccentOnTitleBarAndBorder = isEnabled;
+            }
+        }
+    }
+
+    private void SetTitleBarAndBorderAccentAware(bool isTitleBarAndBorderAccentAware)
+    {
+        _isTitleBarAndBorderAccentAware = isTitleBarAndBorderAccentAware;
+
+        if (IsTitleBarAndBorderAccentAware && !_isCheckingTitleBarAndBorderAccent)
+        {
+            _isCheckingTitleBarAndBorderAccent = true;
+            if (OsHelper.IsWindows10_OrGreater && IsTitleBarAndBorderAccentAware)
+            {
+                SystemEvents.UserPreferenceChanged += SystemEventsUserPreferenceChanged;
+            }
+        }
+        else if (!IsTitleBarAndBorderAccentAware && _isCheckingTitleBarAndBorderAccent)
+        {
+            SystemEvents.UserPreferenceChanged -= SystemEventsUserPreferenceChanged;
+            _isCheckingTitleBarAndBorderAccent = false;
+        }
+    }
+
+    private void SystemEventsUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+    {
+        switch (e.Category)
+        {
+            case UserPreferenceCategory.General:
+                if (IsTitleBarAndBorderAccentAware)
+                {
+                    Application.Current.Dispatcher.Invoke(() => SetAccentColorOnTitleBarAndBorders(GetAccentColorEnabledOnTitleBarAndBorders()));
+                    SetTitleBarAndBorderAccentAware(IsTitleBarAndBorderAccentAware);
+                }
+                break;
+        }
+    }
+
+
     public void UpdateAccentsFromWindows()
     {
-        _isInit = true;
         AccentUpdateFromWindows = true;
 
         AccentColors = WindowsAccentHelper.GetAccentColor();
@@ -109,7 +178,6 @@ public class AccentColorService : IAccentColorService
 
     public void UpdateAccents(Color systemAccent)
     {
-        _isInit = true;
         AccentUpdateFromWindows = false;
 
         AccentColors = new AccentColors(
@@ -123,10 +191,5 @@ public class AccentColorService : IAccentColorService
             );
 
         UpdateFromInternalColors();
-    }
-
-    public static AccentColorService GetCurrent()
-    {
-        return _systemColorsHandler;
     }
 }
