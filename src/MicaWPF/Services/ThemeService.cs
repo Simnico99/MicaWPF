@@ -37,7 +37,7 @@ public class ThemeService : IThemeService
             }
             else
             {
-                _accentColorService.UpdateAccents(_accentColorService.SystemAccentColor);
+                _accentColorService.UpdateAccents(_accentColorService.AccentColors.SystemAccentColor);
             }
         });
     }

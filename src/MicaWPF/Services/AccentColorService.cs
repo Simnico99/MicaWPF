@@ -14,14 +14,7 @@ public class AccentColorService : IAccentColorService
     private static readonly AccentColorService _systemColorsHandler = new();
     private bool _isInit = false;
     public bool AccentUpdateFromWindows { get; private set; } = true;
-
-    public Color SystemAccentColor { get; private set; }
-    public Color SystemAccentColorLight1 { get; private set; }
-    public Color SystemAccentColorLight2 { get; private set; }
-    public Color SystemAccentColorLight3 { get; private set; }
-    public Color SystemAccentColorDark1 { get; private set; }
-    public Color SystemAccentColorDark2 { get; private set; }
-    public Color SystemAccentColorDark3 { get; private set; }
+    public AccentColors AccentColors { get; private set; } = new();
 
     internal void Init()
     {
@@ -37,14 +30,6 @@ public class AccentColorService : IAccentColorService
     }
 
     private AccentColorService() { }
-
-    private void SetColorProperty(string propertyName, object value)
-    {
-        var type = GetType();
-        var propertyInfo = type.GetProperty(propertyName);
-
-        propertyInfo?.SetValue(this, Convert.ChangeType(value, propertyInfo.PropertyType), null);
-    }
 
     private static Color GetOffSet(double hue, double hueCoefficient, double saturation, double value, double valueCoefficient, WindowsTheme windowsTheme)
     {
@@ -76,29 +61,29 @@ public class AccentColorService : IAccentColorService
 
     private void UpdateColorResources(Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
     {
-        
+
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorPrimary"] = primaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorSecondary"] = secondaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorTertiary"] = tertiaryAccent;
 
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = SystemAccentColorLight3;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = SystemAccentColorLight2;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight1"] = SystemAccentColorLight1;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColor"] = SystemAccentColor;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark1"] = SystemAccentColorDark1;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark2"] = SystemAccentColorDark2;
-        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark3"] = SystemAccentColorDark3;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight3"] = AccentColors.SystemAccentColorLight3;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight2"] = AccentColors.SystemAccentColorLight2;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorLight1"] = AccentColors.SystemAccentColorLight1;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColor"] = AccentColors.SystemAccentColor;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark1"] = AccentColors.SystemAccentColorDark1;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark2"] = AccentColors.SystemAccentColorDark2;
+        Application.Current.Resources["MicaWPF.Colors.SystemAccentColorDark3"] = AccentColors.SystemAccentColorDark3;
     }
 
     private void UpdateFromInternalColors()
     {
         switch (ThemeService.GetCurrent().CurrentTheme)
         {
-            case WindowsTheme.Dark: 
-                UpdateColorResources(SystemAccentColorLight1, SystemAccentColorLight2, SystemAccentColorLight3);
+            case WindowsTheme.Dark:
+                UpdateColorResources(AccentColors.SystemAccentColorLight1, AccentColors.SystemAccentColorLight2, AccentColors.SystemAccentColorLight3);
                 break;
             default:
-                UpdateColorResources(SystemAccentColorDark1, SystemAccentColorDark2, SystemAccentColorDark3);
+                UpdateColorResources(AccentColors.SystemAccentColorDark1, AccentColors.SystemAccentColorDark2, AccentColors.SystemAccentColorDark3);
                 break;
         }
 
@@ -111,59 +96,31 @@ public class AccentColorService : IAccentColorService
         _isInit = true;
         AccentUpdateFromWindows = true;
 
-#if NET5_0_OR_GREATER
-        var uwpColors = new UWPColors();
-        var colorsLongString = uwpColors.GetSystemColors();
+        AccentColors = WindowsAccentHelper.GetAccentColor();
 
-        foreach (var colors in colorsLongString)
+        if (OsHelper.IsWindows10 || AccentColors.IsFallBack)
         {
-            var colorValues = colors.Split(',');
-            var colorResult = Color.FromArgb(byte.Parse(colorValues[0]), byte.Parse(colorValues[1]), byte.Parse(colorValues[2]), byte.Parse(colorValues[3]));
-            SetColorProperty(colorValues[4], colorResult);
-        }
-
-        if (OsHelper.IsWindows10)
-        {
-            UpdateAccents(SystemAccentColor);
+            UpdateAccents(AccentColors.SystemAccentColor);
         }
 
         UpdateFromInternalColors();
     }
-#endif
-#if NETFRAMEWORK || NETCOREAPP3_1
-        
-        SystemAccentColor = UIColorConverter(UIColorType.Accent);
-        SystemAccentColorDark1 = UIColorConverter(UIColorType.AccentDark1);
-        SystemAccentColorDark2 = UIColorConverter(UIColorType.AccentDark2);
-        SystemAccentColorDark3 = UIColorConverter(UIColorType.AccentDark3);
 
-        SystemAccentColor = UIColorConverter(UIColorType.Accent);
-        SystemAccentColorLight1 = UIColorConverter(UIColorType.AccentLight1);
-        SystemAccentColorLight2 = UIColorConverter(UIColorType.AccentLight2);
-        SystemAccentColorLight3 = UIColorConverter(UIColorType.AccentLight3);
-
-        UpdateFromInternalColors();
-    }
-
-    private Color UIColorConverter(UIColorType colorType)
-{
-        var uiSettings = new UISettings();
-        var color = uiSettings.GetColorValue(colorType);
-        return Color.FromArgb(color.A, color.R, color.G, color.B);
-    }
-#endif
 
     public void UpdateAccents(Color systemAccent)
     {
         _isInit = true;
         AccentUpdateFromWindows = false;
-        SystemAccentColor = systemAccent;
-        SystemAccentColorLight1 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Secondary);
-        SystemAccentColorLight2 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Tertiary);
-        SystemAccentColorLight3 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Quaternary);
-        SystemAccentColorDark1 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Light, AccentBrushType.Secondary);
-        SystemAccentColorDark2 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Light, AccentBrushType.Tertiary);
-        SystemAccentColorDark3 = GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Light, AccentBrushType.Quaternary);
+
+        AccentColors = new AccentColors(
+            systemAccent,
+            GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Secondary),
+            GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Tertiary),
+            GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Dark, AccentBrushType.Quaternary),
+            GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Light, AccentBrushType.Secondary),
+            GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Light, AccentBrushType.Tertiary),
+            GetThemeColorVariation(HSVColorHelper.ConvertToHSVColor(System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B)), WindowsTheme.Light, AccentBrushType.Quaternary)
+            );
 
         UpdateFromInternalColors();
     }
