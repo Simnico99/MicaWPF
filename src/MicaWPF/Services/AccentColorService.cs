@@ -67,7 +67,6 @@ public class AccentColorService : IAccentColorService
 
     private void UpdateColorResources(Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
     {
-
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorPrimary"] = primaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorSecondary"] = secondaryAccent;
         Application.Current.Resources["MicaWPF.Colors.SystemAccentColorTertiary"] = tertiaryAccent;
@@ -160,7 +159,6 @@ public class AccentColorService : IAccentColorService
         }
     }
 
-
     public void UpdateAccentsFromWindows()
     {
         AccentUpdateFromWindows = true;
@@ -174,7 +172,6 @@ public class AccentColorService : IAccentColorService
 
         UpdateFromInternalColors();
     }
-
 
     public void UpdateAccents(Color systemAccent)
     {
