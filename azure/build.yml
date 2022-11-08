@@ -59,6 +59,13 @@ steps:
     version: '6.0.x'
     includePreviewVersions: false
 
+- task: UseDotNet@2
+  displayName: 'Use .Net 7.0.x'
+  inputs:
+    packageType: 'sdk'
+    version: '7.0.x'
+    includePreviewVersions: false    
+
 - task: DotNetCoreCLI@2
   displayName: .Net Restore
   inputs:
