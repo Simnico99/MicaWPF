@@ -139,7 +139,6 @@ public class MicaWindow : Window
         base.OnPropertyChanged(e);
     }
 
-
     public override void OnApplyTemplate()
     {
         _buttonMax = GetTemplateChild(_buttonMaxName) as System.Windows.Controls.Button;
