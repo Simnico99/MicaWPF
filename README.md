@@ -126,14 +126,14 @@ To get a local copy up and running follow these simple steps.
 
 Here is an exemple:
 ```XAML
-<mica:MicaWindow  
+<controls:MicaWindow  
         x:Class="MicaWPF.DesktopApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:MicaWPF.DesktopApp"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
+        xmlns:controls="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
@@ -141,14 +141,14 @@ Here is an exemple:
     <Grid>
 
     </Grid>
-</mica:MicaWindow>
+</controls:MicaWindow>
 ```
 
 Now get into your Window code:
 1. Add the namespace `using MicaWPF.Controls;`.
 2. Change the Window inherited class to `MicaWindow`.
 
-Here is an exemple of what it might look like using .NET6:
+Here is an exemple of what it might look like using .NET7:
 ```CSharp
 using MicaWPF.Controls;
 
@@ -164,11 +164,11 @@ public partial class MainWindow : MicaWindow
 
 ```
 
-#### Note For .Net5.0 and .Net6.0
-You will need to change your CSPROJ to include the windows build after the netx.0-windows
-Here is an exemple using .Net6.0 just change the 6 for a 5 on .Net5.0
+#### Note For .Net5.0, .Net6.0 and .Net7.0
+You will need to change your CSPROJ to include the windows build after the netx.0-windows.
+Here is an exemple using .Net7.0 just change the net7 for net5 or net6 for the other versions.
 ```Xaml
-<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+<TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
 <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
 ```
 
