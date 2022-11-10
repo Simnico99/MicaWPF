@@ -1,16 +1,35 @@
-﻿<mica:MicaWindow
+﻿<controls:MicaWindow
     x:Class="MicaWPF.Demo.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MicaWPF.Demo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"
     Title="MainWindow"
     Width="800"
     Height="450"
     mc:Ignorable="d">
     <Grid>
+        <controls:Button
+            Height="40"
+            Margin="10,10,628,368"
+            Style="{StaticResource MicaWPF.Styles.AccentedButton}">
+            This is a test
+        </controls:Button>
+        <controls:Button
+            Height="40"
+            Margin="10,63,628,0"
+            VerticalAlignment="Top"
+            Content="This is a test" />
+        <controls:Button
+            Height="40"
+            Margin="10,108,628,0"
+            VerticalAlignment="Top"
+            Style="{StaticResource MicaWPF.Styles.TransparentButton}">
+            This is a test
+        </controls:Button>
         <Label Margin="333,199,333,206" Content="Hello mica from WPF" />
+        <controls:ProgressRing Margin="177,18,563,356" IsIndeterminate="True" />
     </Grid>
-</mica:MicaWindow>
+</controls:MicaWindow>
