@@ -139,17 +139,27 @@ public class MicaWindow : Window
         base.OnPropertyChanged(e);
     }
 
+
     public override void OnApplyTemplate()
     {
         _buttonMax = GetTemplateChild(_buttonMaxName) as System.Windows.Controls.Button;
         _buttonRestore = GetTemplateChild(_buttonRestoreName) as System.Windows.Controls.Button;
 
-        this.EnableBackdrop(SystemBackdropType);
+        base.OnApplyTemplate();
+    }
 
+    protected override void OnActivated(EventArgs e)
+    {
+        this.EnableBackdrop(SystemBackdropType);
+        base.OnActivated(e);
+    }
+
+    public override void EndInit()
+    {
         AddPadding(WindowState);
         ApplyResizeBorderThickness(WindowState);
 
-        base.OnApplyTemplate();
+        base.EndInit();
     }
 
     public MicaWindow()
@@ -187,6 +197,10 @@ public class MicaWindow : Window
     private void OnMaximizeWindow(object target, ExecutedRoutedEventArgs e)
     {
         SystemCommands.MaximizeWindow(this);
+        if (_buttonMax is not null)
+        {
+            _buttonMax.Background = Brushes.Transparent;
+        }
     }
 
     private void OnMinimizeWindow(object target, ExecutedRoutedEventArgs e)
