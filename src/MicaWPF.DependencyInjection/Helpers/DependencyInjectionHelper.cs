@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace MicaWPF.DependencyInjection.Helpers;
+
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0058:Unused variable", Justification = "Do not cast to HostContextBuilder has it crashes the software.")]
 public static class DependencyInjectionHelper
 {
     public static IHostBuilder UseMicaWPF(this IHostBuilder builder, Action<MicaWPFOptions>? options = null)
@@ -20,9 +22,9 @@ public static class DependencyInjectionHelper
 
         _ = builder.ConfigureServices((_, services) =>
         {
-            _ = (HostBuilderContext)services.AddSingleton(cfg);
-            _ = (HostBuilderContext)services.AddSingleton<IThemeService, ThemeServiceDI>();
-            _ = (HostBuilderContext)services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
+            services.AddSingleton(cfg);
+            services.AddSingleton<IThemeService, ThemeServiceDI>();
+            services.AddSingleton<IAccentColorService, AccentColorServiceDI>();
         });
 
         return builder;
