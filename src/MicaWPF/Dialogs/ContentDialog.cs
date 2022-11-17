@@ -1,7 +1,6 @@
 ﻿using MicaWPF.Controls;
 using MicaWPF.Extensions;
 using System.Windows.Documents;
-using System.Windows.Media.Media3D;
 
 namespace MicaWPF.Dialogs;
 
@@ -89,14 +88,7 @@ public sealed class ContentDialog
             }
         }
 
-        if (micaWindow is not null && micaWindow.IsVisible)
-        {
-            return micaWindow;
-        }
-        else 
-        {
-            return null;
-        }
+        return micaWindow is not null && micaWindow.IsVisible ? micaWindow : null;
     }
 
     public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, ContentDialogButton? defaultButton = null, object? customContent = null, double height = double.NaN, double width = 320, Brush? borderBrush = null)
@@ -123,7 +115,7 @@ public sealed class ContentDialog
                     Width = width
                 };
             }
-            else 
+            else
             {
                 content = new DefaultDialogWindow
                 {

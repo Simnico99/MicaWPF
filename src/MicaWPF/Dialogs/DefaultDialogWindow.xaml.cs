@@ -1,17 +1,4 @@
 ﻿using MicaWPF.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MicaWPF.Dialogs;
 /// <summary>
@@ -22,7 +9,7 @@ public partial class DefaultDialogWindow : MicaWindow, IContentDialog
     private readonly TaskCompletionSource<bool> _taskCompletionSource = new();
     public ContentDialogResult Result { get; private set; }
 
-    public Brush? InnerBorderBrush 
+    public Brush? InnerBorderBrush
     {
         get => throw new NotImplementedException();
         set => throw new NotImplementedException();
@@ -31,10 +18,7 @@ public partial class DefaultDialogWindow : MicaWindow, IContentDialog
     public string? InnerTitleText
     {
         get => Title;
-        set
-        {
-            Title = value;
-        }
+        set => Title = value;
     }
 
     public string? InnerText

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 
 namespace MicaWPF.Helpers;
 
@@ -24,13 +19,13 @@ public static class PtrHelper
     public static IntPtr Zero { get; } = IntPtr.Zero;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static IntPtr Create(int value) 
+    public static IntPtr Create(int value)
     {
         return new IntPtr(value);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int ToInt32(this nint nintPtr) 
+    public static int ToInt32(this nint nintPtr)
     {
         var ptr = (IntPtr)nintPtr;
         return ptr.ToInt32();

@@ -9,7 +9,7 @@ namespace MicaWPF.Controls;
 [ToolboxItem(true)]
 public class Frame : System.Windows.Controls.Frame
 {
-    public Frame() 
+    public Frame()
     {
         FocusVisualStyle = null;
         Focusable = false;

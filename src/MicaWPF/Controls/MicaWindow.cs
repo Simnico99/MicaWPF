@@ -1,5 +1,4 @@
 ﻿using MicaWPF.Extensions;
-using System;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 

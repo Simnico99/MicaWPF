@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MicaWPF.Models;
+﻿namespace MicaWPF.Models;
 public readonly struct AccentColors
 {
     public Color SystemAccentColor { get; }

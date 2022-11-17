@@ -1,7 +1,5 @@
-﻿using System.Runtime;
-using MicaWPF.Controls;
+﻿using MicaWPF.Controls;
 using MicaWPF.Events;
-using MicaWPF.Extensions;
 #if NET5_0_OR_GREATER
 using MicaWPFRuntimeComponent;
 #endif
@@ -16,7 +14,6 @@ public class AccentColorService : IAccentColorService
     private const string _registryKeyPath = @"Software\Microsoft\Windows\DWM";
     private const string _registryValueName = "ColorPrevalence";
 
-    private static readonly AccentColorService _systemColorsHandler = new();
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
 

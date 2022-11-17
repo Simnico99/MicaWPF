@@ -1,6 +1,7 @@
 ﻿
 namespace MicaWPF.Interop;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Interops")]
 public sealed class InteropValues
 {
     public static class HwndSourceMessages

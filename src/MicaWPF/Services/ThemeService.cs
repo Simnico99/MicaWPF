@@ -1,5 +1,4 @@
 ﻿using MicaWPF.Events;
-using System.Runtime.InteropServices;
 
 namespace MicaWPF.Services;
 public sealed class ThemeService : IThemeService
@@ -19,7 +18,7 @@ public sealed class ThemeService : IThemeService
     static ThemeService()
     {
         Current = new();
-        Current.ChangeTheme(WindowsTheme.Auto);
+        _ = Current.ChangeTheme(WindowsTheme.Auto);
     }
 
     private WindowsTheme GetTheme()
