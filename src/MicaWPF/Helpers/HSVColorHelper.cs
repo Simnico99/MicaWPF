@@ -62,7 +62,7 @@ public static class HSVColorHelper
         }
 
         var c = v * s;
-        var x = c * (1 - Math.Abs((h / 60 % 2) - 1));
+        var x = c * (1 - Math.Abs(((h / 60) % 2) - 1));
         var m = v - c;
 
         double r = 0, g = 0, b = 0;
