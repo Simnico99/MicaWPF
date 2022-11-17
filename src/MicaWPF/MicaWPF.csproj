@@ -22,6 +22,7 @@
     <Authors>Simnico99</Authors>
     <Description>A WPF Library that implement an easy way to use Mica material without WinUI.</Description>
     <PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

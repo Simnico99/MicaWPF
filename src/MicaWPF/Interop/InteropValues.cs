@@ -1,4 +1,5 @@
-﻿namespace MicaWPF.Interop;
+﻿
+namespace MicaWPF.Interop;
 
 public sealed class InteropValues
 {

@@ -10,26 +10,26 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid>
+    <Grid Height="434" VerticalAlignment="Bottom">
         <controls:Button
             Height="40"
-            Margin="10,10,628,368"
-            Style="{StaticResource MicaWPF.Styles.AccentedButton}">
+            Margin="10,18,0,0"
+            Style="{StaticResource MicaWPF.Styles.AccentedButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="162">
             This is a test
         </controls:Button>
         <controls:Button
             Height="40"
-            Margin="10,63,628,0"
+            Margin="10,63,0,0"
             VerticalAlignment="Top"
-            Content="This is a test" />
+            Content="This is a test" HorizontalAlignment="Left" Width="162" />
         <controls:Button
             Height="40"
-            Margin="10,108,628,0"
+            Margin="10,108,0,0"
             VerticalAlignment="Top"
-            Style="{StaticResource MicaWPF.Styles.TransparentButton}">
+            Style="{StaticResource MicaWPF.Styles.TransparentButton}" HorizontalAlignment="Left" Width="162">
             This is a test
         </controls:Button>
         <Label Margin="333,199,333,206" Content="Hello mica from WPF" />
-        <controls:ProgressRing Margin="177,18,563,356" IsIndeterminate="True" />
+        <controls:ProgressRing Margin="177,18,0,0" IsIndeterminate="True" Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" />
     </Grid>
 </controls:MicaWindow>
