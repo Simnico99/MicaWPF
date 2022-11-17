@@ -1,4 +1,5 @@
 ﻿using MicaWPF.Extensions;
+using System;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 
@@ -212,10 +213,11 @@ public class MicaWindow : Window
         SystemCommands.RestoreWindow(this);
     }
 
-    private IntPtr ShowSnapLayout(IntPtr lparam, ref bool handled)
+    private nint ShowSnapLayout(nint lparam, ref bool handled)
     {
         var x = lparam.ToInt32() & 0xffff;
         var y = lparam.ToInt32() >> 16;
+
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
         var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
 
@@ -235,16 +237,18 @@ public class MicaWindow : Window
             {
                 _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
             }
-            return new IntPtr(_hTMAXBUTTON);
+
+            return PtrHelper.Create(_hTMAXBUTTON);
         }
 
-        return IntPtr.Zero;
+        return PtrHelper.Zero;
     }
 
-    private void HideMaximiseAndMinimiseButton(IntPtr lparam, ref bool handled)
+    private void HideMaximiseAndMinimiseButton(nint lparam, ref bool handled)
     {
         var x = lparam.ToInt32() & 0xffff;
         var y = lparam.ToInt32() >> 16;
+
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
         var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
         if (_button != null)
@@ -261,7 +265,7 @@ public class MicaWindow : Window
         }
     }
 
-    private IntPtr HwndSourceHook(IntPtr hwnd, int msg, IntPtr _, IntPtr lparam, ref bool handled)
+    private nint HwndSourceHook(nint hwnd, int msg, nint _, nint lparam, ref bool handled)
     {
         switch (msg)
         {
@@ -284,6 +288,6 @@ public class MicaWindow : Window
                 break;
         }
 
-        return IntPtr.Zero;
+        return PtrHelper.Zero;
     }
 }

@@ -67,10 +67,10 @@ public sealed class InteropValues
     {
         public uint clrColor;
         public uint clrAfterGlow;
-        public uint nIntensity;
+        public uint nintensity;
         public uint clrAfterGlowBalance;
         public uint clrBlurBalance;
-        public uint clrGlassReflectionIntensity;
+        public uint clrGlassReflectionintensity;
         public bool fOpaque;
     }
 

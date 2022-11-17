@@ -12,14 +12,14 @@ public static class DpiHelper
 
     static DpiHelper()
     {
-        var dC = InteropMethods.GetDC(IntPtr.Zero);
-        if (dC != IntPtr.Zero)
+        var dC = InteropMethods.GetDC(PtrHelper.Zero);
+        if (dC != PtrHelper.Zero)
         {
             const int logicPixelsX = 88;
             const int logicPixelsY = 90;
             _ = DeviceDpiX = InteropMethods.GetDeviceCaps(dC, logicPixelsX);
             _ = DeviceDpiY = InteropMethods.GetDeviceCaps(dC, logicPixelsY);
-            _ = InteropMethods.ReleaseDC(IntPtr.Zero, dC);
+            _ = InteropMethods.ReleaseDC(PtrHelper.Zero, dC);
         }
         else
         {
