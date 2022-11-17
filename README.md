@@ -121,8 +121,8 @@ To get a local copy up and running follow these simple steps.
 <!-- USAGE EXAMPLES -->
 ### Usage
 
-1. To start Change the `<Window><Window/>` for `<mica:MicaWindow></mica:MicaWindow>`.
-2. Add the namespace by adding `xmlns:mica="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"`.
+1. To start Change the `<Window><Window/>` for `<controls:MicaWindow></controls:MicaWindow>`.
+2. Add the namespace by adding `xmlns:controls="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"`.
 
 Here is an exemple:
 ```XAML
