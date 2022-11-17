@@ -23,10 +23,11 @@ internal sealed partial class InteropMethods
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern int GetDeviceCaps(HandleRef hDC, int nIndex);
 
-    [LibraryImport(ExternDll.User32)]
+    [LibraryImport(ExternDll.User32, EntryPoint = "GetWindowLongPtrA")]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     private static partial int GetWindowLong(nint hWnd, int nIndex);
-    [LibraryImport(ExternDll.User32)]
+
+    [LibraryImport(ExternDll.User32, EntryPoint = "SetWindowLongPtrA")]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     private static partial int SetWindowLong(nint hWnd, int nIndex, int dwNewLong);
 
