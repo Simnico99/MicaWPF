@@ -22,12 +22,10 @@
                         <controls:GradientBorder
                             x:Name="ContentBorder"
                             Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
-                            <controls:GradientBorder.Background>
-                                <SolidColorBrush x:Name="mainBrush" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color}" />
-                            </controls:GradientBorder.Background>
                             <ContentPresenter
                                 x:Name="ContentPresenter"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -69,10 +67,8 @@
                             Padding="{TemplateBinding Padding}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}"
+                            Background="{TemplateBinding Background}"
                             Style="{DynamicResource MicaWPF.Styles.GradientBorder.Accent}">
-                            <controls:GradientBorder.Background>
-                                <SolidColorBrush x:Name="mainBrush" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color}" />
-                            </controls:GradientBorder.Background>
                             <ContentPresenter
                                 x:Name="ContentPresenter"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -113,10 +109,8 @@
                             Padding="{TemplateBinding Padding}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
                             CornerRadius="{TemplateBinding CornerRadius}">
-                            <Border.Background>
-                                <SolidColorBrush x:Name="mainBrush" Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background.Color}" />
-                            </Border.Background>
                             <ContentPresenter
                                 x:Name="ContentPresenter"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
