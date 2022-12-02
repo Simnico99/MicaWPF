@@ -76,9 +76,13 @@
                                 </controls:Arc>
                             </Grid>
                             <ControlTemplate.Triggers>
-                                <Trigger Property="IsEnabled" Value="True">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsEnabled" Value="True"/>
+                                        <Condition Property="IsVisible" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <MultiTrigger.EnterActions>
+                                        <BeginStoryboard Name="ProgressRing_StoryBoard">
                                             <Storyboard>
                                                 <DoubleAnimation
                                                     RepeatBehavior="Forever"
@@ -86,7 +90,6 @@
                                                     Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)"
                                                     To="360"
                                                     Duration="0:0:0.65" />
-
                                                 <DoubleAnimation
                                                     AutoReverse="True"
                                                     RepeatBehavior="Forever"
@@ -97,13 +100,11 @@
                                                     Duration="0:0:1.3" />
                                             </Storyboard>
                                         </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard />
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
+                                    </MultiTrigger.EnterActions>
+                                    <MultiTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="ProgressRing_StoryBoard"/>
+                                    </MultiTrigger.ExitActions>
+                                </MultiTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
