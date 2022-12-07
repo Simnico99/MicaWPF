@@ -78,7 +78,7 @@
 
     <Storyboard x:Key="MicaWPF.Animations.Button.Accent.Disabled">
         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(TextElement.Foreground).Color">
-            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Source={StaticResource DynamicResource MicaWPF.Brushes.TextOnAccentFillColorDisabled}, Converter={StaticResource ColorConverter}}" />
+            <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Source={StaticResource MicaWPF.Brushes.TextOnAccentFillColorDisabled}, Converter={StaticResource ColorConverter}}" />
         </ObjectAnimationUsingKeyFrames>
         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentBorder" Storyboard.TargetProperty="Background.Color">
             <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Source={StaticResource MicaWPF.Brushes.AccentFillColorDisabled}, Converter={StaticResource ColorConverter}}" />
