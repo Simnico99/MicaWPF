@@ -69,54 +69,15 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: .Net Restore
   inputs:
-    command: restore
+    command: 'restore'
     projects: '**\*!(Demo).csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: .Net Build (Alpha)
-  condition: eq(variables['buildTag'], False)
+  displayName: .Net Build
   inputs:
     command: 'build'
     configuration: Release
     projects: '**\*!(Demo).csproj'
-    arguments: '-c Release --no-restore'
+    arguments: --no-restore -c release -p:FileVersionRevision=$(packageVersion) -p:ContinuousIntegrationBuild=true
     versioningScheme: byEnvVar
-    versionEnvVar: '$(productVersionBeta)'
-
-- task: DotNetCoreCLI@2
-  displayName: .Net Build (Release)
-  condition: eq(variables['buildTag'], True)
-  inputs:
-    command: 'build'
-    configuration: Release
-    projects: '**\*!(Demo).csproj'
-    arguments: '-c Release --no-restore'
-    versioningScheme: byEnvVar
-    versionEnvVar: '$(finalReleaseVersion)'
-
-- task: ado-discord-webhook@1
-  displayName: Publish test results
-  condition: succeededOrFailed()
-  inputs:
-    channelId: '892075724847079494'
-    webhookKey: 'S3CPGp0vqpF-azkSH-LSxjUf47h3LrTliK7M7QZlJV2GacMn1sQe4OVvpqrItEVd1sBf'
-    name: 'Azure DevOps'
-    avatar: 'https://cdn.iconscout.com/icon/free/png-256/azure-devops-3628645-3029870.png'
-    messageType: 'embeds'
-    embeds: |
-      [{
-            "title": "Azure Build Pipeline",
-            "description": "Build [$(Build.BuildNumber)](https://dev.azure.com/ZirconCloud/web/build.aspx?builduri=$(Build.BuildUri)) $(Agent.JobStatus)\n",
-            "fields": [
-              {
-                "name": "Project",
-                "value": "MicaWPF",
-                "inline": true
-              },
-              {
-                "name": "Id",
-                "value": "$(Build.BuildId)",
-                "inline": true
-              }
-            ]
-          }]
+    versionEnvVar: '$(packageVersion)'

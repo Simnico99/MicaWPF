@@ -6,6 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FFC3644-7C33-4F66-9C5C-EA005CD5C54E}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		azure\build.yml = azure\build.yml
+		azure\deploy.yml = azure\deploy.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF", "src\MicaWPF\MicaWPF.csproj", "{D1A510CB-A91D-484E-9F20-0408DAA2F2C9}"

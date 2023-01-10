@@ -1,14 +1,4 @@
 steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Pack All'
-  condition: eq(variables['buildTag'], False)
-  inputs:
-    command: pack
-    configuration: Release
-    packDirectory: '$(Build.ArtifactStagingDirectory)/packages'
-    nobuild: true
-    packagesToPack: 'src\**\*.csproj;!src\**\+(MicaWPF.Demo)*.csproj'
-
 - task: NuGetCommand@2
   displayName: Push to Artifacts All
   condition: and(succeeded(), eq(variables['buildTag'], false))

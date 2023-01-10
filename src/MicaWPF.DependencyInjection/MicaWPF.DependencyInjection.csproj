@@ -1,38 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net5.0-windows10.0.19041.0;net6.0-windows10.0.19041.0;net7.0-windows10.0.19041.0</TargetFrameworks>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
-    <UseWPF>true</UseWPF>
-    <Copyright>Copyright (c) 2021 Simnico99</Copyright>
-    <RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>MicaWPF;WPF;Mica;WinUI;wpfui;UI;windows;controls;custom;modern;xaml;toolkit;color;dark;theme;Simnico99;net6;net5;net;fluent;acrylic</PackageTags>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
-    <NeutralLanguage>en</NeutralLanguage>
-    <LangVersion>10</LangVersion>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
-    <Authors>Simnico99</Authors>
-    <Description>An extension of MicaWPF that adds dependency injection support.</Description>
-    <PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="..\..\Logo\MicaWPFLogo - 128x128.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\..\ReadmeNuget.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net5.0-windows10.0.19041.0;net6.0-windows10.0.19041.0;net7.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+		<UseWPF>true</UseWPF>
+		<Copyright>Copyright (c) 2021 Simnico99</Copyright>
+		<RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>MicaWPF;WPF;Mica;WinUI;wpfui;UI;windows;controls;custom;modern;xaml;toolkit;color;dark;theme;Simnico99;net6;net5;net;fluent;acrylic</PackageTags>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
+		<NeutralLanguage>en</NeutralLanguage>
+		<LangVersion>10</LangVersion>
+		<Nullable>enable</Nullable>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
+		<Authors>Simnico99</Authors>
+		<Description>An extension of MicaWPF that adds dependency injection support.</Description>
+		<PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\Logo\MicaWPFLogo - 128x128.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\ReadmeNuget.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows10.0.19041.0' OR '$(TargetFramework)'=='net7.0-windows10.0.19041.0'">
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
@@ -46,8 +53,15 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MicaWPF\MicaWPF.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MicaWPF\MicaWPF.csproj" />
+	</ItemGroup>
 
 </Project>
