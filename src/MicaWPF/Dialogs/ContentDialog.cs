@@ -1,5 +1,6 @@
 ﻿using MicaWPF.Controls;
 using MicaWPF.Extensions;
+using System.Threading;
 using System.Windows.Documents;
 
 namespace MicaWPF.Dialogs;
@@ -9,6 +10,9 @@ namespace MicaWPF.Dialogs;
 /// </summary>
 public sealed class ContentDialog
 {
+    private static readonly object _lock = new();
+    private static readonly SemaphoreSlim _semaphoreSlim = new(1); 
+
     public string? Title { get; set; }
     public string? PrimaryButtonText { get; set; }
     public string? SecondaryButtonText { get; set; }
@@ -41,7 +45,10 @@ public sealed class ContentDialog
         }
         if (content is DefaultDialogWindow defaultDialogWindow)
         {
-            defaultDialogWindow.Show();
+            lock (_lock)
+            {
+                defaultDialogWindow.Show();
+            }
         }
 
         return content as ContentControl;
@@ -146,6 +153,8 @@ public sealed class ContentDialog
 
             var adornee = HookToWindow(hook, content);
 
+            await _semaphoreSlim.WaitAsync();
+
             await content.ShowAsync();
 
             result = content.Result;
@@ -158,6 +167,8 @@ public sealed class ContentDialog
             {
                 defaultDialogWindow.Close();
             }
+
+            _semaphoreSlim.Release();
         });
 
         return result;
@@ -216,6 +227,8 @@ public sealed class ContentDialog
 
             var adornee = HookToWindow(hook, content);
 
+            await _semaphoreSlim.WaitAsync();
+
             await content.ShowAsync();
 
             result = content.Result;
@@ -227,6 +240,8 @@ public sealed class ContentDialog
             {
                 defaultDialogWindow.Close();
             }
+
+            _semaphoreSlim.Release();
         });
 
         return result;
