@@ -225,8 +225,6 @@ public sealed class ContentDialog
 
             var adornee = HookToWindow(hook, content);
 
-            await _lock.WaitAsync();
-
             await content.ShowAsync();
 
             result = content.Result;
