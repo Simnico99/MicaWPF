@@ -10,7 +10,6 @@ namespace MicaWPF.Dialogs;
 /// </summary>
 public sealed class ContentDialog
 {
-    private static readonly object _lock = new();
     private static readonly SemaphoreSlim _semaphoreSlim = new(1); 
 
     public string? Title { get; set; }
@@ -45,10 +44,7 @@ public sealed class ContentDialog
         }
         if (content is DefaultDialogWindow defaultDialogWindow)
         {
-            lock (_lock)
-            {
                 defaultDialogWindow.Show();
-            }
         }
 
         return content as ContentControl;
@@ -100,6 +96,8 @@ public sealed class ContentDialog
 
     public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, ContentDialogButton? defaultButton = null, object? customContent = null, double height = double.NaN, double width = 320, Brush? borderBrush = null)
     {
+        await _semaphoreSlim.WaitAsync();
+
         var result = ContentDialogResult.Empty;
 
         await Application.Current.Dispatcher.Invoke(async () =>
@@ -153,8 +151,6 @@ public sealed class ContentDialog
 
             var adornee = HookToWindow(hook, content);
 
-            await _semaphoreSlim.WaitAsync();
-
             await content.ShowAsync();
 
             result = content.Result;
@@ -167,15 +163,17 @@ public sealed class ContentDialog
             {
                 defaultDialogWindow.Close();
             }
-
-            _semaphoreSlim.Release();
         });
+
+        _semaphoreSlim.Release();
 
         return result;
     }
 
     public async Task<ContentDialogResult> ShowAsync(MicaWindow? micaWindow = null)
     {
+        await _semaphoreSlim.WaitAsync();
+
         var result = ContentDialogResult.Empty;
 
         await Application.Current.Dispatcher.Invoke(async () =>
@@ -240,9 +238,9 @@ public sealed class ContentDialog
             {
                 defaultDialogWindow.Close();
             }
-
-            _semaphoreSlim.Release();
         });
+
+        _semaphoreSlim.Release();
 
         return result;
     }
