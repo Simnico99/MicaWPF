@@ -10,7 +10,7 @@ namespace MicaWPF.Dialogs;
 /// </summary>
 public sealed class ContentDialog
 {
-    private static readonly SemaphoreSlim _semaphoreSlim = new(1); 
+    private static readonly SemaphoreSlim _lock = new(1); 
 
     public string? Title { get; set; }
     public string? PrimaryButtonText { get; set; }
@@ -96,7 +96,7 @@ public sealed class ContentDialog
 
     public static async Task<ContentDialogResult> ShowAsync(MicaWindow micaWindow, string? text = null, string? titleText = null, string? primaryButtonText = null, string? secondaryButtonText = null, string? tertiarybuttonText = null, ContentDialogButton? defaultButton = null, object? customContent = null, double height = double.NaN, double width = 320, Brush? borderBrush = null)
     {
-        await _semaphoreSlim.WaitAsync();
+        await _lock.WaitAsync();
 
         var result = ContentDialogResult.Empty;
 
@@ -165,14 +165,14 @@ public sealed class ContentDialog
             }
         });
 
-        _semaphoreSlim.Release();
+        _lock.Release();
 
         return result;
     }
 
     public async Task<ContentDialogResult> ShowAsync(MicaWindow? micaWindow = null)
     {
-        await _semaphoreSlim.WaitAsync();
+        await _lock.WaitAsync();
 
         var result = ContentDialogResult.Empty;
 
@@ -225,7 +225,7 @@ public sealed class ContentDialog
 
             var adornee = HookToWindow(hook, content);
 
-            await _semaphoreSlim.WaitAsync();
+            await _lock.WaitAsync();
 
             await content.ShowAsync();
 
@@ -240,7 +240,7 @@ public sealed class ContentDialog
             }
         });
 
-        _semaphoreSlim.Release();
+        _lock.Release();
 
         return result;
     }
