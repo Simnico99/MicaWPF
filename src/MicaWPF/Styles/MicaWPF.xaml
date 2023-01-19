@@ -7,6 +7,7 @@
         <!--  Controls  -->
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/SelectableLabel.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/MenuListViewItem.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/PasswordBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Controls/SymbolIcon.xaml" />
