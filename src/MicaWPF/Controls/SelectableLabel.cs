@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace MicaWPF.Controls;
 
 /// <summary>
-/// A WinUI TextBox based on <see cref="System.Windows.Controls.TextBox"/>
+/// Label based on <see cref="System.Windows.Controls.TextBox"/> to allow it to be selectable.
 /// </summary>
 [ToolboxItem(true)]
 public class SelectableLabel : System.Windows.Controls.TextBox

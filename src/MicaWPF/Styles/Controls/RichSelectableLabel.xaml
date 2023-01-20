@@ -1,0 +1,26 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MicaWPF.Controls">
+
+    <ContextMenu x:Key="MicaWPF.Menu.RichSelectableLabel.ContextMenu">
+        <MenuItem Command="ApplicationCommands.Copy" />
+    </ContextMenu>
+
+    <Style x:Key="MicaWPF.Styles.Default.RichSelectableLabel" TargetType="{x:Type controls:RichSelectableLabel}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Opacity="0.001" Color="{DynamicResource MicaWPF.Colors.SubtleFillColorTransparent}" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContextMenu" Value="{StaticResource MicaWPF.Menu.RichSelectableLabel.ContextMenu}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource MicaWPF.Brushes.AccentFillColorDefault}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style BasedOn="{StaticResource MicaWPF.Styles.Default.RichSelectableLabel}" TargetType="{x:Type controls:RichSelectableLabel}" />
+</ResourceDictionary>
