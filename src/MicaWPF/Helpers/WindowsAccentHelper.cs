@@ -12,6 +12,12 @@ public static class WindowsAccentHelper
     private const string _registryKeyPath = @"Software\Microsoft\Windows\DWM";
     private const string _registryValueName = "ColorPrevalence";
 
+    /// <summary>
+    /// Determines whether the title bar and borders are accented.
+    /// </summary>
+    /// <returns>
+    /// Returns a boolean value indicating whether the title bar and borders are accented or not.
+    /// </returns>
     public static bool AreTitleBarAndBordersAccented()
     {
         using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
@@ -27,6 +33,12 @@ public static class WindowsAccentHelper
         return registryValue > 0;
     }
 
+    /// <summary>
+    /// Gets the accent color for the system.
+    /// </summary>
+    /// <returns>
+    /// Returns an <see cref="AccentColors"/> object containing the different variations of the accent color.
+    /// </returns>
     public static AccentColors GetAccentColor()
     {
         try

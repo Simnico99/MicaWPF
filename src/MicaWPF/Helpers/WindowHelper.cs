@@ -3,6 +3,9 @@
 namespace MicaWPF.Helpers;
 public static class WindowHelper
 {
+    /// <summary>
+    /// Refreshes the contents of all the windows in the application asynchronously.
+    /// </summary>
     public static async Task RefreshAllWindowsContentsAsync()
     {
         _ = await Application.Current.Dispatcher.InvokeAsync(async () =>
@@ -17,6 +20,9 @@ public static class WindowHelper
         });
     }
 
+    /// <summary>
+    /// Refreshes the contents of all the windows in the application.
+    /// </summary
     public static void RefreshAllWindowsContents()
     {
         _ = Application.Current.Dispatcher.Invoke(async () =>

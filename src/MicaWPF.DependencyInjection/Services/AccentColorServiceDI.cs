@@ -8,7 +8,17 @@ namespace MicaWPF.DependencyInjection.Services;
 internal sealed class AccentColorServiceDI : IAccentColorService
 {
     private readonly MicaWPFOptions _options;
-    public IWeakEvent<AccentColors> AccentColorChanged => AccentColorService.Current.AccentColorChanged;
+    private readonly AccentColorService _accentColorService = AccentColorService.Current;
+
+    public IWeakEvent<AccentColors> AccentColorChanged => _accentColorService.AccentColorChanged;
+    public AccentColors AccentColors => _accentColorService.AccentColors;
+    public bool AccentColorsUpdateFromWindows => _accentColorService.AccentColorsUpdateFromWindows;
+    public bool IsTitleBarAndBorderAccentAware
+    {
+        get => _accentColorService.IsTitleBarAndBorderAccentAware;
+        set => _accentColorService.IsTitleBarAndBorderAccentAware = value;
+    }
+    public bool IsTitleBarAndWindowsBorderColored => _accentColorService.IsTitleBarAndWindowsBorderColored;
 
     public AccentColorServiceDI(MicaWPFOptions options)
     {
@@ -16,36 +26,28 @@ internal sealed class AccentColorServiceDI : IAccentColorService
 
         if (_options.UpdateAccentFromWindows)
         {
-            AccentColorService.Current.UpdateAccentsColorsFromWindows();
+            _accentColorService.UpdateAccentsColorsFromWindows();
         }
         else
         {
-            AccentColorService.Current.UpdateAccentsColors(options.AccentColor);
+            _accentColorService.UpdateAccentsColors(_options.AccentColor);
         }
 
-        AccentColorService.Current.IsTitleBarAndBorderAccentAware = _options.IsTitleBarAndBorderAccentAware;
+        _accentColorService.IsTitleBarAndBorderAccentAware = _options.IsTitleBarAndBorderAccentAware;
     }
-
-    public bool AccentColorsUpdateFromWindows => AccentColorService.Current.AccentColorsUpdateFromWindows;
-
-    public AccentColors AccentColors => AccentColorService.Current.AccentColors;
-
-    public bool IsTitleBarAndBorderAccentAware { get => AccentColorService.Current.IsTitleBarAndBorderAccentAware; set => AccentColorService.Current.IsTitleBarAndBorderAccentAware = value; }
-
-    public bool IsTitleBarAndWindowsBorderColored => AccentColorService.Current.IsTitleBarAndWindowsBorderColored;
 
     public void UpdateAccentsColors(Color systemAccent)
     {
-        AccentColorService.Current.UpdateAccentsColors(systemAccent);
+        _accentColorService.UpdateAccentsColors(systemAccent);
     }
 
     public void UpdateAccentsColorsFromWindows()
     {
-        AccentColorService.Current.UpdateAccentsColorsFromWindows();
+        _accentColorService.UpdateAccentsColorsFromWindows();
     }
 
     public void RefreshAccentsColors()
     {
-        AccentColorService.Current.RefreshAccentsColors();
+        _accentColorService.RefreshAccentsColors();
     }
 }

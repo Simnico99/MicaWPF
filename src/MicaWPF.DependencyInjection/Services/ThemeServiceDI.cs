@@ -8,24 +8,26 @@ namespace MicaWPF.DependencyInjection.Services;
 internal sealed class ThemeServiceDI : IThemeService
 {
     private readonly MicaWPFOptions _options;
-    public IWeakEvent<WindowsTheme> ThemeChanged => ThemeService.Current.ThemeChanged;
-    public List<MicaEnabledWindow> MicaEnabledWindows => ThemeService.Current.MicaEnabledWindows;
-    public WindowsTheme CurrentTheme => ThemeService.Current.CurrentTheme;
-    public bool IsThemeAware => ThemeService.Current.IsThemeAware;
+    private readonly ThemeService _themeService = ThemeService.Current;
+
+    public IWeakEvent<WindowsTheme> ThemeChanged => _themeService.ThemeChanged;
+    public List<MicaEnabledWindow> MicaEnabledWindows => _themeService.MicaEnabledWindows;
+    public WindowsTheme CurrentTheme => _themeService.CurrentTheme;
+    public bool IsThemeAware => _themeService.IsThemeAware;
 
     public ThemeServiceDI(MicaWPFOptions options)
     {
         _options = options;
-        _ = ThemeService.Current.ChangeTheme(_options.Theme);
+        _ = _themeService.ChangeTheme(_options.Theme);
     }
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {
-        return ThemeService.Current.ChangeTheme(windowsTheme);
+        return _themeService.ChangeTheme(windowsTheme);
     }
 
     public void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica)
     {
-        ThemeService.Current.EnableBackdrop(window, micaType);
+        _themeService.EnableBackdrop(window, micaType);
     }
 }
