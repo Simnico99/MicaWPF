@@ -20,9 +20,6 @@ public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDicti
     {
     }
 
-    /// <summary>
-    /// get current theme resource dictionary
-    /// </summary>
     private static List<ResourceDictionary?> GetThemeResourceDictionary()
     {
         return (from dictionary in Application.Current.Resources.MergedDictionaries
@@ -30,10 +27,6 @@ public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDicti
                 select dictionary).ToList();
     }
 
-    /// <summary>
-    /// set the current theme source
-    /// </summary>
-    /// <param name="source"></param>
     public void SetThemeSource(Uri source)
     {
         lock (source)
@@ -57,9 +50,15 @@ public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDicti
         }
     }
 
-    /// <summary>
-    /// current theme source
-    /// </summary>
+    public void RefreshThemeSource()
+    {
+        if (_currentThemeSource is not null)
+        {
+            SetThemeSource(_currentThemeSource);
+            OnPropertyChanged();
+        }
+    }
+
     public Uri? ThemeSource
     {
         get => _currentThemeSource;

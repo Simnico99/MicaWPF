@@ -16,17 +16,17 @@ internal sealed class AccentColorServiceDI : IAccentColorService
 
         if (_options.UpdateAccentFromWindows)
         {
-            AccentColorService.Current.UpdateAccentsFromWindows();
+            AccentColorService.Current.UpdateAccentsColorsFromWindows();
         }
         else
         {
-            AccentColorService.Current.UpdateAccents(options.AccentColor);
+            AccentColorService.Current.UpdateAccentsColors(options.AccentColor);
         }
 
         AccentColorService.Current.IsTitleBarAndBorderAccentAware = _options.IsTitleBarAndBorderAccentAware;
     }
 
-    public bool AccentUpdateFromWindows => AccentColorService.Current.AccentUpdateFromWindows;
+    public bool AccentColorsUpdateFromWindows => AccentColorService.Current.AccentColorsUpdateFromWindows;
 
     public AccentColors AccentColors => AccentColorService.Current.AccentColors;
 
@@ -34,13 +34,18 @@ internal sealed class AccentColorServiceDI : IAccentColorService
 
     public bool IsTitleBarAndWindowsBorderColored => AccentColorService.Current.IsTitleBarAndWindowsBorderColored;
 
-    public void UpdateAccents(Color systemAccent)
+    public void UpdateAccentsColors(Color systemAccent)
     {
-        AccentColorService.Current.UpdateAccents(systemAccent);
+        AccentColorService.Current.UpdateAccentsColors(systemAccent);
     }
 
-    public void UpdateAccentsFromWindows()
+    public void UpdateAccentsColorsFromWindows()
     {
-        AccentColorService.Current.UpdateAccentsFromWindows();
+        AccentColorService.Current.UpdateAccentsColorsFromWindows();
+    }
+
+    public void RefreshAccentsColors()
+    {
+        AccentColorService.Current.RefreshAccentsColors();
     }
 }

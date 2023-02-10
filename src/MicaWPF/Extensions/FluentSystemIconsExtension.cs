@@ -6,13 +6,11 @@ internal static class FluentSystemIconsExtension
 {
     public static FluentSystemIcons.Filled Swap(this FluentSystemIcons.Regular icon)
     {
-        // TODO: It is possible that the alternative icon does not exist
         return Glyph.ParseFilled(icon.ToString());
     }
 
     public static FluentSystemIcons.Regular Swap(this FluentSystemIcons.Filled icon)
     {
-        // TODO: It is possible that the alternative icon does not exist
         return Glyph.Parse(icon.ToString());
     }
 

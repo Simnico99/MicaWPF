@@ -7,8 +7,26 @@ using Windows.UI.ViewManagement;
 
 namespace MicaWPF.Helpers;
 
-public sealed class WindowsAccentHelper
+public static class WindowsAccentHelper
 {
+    private const string _registryKeyPath = @"Software\Microsoft\Windows\DWM";
+    private const string _registryValueName = "ColorPrevalence";
+
+    public static bool AreTitleBarAndBordersAccented()
+    {
+        using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
+        var registryValueObject = key?.GetValue(_registryValueName);
+
+        if (registryValueObject == null)
+        {
+            return false;
+        }
+
+        var registryValue = (int)registryValueObject;
+
+        return registryValue > 0;
+    }
+
     public static AccentColors GetAccentColor()
     {
         try

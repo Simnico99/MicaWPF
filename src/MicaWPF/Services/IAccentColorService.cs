@@ -17,7 +17,7 @@ public interface IAccentColorService
     /// <summary>
     /// Indicates if the accent colors were updated from Windows.
     /// </summary>
-    bool AccentUpdateFromWindows { get; }
+    bool AccentColorsUpdateFromWindows { get; }
 
     /// <summary>
     /// Indicates if the title bar and borders are accent aware.
@@ -30,13 +30,21 @@ public interface IAccentColorService
     bool IsTitleBarAndWindowsBorderColored { get; }
 
     /// <summary>
+    /// Refreshes the accent colors used in the application. 
+    /// If `AccentColorsUpdateFromWindows` is set to true, the accent colors will be updated from Windows. 
+    /// Otherwise, the accent colors will be updated to the system accent color.
+    /// This is automatically done when the theme change.
+    /// </summary>
+    void RefreshAccentsColors();
+
+    /// <summary>
     /// Updates the accent colors with the given color.
     /// </summary>
     /// <param name="systemAccent">The color to use as the system accent color</param>
-    void UpdateAccents(Color systemAccent);
+    void UpdateAccentsColors(Color systemAccent);
 
     /// <summary>
     /// Updates the accent colors with the system accent color obtained from Windows.
     /// </summary>
-    void UpdateAccentsFromWindows();
+    void UpdateAccentsColorsFromWindows();
 }

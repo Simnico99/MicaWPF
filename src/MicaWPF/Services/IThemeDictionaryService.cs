@@ -18,4 +18,9 @@ public interface IThemeDictionaryService
     /// </summary>
     /// <param name="source">The source of the theme to set.</param>
     void SetThemeSource(Uri source);
+
+    /// <summary>
+    /// Force the current theme source to reload.
+    /// </summary>
+    void RefreshThemeSource();
 }

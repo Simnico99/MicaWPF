@@ -1,19 +1,10 @@
 ﻿using MicaWPF.Controls;
 using MicaWPF.Events;
-#if NET5_0_OR_GREATER
-using MicaWPFRuntimeComponent;
-#endif
-#if NETFRAMEWORK || NETCOREAPP3_1
-using Windows.UI.ViewManagement;
-#endif
 
 namespace MicaWPF.Services;
 
 public sealed class AccentColorService : IAccentColorService
 {
-    private const string _registryKeyPath = @"Software\Microsoft\Windows\DWM";
-    private const string _registryValueName = "ColorPrevalence";
-
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
 
@@ -21,7 +12,7 @@ public sealed class AccentColorService : IAccentColorService
     public static AccentColorService Current { get; }
 
     public AccentColors AccentColors { get; private set; } = new AccentColors();
-    public bool AccentUpdateFromWindows { get; private set; } = true;
+    public bool AccentColorsUpdateFromWindows { get; private set; } = true;
     public bool IsTitleBarAndWindowsBorderColored { get; private set; }
     public bool IsTitleBarAndBorderAccentAware
     {
@@ -32,16 +23,28 @@ public sealed class AccentColorService : IAccentColorService
     static AccentColorService()
     {
         Current = new();
-        Current.UpdateAccentsFromWindows();
-        Current.IsTitleBarAndWindowsBorderColored = GetAccentColorEnabledOnTitleBarAndBorders();
+        Current.UpdateAccentsColorsFromWindows();
+        Current.IsTitleBarAndWindowsBorderColored = WindowsAccentHelper.AreTitleBarAndBordersAccented();
         Current.IsTitleBarAndBorderAccentAware = true;
     }
 
     private AccentColorService() { }
 
-    public void UpdateAccents(Color systemAccent)
+    public void RefreshAccentsColors() 
     {
-        AccentUpdateFromWindows = false;
+        if (AccentColorsUpdateFromWindows)
+        {
+            UpdateAccentsColorsFromWindows();
+        }
+        else
+        {
+            UpdateAccentsColors(AccentColors.SystemAccentColor);
+        }
+    }
+
+    public void UpdateAccentsColors(Color systemAccent)
+    {
+        AccentColorsUpdateFromWindows = false;
         var drawingColor = System.Drawing.Color.FromArgb(systemAccent.R, systemAccent.G, systemAccent.B);
         var hsvColor = HSVColorHelper.ConvertToHSVColor(drawingColor);
 
@@ -58,15 +61,15 @@ public sealed class AccentColorService : IAccentColorService
         UpdateFromInternalColors();
     }
 
-    public void UpdateAccentsFromWindows()
+    public void UpdateAccentsColorsFromWindows()
     {
-        AccentUpdateFromWindows = true;
+        AccentColorsUpdateFromWindows = true;
 
         AccentColors = WindowsAccentHelper.GetAccentColor();
 
         if (OsHelper.IsWindows10 || AccentColors.IsFallBack)
         {
-            UpdateAccents(AccentColors.SystemAccentColor);
+            UpdateAccentsColors(AccentColors.SystemAccentColor);
         }
 
         UpdateFromInternalColors();
@@ -98,7 +101,7 @@ public sealed class AccentColorService : IAccentColorService
         }
 
         WindowHelper.RefreshAllWindowsContents();
-        ThemeService.RefreshTheme();
+        ThemeDictionaryService.Current.RefreshThemeSource();
     }
 
     private void SetAccentColorOnTitleBarAndBorders(bool isEnabled)
@@ -140,26 +143,11 @@ public sealed class AccentColorService : IAccentColorService
             case UserPreferenceCategory.General:
                 if (IsTitleBarAndBorderAccentAware)
                 {
-                    Application.Current.Dispatcher.Invoke(() => SetAccentColorOnTitleBarAndBorders(GetAccentColorEnabledOnTitleBarAndBorders()));
+                    Application.Current.Dispatcher.Invoke(() => SetAccentColorOnTitleBarAndBorders(WindowsAccentHelper.AreTitleBarAndBordersAccented()));
                     SetTitleBarAndBorderAccentAware(IsTitleBarAndBorderAccentAware);
                 }
                 break;
         }
-    }
-
-    private static bool GetAccentColorEnabledOnTitleBarAndBorders()
-    {
-        using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
-        var registryValueObject = key?.GetValue(_registryValueName);
-
-        if (registryValueObject == null)
-        {
-            return false;
-        }
-
-        var registryValue = (int)registryValueObject;
-
-        return registryValue > 0;
     }
 
     private static Color GetThemeColorVariation((double hue, double saturation, double value) hsv, WindowsTheme windowsTheme, AccentBrushType accentBrushType)
