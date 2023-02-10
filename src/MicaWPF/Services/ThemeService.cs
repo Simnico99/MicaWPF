@@ -15,7 +15,6 @@ public sealed class ThemeService : IThemeService
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
     public bool IsThemeAware { get; private set; }
 
-
     static ThemeService()
     {
         Current = new();
