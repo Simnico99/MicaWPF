@@ -1,11 +1,11 @@
 ﻿using MicaWPF.Events;
 
 namespace MicaWPF.Services;
+
 public sealed class ThemeService : IThemeService
 {
     private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
     private const string _registryValueName = "AppsUseLightTheme";
-
     private WindowsTheme _currentTheme;
     private bool _isCheckingTheme;
 
@@ -15,86 +15,19 @@ public sealed class ThemeService : IThemeService
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
     public bool IsThemeAware { get; private set; }
 
+
     static ThemeService()
     {
         Current = new();
         _ = Current.ChangeTheme(WindowsTheme.Auto);
     }
 
-    private WindowsTheme GetTheme()
-    {
-        return _currentTheme == WindowsTheme.Auto ? GetWindowsTheme() : _currentTheme;
-    }
+    private ThemeService() { }
 
-    private void UpdateAccent()
-    {
-        _ = Task.Run(() =>
-        {
-            if (AccentColorService.Current.AccentUpdateFromWindows)
-            {
-                AccentColorService.Current.UpdateAccentsFromWindows();
-            }
-            else
-            {
-                AccentColorService.Current.UpdateAccents(AccentColorService.Current.AccentColors.SystemAccentColor);
-            }
-        });
-    }
-
-    private void SetThemeAware()
-    {
-        if (IsThemeAware && !_isCheckingTheme)
-        {
-            _isCheckingTheme = true;
-            if (OsHelper.IsWindows10_OrGreater && IsThemeAware)
-            {
-                SystemEvents.UserPreferenceChanged += SystemEventsUserPreferenceChanged;
-            }
-        }
-        else if (!IsThemeAware && _isCheckingTheme)
-        {
-            SystemEvents.UserPreferenceChanged -= SystemEventsUserPreferenceChanged;
-            _isCheckingTheme = false;
-        }
-    }
-
-    private void SystemEventsUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
-    {
-        switch (e.Category)
-        {
-            case UserPreferenceCategory.General:
-                if (IsThemeAware)
-                {
-                    UpdateAccent();
-                    _ = Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
-                    SetThemeAware();
-                }
-                break;
-        }
-    }
-
-    private void SetWindowBackdrop(Window window, BackdropType micaType)
-    {
-        if (OsHelper.IsWindows11_OrGreater)
-        {
-            window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
-            var windowHandle = new WindowInteropHelper(window).Handle;
-
-            if (CurrentTheme == WindowsTheme.Dark)
-            {
-                _ = InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.True);
-            }
-            else if (OsHelper.IsWindows11_OrGreater)
-            {
-                _ = InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
-            }
-
-            _ = OsHelper.IsWindows11_22523_OrGreater
-                ? InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType)
-                : InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, InteropValues.DwmValues.True);
-        }
-    }
-
+    /// <summary>
+    /// Gets the Windows theme (light or dark) from the registry.
+    /// </summary>
+    /// <returns>The current Windows theme (light or dark).</returns>
     public static WindowsTheme GetWindowsTheme()
     {
         using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
@@ -110,6 +43,11 @@ public sealed class ThemeService : IThemeService
         return registryValue > 0 ? WindowsTheme.Light : WindowsTheme.Dark;
     }
 
+    /// <summary>
+    /// Converts a Windows theme (light or dark) to a resource theme.
+    /// </summary>
+    /// <param name="windowsTheme">The Windows theme to convert.</param>
+    /// <returns>The corresponding resource theme URI.</returns>
     public static Uri WindowsThemeToResourceTheme(WindowsTheme windowsTheme)
     {
         return windowsTheme == WindowsTheme.Dark
@@ -117,6 +55,9 @@ public sealed class ThemeService : IThemeService
             : new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
     }
 
+    /// <summary>
+    /// Refreshes the current theme.
+    /// </summary>
     public static void RefreshTheme()
     {
         ThemeDictionaryService.Current.ThemeSource = ThemeDictionaryService.Current.ThemeSource;
@@ -166,6 +107,80 @@ public sealed class ThemeService : IThemeService
         lock (MicaEnabledWindows)
         {
             MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType));
+        }
+    }
+
+    private WindowsTheme GetTheme()
+    {
+        return _currentTheme == WindowsTheme.Auto ? GetWindowsTheme() : _currentTheme;
+    }
+
+    private void UpdateAccent()
+    {
+        _ = Task.Run(() =>
+        {
+            if (AccentColorService.Current.AccentUpdateFromWindows)
+            {
+                AccentColorService.Current.UpdateAccentsFromWindows();
+            }
+            else
+            {
+                AccentColorService.Current.UpdateAccents(AccentColorService.Current.AccentColors.SystemAccentColor);
+            }
+        });
+    }
+
+    private void SetWindowBackdrop(Window window, BackdropType micaType)
+    {
+        if (OsHelper.IsWindows11_OrGreater)
+        {
+            window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
+            var windowHandle = new WindowInteropHelper(window).Handle;
+
+            if (CurrentTheme == WindowsTheme.Dark)
+            {
+                _ = InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.True);
+            }
+            else if (OsHelper.IsWindows11_OrGreater)
+            {
+                _ = InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, InteropValues.DwmValues.False);
+            }
+
+            _ = OsHelper.IsWindows11_22523_OrGreater
+                ? InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE, (int)micaType)
+                : InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_MICA_EFFECT, InteropValues.DwmValues.True);
+        }
+    }
+
+    private void SetThemeAware()
+    {
+        if (IsThemeAware && !_isCheckingTheme)
+        {
+            _isCheckingTheme = true;
+            if (OsHelper.IsWindows10_OrGreater && IsThemeAware)
+            {
+                SystemEvents.UserPreferenceChanged += SystemEventsUserPreferenceChanged;
+            }
+        }
+        else if (!IsThemeAware && _isCheckingTheme)
+        {
+            SystemEvents.UserPreferenceChanged -= SystemEventsUserPreferenceChanged;
+            _isCheckingTheme = false;
+        }
+    }
+
+    private void SystemEventsUserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+    {
+        switch (e.Category)
+        {
+            case UserPreferenceCategory.General:
+                if (IsThemeAware)
+                {
+                    UpdateAccent();
+                    _ = Application.Current.Dispatcher.Invoke(() => ChangeTheme(WindowsTheme.Auto));
+                    SetThemeAware();
+                }
+                break;
         }
     }
 }

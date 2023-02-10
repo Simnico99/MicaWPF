@@ -19,10 +19,10 @@ public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDicti
     private ThemeDictionaryService()
     {
     }
+
     /// <summary>
     /// get current theme resource dictionary
     /// </summary>
-    /// <returns></returns>
     private static List<ResourceDictionary?> GetThemeResourceDictionary()
     {
         return (from dictionary in Application.Current.Resources.MergedDictionaries

@@ -216,21 +216,21 @@ public class MicaWindow : Window
     {
         var x = lparam.ToInt32() & 0xffff;
         var y = lparam.ToInt32() >> 16;
-
+        var point = new Point(x, y);
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
         var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
 
-        if (_button is not null)
+        if (_button != null)
         {
-            var rect = new Rect(_button.PointToScreen(
-            new Point()),
-            new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
+            var buttonSize = new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE);
+            var buttonLocation = _button.PointToScreen(new Point());
+            var rect = new Rect(buttonLocation, buttonSize);
 
-            if (rect.Contains(new Point(x, y)))
+            handled = rect.Contains(point);
+            if (handled)
             {
-                var color = (LinearGradientBrush)TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") ?? new LinearGradientBrush();
+                var color = TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") as LinearGradientBrush ?? new LinearGradientBrush();
                 _button.Background = color;
-                handled = true;
             }
             else
             {
@@ -250,41 +250,41 @@ public class MicaWindow : Window
 
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
         var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
-        if (_button != null)
+        if (_button == null || !_button.IsVisible)
         {
-            var rect = new Rect(_button.PointToScreen(
-            new Point()),
-            new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
-            if (rect.Contains(new Point(x, y)))
-            {
-                handled = true;
-                var invokeProv = new ButtonAutomationPeer(_button).GetPattern(PatternInterface.Invoke) as IInvokeProvider;
-                invokeProv?.Invoke();
-            }
+            return;
         }
+
+        var rect = new Rect(_button.PointToScreen(
+        new Point()),
+        new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE));
+        if (!rect.Contains(new Point(x, y)))
+        {
+            return;
+        }
+
+        handled = true;
+        var invokeProv = new ButtonAutomationPeer(_button).GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+        invokeProv?.Invoke();
     }
 
     private nint HwndSourceHook(nint hwnd, int msg, nint _, nint lparam, ref bool handled)
     {
+        if (ResizeMode is ResizeMode.NoResize or ResizeMode.CanMinimize)
+        {
+            return PtrHelper.Zero;
+        }
+
         switch (msg)
         {
             case InteropValues.HwndSourceMessages.WM_NCHITTEST:
-                if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
-                {
-                    return ShowSnapLayout(lparam, ref handled);
-                }
-                break;
+                return ShowSnapLayout(lparam, ref handled);
             case InteropValues.HwndSourceMessages.WM_NCLBUTTONDOWN:
-                if (ResizeMode is not ResizeMode.NoResize and not ResizeMode.CanMinimize)
-                {
-                    HideMaximiseAndMinimiseButton(lparam, ref handled);
-                }
+                HideMaximiseAndMinimiseButton(lparam, ref handled);
                 break;
-            //case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
-            //    WmGetMinMaxInfo(hwnd, lparam);
-            //    break;
-            default:
-                break;
+                //case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
+                //    WmGetMinMaxInfo(hwnd, lparam);
+                //    break;
         }
 
         return PtrHelper.Zero;
