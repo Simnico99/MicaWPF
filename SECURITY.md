@@ -9,4 +9,4 @@ We release patches for security vulnerabilities. Which versions are eligible for
 | 5.x.x   | :white_check_mark: |
 
 ## Reporting a Vulnerability
-Open an issue without any details and I will contact you. (Simnico99)
+Go to the security tab and click on the report security vulnerability button.
