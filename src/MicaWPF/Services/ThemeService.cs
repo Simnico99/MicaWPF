@@ -16,7 +16,7 @@ public sealed class ThemeService : IThemeService
     private bool _isCheckingTheme;
 
     public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
-    public List<MicaEnabledWindow> MicaEnabledWindows { get; private set; } = new List<MicaEnabledWindow>();
+    public List<BackdropEnabledWindow> BackdropEnabledWindows { get; private set; } = new List<BackdropEnabledWindow>();
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
     public bool IsThemeAware { get; private set; }
 
@@ -36,25 +36,25 @@ public sealed class ThemeService : IThemeService
         AccentColorService.Current.RefreshAccentsColors();
         ThemeDictionaryService.Current.ThemeSource = WindowsThemeHelper.WindowsThemeToResourceTheme(CurrentTheme);
 
-        lock (MicaEnabledWindows)
+        lock (BackdropEnabledWindows)
         {
 #if NET5_0_OR_GREATER
-            foreach (var micaEnabledWindow in CollectionsMarshal.AsSpan(MicaEnabledWindows))
+            foreach (var backdropEnabledWindow in CollectionsMarshal.AsSpan(BackdropEnabledWindows))
             {
-                SetWindowBackdrop(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
+                SetWindowBackdrop(backdropEnabledWindow.Window, backdropEnabledWindow.BackdropType);
                 //Force the title bar to refresh.
-                var style = micaEnabledWindow.Window.WindowStyle;
-                micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
-                micaEnabledWindow.Window.WindowStyle = style;
+                var style = backdropEnabledWindow.Window.WindowStyle;
+                backdropEnabledWindow.Window.WindowStyle = WindowStyle.None;
+                backdropEnabledWindow.Window.WindowStyle = style;
             }
 #else
-            foreach (var micaEnabledWindow in MicaEnabledWindows)
+            foreach (var backdropEnabledWindow in BackdropEnabledWindows)
             {
-                SetWindowBackdrop(micaEnabledWindow.Window, micaEnabledWindow.BackdropType);
+                SetWindowBackdrop(backdropEnabledWindow.Window, backdropEnabledWindow.BackdropType);
                 //Force the title bar to refresh.
-                var style = micaEnabledWindow.Window.WindowStyle;
-                micaEnabledWindow.Window.WindowStyle = WindowStyle.None;
-                micaEnabledWindow.Window.WindowStyle = style;
+                var style = backdropEnabledWindow.Window.WindowStyle;
+                backdropEnabledWindow.Window.WindowStyle = WindowStyle.None;
+                backdropEnabledWindow.Window.WindowStyle = style;
             }
 #endif
         }
@@ -69,9 +69,9 @@ public sealed class ThemeService : IThemeService
         _ = AccentColorService.Current;
         SetWindowBackdrop(window, micaType);
 
-        lock (MicaEnabledWindows)
+        lock (BackdropEnabledWindows)
         {
-            MicaEnabledWindows.Add(new MicaEnabledWindow(window, micaType));
+            BackdropEnabledWindows.Add(new BackdropEnabledWindow(window, micaType));
         }
     }
 

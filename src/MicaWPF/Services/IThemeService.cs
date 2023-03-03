@@ -20,7 +20,7 @@ public interface IThemeService
     /// <summary>
     /// List of windows that have Mica enabled.
     /// </summary>
-    List<MicaEnabledWindow> MicaEnabledWindows { get; }
+    List<BackdropEnabledWindow> BackdropEnabledWindows { get; }
 
     /// <summary>
     /// Event that is raised when the theme is changed.

@@ -1,5 +1,5 @@
 ﻿namespace MicaWPF.Models;
-public sealed class MicaEnabledWindow
+public readonly struct MicaEnabledWindow
 {
     public Window Window { get; }
     public BackdropType BackdropType { get; }

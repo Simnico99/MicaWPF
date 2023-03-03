@@ -11,7 +11,7 @@ internal sealed class ThemeServiceDI : IThemeService
     private readonly IThemeService _themeService = ThemeService.Current;
 
     public IWeakEvent<WindowsTheme> ThemeChanged => _themeService.ThemeChanged;
-    public List<MicaEnabledWindow> MicaEnabledWindows => _themeService.MicaEnabledWindows;
+    public List<BackdropEnabledWindow> BackdropEnabledWindows => _themeService.BackdropEnabledWindows;
     public WindowsTheme CurrentTheme => _themeService.CurrentTheme;
     public bool IsThemeAware => _themeService.IsThemeAware;
 
