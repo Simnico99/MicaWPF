@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel;
 
 namespace MicaWPF.Services;
+
+///<summary>
+///Service that manages the theme dictionnaries from MicaWPF.
+///</summary>
 public interface IThemeDictionaryService
 {
     /// <summary>

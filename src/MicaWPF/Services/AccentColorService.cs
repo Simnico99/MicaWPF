@@ -3,13 +3,21 @@ using MicaWPF.Events;
 
 namespace MicaWPF.Services;
 
+///<summary>
+///Service that manages the accent colors of the application.
+///</summary>
 public sealed class AccentColorService : IAccentColorService
 {
+    ///<summary>
+    ///Gets the current instance of <see cref="AccentColorService"/> but as the interface <see cref="IAccentColorService"/>.
+    ///</summary>
+    public static IAccentColorService Current { get; }
+
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
 
     public IWeakEvent<AccentColors> AccentColorChanged { get; } = new WeakEvent<AccentColors>();
-    public static AccentColorService Current { get; }
+
 
     public AccentColors AccentColors { get; private set; } = new AccentColors();
     public bool AccentColorsUpdateFromWindows { get; private set; } = true;
@@ -22,10 +30,11 @@ public sealed class AccentColorService : IAccentColorService
 
     static AccentColorService()
     {
-        Current = new();
-        Current.UpdateAccentsColorsFromWindows();
-        Current.IsTitleBarAndWindowsBorderColored = WindowsAccentHelper.AreTitleBarAndBordersAccented();
-        Current.IsTitleBarAndBorderAccentAware = true;
+        Current = new AccentColorService();
+        var localCurrent = (AccentColorService)Current;
+        localCurrent.UpdateAccentsColorsFromWindows();
+        localCurrent.IsTitleBarAndWindowsBorderColored = WindowsAccentHelper.AreTitleBarAndBordersAccented();
+        localCurrent.IsTitleBarAndBorderAccentAware = true;
     }
 
     private AccentColorService() { }

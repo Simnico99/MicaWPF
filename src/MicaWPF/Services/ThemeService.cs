@@ -2,12 +2,19 @@
 
 namespace MicaWPF.Services;
 
+///<summary>
+///Service that manages the theme of the application.
+///</summary>
 public sealed class ThemeService : IThemeService
 {
+    ///<summary>
+    ///Gets the current instance of the <see cref="ThemeService"/> class but as the interface <see cref="IThemeService"/>.
+    ///</summary>
+    public static IThemeService Current { get; }
+
     private WindowsTheme _currentTheme;
     private bool _isCheckingTheme;
 
-    public static ThemeService Current { get; }
     public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
     public List<MicaEnabledWindow> MicaEnabledWindows { get; private set; } = new List<MicaEnabledWindow>();
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
@@ -15,7 +22,7 @@ public sealed class ThemeService : IThemeService
 
     static ThemeService()
     {
-        Current = new();
+        Current = new ThemeService();
         _ = Current.ChangeTheme(WindowsTheme.Auto);
     }
 

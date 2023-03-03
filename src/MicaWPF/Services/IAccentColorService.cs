@@ -2,6 +2,9 @@
 
 namespace MicaWPF.Services;
 
+///<summary>
+///Service that manages the accent colors of the application.
+///</summary>
 public interface IAccentColorService
 {
     /// <summary>

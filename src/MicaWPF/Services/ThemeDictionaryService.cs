@@ -3,13 +3,19 @@ using System.Runtime.CompilerServices;
 
 namespace MicaWPF.Services;
 
+///<summary>
+///Service that manages the theme dictionnaries from MicaWPF.
+///</summary>
 public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionaryService
 {
+    ///<summary>
+    ///Gets the current instance of <see cref="ThemeDictionaryService"/> but as the interface <see cref="IThemeDictionaryService"/>.
+    ///</summary>
+    public static IThemeDictionaryService Current { get; } = new ThemeDictionaryService();
+
     private static Uri? _currentThemeSource;
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    public static ThemeDictionaryService Current { get; } = new();
 
     private void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {

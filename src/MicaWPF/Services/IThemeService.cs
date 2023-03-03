@@ -1,6 +1,10 @@
 ﻿using MicaWPF.Events;
 
 namespace MicaWPF.Services;
+
+///<summary>
+///Service that manages the theme of the application.
+///</summary>
 public interface IThemeService
 {
     /// <summary>
