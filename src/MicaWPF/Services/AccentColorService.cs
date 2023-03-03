@@ -18,7 +18,6 @@ public sealed class AccentColorService : IAccentColorService
 
     public IWeakEvent<AccentColors> AccentColorChanged { get; } = new WeakEvent<AccentColors>();
 
-
     public AccentColors AccentColors { get; private set; } = new AccentColors();
     public bool AccentColorsUpdateFromWindows { get; private set; } = true;
     public bool IsTitleBarAndWindowsBorderColored { get; private set; }
