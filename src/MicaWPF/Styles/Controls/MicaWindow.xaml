@@ -365,6 +365,7 @@
                                         Visibility="Collapsed"
                                         WindowChrome.IsHitTestVisibleInChrome="True">
                                         <Button
+                                            x:Name="Minimize"
                                             Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
                                             Focusable="False"
                                             Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
@@ -495,10 +496,25 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=TitleBarType}" Value="WinUI" />
-                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ResizeMode}" Value="CanResize" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="TitleButtonStackPanel" Property="Visibility" Value="Visible" />
                             <Setter TargetName="TitleStackPanel" Property="Margin" Value="10,5,5,5" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=TitleBarType}" Value="WinUI" />
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ResizeMode}" Value="CanMinimize" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="Maximize" Property="IsEnabled" Value="False" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=TitleBarType}" Value="WinUI" />
+                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=ResizeMode}" Value="NoResize" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Minimize" Property="Visibility" Value="Hidden" />
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
