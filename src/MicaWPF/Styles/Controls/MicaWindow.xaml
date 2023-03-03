@@ -1,7 +1,10 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:MicaWPF.Converters"
     xmlns:local="clr-namespace:MicaWPF.Controls">
+
+    <converters:IsNullConverter x:Key="IsNullConverter" />
 
     <Style x:Key="MicaWPF.Styles.Default.MicaWindow.Button.Windows" TargetType="{x:Type Button}">
         <Setter Property="Focusable" Value="False" />
