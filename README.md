@@ -38,8 +38,8 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+<details>
+  <summary>Table of Contents</summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -86,7 +86,6 @@ Here are some exemple controls:
 ### Built With
 
 * [MicaWPFRuntimeComponent](https://github.com/Simnico99/MicaWPFRuntimeComponent)
-
 
 
 <!-- GETTING STARTED -->
@@ -142,6 +141,26 @@ Here is an exemple:
 
     </Grid>
 </controls:MicaWindow>
+```
+
+3. You need to add `<mica:ThemeDictionnary Theme="Dark" />` to your App.xaml resources.
+
+Here is an exemple:
+```xaml
+<Application
+    x:Class="MicaWPF.DesktopApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mica="clr-namespace:MicaWPF.Styles;assembly=MicaWPF"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <mica:ThemeDictionnary Theme="Auto" /> <!-- And Here (You can change to Light or Dark here) -->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
 ```
 
 Now get into your Window code:
