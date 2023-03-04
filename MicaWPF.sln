@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF", "src\MicaWPF\Mica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF.DependencyInjection", "src\MicaWPF.DependencyInjection\MicaWPF.DependencyInjection.csproj", "{EC4F60D4-D6D5-4767-9D05-754E792D01C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF.Test", "src\MicaWPF.Test\MicaWPF.Test.csproj", "{485B9A35-56EC-4A45-B8B7-883119ADC477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicaWPF.Test", "src\MicaWPF.Test\MicaWPF.Test.csproj", "{FA3598D8-15BD-4D4C-AB8C-0B23A77AAD0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
