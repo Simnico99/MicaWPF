@@ -143,7 +143,7 @@ Here is an exemple:
 </controls:MicaWindow>
 ```
 
-3. You need to add `<mica:ThemeDictionnary Theme="Dark" />` to your App.xaml resources.
+3. You need to add `<mica:ThemeDictionary Theme="Dark" />` to your App.xaml resources.
 
 Here is an exemple:
 ```xaml
@@ -156,7 +156,7 @@ Here is an exemple:
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <mica:ThemeDictionnary Theme="Auto" /> <!-- And Here (You can change to Light or Dark here) -->
+                <mica:ThemeDictionary Theme="Auto" /> <!-- And Here (You can change to Light or Dark here) -->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
