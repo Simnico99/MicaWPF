@@ -223,7 +223,7 @@ TitleBarType="WinUI"
 >
 [other code...]
 </mica:MicaWindow>
-
+```
 <!-- LICENSE -->
 ## License
 
