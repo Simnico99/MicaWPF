@@ -516,6 +516,14 @@
                             <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="Minimize" Property="Visibility" Value="Hidden" />
                         </MultiDataTrigger>
+                        <Trigger Property="WindowStyle" Value="None">
+                            <Setter TargetName="TitleGrid" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="WindowStyle" Value="ToolWindow">
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Minimize" Property="Visibility" Value="Hidden" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
