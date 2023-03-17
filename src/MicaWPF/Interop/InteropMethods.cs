@@ -73,6 +73,13 @@ internal sealed partial class InteropMethods
     {
         return DwmSetWindowAttribute(hwnd, attribute, ref parameter, Marshal.SizeOf<int>());
     }
+
+    public static int RoundWindowCorner(nint hWnd, DWM_WINDOW_CORNER_PREFERENCE cornerPrefrence = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND)
+    {
+        var attribute = DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE;
+        var preference = (int)cornerPrefrence;
+        return DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
+    }
 }
 #else
 internal sealed class InteropMethods
@@ -139,6 +146,13 @@ internal sealed class InteropMethods
     public static int SetWindowAttribute(nint hwnd, DWMWINDOWATTRIBUTE attribute, int parameter)
     {
         return DwmSetWindowAttribute(hwnd, attribute, ref parameter, Marshal.SizeOf<int>());
+    }
+
+    public static int RoundWindowCorner(nint hWnd, DWM_WINDOW_CORNER_PREFERENCE cornerPrefrence = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND)
+    {
+        var attribute = DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE;
+        var preference = (int)cornerPrefrence;
+        return DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
     }
 }
 #endif

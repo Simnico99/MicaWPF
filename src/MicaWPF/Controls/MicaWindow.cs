@@ -94,8 +94,10 @@ public class MicaWindow : Window
         base.OnSourceInitialized(e);
         if (OsHelper.IsWindows11_OrGreater && TitleBarType == TitleBarType.WinUI)
         {
-            HwndSource.FromHwnd(new WindowInteropHelper(this).EnsureHandle())?.AddHook(HwndSourceHook);
-            InteropMethods.HideAllWindowButton(new WindowInteropHelper(this).Handle);
+            var windowHwnd = new WindowInteropHelper(this).EnsureHandle();
+            HwndSource.FromHwnd(windowHwnd)?.AddHook(HwndSourceHook);
+            InteropMethods.RoundWindowCorner(windowHwnd);
+            InteropMethods.HideAllWindowButton(windowHwnd);
         }
     }
 
@@ -145,11 +147,6 @@ public class MicaWindow : Window
         _buttonRestore = GetTemplateChild(_buttonRestoreName) as System.Windows.Controls.Button;
 
         base.OnApplyTemplate();
-
-        if (ResizeMode == ResizeMode.CanResizeWithGrip && TitleBarType == TitleBarType.WinUI)
-        {
-            throw new NotSupportedException("TitleBar of Type WinUI style doesn't support CanResizeWithGrip!");
-        }
     }
 
     protected override void OnActivated(EventArgs e)
