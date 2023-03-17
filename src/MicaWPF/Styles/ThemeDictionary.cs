@@ -5,7 +5,7 @@ namespace MicaWPF.Styles;
 [Localizability(LocalizationCategory.Ignore)]
 [Ambient]
 [UsableDuringInitialization(true)]
-public sealed class ThemeDictionnary : ResourceDictionary
+public sealed class ThemeDictionary : ResourceDictionary
 {
     public WindowsTheme Theme
     {

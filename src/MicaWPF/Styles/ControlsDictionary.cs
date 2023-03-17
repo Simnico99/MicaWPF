@@ -5,9 +5,9 @@ namespace MicaWPF.Styles;
 [Localizability(LocalizationCategory.Ignore)]
 [Ambient]
 [UsableDuringInitialization(true)]
-public sealed class ControlsDictionnary : ResourceDictionary
+public sealed class ControlsDictionary : ResourceDictionary
 {
-    public ControlsDictionnary()
+    public ControlsDictionary()
     {
         Source = new($"pack://application:,,,/MicaWPF;component/Styles/MicaWPF.xaml", UriKind.Absolute);
     }
