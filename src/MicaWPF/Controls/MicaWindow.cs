@@ -145,6 +145,11 @@ public class MicaWindow : Window
         _buttonRestore = GetTemplateChild(_buttonRestoreName) as System.Windows.Controls.Button;
 
         base.OnApplyTemplate();
+
+        if (ResizeMode == ResizeMode.CanResizeWithGrip && TitleBarType == TitleBarType.WinUI)
+        {
+            throw new NotSupportedException("TitleBar of Type WinUI style doesn't support CanResizeWithGrip!");
+        }
     }
 
     protected override void OnActivated(EventArgs e)
