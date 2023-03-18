@@ -198,10 +198,6 @@ public class MicaWindow : Window
     private void OnMaximizeWindow(object target, ExecutedRoutedEventArgs e)
     {
         SystemCommands.MaximizeWindow(this);
-        //if (_buttonMax is not null)
-        //{
-        //    _buttonMax.Background = Brushes.Transparent;
-        //}
     }
 
     private void OnMinimizeWindow(object target, ExecutedRoutedEventArgs e)
@@ -242,7 +238,6 @@ public class MicaWindow : Window
             return PtrHelper.Create(_hTMAXBUTTON);
         }
 
-
         return PtrHelper.Zero;
     }
 
@@ -277,7 +272,6 @@ public class MicaWindow : Window
         {
             return PtrHelper.Zero;
         }
-
 
         switch (msg)
         {
