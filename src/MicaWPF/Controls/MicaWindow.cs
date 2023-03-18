@@ -212,7 +212,6 @@ public class MicaWindow : Window
 
     private nint ShowSnapLayout(nint lparam, ref bool handled)
     {
-
         var x = lparam.ToInt32() & 0xffff;
         var y = lparam.ToInt32() >> 16;
         var point = new Point(x, y);
