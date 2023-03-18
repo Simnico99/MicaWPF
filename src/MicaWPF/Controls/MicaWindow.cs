@@ -198,10 +198,6 @@ public class MicaWindow : Window
     private void OnMaximizeWindow(object target, ExecutedRoutedEventArgs e)
     {
         SystemCommands.MaximizeWindow(this);
-        if (_buttonMax is not null)
-        {
-            _buttonMax.Background = Brushes.Transparent;
-        }
     }
 
     private void OnMinimizeWindow(object target, ExecutedRoutedEventArgs e)
@@ -238,7 +234,6 @@ public class MicaWindow : Window
             {
                 _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
             }
-
             return PtrHelper.Create(_hTMAXBUTTON);
         }
 
@@ -280,7 +275,11 @@ public class MicaWindow : Window
         switch (msg)
         {
             case InteropValues.HwndSourceMessages.WM_NCHITTEST:
-                return ShowSnapLayout(lparam, ref handled);
+                if (SnapLayoutHelper.IsSnapLayoutEnabled())
+                {
+                    return ShowSnapLayout(lparam, ref handled);
+                }
+                break;
             case InteropValues.HwndSourceMessages.WM_NCLBUTTONDOWN:
                 HideMaximiseAndMinimiseButton(lparam, ref handled);
                 break;
