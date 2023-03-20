@@ -60,11 +60,22 @@
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsPressed" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Foreground" Value="{Binding Foreground, ElementName=TitleTextBlock}" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#C42B1C" />
+                            <Setter Property="Foreground" Value="#FFFFFF" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="#B4271C" />
+                            <Setter Property="Foreground" Value="#C5FFFFFF" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
@@ -432,7 +443,6 @@
                                         <Button
                                             Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
                                             Focusable="False"
-                                            Foreground="{Binding Foreground, ElementName=TitleTextBlock}"
                                             Style="{StaticResource MicaWPF.Styles.Default.MicaWindow.Button.Close}">
                                             <Button.Content>
                                                 <Grid Width="46">
