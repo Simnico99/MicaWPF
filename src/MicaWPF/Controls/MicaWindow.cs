@@ -278,8 +278,6 @@ public class MicaWindow : Window
             return PtrHelper.Zero;
         }
 
-        Debug.WriteLine(msg);
-
         switch (msg)
         {
             case InteropValues.HwndSourceMessages.WM_NCHITTEST:
