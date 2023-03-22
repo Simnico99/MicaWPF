@@ -12,7 +12,12 @@ public sealed class InteropValues
         WM_NCPAINT = 0x0085,
         WM_ERASEBKGND = 0x0014,
         WM_PAINT = 0x000F,
-        WM_GETMINMAXINFO = 0x0024;
+        WM_GETMINMAXINFO = 0x0024,
+        WM_MOVING = 0x0216,
+        WM_SETCURSOR = 0x20,
+        WM_GETTEXT = 0xD,
+        WM_WINDOWPOSCHANGING = 0x46,
+        WM_SIZING = 0x0214;
     }
 
     public static class HwndButtons
