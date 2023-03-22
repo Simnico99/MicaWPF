@@ -213,7 +213,7 @@ public class MicaWindow : Window
 
     private nint ShowSnapLayout(nint lparam, ref bool handled)
     {
-        var x = lparam.ToInt32() & 0xffff;
+        var x = (short)(lparam.ToInt32() & 0xffff);
         var y = lparam.ToInt32() >> 16;
         var point = new Point(x, y);
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
@@ -277,6 +277,8 @@ public class MicaWindow : Window
         {
             return PtrHelper.Zero;
         }
+
+        Debug.WriteLine(msg);
 
         switch (msg)
         {
