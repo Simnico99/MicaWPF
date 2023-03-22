@@ -301,6 +301,3 @@ public class MicaWindow : Window
         return PtrHelper.Zero;
     }
 }
-
-//0x281
-//0x7
