@@ -298,8 +298,6 @@ public class MicaWindow : Window
                 break;
         }
 
-        Debug.WriteLine($"Window message = {msg}");
-
         return PtrHelper.Zero;
     }
 }
