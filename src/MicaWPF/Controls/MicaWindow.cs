@@ -1,4 +1,5 @@
 ﻿using MicaWPF.Extensions;
+using System.Diagnostics;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 
@@ -216,23 +217,23 @@ public class MicaWindow : Window
         var y = lparam.ToInt32() >> 16;
         var point = new Point(x, y);
         var DPI_SCALE = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
-        var _button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
+        var button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
 
-        if (_button != null)
+        if (button != null)
         {
-            var buttonSize = new Size(_button.ActualWidth * DPI_SCALE, _button.ActualHeight * DPI_SCALE);
-            var buttonLocation = _button.PointToScreen(new Point());
+            var buttonSize = new Size(button.ActualWidth * DPI_SCALE, button.ActualHeight * DPI_SCALE);
+            var buttonLocation = button.PointToScreen(new Point());
             var rect = new Rect(buttonLocation, buttonSize);
 
             handled = rect.Contains(point);
             if (handled)
             {
                 var color = TryFindResource("MicaWPF.GradientBrushes.ControlElevationBorder") as LinearGradientBrush ?? new LinearGradientBrush();
-                _button.Background = color;
+                button.Background = color;
             }
             else
             {
-                _button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
             }
             return PtrHelper.Create(_hTMAXBUTTON);
         }
@@ -272,6 +273,11 @@ public class MicaWindow : Window
             return PtrHelper.Zero;
         }
 
+        if (msg == InteropValues.HwndSourceMessages.WM_GETTEXT)
+        {
+            return PtrHelper.Zero;
+        }
+
         switch (msg)
         {
             case InteropValues.HwndSourceMessages.WM_NCHITTEST:
@@ -283,11 +289,20 @@ public class MicaWindow : Window
             case InteropValues.HwndSourceMessages.WM_NCLBUTTONDOWN:
                 HideMaximiseAndMinimiseButton(lparam, ref handled);
                 break;
-                //case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
-                //    WmGetMinMaxInfo(hwnd, lparam);
-                //    break;
+            case InteropValues.HwndSourceMessages.WM_WINDOWPOSCHANGING:
+                var button = WindowState == WindowState.Maximized ? _buttonRestore : _buttonMax;
+                if (button is not null)
+                {
+                    button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                }
+                break;
         }
+
+        Debug.WriteLine($"Window message = {msg}");
 
         return PtrHelper.Zero;
     }
 }
+
+//0x281
+//0x7
