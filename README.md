@@ -157,6 +157,7 @@ Here is an exemple:
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <mica:ThemeDictionary Theme="Auto" /> <!-- And Here (You can change to Light or Dark here) -->
+		<mica:ControlsDictionary /> <!-- This is mandatory -->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
