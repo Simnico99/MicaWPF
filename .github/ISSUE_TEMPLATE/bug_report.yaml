@@ -55,6 +55,24 @@ body:
         - "Visual Studio 2022"
         - "Visual Studio 2019"
         - "Other"
+  - type: dropdown
+    attributes:
+      label: .Net Version
+      description: Which Version of .Net are you using?
+      multiple: true
+      options:
+        - ".Net Framework 4.6.x"
+        - ".Net Framework 4.7.x"
+        - ".Net Framework 4.8.x"
+        - ".NET Standard 1.x"
+        - ".NET Standard 2.x"
+        - ".NET Core 1.x"
+        - ".NET Core 2.x"
+        - ".NET Core 3.x"
+        - ".NET 5.x"
+        - ".NET 6.x"
+        - ".NET 7.x"
+        - "Other (Please add the version in additionnal context.)"
   - type: textarea
     attributes:
       label: Additional context
