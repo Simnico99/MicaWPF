@@ -6,14 +6,6 @@ assignees:
   - Simnico99
 body:
   - type: textarea
-    attributes:
-      label: Is your feature request related to a problem? Please describe. (Optional)
-      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when
-  - type: textarea
-    attributes:
-      label: Describe alternatives you've considered (Optional)
-      description: A clear and concise description of any alternative solutions or features you've considered.
-  - type: textarea
     validations:
       required: true
     attributes:
@@ -21,5 +13,13 @@ body:
       description: A clear and concise description of what you want to happen.
   - type: textarea
     attributes:
-      label: Additional context (Optional)
+      label: Is your feature request related to a problem? Please describe. 
+      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when
+  - type: textarea
+    attributes:
+      label: Describe alternatives you've considered 
+      description: A clear and concise description of any alternative solutions or features you've considered.
+  - type: textarea
+    attributes:
+      label: Additional context
       description: Enter any other applicable info here.
