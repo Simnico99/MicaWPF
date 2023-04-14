@@ -5,10 +5,6 @@ labels: ["bug", "Needs-Triage"]
 assignees:
   - Simnico99
 body:
-  - type: markdown
-    attributes:
-      value: |
-        For bugs related to WinUI, please open a bug on the [Microsoft.UI.Xaml repository](https://github.com/microsoft/microsoft-ui-xaml)
   - type: textarea
     validations:
       required: true
