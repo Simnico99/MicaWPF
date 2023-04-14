@@ -7,8 +7,8 @@ assignees:
 body:
   - type: textarea
     attributes:
-      label:Is your feature request related to a problem? Please describe. (Optional)
-      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+      label: Is your feature request related to a problem? Please describe. (Optional)
+      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when
   - type: textarea
     attributes:
       label: Describe alternatives you've considered (Optional)
