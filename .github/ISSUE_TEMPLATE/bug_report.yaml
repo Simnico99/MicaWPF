@@ -47,16 +47,6 @@ body:
         - "Windows 10 version 1809 (17763, October 2018 Update)"
   - type: dropdown
     attributes:
-      label: IDE
-      description: Which IDE are you using?
-      multiple: true
-      options:
-        - "Visual Studio 2022-preview"
-        - "Visual Studio 2022"
-        - "Visual Studio 2019"
-        - "Other"
-  - type: dropdown
-    attributes:
       label: .Net Version
       description: Which Version of .Net are you using?
       multiple: true
