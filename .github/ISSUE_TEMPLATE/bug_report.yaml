@@ -29,6 +29,8 @@ body:
       label: Screenshots
       description: If applicable, add screenshots here to help explain your problem
   - type: dropdown
+   validations:
+      required: true
     attributes:
       label: Windows version
       description: Which Windows versions did you see the issue on?
@@ -46,6 +48,8 @@ body:
         - "Windows 10 version 1903 (18362, May 2019 Update)"
         - "Windows 10 version 1809 (17763, October 2018 Update)"
   - type: dropdown
+   validations:
+      required: true
     attributes:
       label: .Net Version
       description: Which Version of .Net are you using?
