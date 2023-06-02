@@ -11,7 +11,7 @@ public static class SnapLayoutHelper
 
         if (registryValueObject == null)
         {
-            return false;
+            return true;
         }
 
         var registryValue = (int)registryValueObject;
