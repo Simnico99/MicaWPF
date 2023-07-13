@@ -4,6 +4,11 @@
 
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
+using MicaWPF.Controls;
+using MicaWPF.Core.Controls;
+using MicaWPF.Core.Enums;
+using MicaWPF.Core.Helpers;
+using MicaWPF.Core.Interop;
 using MicaWPF.Extensions;
 
 namespace MicaWPF.Controls;
@@ -11,7 +16,7 @@ namespace MicaWPF.Controls;
 /// <summary>
 /// A window where custom backdrops are enabled.
 /// </summary>
-public class MicaWindow : Window
+public class MicaWindow : Window, IMicaWindow
 {
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindow));
     public static readonly DependencyProperty UseAccentOnTitleBarAndBorderProperty = DependencyProperty.Register(nameof(UseAccentOnTitleBarAndBorder), typeof(bool), typeof(MicaWindow), new UIPropertyMetadata(AccentColorService.Current.IsTitleBarAndWindowsBorderColored));

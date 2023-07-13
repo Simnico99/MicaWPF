@@ -3,6 +3,9 @@
 // </copyright>
 
 using MicaWPF.Controls;
+using MicaWPF.Core.Enums;
+using MicaWPF.Core.Extensions;
+using MicaWPF.Core.Services;
 
 namespace MicaWPF.Extensions;
 

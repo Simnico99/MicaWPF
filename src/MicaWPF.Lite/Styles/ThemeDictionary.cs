@@ -1,0 +1,28 @@
+﻿// <copyright file="ThemeDictionary.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Windows.Markup;
+using MicaWPF.Core.Enums;
+
+namespace MicaWPF.Lite.Styles;
+
+[Localizability(LocalizationCategory.Ignore)]
+[Ambient]
+[UsableDuringInitialization(true)]
+public sealed class ThemeDictionary : ResourceDictionary
+{
+    public WindowsTheme Theme
+    {
+        set
+        {
+            var themeName = value switch
+            {
+                WindowsTheme.Dark => "MicaDark",
+                _ => "MicaLight",
+            };
+
+            Source = new($"pack://application:,,,/MicaWPF.Lite;component/Styles/Themes/{themeName}.xaml", UriKind.Absolute);
+        }
+    }
+}

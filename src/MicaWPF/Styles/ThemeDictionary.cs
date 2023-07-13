@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Windows.Markup;
+using MicaWPF.Core.Enums;
 
 namespace MicaWPF.Styles;
 

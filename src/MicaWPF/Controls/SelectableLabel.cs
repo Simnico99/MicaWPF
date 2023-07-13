@@ -3,7 +3,6 @@
 // </copyright>
 
 using System.ComponentModel;
-using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 

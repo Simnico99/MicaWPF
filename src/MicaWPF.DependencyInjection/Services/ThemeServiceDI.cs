@@ -3,9 +3,11 @@
 // </copyright>
 
 using System.Windows;
+using MicaWPF.Core.Enums;
+using MicaWPF.Core.Events;
+using MicaWPF.Core.Models;
+using MicaWPF.Core.Services;
 using MicaWPF.DependencyInjection.Options;
-using MicaWPF.Events;
-using MicaWPF.Models;
 using MicaWPF.Services;
 
 namespace MicaWPF.DependencyInjection.Services;
@@ -37,5 +39,10 @@ internal sealed class ThemeServiceDI : IThemeService
     public void EnableBackdrop(Window window, BackdropType micaType = BackdropType.Mica)
     {
         _themeService.EnableBackdrop(window, micaType);
+    }
+
+    public void SetAccentColorService(IAccentColorService accentColorService)
+    {
+        _themeService.SetAccentColorService(accentColorService);
     }
 }

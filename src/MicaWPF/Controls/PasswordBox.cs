@@ -3,7 +3,9 @@
 // </copyright>
 
 using System.ComponentModel;
-using MicaWPF.Symbols;
+using System.Windows.Controls;
+using MicaWPF.Core.Enums;
+using MicaWPF.Core.Symbols;
 
 namespace MicaWPF.Controls;
 

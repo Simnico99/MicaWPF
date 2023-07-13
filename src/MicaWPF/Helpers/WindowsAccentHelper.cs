@@ -2,6 +2,9 @@
 // This software is distributed under the MIT license and its code is free of use.
 // </copyright>
 
+using System.Runtime.InteropServices;
+using MicaWPF.Core.Interop;
+using MicaWPF.Core.Models;
 #if NET5_0_OR_GREATER
 using MicaWPFRuntimeComponent;
 #endif
