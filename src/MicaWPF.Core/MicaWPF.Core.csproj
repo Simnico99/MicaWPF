@@ -17,7 +17,7 @@
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
 		<Authors>Simnico99</Authors>
-		<Description>Core library of MicaWPF and MicaWPF.Core.Lite</Description>
+		<Description>Core library of MicaWPF and MicaWPF.Lite</Description>
 		<PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
