@@ -102,7 +102,7 @@ To get a local copy up and running follow these simple steps.
    ```
 2. If you have used the NuGet Command line restore de packages.
    ```sh
-   nuget restore MicaWPF.sln (or MicaWPF.Lite.sln)
+   nuget restore MicaWPF.sln
    ```
 
 #### Using source
@@ -112,7 +112,7 @@ To get a local copy up and running follow these simple steps.
    ```
 2. Restore NuGet packages.
    ```sh
-   nuget restore MicaWPF.sln (or MicaWPF.Lite.sln)
+   nuget restore MicaWPF.sln
    ```
 3. Add the project in your project reference.
 
