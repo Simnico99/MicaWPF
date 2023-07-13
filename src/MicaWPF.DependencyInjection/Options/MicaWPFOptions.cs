@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Windows.Media;
+using MicaWPF.Core.Enums;
 
 namespace MicaWPF.DependencyInjection.Options;
 

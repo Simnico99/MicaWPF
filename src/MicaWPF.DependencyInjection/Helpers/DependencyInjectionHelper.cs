@@ -2,9 +2,9 @@
 // This software is distributed under the MIT license and its code is free of use.
 // </copyright>
 
+using MicaWPF.Core.Services;
 using MicaWPF.DependencyInjection.Options;
 using MicaWPF.DependencyInjection.Services;
-using MicaWPF.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

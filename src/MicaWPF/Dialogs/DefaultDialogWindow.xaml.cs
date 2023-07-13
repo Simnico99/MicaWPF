@@ -3,6 +3,7 @@
 // </copyright>
 
 using MicaWPF.Controls;
+using MicaWPF.Core.Enums;
 
 namespace MicaWPF.Dialogs;
 

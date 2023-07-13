@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Windows.Controls.Primitives;
+using MicaWPF.Core.Models;
 
 namespace MicaWPF.Controls;
 

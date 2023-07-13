@@ -2,6 +2,8 @@
 // This software is distributed under the MIT license and its code is free of use.
 // </copyright>
 
+using MicaWPF.Core.Models;
+
 namespace MicaWPF.Controls;
 
 /// <summary>

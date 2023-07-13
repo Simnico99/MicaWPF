@@ -5,6 +5,8 @@
 using System.Threading;
 using System.Windows.Documents;
 using MicaWPF.Controls;
+using MicaWPF.Core.Enums;
+using MicaWPF.Core.Extensions;
 using MicaWPF.Extensions;
 
 namespace MicaWPF.Dialogs;

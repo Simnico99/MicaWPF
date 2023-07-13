@@ -3,7 +3,12 @@
 // </copyright>
 
 using MicaWPF.Controls;
-using MicaWPF.Events;
+using MicaWPF.Core.Enums;
+using MicaWPF.Core.Events;
+using MicaWPF.Core.Helpers;
+using MicaWPF.Core.Models;
+using MicaWPF.Core.Services;
+using MicaWPF.Helpers;
 
 namespace MicaWPF.Services;
 
@@ -22,6 +27,7 @@ public sealed class AccentColorService : IAccentColorService
         localCurrent.UpdateAccentsColorsFromWindows();
         localCurrent.IsTitleBarAndWindowsBorderColored = WindowsAccentHelper.AreTitleBarAndBordersAccented();
         localCurrent.IsTitleBarAndBorderAccentAware = true;
+        ThemeService.Current.SetAccentColorService(Current);
     }
 
     private AccentColorService()
@@ -185,6 +191,11 @@ public sealed class AccentColorService : IAccentColorService
                 {
                     Application.Current.Dispatcher.Invoke(() => SetAccentColorOnTitleBarAndBorders(WindowsAccentHelper.AreTitleBarAndBordersAccented()));
                     SetTitleBarAndBorderAccentAware(IsTitleBarAndBorderAccentAware);
+                }
+
+                if (AccentColorsUpdateFromWindows)
+                {
+                    Application.Current.Dispatcher.Invoke(() => UpdateAccentsColorsFromWindows());
                 }
 
                 break;

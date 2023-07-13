@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
+		<TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
+		<UseWPF>true</UseWPF>
+		<Copyright>Copyright (c) 2021 Simnico99</Copyright>
+		<RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>MicaWPF;WPF;Mica;WinUI;wpfui;UI;windows;controls;custom;modern;xaml;toolkit;color;dark;theme;Simnico99;net6;net5;net;fluent;acrylic</PackageTags>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<PackageProjectUrl>https://github.com/Simnico99/MicaWPF</PackageProjectUrl>
+		<NeutralLanguage>en</NeutralLanguage>
+		<LangVersion>10</LangVersion>
+		<Nullable>enable</Nullable>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageIcon>MicaWPFLogo - 128x128.png</PackageIcon>
+		<Authors>Simnico99</Authors>
+		<Description>A WPF Library that implement an easy way to use Mica material without WinUI. This is the Lite version it doesn't contains most of the controls, etc...</Description>
+		<PackageReadmeFile>ReadmeNuget.md</PackageReadmeFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<NoWarn>NETSDK1138</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\Logo\MicaWPFLogo - 128x128.png" Link="MicaWPFLogo - 128x128.png">
+	    <PackagePath>\</PackagePath>
+	    <Pack>True</Pack>
+	  </None>
+	  <None Include="..\..\ReadmeNuget.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.507">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\MicaWPF.Core\MicaWPF.Core.csproj" />
+	</ItemGroup>
+
+</Project>

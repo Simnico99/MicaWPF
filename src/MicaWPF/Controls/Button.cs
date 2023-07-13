@@ -3,7 +3,8 @@
 // </copyright>
 
 using System.ComponentModel;
-using MicaWPF.Symbols;
+using MicaWPF.Core.Controls;
+using MicaWPF.Core.Symbols;
 
 namespace MicaWPF.Controls;
 
@@ -11,7 +12,7 @@ namespace MicaWPF.Controls;
 /// A WinUI button based on <see cref="System.Windows.Controls.Button"/>.
 /// </summary>
 [ToolboxItem(true)]
-public class Button : System.Windows.Controls.Button
+public class Button : System.Windows.Controls.Button, IButton
 {
     public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(FluentSystemIcons.Regular), typeof(Button), new PropertyMetadata(FluentSystemIcons.Regular.Empty));
     public static readonly DependencyProperty IconFilledProperty = DependencyProperty.Register(nameof(IconFilled), typeof(bool), typeof(Button), new PropertyMetadata(false));
