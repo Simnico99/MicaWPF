@@ -98,11 +98,11 @@ To get a local copy up and running follow these simple steps.
 #### NuGet
 1. Download via the Nuget package manager or use the NuGet Command line.
    ```sh
-   Install-Package MicaWPF
+   Install-Package MicaWPF (or MicaWPF.Lite)
    ```
 2. If you have used the NuGet Command line restore de packages.
    ```sh
-   nuget restore MicaWPF.sln
+   nuget restore MicaWPF.sln (or MicaWPF.Lite.sln)
    ```
 
 #### Using source
@@ -112,7 +112,7 @@ To get a local copy up and running follow these simple steps.
    ```
 2. Restore NuGet packages.
    ```sh
-   nuget restore MicaWPF.sln
+   nuget restore MicaWPF.sln (or MicaWPF.Lite.sln)
    ```
 3. Add the project in your project reference.
 
@@ -120,8 +120,10 @@ To get a local copy up and running follow these simple steps.
 <!-- USAGE EXAMPLES -->
 ### Usage
 
+(Works for both MicaWPF and MicaWPF.Lite)
+
 1. To start Change the `<Window><Window/>` for `<controls:MicaWindow></controls:MicaWindow>`.
-2. Add the namespace by adding `xmlns:controls="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"`.
+2. Add the namespace by adding `xmlns:controls="clr-namespace:MicaWPF.Controls;assembly=MicaWPF"` (For MicaWPF.Lite `xmlns:controls="clr-namespace:MicaWPF.Lite.Controls;assembly=MicaWPF.Lite"`).
 
 Here is an exemple:
 ```XAML
@@ -151,7 +153,7 @@ Here is an exemple:
     x:Class="MicaWPF.DesktopApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mica="clr-namespace:MicaWPF.Styles;assembly=MicaWPF"
+    xmlns:mica="clr-namespace:MicaWPF.Styles;assembly=MicaWPF" <!-- For the lite version: clr-namespace:MicaWPF.Lite.Styles;assembly=MicaWPF.Lite -->
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -164,6 +166,7 @@ Here is an exemple:
 </Application>
 ```
 
+(Does not apply to MicaWPF.Lite)
 Now get into your Window code:
 1. Add the namespace `using MicaWPF.Controls;`.
 2. Change the Window inherited class to `MicaWindow`.
@@ -187,9 +190,16 @@ public partial class MainWindow : MicaWindow
 #### Note For .Net5.0, .Net6.0 and .Net7.0
 You will need to change your CSPROJ to include the windows build after the netx.0-windows.
 Here is an exemple using .Net7.0 just change the net7 for net5 or net6 for the other versions.
+
+MicaWPF:
 ```Xaml
 <TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
 <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
+```
+
+MicaWPF.Lite:
+```Xaml
+<TargetFramework>net7.0-windows</TargetFramework>
 ```
 
 _For more examples, please refer to the [Documentation](https://github.com/Simnico99/MicaWPF/wiki)_
@@ -216,6 +226,11 @@ Contributions are what make the open source community such an amazing place to b
 
 ## FAQ
 
+### Q: What is the difference between MicaWPF and MicaWPF.Lite?
+A: The MicaWPF.Lite Nuget package only contains the MicaWindow code<br/>
+and a trim down accent color detection so it takes way less space.<br />
+Take note that accent colors are not as accurate on the light version.
+
 ### Q: The title bar buttons are weird, how do I fix?
 A: Apply TitleBarType="WinUI" like this:
 ```
@@ -225,6 +240,7 @@ TitleBarType="WinUI"
 [other code...]
 </mica:MicaWindow>
 ```
+
 <!-- LICENSE -->
 ## License
 
