@@ -16,3 +16,21 @@ steps:
     packagesToPush: '**/+(MicaWPF.DependencyInjection)*.nupkg;!**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NugetConnection'
+
+- task: NuGetCommand@2
+  displayName: Push to NuGet (MicaWPF.Core)
+  condition: and(succeeded(), eq(variables['buildTag'], true))
+  inputs:
+    command: 'push'
+    packagesToPush: '**/+(MicaWPF.Core)*.nupkg;!**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NugetConnection'
+
+- task: NuGetCommand@2
+  displayName: Push to NuGet (MicaWPF.Lite)
+  condition: and(succeeded(), eq(variables['buildTag'], true))
+  inputs:
+    command: 'push'
+    packagesToPush: '**/+(MicaWPF.Lite)*.nupkg;!**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NugetConnection'
