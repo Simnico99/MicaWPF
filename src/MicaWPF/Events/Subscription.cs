@@ -1,4 +1,9 @@
-﻿namespace MicaWPF.Events;
+﻿// <copyright file="Subscription.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Events;
+
 internal sealed class Subscription : ISubscription
 {
     private readonly Action _removeMethod;

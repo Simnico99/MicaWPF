@@ -1,29 +1,33 @@
-﻿using MicaWPF.Events;
+﻿// <copyright file="IThemeService.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using MicaWPF.Events;
 
 namespace MicaWPF.Services;
 
-///<summary>
-///Service that manages the theme of the application.
-///</summary>
+/// <summary>
+/// Service that manages the theme of the application.
+/// </summary>
 public interface IThemeService
 {
     /// <summary>
-    /// Contains information about the current theme.
+    /// Gets contains information about the current theme.
     /// </summary>
     WindowsTheme CurrentTheme { get; }
 
     /// <summary>
-    /// Indicates if the service is aware of windows theme changes.
+    /// Gets a value indicating whether indicates if the service is aware of windows theme changes.
     /// </summary>
     bool IsThemeAware { get; }
 
     /// <summary>
-    /// List of windows that have Mica enabled.
+    /// Gets list of windows that have Mica enabled.
     /// </summary>
     List<BackdropEnabledWindow> BackdropEnabledWindows { get; }
 
     /// <summary>
-    /// Event that is raised when the theme is changed.
+    /// Gets event that is raised when the theme is changed.
     /// </summary>
     IWeakEvent<WindowsTheme> ThemeChanged { get; }
 

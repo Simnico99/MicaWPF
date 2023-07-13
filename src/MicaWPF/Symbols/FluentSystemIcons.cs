@@ -1,4 +1,8 @@
-﻿namespace MicaWPF.Symbols;
+﻿// <copyright file="FluentSystemIcons.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Symbols;
 
 /// <summary>
 /// Icons used by WinUI.
@@ -5645,7 +5649,7 @@ public class FluentSystemIcons
         CalendarPhone20 = 0xFFFC,
         CalendarSearch20 = 0xFFFD,
         CalendarStar16 = 0xFFFE,
-        ChatArrowBack16 = 0xFFFF
+        ChatArrowBack16 = 0xFFFF,
     }
 
     /// <summary>
@@ -11288,6 +11292,6 @@ public class FluentSystemIcons
         ChatArrowBack20 = 0xFFFC,
         ChatArrowDoubleBack16 = 0xFFFD,
         ChatArrowDoubleBack20 = 0xFFFE,
-        Check24 = 0xFFFF
+        Check24 = 0xFFFF,
     }
 }

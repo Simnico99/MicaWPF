@@ -1,4 +1,9 @@
-﻿namespace MicaWPF.Helpers;
+﻿// <copyright file="MathHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Helpers;
+
 internal static class MathHelper
 {
     public static bool AreClose(double value1, double value2)

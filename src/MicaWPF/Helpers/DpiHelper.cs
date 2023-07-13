@@ -1,4 +1,8 @@
-﻿namespace MicaWPF.Helpers;
+﻿// <copyright file="DpiHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Helpers;
 
 /// <summary>
 /// An helper class to help with DPI.
@@ -38,32 +42,32 @@ public static class DpiHelper
     }
 
     /// <summary>
-    /// The current device.
+    /// Gets the current device.
     /// </summary>
     public static MatrixTransform TransformFromDevice { get; }
 
     /// <summary>
-    /// The destination device.
+    /// Gets the destination device.
     /// </summary>
     public static MatrixTransform TransformToDevice { get; }
 
     /// <summary>
-    /// The device DPI X value.
+    /// Gets the device DPI X value.
     /// </summary>
     public static double DeviceDpiX { get; }
 
     /// <summary>
-    /// The device DPI Y value.
+    /// Gets the device DPI Y value.
     /// </summary>
     public static double DeviceDpiY { get; }
 
     /// <summary>
-    /// Logical value to Unit Scaling X.
+    /// Gets logical value to Unit Scaling X.
     /// </summary>
     public static double LogicalToDeviceUnitsScalingFactorX => TransformToDevice.Matrix.M11;
 
     /// <summary>
-    /// Logical value to Unit Scaling Y.
+    /// Gets logical value to Unit Scaling Y.
     /// </summary>
     public static double LogicalToDeviceUnitsScalingFactorY => TransformToDevice.Matrix.M22;
 
@@ -98,6 +102,7 @@ public static class DpiHelper
         result.Transform(TransformToDevice.Matrix);
         return result;
     }
+
     /// <summary>
     /// Logical size to pixel.
     /// </summary>

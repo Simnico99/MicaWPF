@@ -1,10 +1,14 @@
-﻿using MicaWPF.Symbols;
+﻿// <copyright file="Button.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
 using System.ComponentModel;
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 
 /// <summary>
-/// A WinUI button based on <see cref="System.Windows.Controls.Button"/>
+/// A WinUI button based on <see cref="System.Windows.Controls.Button"/>.
 /// </summary>
 [ToolboxItem(true)]
 public class Button : System.Windows.Controls.Button
@@ -14,7 +18,7 @@ public class Button : System.Windows.Controls.Button
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(Button));
 
     /// <summary>
-    /// An icon to show in the button.
+    /// Gets or sets an icon to show in the button.
     /// </summary>
     public FluentSystemIcons.Regular Icon
     {
@@ -23,7 +27,7 @@ public class Button : System.Windows.Controls.Button
     }
 
     /// <summary>
-    /// Is the icon filled or not.
+    /// Gets or sets a value indicating whether is the icon filled or not.
     /// </summary>
     public bool IconFilled
     {
@@ -32,7 +36,7 @@ public class Button : System.Windows.Controls.Button
     }
 
     /// <summary>
-    /// The CornerRadius of the button.
+    /// Gets or sets the CornerRadius of the button.
     /// </summary>
     public CornerRadius CornerRadius
     {

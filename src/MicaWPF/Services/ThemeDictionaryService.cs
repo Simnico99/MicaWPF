@@ -1,36 +1,41 @@
-﻿using System.ComponentModel;
+﻿// <copyright file="ThemeDictionaryService.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace MicaWPF.Services;
 
-///<summary>
-///Service that manages the theme dictionnaries from MicaWPF.
-///</summary>
+/// <summary>
+/// Service that manages the theme dictionnaries from MicaWPF.
+/// </summary>
 public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionaryService
 {
-    ///<summary>
-    ///Gets the current instance of <see cref="ThemeDictionaryService"/> but as the interface <see cref="IThemeDictionaryService"/>.
-    ///</summary>
-    public static IThemeDictionaryService Current { get; } = new ThemeDictionaryService();
-
     private static Uri? _currentThemeSource;
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     private ThemeDictionaryService()
     {
     }
 
-    private static List<ResourceDictionary?> GetThemeResourceDictionary()
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    /// <summary>
+    /// Gets the current instance of <see cref="ThemeDictionaryService"/> but as the interface <see cref="IThemeDictionaryService"/>.
+    /// </summary>
+    public static IThemeDictionaryService Current { get; } = new ThemeDictionaryService();
+
+    public Uri? ThemeSource
     {
-        return (from dictionary in Application.Current.Resources.MergedDictionaries
-                where dictionary.Contains("MicaWPF.Colors.ApplicationBackgroundColor")
-                select dictionary).ToList();
+        get => _currentThemeSource;
+        set
+        {
+            if (value != null)
+            {
+                SetThemeSource(value);
+                OnPropertyChanged();
+            }
+        }
     }
 
     public void SetThemeSource(Uri source)
@@ -46,7 +51,7 @@ public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDicti
 
             dictionaries.Add(new ResourceDictionary
             {
-                Source = source
+                Source = source,
             });
 
             foreach (var oldTheme in oldThemes)
@@ -65,16 +70,15 @@ public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDicti
         }
     }
 
-    public Uri? ThemeSource
+    private static List<ResourceDictionary?> GetThemeResourceDictionary()
     {
-        get => _currentThemeSource;
-        set
-        {
-            if (value != null)
-            {
-                SetThemeSource(value);
-                OnPropertyChanged();
-            }
-        }
+        return (from dictionary in Application.Current.Resources.MergedDictionaries
+                where dictionary.Contains("MicaWPF.Colors.ApplicationBackgroundColor")
+                select dictionary).ToList();
+    }
+
+    private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

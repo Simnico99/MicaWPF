@@ -1,6 +1,11 @@
-﻿using MicaWPF.Extensions;
+﻿// <copyright file="WindowHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using MicaWPF.Extensions;
 
 namespace MicaWPF.Helpers;
+
 public static class WindowHelper
 {
     /// <summary>

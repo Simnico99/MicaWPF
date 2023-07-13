@@ -1,9 +1,13 @@
-﻿using System.Windows.Data;
+﻿// <copyright file="ProgressThicknessConverter.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Windows.Data;
 
 namespace MicaWPF.Converters;
 
 /// <summary>
-/// Converts the current double to a thickness value for the <see cref="MicaWPF.Controls.ProgressRing"/>.
+/// Converts the current double to a thickness value for the <see cref="Controls.ProgressRing"/>.
 /// </summary>
 public sealed class ProgressThicknessConverter : IValueConverter
 {

@@ -1,4 +1,8 @@
-﻿using System.Windows.Markup;
+﻿// <copyright file="ControlsDictionary.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Windows.Markup;
 
 namespace MicaWPF.Styles;
 

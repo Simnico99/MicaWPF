@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿// <copyright file="ProgressRing.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.ComponentModel;
 
 namespace MicaWPF.Controls;
 
@@ -8,42 +12,20 @@ namespace MicaWPF.Controls;
 [ToolboxItem(true)]
 public class ProgressRing : Control
 {
-    public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress),
-        typeof(double), typeof(ProgressRing),
-        new PropertyMetadata(50d, PropertyChangedCallback));
+    public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress), typeof(double), typeof(ProgressRing), new PropertyMetadata(50d, PropertyChangedCallback));
 
-    public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register(
-        nameof(IsIndeterminate),
-        typeof(bool), typeof(ProgressRing),
-        new PropertyMetadata(false));
+    public static readonly DependencyProperty IsIndeterminateProperty = DependencyProperty.Register(nameof(IsIndeterminate), typeof(bool), typeof(ProgressRing), new PropertyMetadata(false));
 
-    public static readonly DependencyProperty EndAngleProperty = DependencyProperty.Register(nameof(EndAngle),
-        typeof(double), typeof(ProgressRing),
-        new PropertyMetadata(180.0d));
+    public static readonly DependencyProperty EndAngleProperty = DependencyProperty.Register(nameof(EndAngle), typeof(double), typeof(ProgressRing), new PropertyMetadata(180.0d));
 
-    public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(
-        nameof(IndeterminateAngle),
-        typeof(double), typeof(ProgressRing),
-        new PropertyMetadata(180.0d));
+    public static readonly DependencyProperty IndeterminateAngleProperty = DependencyProperty.Register(nameof(IndeterminateAngle), typeof(double), typeof(ProgressRing), new PropertyMetadata(180.0d));
 
-    public static readonly DependencyProperty CoverRingStrokeProperty =
-        DependencyProperty.RegisterAttached(
-            nameof(CoverRingStroke),
-            typeof(Brush),
-            typeof(ProgressRing),
-            new FrameworkPropertyMetadata(
-                Brushes.Black,
-                FrameworkPropertyMetadataOptions.AffectsRender |
-                FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender |
-                FrameworkPropertyMetadataOptions.Inherits));
+    public static readonly DependencyProperty CoverRingStrokeProperty = DependencyProperty.RegisterAttached(nameof(CoverRingStroke), typeof(Brush), typeof(ProgressRing), new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender | FrameworkPropertyMetadataOptions.Inherits));
 
-    public static readonly DependencyProperty CoverRingVisibilityProperty = DependencyProperty.Register(
-        nameof(CoverRingVisibility),
-        typeof(System.Windows.Visibility), typeof(ProgressRing),
-        new PropertyMetadata(System.Windows.Visibility.Visible));
+    public static readonly DependencyProperty CoverRingVisibilityProperty = DependencyProperty.Register(nameof(CoverRingVisibility), typeof(Visibility), typeof(ProgressRing), new PropertyMetadata(Visibility.Visible));
 
     /// <summary>
-    /// The current progress.
+    /// Gets or sets the current progress.
     /// </summary>
     public double Progress
     {
@@ -52,7 +34,7 @@ public class ProgressRing : Control
     }
 
     /// <summary>
-    /// Is inderteminate.
+    /// Gets or sets a value indicating whether is inderteminate.
     /// </summary>
     public bool IsIndeterminate
     {
@@ -61,7 +43,7 @@ public class ProgressRing : Control
     }
 
     /// <summary>
-    /// The end angle.
+    /// Gets or sets the end angle.
     /// </summary>
     public double EndAngle
     {
@@ -70,7 +52,7 @@ public class ProgressRing : Control
     }
 
     /// <summary>
-    /// The angle when using the inderteminate progress.
+    /// Gets the angle when using the inderteminate progress.
     /// </summary>
     public double IndeterminateAngle
     {
@@ -79,7 +61,7 @@ public class ProgressRing : Control
     }
 
     /// <summary>
-    /// The background of the ring.
+    /// Gets the background of the ring.
     /// </summary>
     public Brush CoverRingStroke
     {
@@ -88,12 +70,22 @@ public class ProgressRing : Control
     }
 
     /// <summary>
-    /// Is the background ring visible.
+    /// Gets is the background ring visible.
     /// </summary>
-    public System.Windows.Visibility CoverRingVisibility
+    public Visibility CoverRingVisibility
     {
-        get => (System.Windows.Visibility)GetValue(CoverRingVisibilityProperty);
+        get => (Visibility)GetValue(CoverRingVisibilityProperty);
         internal set => SetValue(CoverRingVisibilityProperty, value);
+    }
+
+    protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not ProgressRing control)
+        {
+            return;
+        }
+
+        control.UpdateProgressAngle();
     }
 
     protected void UpdateProgressAngle()
@@ -118,15 +110,5 @@ public class ProgressRing : Control
         }
 
         EndAngle = endAngle;
-    }
-
-    protected static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is not ProgressRing control)
-        {
-            return;
-        }
-
-        control.UpdateProgressAngle();
     }
 }

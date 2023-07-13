@@ -1,24 +1,18 @@
-﻿using MicaWPF.Events;
+﻿// <copyright file="ThemeService.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using MicaWPF.Events;
 
 namespace MicaWPF.Services;
 
-///<summary>
-///Service that manages the theme of the application.
-///</summary>
+/// <summary>
+/// Service that manages the theme of the application.
+/// </summary>
 public sealed class ThemeService : IThemeService
 {
-    ///<summary>
-    ///Gets the current instance of the <see cref="ThemeService"/> class but as the interface <see cref="IThemeService"/>.
-    ///</summary>
-    public static IThemeService Current { get; }
-
     private WindowsTheme _currentTheme;
     private bool _isCheckingTheme;
-
-    public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
-    public List<BackdropEnabledWindow> BackdropEnabledWindows { get; private set; } = new List<BackdropEnabledWindow>();
-    public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
-    public bool IsThemeAware { get; private set; }
 
     static ThemeService()
     {
@@ -26,7 +20,22 @@ public sealed class ThemeService : IThemeService
         _ = Current.ChangeTheme(WindowsTheme.Auto);
     }
 
-    private ThemeService() { }
+    private ThemeService()
+    {
+    }
+
+    /// <summary>
+    /// Gets the current instance of the <see cref="ThemeService"/> class but as the interface <see cref="IThemeService"/>.
+    /// </summary>
+    public static IThemeService Current { get; }
+
+    public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
+
+    public List<BackdropEnabledWindow> BackdropEnabledWindows { get; private set; } = new List<BackdropEnabledWindow>();
+
+    public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
+
+    public bool IsThemeAware { get; private set; }
 
     public WindowsTheme ChangeTheme(WindowsTheme windowsTheme = WindowsTheme.Auto)
     {
@@ -42,7 +51,8 @@ public sealed class ThemeService : IThemeService
             foreach (var backdropEnabledWindow in CollectionsMarshal.AsSpan(BackdropEnabledWindows))
             {
                 SetWindowBackdrop(backdropEnabledWindow.Window, backdropEnabledWindow.BackdropType);
-                //Force the title bar to refresh.
+
+                // Force the title bar to refresh.
                 var style = backdropEnabledWindow.Window.WindowStyle;
                 backdropEnabledWindow.Window.WindowStyle = WindowStyle.None;
                 backdropEnabledWindow.Window.WindowStyle = style;
@@ -51,7 +61,8 @@ public sealed class ThemeService : IThemeService
             foreach (var backdropEnabledWindow in BackdropEnabledWindows)
             {
                 SetWindowBackdrop(backdropEnabledWindow.Window, backdropEnabledWindow.BackdropType);
-                //Force the title bar to refresh.
+
+                // Force the title bar to refresh.
                 var style = backdropEnabledWindow.Window.WindowStyle;
                 backdropEnabledWindow.Window.WindowStyle = WindowStyle.None;
                 backdropEnabledWindow.Window.WindowStyle = style;

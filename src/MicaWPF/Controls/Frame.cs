@@ -1,5 +1,9 @@
-﻿using MicaWPF.Extensions;
+﻿// <copyright file="Frame.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
 using System.ComponentModel;
+using MicaWPF.Extensions;
 
 namespace MicaWPF.Controls;
 
@@ -14,6 +18,7 @@ public class Frame : System.Windows.Controls.Frame
         FocusVisualStyle = null;
         Focusable = false;
     }
+
     protected override void OnContentChanged(object oldContent, object newContent)
     {
         if (newContent is DependencyObject dependencyObject)

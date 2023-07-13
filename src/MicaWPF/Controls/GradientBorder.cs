@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿// <copyright file="GradientBorder.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.ComponentModel;
 
 namespace MicaWPF.Controls;
 

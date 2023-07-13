@@ -1,4 +1,8 @@
-﻿#if NET5_0_OR_GREATER
+﻿// <copyright file="WindowsAccentHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+#if NET5_0_OR_GREATER
 using MicaWPFRuntimeComponent;
 #endif
 #if NETFRAMEWORK || NETCOREAPP3_1
@@ -87,7 +91,8 @@ public static class WindowsAccentHelper
                 }
             }
 
-            return new(tempColorAccent,
+            return new(
+                tempColorAccent,
                 tempColorAccentLight1,
                 tempColorAccentLight2,
                 tempColorAccentLight3,
@@ -97,7 +102,8 @@ public static class WindowsAccentHelper
         }
 #endif
 #if NETFRAMEWORK || NETCOREAPP3_1
-            return new AccentColors(UIColorConverter(UIColorType.Accent),
+            return new AccentColors(
+                UIColorConverter(UIColorType.Accent),
                 UIColorConverter(UIColorType.AccentLight1),
                 UIColorConverter(UIColorType.AccentLight2),
                 UIColorConverter(UIColorType.AccentLight3),
@@ -117,7 +123,8 @@ public static class WindowsAccentHelper
     {
         var opaque = true;
 
-        return Color.FromArgb((byte)(opaque ? 255 : (color >> 24) & 0xff),
+        return Color.FromArgb(
+            (byte)(opaque ? 255 : (color >> 24) & 0xff),
             (byte)((color >> 16) & 0xff),
             (byte)((color >> 8) & 0xff),
             (byte)((byte)color & 0xff));

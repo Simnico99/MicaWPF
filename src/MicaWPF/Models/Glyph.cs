@@ -1,4 +1,8 @@
-﻿using MicaWPF.Symbols;
+﻿// <copyright file="Glyph.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Models;
 

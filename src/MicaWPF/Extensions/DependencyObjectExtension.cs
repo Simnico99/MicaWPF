@@ -1,4 +1,8 @@
-﻿namespace MicaWPF.Extensions;
+﻿// <copyright file="DependencyObjectExtension.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Extensions;
 
 /// <summary>
 /// Extensions for <see cref="DependencyObject"/>.
@@ -6,11 +10,11 @@
 public static class DependencyObjectExtension
 {
     /// <summary>
-    /// List of type types to refresh on theme change.
+    /// Gets or sets list of type types to refresh on theme change.
     /// </summary>
     private static List<Type> ObjectsThatNeedsRefresh { get; set; } = new()
     {
-        typeof(Controls.Button)
+        typeof(Controls.Button),
     };
 
     /// <summary>
@@ -19,7 +23,8 @@ public static class DependencyObjectExtension
     /// <returns>
     ///     A <see cref="IEnumerable{T}" /> of the type of object specified.
     /// </returns>
-    public static IEnumerable<T> FindVisualChildren<T>(this DependencyObject depObj) where T : DependencyObject
+    public static IEnumerable<T> FindVisualChildren<T>(this DependencyObject depObj)
+        where T : DependencyObject
     {
         if (depObj == null)
         {
@@ -48,7 +53,8 @@ public static class DependencyObjectExtension
     /// <returns>
     ///     A <see cref="IEnumerable{T}" /> of the type of object specified.
     /// </returns>
-    public static IEnumerable<T> FindLogicalChildren<T>(this DependencyObject depObj) where T : DependencyObject
+    public static IEnumerable<T> FindLogicalChildren<T>(this DependencyObject depObj)
+        where T : DependencyObject
     {
         if (depObj != null)
         {

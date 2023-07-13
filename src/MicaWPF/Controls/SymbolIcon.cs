@@ -1,7 +1,11 @@
-﻿using MicaWPF.Extensions;
-using MicaWPF.Symbols;
+﻿// <copyright file="SymbolIcon.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
 using System.ComponentModel;
 using System.Text;
+using MicaWPF.Extensions;
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 
@@ -16,7 +20,7 @@ public class SymbolIcon : Label
     public static readonly DependencyProperty FilledProperty = DependencyProperty.Register(nameof(Filled), typeof(bool), typeof(SymbolIcon), new PropertyMetadata(false, OnGlyphChanged));
 
     /// <summary>
-    /// The current Symbol.
+    /// Gets or sets the current Symbol.
     /// </summary>
     public FluentSystemIcons.Regular Symbol
     {
@@ -25,12 +29,12 @@ public class SymbolIcon : Label
     }
 
     /// <summary>
-    /// The current symbole as a <see cref="string"/>.
+    /// Gets the current symbole as a <see cref="string"/>.
     /// </summary>
     public string RawSymbol => (string)GetValue(RawSymbolProperty);
 
     /// <summary>
-    /// Is it a filled icon or not.
+    /// Gets or sets a value indicating whether is it a filled icon or not.
     /// </summary>
     public bool Filled
     {

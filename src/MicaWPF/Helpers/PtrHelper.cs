@@ -1,4 +1,8 @@
-﻿using System.Runtime.CompilerServices;
+﻿// <copyright file="PtrHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Runtime.CompilerServices;
 
 namespace MicaWPF.Helpers;
 

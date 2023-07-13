@@ -1,4 +1,8 @@
-﻿namespace MicaWPF;
+﻿// <copyright file="Enums.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF;
 
 /// <summary>
 /// Results of a Content Dialog.
@@ -8,7 +12,7 @@ public enum ContentDialogResult
     PrimaryButton,
     SecondaryButton,
     TertiaryButton,
-    Empty
+    Empty,
 }
 
 /// <summary>
@@ -18,7 +22,7 @@ public enum ContentDialogButton
 {
     Primary,
     Secondary,
-    Close
+    Close,
 }
 
 /// <summary>
@@ -27,7 +31,7 @@ public enum ContentDialogButton
 public enum RevealMode
 {
     Hidden,
-    Visible
+    Visible,
 }
 
 /// <summary>
@@ -36,7 +40,7 @@ public enum RevealMode
 public enum ElementPosition
 {
     Left,
-    Right
+    Right,
 }
 
 /// <summary>
@@ -46,7 +50,7 @@ public enum WindowsTheme
 {
     Light,
     Dark,
-    Auto
+    Auto,
 }
 
 /// <summary>
@@ -57,7 +61,7 @@ public enum BackdropType
     None = 1,
     Mica = 2,
     Acrylic = 3,
-    Tabbed = 4
+    Tabbed = 4,
 }
 
 /// <summary>
@@ -68,7 +72,7 @@ public enum AccentBrushType
     Primary,
     Secondary,
     Tertiary,
-    Quaternary
+    Quaternary,
 }
 
 /// <summary>
@@ -77,5 +81,5 @@ public enum AccentBrushType
 public enum TitleBarType
 {
     Win32,
-    WinUI
+    WinUI,
 }

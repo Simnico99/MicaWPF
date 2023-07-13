@@ -1,5 +1,9 @@
-﻿using MicaWPF.Symbols;
+﻿// <copyright file="SelectableLabel.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
 using System.ComponentModel;
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 

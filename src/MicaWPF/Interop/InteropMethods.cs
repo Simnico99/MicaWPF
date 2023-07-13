@@ -1,17 +1,16 @@
-﻿using System.Security;
+﻿// <copyright file="InteropMethods.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Security;
 using static MicaWPF.Interop.InteropValues;
 
 namespace MicaWPF.Interop;
 
 #if NET7_0_OR_GREATER
+[System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:Partial elements should be documented", Justification = "Interops")]
 internal sealed partial class InteropMethods
 {
-    [SecurityCritical]
-    [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "SYSLIB1054:Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time", Justification = "Cannot marshal OSVERSIONINFOEX")]
-    internal static extern int RtlGetVersion(out OSVERSIONINFOEX versionInfo);
-
     [DllImport(ExternDll.DwmApi, EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "SYSLIB1054:Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time", Justification = "Cannot marshal DWMCOLORIZATIONPARAMS")]
@@ -22,18 +21,6 @@ internal sealed partial class InteropMethods
     [DllImport(ExternDll.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern int GetDeviceCaps(HandleRef hDC, int nIndex);
-
-    [LibraryImport(ExternDll.User32, EntryPoint = "GetWindowLongPtrA")]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    private static partial int GetWindowLong(nint hWnd, int nIndex);
-
-    [LibraryImport(ExternDll.User32, EntryPoint = "SetWindowLongPtrA")]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    private static partial int SetWindowLong(nint hWnd, int nIndex, int dwNewLong);
-
-    [LibraryImport(ExternDll.DwmApi)]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    private static partial int DwmSetWindowAttribute(nint hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
 
     [LibraryImport(ExternDll.DwmApi)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
@@ -80,21 +67,28 @@ internal sealed partial class InteropMethods
         var preference = (int)cornerPrefrence;
         return DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
     }
+
+    [SecurityCritical]
+    [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "SYSLIB1054:Use 'LibraryImportAttribute' instead of 'DllImportAttribute' to generate P/Invoke marshalling code at compile time", Justification = "Cannot marshal OSVERSIONINFOEX")]
+    internal static extern int RtlGetVersion(out OSVERSIONINFOEX versionInfo);
+
+    [LibraryImport(ExternDll.User32, EntryPoint = "GetWindowLongPtrA")]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static partial int GetWindowLong(nint hWnd, int nIndex);
+
+    [LibraryImport(ExternDll.User32, EntryPoint = "SetWindowLongPtrA")]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static partial int SetWindowLong(nint hWnd, int nIndex, int dwNewLong);
+
+    [LibraryImport(ExternDll.DwmApi)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static partial int DwmSetWindowAttribute(nint hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
 }
 #else
 internal sealed class InteropMethods
 {
-    [DllImport(ExternDll.User32)]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    private static extern int GetWindowLong(nint hWnd, int nIndex);
-    [DllImport(ExternDll.User32)]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    private static extern int SetWindowLong(nint hWnd, int nIndex, int dwNewLong);
-
-    [DllImport(ExternDll.DwmApi)]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    private static extern int DwmSetWindowAttribute(nint hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
-
     [DllImport(ExternDll.DwmApi)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern int DwmExtendFrameIntoClientArea(nint hwnd, ref MARGINS pMarInset);
@@ -102,11 +96,6 @@ internal sealed class InteropMethods
     [DllImport(ExternDll.DwmApi, EntryPoint = "#127", PreserveSig = false, CharSet = CharSet.Unicode)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern void DwmGetColorizationParameters(out DWMCOLORIZATIONPARAMS dwParameters);
-
-    [SecurityCritical]
-    [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
-    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    internal static extern int RtlGetVersion(out OSVERSIONINFOEX versionInfo);
 
     [DllImport(ExternDll.User32)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
@@ -154,5 +143,22 @@ internal sealed class InteropMethods
         var preference = (int)cornerPrefrence;
         return DwmSetWindowAttribute(hWnd, attribute, ref preference, sizeof(uint));
     }
+
+    [SecurityCritical]
+    [DllImport(ExternDll.NTdll, SetLastError = true, CharSet = CharSet.Unicode)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    internal static extern int RtlGetVersion(out OSVERSIONINFOEX versionInfo);
+
+    [DllImport(ExternDll.User32)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static extern int GetWindowLong(nint hWnd, int nIndex);
+
+    [DllImport(ExternDll.User32)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static extern int SetWindowLong(nint hWnd, int nIndex, int dwNewLong);
+
+    [DllImport(ExternDll.DwmApi)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static extern int DwmSetWindowAttribute(nint hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
 }
 #endif
