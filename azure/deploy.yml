@@ -1,15 +1,5 @@
 steps:
 - task: NuGetCommand@2
-  displayName: Push to Artifacts All
-  condition: and(succeeded(), eq(variables['buildTag'], false))
-  inputs:
-    command: 'push'
-    nuGetFeedType: 'internal'
-    packagesToPush: '**/*.nupkg'
-    publishVstsFeed: '54a199f8-9bc3-479f-affc-91a4138f5c0e'
-    allowPackageConflicts: true
-
-- task: NuGetCommand@2
   displayName: Push to NuGet (MicaWPF)
   condition: and(succeeded(), eq(variables['buildTag'], true))
   inputs:
