@@ -1,4 +1,8 @@
-﻿using System.Windows.Markup;
+﻿// <copyright file="ThemeDictionary.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Windows.Markup;
 
 namespace MicaWPF.Styles;
 
@@ -14,11 +18,11 @@ public sealed class ThemeDictionary : ResourceDictionary
             var themeName = value switch
             {
                 WindowsTheme.Dark => "MicaDark",
-                _ => "MicaLight"
+                _ => "MicaLight",
             };
 
-            //MergedDictionaries.Add(new ResourceDictionary() { Source = new($"pack://application:,,,/MicaWPF;component/Styles/Themes/{themeName}.xaml", UriKind.Absolute) });
+            // MergedDictionaries.Add(new ResourceDictionary() { Source = new($"pack://application:,,,/MicaWPF;component/Styles/Themes/{themeName}.xaml", UriKind.Absolute) });
             Source = new($"pack://application:,,,/MicaWPF;component/Styles/Themes/{themeName}.xaml", UriKind.Absolute);
-        } 
+        }
     }
 }

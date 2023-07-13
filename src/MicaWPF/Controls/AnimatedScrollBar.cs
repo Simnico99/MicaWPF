@@ -1,4 +1,8 @@
-﻿using System.Windows.Controls.Primitives;
+﻿// <copyright file="AnimatedScrollBar.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Windows.Controls.Primitives;
 
 namespace MicaWPF.Controls;
 
@@ -7,24 +11,20 @@ namespace MicaWPF.Controls;
 /// </summary>
 public class AnimatedScrollBar : ScrollBar
 {
+    public static readonly DependencyProperty IsScrollingProperty = DependencyProperty.Register(nameof(IsScrolling), typeof(bool), typeof(AnimatedScrollBar), new PropertyMetadata(false, IsScrollingProperty_OnChange));
+
+    public static readonly DependencyProperty IsInteractedProperty = DependencyProperty.Register(nameof(IsInteracted), typeof(bool), typeof(AnimatedScrollBar), new PropertyMetadata(false, IsInteractedProperty_OnChange));
+
+    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout), typeof(int), typeof(AnimatedScrollBar), new PropertyMetadata(1000));
+
+    private readonly EventIdentifier _interactiveIdentifier = new();
+
     private bool _isScrolling = false;
 
     private bool _isInteracted = false;
 
-    private readonly EventIdentifier _interactiveIdentifier = new();
-
-    public static readonly DependencyProperty IsScrollingProperty = DependencyProperty.Register(nameof(IsScrolling),
-        typeof(bool), typeof(AnimatedScrollBar), new PropertyMetadata(false, IsScrollingProperty_OnChange));
-
-    public static readonly DependencyProperty IsInteractedProperty = DependencyProperty.Register(
-        nameof(IsInteracted),
-        typeof(bool), typeof(AnimatedScrollBar), new PropertyMetadata(false, IsInteractedProperty_OnChange));
-
-    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
-        typeof(int), typeof(AnimatedScrollBar), new PropertyMetadata(1000));
-
     /// <summary>
-    /// Is currently scrolling.
+    /// Gets or sets a value indicating whether is currently scrolling.
     /// </summary>
     public bool IsScrolling
     {
@@ -33,7 +33,7 @@ public class AnimatedScrollBar : ScrollBar
     }
 
     /// <summary>
-    /// Has been interacted with.
+    /// Gets or sets a value indicating whether has been interacted with.
     /// </summary>
     public bool IsInteracted
     {
@@ -48,7 +48,7 @@ public class AnimatedScrollBar : ScrollBar
     }
 
     /// <summary>
-    /// Has timed out.
+    /// Gets or sets has timed out.
     /// </summary>
     public int Timeout
     {
@@ -68,29 +68,6 @@ public class AnimatedScrollBar : ScrollBar
         base.OnMouseLeave(e);
 
         _ = UpdateScroll().GetAwaiter();
-    }
-
-    private async Task UpdateScroll()
-    {
-        var currentEvent = _interactiveIdentifier.GetNext();
-        var shouldScroll = IsMouseOver || _isScrolling;
-
-        if (shouldScroll == _isInteracted)
-        {
-            return;
-        }
-
-        if (!shouldScroll)
-        {
-            await Task.Delay(Timeout);
-        }
-
-        if (!_interactiveIdentifier.IsEqual(currentEvent))
-        {
-            return;
-        }
-
-        IsInteracted = shouldScroll;
     }
 
     private static void IsScrollingProperty_OnChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -125,5 +102,28 @@ public class AnimatedScrollBar : ScrollBar
         bar._isInteracted = !bar._isInteracted;
 
         _ = bar.UpdateScroll().GetAwaiter();
+    }
+
+    private async Task UpdateScroll()
+    {
+        var currentEvent = _interactiveIdentifier.GetNext();
+        var shouldScroll = IsMouseOver || _isScrolling;
+
+        if (shouldScroll == _isInteracted)
+        {
+            return;
+        }
+
+        if (!shouldScroll)
+        {
+            await Task.Delay(Timeout);
+        }
+
+        if (!_interactiveIdentifier.IsEqual(currentEvent))
+        {
+            return;
+        }
+
+        IsInteracted = shouldScroll;
     }
 }

@@ -1,15 +1,20 @@
-﻿namespace MicaWPF.Helpers;
+﻿// <copyright file="ColorHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Helpers;
 
 /// <summary>
 /// An helper class to help with <see cref="Color"/>.
 /// </summary>
 public static class ColorHelper
 {
-    private delegate byte ComponentSelector(Color color);
     private static readonly ComponentSelector _alphaSelector = color => color.A;
     private static readonly ComponentSelector _redSelector = color => color.R;
     private static readonly ComponentSelector _greenSelector = color => color.G;
     private static readonly ComponentSelector _blueSelector = color => color.B;
+
+    private delegate byte ComponentSelector(Color color);
 
     /// <summary>
     /// Will interpolate between 2 colors.
@@ -30,8 +35,7 @@ public static class ColorHelper
             InterpolateComponent(endPoint1, endPoint2, lambda, _alphaSelector),
             InterpolateComponent(endPoint1, endPoint2, lambda, _redSelector),
             InterpolateComponent(endPoint1, endPoint2, lambda, _greenSelector),
-            InterpolateComponent(endPoint1, endPoint2, lambda, _blueSelector)
-        );
+            InterpolateComponent(endPoint1, endPoint2, lambda, _blueSelector));
 
         return color;
     }

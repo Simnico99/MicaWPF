@@ -1,4 +1,8 @@
-﻿using MicaWPF.DependencyInjection.Options;
+﻿// <copyright file="DependencyInjectionHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using MicaWPF.DependencyInjection.Options;
 using MicaWPF.DependencyInjection.Services;
 using MicaWPF.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,9 +15,9 @@ public static class DependencyInjectionHelper
 {
     /// <summary>
     /// Adds MicaWPF services to the host builder.
-    /// MicaWPF is a set of services that provide theme and accent color 
+    /// MicaWPF is a set of services that provide theme and accent color
     /// functionality to a WPF application.
-    /// The `options` parameter can be used to configure the behavior of 
+    /// The `options` parameter can be used to configure the behavior of
     /// MicaWPF.
     /// </summary>
     /// <param name="builder">The host builder instance to add MicaWPF services to.</param>

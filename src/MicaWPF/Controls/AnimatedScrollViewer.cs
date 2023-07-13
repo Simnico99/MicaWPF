@@ -1,10 +1,22 @@
-﻿namespace MicaWPF.Controls;
+﻿// <copyright file="AnimatedScrollViewer.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Controls;
 
 /// <summary>
 /// Kinda of a smart <see cref="ScrollViewer"/>.
 /// </summary>
 public class AnimatedScrollViewer : ScrollViewer
 {
+    public static readonly DependencyProperty IsScrollingVerticallyProperty = DependencyProperty.Register(nameof(IsScrollingVertically), typeof(bool), typeof(AnimatedScrollViewer), new PropertyMetadata(false, IsScrollingVerticallyProperty_OnChanged));
+
+    public static readonly DependencyProperty IsScrollingHorizontallyProperty = DependencyProperty.Register(nameof(IsScrollingHorizontally), typeof(bool), typeof(AnimatedScrollViewer), new PropertyMetadata(false, IsScrollingHorizontally_OnChanged));
+
+    public static readonly DependencyProperty MinimalChangeProperty = DependencyProperty.Register(nameof(MinimalChange), typeof(double), typeof(AnimatedScrollViewer), new PropertyMetadata(40d, MinimalChangeProperty_OnChanged));
+
+    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout), typeof(int), typeof(AnimatedScrollViewer), new PropertyMetadata(1200, TimeoutProperty_OnChanged));
+
     private readonly EventIdentifier _verticalIdentifier = new();
 
     private readonly EventIdentifier _horizontalIdentifier = new();
@@ -17,24 +29,8 @@ public class AnimatedScrollViewer : ScrollViewer
 
     private double _minimalChange = 40d;
 
-    public static readonly DependencyProperty IsScrollingVerticallyProperty = DependencyProperty.Register(
-        nameof(IsScrollingVertically),
-        typeof(bool), typeof(AnimatedScrollViewer),
-        new PropertyMetadata(false, IsScrollingVerticallyProperty_OnChanged));
-
-    public static readonly DependencyProperty IsScrollingHorizontallyProperty = DependencyProperty.Register(
-        nameof(IsScrollingHorizontally),
-        typeof(bool), typeof(AnimatedScrollViewer), new PropertyMetadata(false, IsScrollingHorizontally_OnChanged));
-
-    public static readonly DependencyProperty MinimalChangeProperty = DependencyProperty.Register(
-        nameof(MinimalChange),
-        typeof(double), typeof(AnimatedScrollViewer), new PropertyMetadata(40d, MinimalChangeProperty_OnChanged));
-
-    public static readonly DependencyProperty TimeoutProperty = DependencyProperty.Register(nameof(Timeout),
-        typeof(int), typeof(AnimatedScrollViewer), new PropertyMetadata(1200, TimeoutProperty_OnChanged));
-
     /// <summary>
-    /// Is currently scrolling vertically.
+    /// Gets or sets a value indicating whether is currently scrolling vertically.
     /// </summary>
     public bool IsScrollingVertically
     {
@@ -43,7 +39,7 @@ public class AnimatedScrollViewer : ScrollViewer
     }
 
     /// <summary>
-    /// Is currently scrolling horizontally.
+    /// Gets or sets a value indicating whether is currently scrolling horizontally.
     /// </summary>
     public bool IsScrollingHorizontally
     {
@@ -52,7 +48,7 @@ public class AnimatedScrollViewer : ScrollViewer
     }
 
     /// <summary>
-    /// Is the change minimal?
+    /// Gets or sets is the change minimal.
     /// </summary>
     public double MinimalChange
     {
@@ -61,7 +57,7 @@ public class AnimatedScrollViewer : ScrollViewer
     }
 
     /// <summary>
-    /// Has timed out.
+    /// Gets or sets has timed out.
     /// </summary>
     public int Timeout
     {
@@ -84,45 +80,7 @@ public class AnimatedScrollViewer : ScrollViewer
         }
     }
 
-    private async void UpdateVerticalScrollingState()
-    {
-        var currentEvent = _verticalIdentifier.GetNext();
-
-        if (!_scrollingVertically)
-        {
-            IsScrollingVertically = true;
-        }
-
-        if (_timeout > -1)
-        {
-            await Task.Delay(_timeout < 10000 ? _timeout : 1000);
-        }
-
-        if (_verticalIdentifier.IsEqual(currentEvent) && _scrollingVertically)
-        {
-            IsScrollingVertically = false;
-        }
-    }
-
-    private async void UpdateHorizontalScrollingState()
-    {
-        var currentEvent = _horizontalIdentifier.GetNext();
-
-        if (!_scrollingHorizontally)
-        {
-            IsScrollingHorizontally = true;
-        }
-
-        await Task.Delay(Timeout < 10000 ? Timeout : 1000);
-
-        if (_horizontalIdentifier.IsEqual(currentEvent) && _scrollingHorizontally)
-        {
-            IsScrollingHorizontally = false;
-        }
-    }
-
-    private static void IsScrollingVerticallyProperty_OnChanged(DependencyObject d,
-        DependencyPropertyChangedEventArgs e)
+    private static void IsScrollingVerticallyProperty_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not AnimatedScrollViewer scroll)
         {
@@ -160,5 +118,42 @@ public class AnimatedScrollViewer : ScrollViewer
         }
 
         scroll._timeout = scroll.Timeout;
+    }
+
+    private async void UpdateVerticalScrollingState()
+    {
+        var currentEvent = _verticalIdentifier.GetNext();
+
+        if (!_scrollingVertically)
+        {
+            IsScrollingVertically = true;
+        }
+
+        if (_timeout > -1)
+        {
+            await Task.Delay(_timeout < 10000 ? _timeout : 1000);
+        }
+
+        if (_verticalIdentifier.IsEqual(currentEvent) && _scrollingVertically)
+        {
+            IsScrollingVertically = false;
+        }
+    }
+
+    private async void UpdateHorizontalScrollingState()
+    {
+        var currentEvent = _horizontalIdentifier.GetNext();
+
+        if (!_scrollingHorizontally)
+        {
+            IsScrollingHorizontally = true;
+        }
+
+        await Task.Delay(Timeout < 10000 ? Timeout : 1000);
+
+        if (_horizontalIdentifier.IsEqual(currentEvent) && _scrollingHorizontally)
+        {
+            IsScrollingHorizontally = false;
+        }
     }
 }

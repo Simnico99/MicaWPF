@@ -1,6 +1,11 @@
-﻿using System.Windows.Data;
+﻿// <copyright file="DialogScrollViewerHeightConverter.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Windows.Data;
 
 namespace MicaWPF.Converters;
+
 public sealed class DialogScrollViewerHeightConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

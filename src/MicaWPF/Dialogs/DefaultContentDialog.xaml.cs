@@ -1,10 +1,21 @@
-﻿namespace MicaWPF.Dialogs;
+﻿// <copyright file="DefaultContentDialog.xaml.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Dialogs;
+
 /// <summary>
-/// Interaction logic for DefaultContentDialog.xaml
+/// Interaction logic for DefaultContentDialog.xaml.
 /// </summary>
 public partial class DefaultContentDialog : ContentControl, IContentDialog
 {
     private readonly TaskCompletionSource<bool> _taskCompletionSource = new();
+
+    internal DefaultContentDialog()
+    {
+        InitializeComponent();
+    }
+
     public ContentDialogResult Result { get; private set; }
 
     public Brush? InnerBorderBrush
@@ -104,20 +115,17 @@ public partial class DefaultContentDialog : ContentControl, IContentDialog
         get => PrimaryButton.Style;
         set => PrimaryButton.Style = value;
     }
+
     public Style SecondaryButtonStyle
     {
         get => SecondaryButton.Style;
         set => SecondaryButton.Style = value;
     }
+
     public Style CloseButtonStyle
     {
         get => TertiaryButton.Style;
         set => TertiaryButton.Style = value;
-    }
-
-    internal DefaultContentDialog()
-    {
-        InitializeComponent();
     }
 
     public async Task ShowAsync()

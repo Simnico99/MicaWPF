@@ -1,40 +1,44 @@
-﻿using MicaWPF.Events;
+﻿// <copyright file="IAccentColorService.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using MicaWPF.Events;
 
 namespace MicaWPF.Services;
 
-///<summary>
-///Service that manages the accent colors of the application.
-///</summary>
+/// <summary>
+/// Service that manages the accent colors of the application.
+/// </summary>
 public interface IAccentColorService
 {
     /// <summary>
-    /// Event that is raised when the accent colors are changed.
+    /// Gets event that is raised when the accent colors are changed.
     /// </summary>
     IWeakEvent<AccentColors> AccentColorChanged { get; }
 
     /// <summary>
-    /// Contains information about the current accent colors.
+    /// Gets contains information about the current accent colors.
     /// </summary>
     AccentColors AccentColors { get; }
 
     /// <summary>
-    /// Indicates if the accent colors were updated from Windows.
+    /// Gets a value indicating whether indicates if the accent colors were updated from Windows.
     /// </summary>
     bool AccentColorsUpdateFromWindows { get; }
 
     /// <summary>
-    /// Indicates if the title bar and borders are accent aware.
+    /// Gets or sets a value indicating whether indicates if the title bar and borders are accent aware.
     /// </summary>
     bool IsTitleBarAndBorderAccentAware { get; set; }
 
     /// <summary>
-    /// Indicates if the title bar and windows borders are colored.
+    /// Gets a value indicating whether indicates if the title bar and windows borders are colored.
     /// </summary>
     bool IsTitleBarAndWindowsBorderColored { get; }
 
     /// <summary>
-    /// Refreshes the accent colors used in the application. 
-    /// If `AccentColorsUpdateFromWindows` is set to true, the accent colors will be updated from Windows. 
+    /// Refreshes the accent colors used in the application.
+    /// If `AccentColorsUpdateFromWindows` is set to true, the accent colors will be updated from Windows.
     /// Otherwise, the accent colors will be updated to the system accent color.
     /// This is automatically done when the theme change.
     /// </summary>

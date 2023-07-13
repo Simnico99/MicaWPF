@@ -1,10 +1,15 @@
-﻿using System;
+﻿// <copyright file="WindowsThemeHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MicaWPF.Helpers;
+
 public static class WindowsThemeHelper
 {
     private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";

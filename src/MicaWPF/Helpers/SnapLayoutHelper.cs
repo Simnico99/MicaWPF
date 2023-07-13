@@ -1,4 +1,9 @@
-﻿namespace MicaWPF.Helpers;
+﻿// <copyright file="SnapLayoutHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Helpers;
+
 public static class SnapLayoutHelper
 {
     private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced";

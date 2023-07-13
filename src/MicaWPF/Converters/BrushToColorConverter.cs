@@ -1,7 +1,12 @@
-﻿using System.Globalization;
+﻿// <copyright file="BrushToColorConverter.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Globalization;
 using System.Windows.Data;
 
 namespace MicaWPF.Converters;
+
 internal sealed class BrushToColorConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -20,11 +25,7 @@ internal sealed class BrushToColorConverter : IValueConverter
         return new Color { A = 255, R = 255, G = 0, B = 0 };
     }
 
-    /// <summary>
-    /// Not Implemented.
-    /// </summary>
-    /// <exception cref="NotImplementedException"></exception>
-    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

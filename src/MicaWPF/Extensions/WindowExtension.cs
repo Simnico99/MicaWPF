@@ -1,4 +1,8 @@
-﻿using MicaWPF.Controls;
+﻿// <copyright file="WindowExtension.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using MicaWPF.Controls;
 
 namespace MicaWPF.Extensions;
 

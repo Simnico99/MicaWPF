@@ -1,4 +1,8 @@
-﻿namespace MicaWPF.Events;
+﻿// <copyright file="ISubscription.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Events;
 
 /// <summary>
 /// A IWeakEvent subscription.

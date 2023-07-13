@@ -1,31 +1,19 @@
-﻿using MicaWPF.Controls;
+﻿// <copyright file="AccentColorService.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using MicaWPF.Controls;
 using MicaWPF.Events;
 
 namespace MicaWPF.Services;
 
-///<summary>
-///Service that manages the accent colors of the application.
-///</summary>
+/// <summary>
+/// Service that manages the accent colors of the application.
+/// </summary>
 public sealed class AccentColorService : IAccentColorService
 {
-    ///<summary>
-    ///Gets the current instance of <see cref="AccentColorService"/> but as the interface <see cref="IAccentColorService"/>.
-    ///</summary>
-    public static IAccentColorService Current { get; }
-
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
-
-    public IWeakEvent<AccentColors> AccentColorChanged { get; } = new WeakEvent<AccentColors>();
-
-    public AccentColors AccentColors { get; private set; } = new AccentColors();
-    public bool AccentColorsUpdateFromWindows { get; private set; } = true;
-    public bool IsTitleBarAndWindowsBorderColored { get; private set; }
-    public bool IsTitleBarAndBorderAccentAware
-    {
-        get => _isTitleBarAndBorderAccentAware;
-        set => SetTitleBarAndBorderAccentAware(value);
-    }
 
     static AccentColorService()
     {
@@ -36,9 +24,30 @@ public sealed class AccentColorService : IAccentColorService
         localCurrent.IsTitleBarAndBorderAccentAware = true;
     }
 
-    private AccentColorService() { }
+    private AccentColorService()
+    {
+    }
 
-    public void RefreshAccentsColors() 
+    /// <summary>
+    /// Gets the current instance of <see cref="AccentColorService"/> but as the interface <see cref="IAccentColorService"/>.
+    /// </summary>
+    public static IAccentColorService Current { get; }
+
+    public IWeakEvent<AccentColors> AccentColorChanged { get; } = new WeakEvent<AccentColors>();
+
+    public AccentColors AccentColors { get; private set; } = default;
+
+    public bool AccentColorsUpdateFromWindows { get; private set; } = true;
+
+    public bool IsTitleBarAndWindowsBorderColored { get; private set; }
+
+    public bool IsTitleBarAndBorderAccentAware
+    {
+        get => _isTitleBarAndBorderAccentAware;
+        set => SetTitleBarAndBorderAccentAware(value);
+    }
+
+    public void RefreshAccentsColors()
     {
         if (AccentColorsUpdateFromWindows)
         {
@@ -63,8 +72,7 @@ public sealed class AccentColorService : IAccentColorService
             GetThemeColorVariation(hsvColor, WindowsTheme.Dark, AccentBrushType.Quaternary),
             GetThemeColorVariation(hsvColor, WindowsTheme.Light, AccentBrushType.Secondary),
             GetThemeColorVariation(hsvColor, WindowsTheme.Light, AccentBrushType.Tertiary),
-            GetThemeColorVariation(hsvColor, WindowsTheme.Light, AccentBrushType.Quaternary)
-            );
+            GetThemeColorVariation(hsvColor, WindowsTheme.Light, AccentBrushType.Quaternary));
 
         UpdateFromInternalColors();
     }
@@ -83,9 +91,33 @@ public sealed class AccentColorService : IAccentColorService
         UpdateFromInternalColors();
     }
 
+    private static Color GetThemeColorVariation((double Hue, double Saturation, double Value) hsv, WindowsTheme windowsTheme, AccentBrushType accentBrushType)
+    {
+        var hueCoefficient = 1 - hsv.Value < 0.15 ? 1 : 0;
+
+        return accentBrushType switch
+        {
+            AccentBrushType.Primary => HSVColorHelper.RGBFromHSV(hsv.Hue, hsv.Saturation, hsv.Value),
+            AccentBrushType.Secondary => GetOffSet(hsv.Hue, hueCoefficient, hsv.Saturation, hsv.Value, 0.3, windowsTheme),
+            AccentBrushType.Tertiary => GetOffSet(hsv.Hue, hueCoefficient, hsv.Saturation, hsv.Value, 0.35, windowsTheme),
+            AccentBrushType.Quaternary => GetOffSet(hsv.Hue, hueCoefficient, hsv.Saturation, hsv.Value, 0.65, windowsTheme),
+            _ => throw new ArgumentOutOfRangeException(nameof(accentBrushType)),
+        };
+    }
+
+    private static Color GetOffSet(double hue, double hueCoefficient, double saturation, double value, double valueCoefficient, WindowsTheme windowsTheme)
+    {
+        return windowsTheme switch
+        {
+            WindowsTheme.Dark => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value + valueCoefficient, 1)),
+            WindowsTheme.Light => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value - (valueCoefficient / 2), 1)),
+            _ => throw new ArgumentOutOfRangeException(nameof(windowsTheme)),
+        };
+    }
+
     private void UpdateColorResources(Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
     {
-        var colorKeys = new string[] { "Primary", "Secondary", "Tertiary", "Light3", "Light2", "Light1", "", "Dark1", "Dark2", "Dark3" };
+        var colorKeys = new string[] { "Primary", "Secondary", "Tertiary", "Light3", "Light2", "Light1", string.Empty, "Dark1", "Dark2", "Dark3" };
         var accentColors = new Color[] { primaryAccent, secondaryAccent, tertiaryAccent, AccentColors.SystemAccentColorLight3, AccentColors.SystemAccentColorLight2, AccentColors.SystemAccentColorLight1, AccentColors.SystemAccentColor, AccentColors.SystemAccentColorDark1, AccentColors.SystemAccentColorDark2, AccentColors.SystemAccentColorDark3 };
 
         for (var i = 0; i < colorKeys.Length; i++)
@@ -154,31 +186,8 @@ public sealed class AccentColorService : IAccentColorService
                     Application.Current.Dispatcher.Invoke(() => SetAccentColorOnTitleBarAndBorders(WindowsAccentHelper.AreTitleBarAndBordersAccented()));
                     SetTitleBarAndBorderAccentAware(IsTitleBarAndBorderAccentAware);
                 }
+
                 break;
         }
-    }
-
-    private static Color GetThemeColorVariation((double hue, double saturation, double value) hsv, WindowsTheme windowsTheme, AccentBrushType accentBrushType)
-    {
-        var hueCoefficient = 1 - hsv.value < 0.15 ? 1 : 0;
-
-        return accentBrushType switch
-        {
-            AccentBrushType.Primary => HSVColorHelper.RGBFromHSV(hsv.hue, hsv.saturation, hsv.value),
-            AccentBrushType.Secondary => GetOffSet(hsv.hue, hueCoefficient, hsv.saturation, hsv.value, 0.3, windowsTheme),
-            AccentBrushType.Tertiary => GetOffSet(hsv.hue, hueCoefficient, hsv.saturation, hsv.value, 0.35, windowsTheme),
-            AccentBrushType.Quaternary => GetOffSet(hsv.hue, hueCoefficient, hsv.saturation, hsv.value, 0.65, windowsTheme),
-            _ => throw new ArgumentOutOfRangeException(nameof(accentBrushType)),
-        };
-    }
-
-    private static Color GetOffSet(double hue, double hueCoefficient, double saturation, double value, double valueCoefficient, WindowsTheme windowsTheme)
-    {
-        return windowsTheme switch
-        {
-            WindowsTheme.Dark => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value + valueCoefficient, 1)),
-            WindowsTheme.Light => HSVColorHelper.RGBFromHSV(Math.Min(hue + hueCoefficient, 360), saturation, Math.Min(value - (valueCoefficient / 2), 1)),
-            _ => throw new ArgumentOutOfRangeException(nameof(windowsTheme)),
-        };
     }
 }

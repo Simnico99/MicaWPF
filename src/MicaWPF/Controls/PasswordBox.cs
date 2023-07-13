@@ -1,5 +1,9 @@
-﻿using MicaWPF.Symbols;
+﻿// <copyright file="PasswordBox.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
 using System.ComponentModel;
+using MicaWPF.Symbols;
 
 namespace MicaWPF.Controls;
 
@@ -9,14 +13,23 @@ namespace MicaWPF.Controls;
 [ToolboxItem(true)]
 public class PasswordBox : TextBox
 {
-    private bool _takenControl = false;
     public static readonly DependencyProperty PasswordProperty = DependencyProperty.Register(nameof(Password), typeof(string), typeof(PasswordBox), new PropertyMetadata(string.Empty));
     public static readonly DependencyProperty PasswordCharProperty = DependencyProperty.Register(nameof(PasswordChar), typeof(char), typeof(PasswordBox), new PropertyMetadata('•', OnPasswordCharChanged));
     public static readonly DependencyProperty PasswordRevealModeProperty = DependencyProperty.Register(nameof(PasswordRevealMode), typeof(RevealMode), typeof(PasswordBox), new PropertyMetadata(RevealMode.Hidden, OnPasswordRevealModeChanged));
     public static readonly DependencyProperty ShowRevealButtonProperty = DependencyProperty.Register(nameof(ShowRevealButton), typeof(bool), typeof(PasswordBox), new PropertyMetadata(true));
 
+    private bool _takenControl = false;
+
+    public PasswordBox()
+    {
+        if (Icon is FluentSystemIcons.Regular.Empty)
+        {
+            Icon = FluentSystemIcons.Regular.Eye20;
+        }
+    }
+
     /// <summary>
-    /// The current password the user has typed.
+    /// Gets the current password the user has typed.
     /// </summary>
     public string Password
     {
@@ -25,7 +38,7 @@ public class PasswordBox : TextBox
     }
 
     /// <summary>
-    /// The character used to hide the password.
+    /// Gets or sets the character used to hide the password.
     /// </summary>
     public char PasswordChar
     {
@@ -34,7 +47,7 @@ public class PasswordBox : TextBox
     }
 
     /// <summary>
-    /// Is the password revealed or not.
+    /// Gets or sets is the password revealed or not.
     /// </summary>
     public RevealMode PasswordRevealMode
     {
@@ -43,7 +56,7 @@ public class PasswordBox : TextBox
     }
 
     /// <summary>
-    /// Should show the reveal button or not.
+    /// Gets or sets a value indicating whether should show the reveal button or not.
     /// </summary>
     public bool ShowRevealButton
     {
@@ -52,7 +65,7 @@ public class PasswordBox : TextBox
     }
 
     /// <summary>
-    /// The current text in the box.
+    /// Gets or sets the current text in the box.
     /// </summary>
     public new string Text
     {
@@ -61,14 +74,6 @@ public class PasswordBox : TextBox
         {
             SetValue(PasswordProperty, value);
             SetValue(TextProperty, new string(PasswordChar, value?.Length ?? 0));
-        }
-    }
-
-    public PasswordBox()
-    {
-        if (Icon is FluentSystemIcons.Regular.Empty)
-        {
-            Icon = FluentSystemIcons.Regular.Eye20;
         }
     }
 
@@ -133,6 +138,22 @@ public class PasswordBox : TextBox
         base.OnTextChanged(e);
     }
 
+    private static void OnPasswordCharChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is PasswordBox control)
+        {
+            control.UpdatePasswordWithNewChar(control.PasswordChar);
+        }
+    }
+
+    private static void OnPasswordRevealModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is PasswordBox control)
+        {
+            control.UpdateRevealIfPossible(control.PasswordRevealMode);
+        }
+    }
+
     private void UpdatePasswordWithNewChar(char newChar)
     {
         if (PasswordRevealMode == RevealMode.Visible)
@@ -151,23 +172,6 @@ public class PasswordBox : TextBox
             return;
         }
 
-        SetValue(TextProperty,
-            revealMode == RevealMode.Visible ? Password : new string(PasswordChar, Password.Length));
-    }
-
-    private static void OnPasswordCharChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is PasswordBox control)
-        {
-            control.UpdatePasswordWithNewChar(control.PasswordChar);
-        }
-    }
-
-    private static void OnPasswordRevealModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        if (d is PasswordBox control)
-        {
-            control.UpdateRevealIfPossible(control.PasswordRevealMode);
-        }
+        SetValue(TextProperty, revealMode == RevealMode.Visible ? Password : new string(PasswordChar, Password.Length));
     }
 }

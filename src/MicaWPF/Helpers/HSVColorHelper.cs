@@ -1,4 +1,8 @@
-﻿namespace MicaWPF.Helpers;
+﻿// <copyright file="HSVColorHelper.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Helpers;
 
 /// <summary>
 /// An helper class to manipulate HSV Colors.
@@ -6,22 +10,9 @@
 public static class HSVColorHelper
 {
     /// <summary>
-    /// Convert a given <see cref="Color"/> to a HSV color (hue, saturation, value)
-    /// </summary>
-    /// <param name="color">The <see cref="Color"/> to convert</param>
-    /// <returns>The hue [0°..360°], saturation [0..1] and value [0..1] of the converted color</returns>
-    internal static (double hue, double saturation, double value) ConvertToHSVColor(System.Drawing.Color color)
-    {
-        var min = Math.Min(Math.Min(color.R, color.G), color.B) / 255d;
-        var max = Math.Max(Math.Max(color.R, color.G), color.B) / 255d;
-
-        return (color.GetHue(), max == 0d ? 0d : (max - min) / max, max);
-    }
-
-    /// <summary>
     /// Gets the entire color spectrum.
     /// </summary>
-    /// <returns>The entire color</returns>
+    /// <returns>The entire color.</returns>
     public static Color[] GetSpectrum()
     {
         var rgbs = new Color[360];
@@ -51,7 +42,7 @@ public static class HSVColorHelper
     }
 
     /// <summary>
-    /// Convert HSV to RGB <see cref="Color"/>
+    /// Convert HSV to RGB <see cref="Color"/>.
     /// </summary>
     /// <returns>Converted HSV color to RGB.</returns>
     public static Color RGBFromHSV(double h, double s, double v)
@@ -67,37 +58,47 @@ public static class HSVColorHelper
 
         double r = 0, g = 0, b = 0;
 
-        if (h < 60)
+        switch (h)
         {
-            r = c;
-            g = x;
-        }
-        else if (h < 120)
-        {
-            r = x;
-            g = c;
-        }
-        else if (h < 180)
-        {
-            g = c;
-            b = x;
-        }
-        else if (h < 240)
-        {
-            g = x;
-            b = c;
-        }
-        else if (h < 300)
-        {
-            r = x;
-            b = c;
-        }
-        else if (h <= 360)
-        {
-            r = c;
-            b = x;
+            case < 60:
+                r = c;
+                g = x;
+                break;
+            case < 120:
+                r = x;
+                g = c;
+                break;
+            case < 180:
+                g = c;
+                b = x;
+                break;
+            case < 240:
+                g = x;
+                b = c;
+                break;
+            case < 300:
+                r = x;
+                b = c;
+                break;
+            case <= 360:
+                r = c;
+                b = x;
+                break;
         }
 
         return Color.FromRgb((byte)((r + m) * 255), (byte)((g + m) * 255), (byte)((b + m) * 255));
+    }
+
+    /// <summary>
+    /// Convert a given <see cref="Color"/> to a HSV color (hue, saturation, value).
+    /// </summary>
+    /// <param name="color">The <see cref="Color"/> to convert.</param>
+    /// <returns>The hue [0°..360°], saturation [0..1] and value [0..1] of the converted color.</returns>
+    internal static (double Hue, double Saturation, double Value) ConvertToHSVColor(System.Drawing.Color color)
+    {
+        var min = Math.Min(Math.Min(color.R, color.G), color.B) / 255d;
+        var max = Math.Max(Math.Max(color.R, color.G), color.B) / 255d;
+
+        return (color.GetHue(), max == 0d ? 0d : (max - min) / max, max);
     }
 }

@@ -1,7 +1,13 @@
-﻿namespace MicaWPF.Models;
+﻿// <copyright file="EventIdentifier.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+namespace MicaWPF.Models;
+
 internal sealed class EventIdentifier
 {
     public long Current { get; internal set; } = 0;
+
     public long GetNext()
     {
         UpdateIdentifier();

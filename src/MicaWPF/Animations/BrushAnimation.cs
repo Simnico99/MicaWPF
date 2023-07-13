@@ -1,4 +1,8 @@
-﻿using System.Windows.Media.Animation;
+﻿// <copyright file="BrushAnimation.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Windows.Media.Animation;
 
 namespace MicaWPF.Animations;
 
@@ -7,27 +11,42 @@ namespace MicaWPF.Animations;
 /// </summary>
 public sealed class BrushAnimation : AnimationTimeline
 {
+    public static readonly DependencyProperty FromProperty = DependencyProperty.Register("From", typeof(Brush), typeof(BrushAnimation));
+    public static readonly DependencyProperty ToProperty = DependencyProperty.Register("To", typeof(Brush), typeof(BrushAnimation));
+
+    /// <summary>
+    /// Gets or sets brush to start the animation from.
+    /// </summary>
+    public Brush From
+    {
+        get => (Brush)GetValue(FromProperty);
+        set => SetValue(FromProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets brush to end the animation to.
+    /// </summary>
+    public Brush To
+    {
+        get => (Brush)GetValue(ToProperty);
+        set => SetValue(ToProperty, value);
+    }
+
     public override Type TargetPropertyType => typeof(Brush);
 
-    public override object GetCurrentValue(object defaultOriginValue,
-                                           object defaultDestinationValue,
-                                           AnimationClock animationClock)
+    public override object GetCurrentValue(object defaultOriginValue, object defaultDestinationValue, AnimationClock animationClock)
     {
-        return GetCurrentValue((Brush)defaultOriginValue,
-                               (Brush)defaultDestinationValue,
-                               animationClock);
+        return GetCurrentValue((Brush)defaultOriginValue, (Brush)defaultDestinationValue, animationClock);
     }
 
     /// <summary>
     /// Gets the current value of the animation.
     /// </summary>
-    /// <param name="defaultOriginValue">Origin brush</param>
-    /// <param name="defaultDestinationValue">Destination brush</param>
-    /// <param name="animationClock">Animation Clock</param>
-    /// <returns>The value this animation believes should be the current value for the property</returns>
-    public object GetCurrentValue(Brush defaultOriginValue,
-                                  Brush defaultDestinationValue,
-                                  AnimationClock animationClock)
+    /// <param name="defaultOriginValue">Origin brush.</param>
+    /// <param name="defaultDestinationValue">Destination brush.</param>
+    /// <param name="animationClock">Animation Clock.</param>
+    /// <returns>The value this animation believes should be the current value for the property.</returns>
+    public object GetCurrentValue(Brush defaultOriginValue, Brush defaultDestinationValue, AnimationClock animationClock)
     {
         if (!animationClock.CurrentProgress.HasValue)
         {
@@ -47,38 +66,14 @@ public sealed class BrushAnimation : AnimationTimeline
             return defaultDestinationValue;
         }
 
-        var ColorOriginValue = ((SolidColorBrush)defaultOriginValue).Color;
-        var ColorDestinationValue = ((SolidColorBrush)defaultDestinationValue).Color;
+        var colorOriginValue = ((SolidColorBrush)defaultOriginValue).Color;
+        var colorDestinationValue = ((SolidColorBrush)defaultDestinationValue).Color;
 
-        return new SolidColorBrush(ColorHelper.InterpolateBetween(ColorOriginValue, ColorDestinationValue, animationClock.CurrentProgress.Value));
+        return new SolidColorBrush(ColorHelper.InterpolateBetween(colorOriginValue, colorDestinationValue, animationClock.CurrentProgress.Value));
     }
 
     protected override Freezable CreateInstanceCore()
     {
         return new BrushAnimation();
     }
-
-    //we must define From and To, AnimationTimeline does not have this properties
-    /// <summary>
-    /// Brush to start the animation from.
-    /// </summary>
-    public Brush From
-    {
-        get => (Brush)GetValue(FromProperty);
-        set => SetValue(FromProperty, value);
-    }
-
-    /// <summary>
-    /// Brush to end the animation to.
-    /// </summary>
-    public Brush To
-    {
-        get => (Brush)GetValue(ToProperty);
-        set => SetValue(ToProperty, value);
-    }
-
-    public static readonly DependencyProperty FromProperty =
-        DependencyProperty.Register("From", typeof(Brush), typeof(BrushAnimation));
-    public static readonly DependencyProperty ToProperty =
-        DependencyProperty.Register("To", typeof(Brush), typeof(BrushAnimation));
 }

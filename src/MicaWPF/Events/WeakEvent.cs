@@ -1,6 +1,11 @@
-﻿using System.Runtime.CompilerServices;
+﻿// <copyright file="WeakEvent.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Runtime.CompilerServices;
 
 namespace MicaWPF.Events;
+
 internal sealed class WeakEvent<T> : IWeakEvent<T>
 {
     private readonly object _locker = new();
@@ -30,11 +35,11 @@ internal sealed class WeakEvent<T> : IWeakEvent<T>
         {
             lock (_locker)
             {
-                foreach (var (EventType, MethodToCall) in _eventRegistrations)
+                foreach (var (eventType, methodToCall) in _eventRegistrations)
                 {
-                    if (EventType == typeof(T))
+                    if (eventType == typeof(T))
                     {
-                        ((Action<T>)MethodToCall)(data);
+                        ((Action<T>)methodToCall)(data);
                     }
                 }
             }
@@ -47,11 +52,11 @@ internal sealed class WeakEvent<T> : IWeakEvent<T>
         {
             lock (_locker)
             {
-                foreach (var (EventType, MethodToCall) in _eventRegistrations)
+                foreach (var (eventType, methodToCall) in _eventRegistrations)
                 {
-                    if (EventType == typeof(T))
+                    if (eventType == typeof(T))
                     {
-                        ((Action<T>)MethodToCall)(data);
+                        ((Action<T>)methodToCall)(data);
                     }
                 }
             }

@@ -1,24 +1,19 @@
-﻿using MicaWPF.DependencyInjection.Options;
+﻿// <copyright file="AccentColorServiceDI.cs" company="Zircon Technology">
+// This software is distributed under the MIT license and its code is free of use.
+// </copyright>
+
+using System.Windows.Media;
+using MicaWPF.DependencyInjection.Options;
 using MicaWPF.Events;
 using MicaWPF.Models;
 using MicaWPF.Services;
-using System.Windows.Media;
 
 namespace MicaWPF.DependencyInjection.Services;
+
 internal sealed class AccentColorServiceDI : IAccentColorService
 {
     private readonly MicaWPFOptions _options;
     private readonly IAccentColorService _accentColorService = AccentColorService.Current;
-
-    public IWeakEvent<AccentColors> AccentColorChanged => _accentColorService.AccentColorChanged;
-    public AccentColors AccentColors => _accentColorService.AccentColors;
-    public bool AccentColorsUpdateFromWindows => _accentColorService.AccentColorsUpdateFromWindows;
-    public bool IsTitleBarAndBorderAccentAware
-    {
-        get => _accentColorService.IsTitleBarAndBorderAccentAware;
-        set => _accentColorService.IsTitleBarAndBorderAccentAware = value;
-    }
-    public bool IsTitleBarAndWindowsBorderColored => _accentColorService.IsTitleBarAndWindowsBorderColored;
 
     public AccentColorServiceDI(MicaWPFOptions options)
     {
@@ -35,6 +30,20 @@ internal sealed class AccentColorServiceDI : IAccentColorService
 
         _accentColorService.IsTitleBarAndBorderAccentAware = _options.IsTitleBarAndBorderAccentAware;
     }
+
+    public IWeakEvent<AccentColors> AccentColorChanged => _accentColorService.AccentColorChanged;
+
+    public AccentColors AccentColors => _accentColorService.AccentColors;
+
+    public bool AccentColorsUpdateFromWindows => _accentColorService.AccentColorsUpdateFromWindows;
+
+    public bool IsTitleBarAndBorderAccentAware
+    {
+        get => _accentColorService.IsTitleBarAndBorderAccentAware;
+        set => _accentColorService.IsTitleBarAndBorderAccentAware = value;
+    }
+
+    public bool IsTitleBarAndWindowsBorderColored => _accentColorService.IsTitleBarAndWindowsBorderColored;
 
     public void UpdateAccentsColors(Color systemAccent)
     {
