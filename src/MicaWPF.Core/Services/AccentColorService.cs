@@ -127,7 +127,7 @@ public class AccentColorService : IAccentColorService
 
     private void UpdateFromInternalColors()
     {
-        switch (MicaWPFControllerService.ThemeService.CurrentTheme)
+        switch (MicaWPFServiceUtility.ThemeService.CurrentTheme)
         {
             case WindowsTheme.Dark:
                 UpdateColorResources(AccentColors.SystemAccentColorLight1, AccentColors.SystemAccentColorLight2, AccentColors.SystemAccentColorLight3);
@@ -138,7 +138,7 @@ public class AccentColorService : IAccentColorService
         }
 
         WindowHelper.RefreshAllWindowsContents();
-        MicaWPFControllerService.ThemeDictionaryService.RefreshThemeSource();
+        MicaWPFServiceUtility.ThemeDictionaryService.RefreshThemeSource();
     }
 
     private void SetAccentColorOnTitleBarAndBorders(bool isEnabled)

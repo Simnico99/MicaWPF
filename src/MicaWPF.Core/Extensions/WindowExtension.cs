@@ -26,6 +26,6 @@ public static class WindowExtension
     /// </summary>
     public static void EnableBackdrop(this Window window, BackdropType backdropType = BackdropType.Mica)
     {
-        MicaWPFControllerService.ThemeService.EnableBackdrop(window, backdropType);
+        MicaWPFServiceUtility.ThemeService.EnableBackdrop(window, backdropType);
     }
 }

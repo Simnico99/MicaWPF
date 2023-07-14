@@ -17,7 +17,7 @@ namespace MicaWPF.DependencyInjection.Services;
 internal sealed class AccentColorServiceDI : IAccentColorService
 {
     private readonly MicaWPFOptions _options;
-    private readonly IAccentColorService _accentColorService = MicaWPFControllerService.AccentColorService;
+    private readonly IAccentColorService _accentColorService = MicaWPFServiceUtility.AccentColorService;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AccentColorServiceDI"/> class.

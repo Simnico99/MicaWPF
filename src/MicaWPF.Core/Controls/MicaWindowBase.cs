@@ -23,7 +23,7 @@ namespace MicaWPF.Core.Controls;
 public class MicaWindowBase : Window, IMicaWindow
 {
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindowBase));
-    public static readonly DependencyProperty UseAccentOnTitleBarAndBorderProperty = DependencyProperty.Register(nameof(UseAccentOnTitleBarAndBorder), typeof(bool), typeof(MicaWindowBase), new UIPropertyMetadata(MicaWPFControllerService.AccentColorService.IsTitleBarAndWindowsBorderColored));
+    public static readonly DependencyProperty UseAccentOnTitleBarAndBorderProperty = DependencyProperty.Register(nameof(UseAccentOnTitleBarAndBorder), typeof(bool), typeof(MicaWindowBase), new UIPropertyMetadata(MicaWPFServiceUtility.AccentColorService.IsTitleBarAndWindowsBorderColored));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindowBase), new UIPropertyMetadata(true));
     public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindowBase), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindowBase), new UIPropertyMetadata(TitleBarType.WinUI));
@@ -48,7 +48,7 @@ public class MicaWindowBase : Window, IMicaWindow
     {
         var myResourceDictionary = new ResourceDictionary
         {
-            Source = new Uri($"{MicaWPFControllerService.CurrentNamespace};component/Styles/Controls/MicaWindow.xaml", UriKind.RelativeOrAbsolute),
+            Source = new Uri($"{MicaWPFServiceUtility.CurrentNamespace};component/Styles/Controls/MicaWindow.xaml", UriKind.RelativeOrAbsolute),
         };
 
         _ = CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, OnCloseWindow));
@@ -57,8 +57,8 @@ public class MicaWindowBase : Window, IMicaWindow
         _ = CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, OnRestoreWindow, OnCanResizeWindow));
 
         Style = OsHelper.IsWindows11_OrGreater
-            ? myResourceDictionary[$"{MicaWPFControllerService.CurrentNamespace}.Styles.Default.MicaWindow.Windows11"] as Style
-            : myResourceDictionary[$"{MicaWPFControllerService.CurrentNamespace}.Styles.Default.MicaWindow.Windows10"] as Style;
+            ? myResourceDictionary[$"{MicaWPFServiceUtility.CurrentNamespace}.Styles.Default.MicaWindow.Windows11"] as Style
+            : myResourceDictionary[$"{MicaWPFServiceUtility.CurrentNamespace}.Styles.Default.MicaWindow.Windows10"] as Style;
     }
 
     /// <inheritdoc/>

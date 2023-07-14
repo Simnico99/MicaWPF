@@ -1,4 +1,4 @@
-﻿// <copyright file="MicaWPFControllerService.cs" company="Zircon Technology">
+﻿// <copyright file="MicaWPFServiceUtility.cs" company="Zircon Technology">
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
@@ -9,14 +9,14 @@ namespace MicaWPF.Core.Services;
 /// <summary>
 /// Controls and manages the services in the MicaWPF framework.
 /// </summary>
-public sealed class MicaWPFControllerService
+public sealed class MicaWPFServiceUtility
 {
     private static IAccentColorService? _accentColorService;
     private static IThemeService? _themeService;
     private static IThemeDictionaryService? _themeDictionaryService;
     private static string? _currentNamespace;
 
-    static MicaWPFControllerService()
+    static MicaWPFServiceUtility()
     {
         // Warning the order is very important.
         _currentNamespace ??= ServiceLocatorHelper.GetNamespace();
@@ -26,7 +26,7 @@ public sealed class MicaWPFControllerService
     }
 
     /// <summary>
-    /// Gets or sets the Accent Color Service instance.
+    /// Gets or sets the Accent Color Service instance (WARNING: Sets should be done on application start).
     /// </summary>
     public static IAccentColorService AccentColorService
     {
@@ -35,7 +35,7 @@ public sealed class MicaWPFControllerService
     }
 
     /// <summary>
-    /// Gets or sets the Theme Service instance.
+    /// Gets or sets the Theme Service instance (WARNING: Sets should be done on application start).
     /// </summary>
     public static IThemeService ThemeService
     {
@@ -44,7 +44,7 @@ public sealed class MicaWPFControllerService
     }
 
     /// <summary>
-    /// Gets or sets the Theme Dictionary Service instance.
+    /// Gets or sets the Theme Dictionary Service instance (WARNING: Sets should be done on application start).
     /// </summary>
     public static IThemeDictionaryService ThemeDictionaryService
     {
@@ -53,7 +53,7 @@ public sealed class MicaWPFControllerService
     }
 
     /// <summary>
-    /// Gets or sets the current namespace string.
+    /// Gets or sets the current namespace string (WARNING: Sets should be done on application start).
     /// </summary>
     public static string CurrentNamespace
     {

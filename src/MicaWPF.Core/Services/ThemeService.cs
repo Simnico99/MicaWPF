@@ -47,7 +47,7 @@ public class ThemeService : IThemeService
         CurrentTheme = windowsTheme == WindowsTheme.Auto ? WindowsThemeHelper.GetCurrentWindowsTheme() : windowsTheme;
 
         _accentColorService?.RefreshAccentsColors();
-        MicaWPFControllerService.ThemeDictionaryService.ThemeSource = WindowsThemeHelper.WindowsThemeToResourceTheme(CurrentTheme);
+        MicaWPFServiceUtility.ThemeDictionaryService.ThemeSource = WindowsThemeHelper.WindowsThemeToResourceTheme(CurrentTheme);
 
         lock (BackdropEnabledWindows)
         {
