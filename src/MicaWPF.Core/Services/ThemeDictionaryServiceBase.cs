@@ -1,4 +1,4 @@
-﻿// <copyright file="ThemeDictionaryService.cs" company="Zircon Technology">
+﻿// <copyright file="ThemeDictionaryServiceBase.cs" company="Zircon Technology">
 // This software is distributed under the MIT license and its code is free of use.
 // </copyright>
 
@@ -11,20 +11,11 @@ namespace MicaWPF.Core.Services;
 /// <summary>
 /// Service that manages the theme dictionnaries from MicaWPF.
 /// </summary>
-public sealed class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionaryService
+public class ThemeDictionaryServiceBase : INotifyPropertyChanged, IThemeDictionaryService
 {
     private static Uri? _currentThemeSource;
 
-    private ThemeDictionaryService()
-    {
-    }
-
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    /// <summary>
-    /// Gets the current instance of <see cref="ThemeDictionaryService"/> but as the interface <see cref="IThemeDictionaryService"/>.
-    /// </summary>
-    public static IThemeDictionaryService Current { get; } = new ThemeDictionaryService();
 
     public Uri? ThemeSource
     {

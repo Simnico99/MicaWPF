@@ -22,7 +22,6 @@ public sealed class ThemeDictionary : ResourceDictionary
                 _ => "MicaLight",
             };
 
-            // MergedDictionaries.Add(new ResourceDictionary() { Source = new($"pack://application:,,,/MicaWPF;component/Styles/Themes/{themeName}.xaml", UriKind.Absolute) });
             Source = new($"pack://application:,,,/MicaWPF;component/Styles/Themes/{themeName}.xaml", UriKind.Absolute);
         }
     }

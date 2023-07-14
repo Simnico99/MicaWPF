@@ -2,6 +2,9 @@
 // This software is distributed under the MIT license and its code is free of use.
 // </copyright>
 
+using MicaWPF.Core.Enums;
+using MicaWPF.Core.Services;
+
 namespace MicaWPF.Core.Extensions;
 
 /// <summary>
@@ -15,5 +18,13 @@ public static class WindowExtension
     public static async Task RefreshContentAsync(this Window window)
     {
         await Application.Current.Dispatcher.InvokeAsync(() => window.RefreshChildrenStyle());
+    }
+
+    /// <summary>
+    /// Enable the backdrop on a <see cref="Window"/>.
+    /// </summary>
+    public static void EnableBackdrop(this Window window, BackdropType backdropType = BackdropType.Mica)
+    {
+        MicaWPFControllerService.ThemeService.EnableBackdrop(window, backdropType);
     }
 }

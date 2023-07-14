@@ -5,7 +5,7 @@
 using System.ComponentModel;
 using System.Windows.Controls;
 
-namespace MicaWPF.Lite.Controls;
+namespace MicaWPF.Core.Controls;
 
 /// <summary>
 /// A border that has a gradient based on the current theme.

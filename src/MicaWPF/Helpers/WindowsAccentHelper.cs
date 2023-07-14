@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Runtime.InteropServices;
+using MicaWPF.Core.Defaults.Helpers;
 using MicaWPF.Core.Interop;
 using MicaWPF.Core.Models;
 #if NET5_0_OR_GREATER
@@ -14,18 +15,15 @@ using Windows.UI.ViewManagement;
 
 namespace MicaWPF.Helpers;
 
-public static class WindowsAccentHelper
+public class WindowsAccentHelper : WindowsAccentHelperBase
 {
-    private const string _registryKeyPath = @"Software\Microsoft\Windows\DWM";
-    private const string _registryValueName = "ColorPrevalence";
-
     /// <summary>
     /// Determines whether the title bar and borders are accented.
     /// </summary>
     /// <returns>
     /// Returns a boolean value indicating whether the title bar and borders are accented or not.
     /// </returns>
-    public static bool AreTitleBarAndBordersAccented()
+    public override bool AreTitleBarAndBordersAccented()
     {
         using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
         var registryValueObject = key?.GetValue(_registryValueName);
@@ -46,7 +44,7 @@ public static class WindowsAccentHelper
     /// <returns>
     /// Returns an <see cref="AccentColors"/> object containing the different variations of the accent color.
     /// </returns>
-    public static AccentColors GetAccentColor()
+    public override AccentColors GetAccentColor()
     {
         try
         {
@@ -117,20 +115,9 @@ public static class WindowsAccentHelper
 #endif
         catch (Exception e) when (e is TypeInitializationException or COMException)
         {
-            InteropMethods.DwmGetColorizationParameters(out var colors);
+            var colors = InteropMethods.GetDwmGetColorizationParameters();
             return new(ParseColor(colors.clrColor), default, default, default, default, default, default, true);
         }
-    }
-
-    private static Color ParseColor(uint color)
-    {
-        var opaque = true;
-
-        return Color.FromArgb(
-            (byte)(opaque ? 255 : (color >> 24) & 0xff),
-            (byte)((color >> 16) & 0xff),
-            (byte)((color >> 8) & 0xff),
-            (byte)((byte)color & 0xff));
     }
 
 #if NETFRAMEWORK || NETCOREAPP3_1

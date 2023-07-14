@@ -1,4 +1,4 @@
-﻿// <copyright file="ThemeService.cs" company="Zircon Technology">
+﻿// <copyright file="ThemeServiceBase.cs" company="Zircon Technology">
 // This software is distributed under the MIT license and its code is free of use.
 // </copyright>
 
@@ -14,26 +14,16 @@ namespace MicaWPF.Core.Services;
 /// <summary>
 /// Service that manages the theme of the application.
 /// </summary>
-public sealed class ThemeService : IThemeService
+public class ThemeServiceBase : IThemeService
 {
     private IAccentColorService? _accentColorService;
     private WindowsTheme _currentTheme;
     private bool _isCheckingTheme;
 
-    static ThemeService()
+    public ThemeServiceBase()
     {
-        Current = new ThemeService();
-        _ = Current.ChangeTheme(WindowsTheme.Auto);
+        ChangeTheme(WindowsTheme.Auto);
     }
-
-    private ThemeService()
-    {
-    }
-
-    /// <summary>
-    /// Gets the current instance of the <see cref="ThemeService"/> class but as the interface <see cref="IThemeService"/>.
-    /// </summary>
-    public static IThemeService Current { get; }
 
     public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
 
@@ -54,7 +44,7 @@ public sealed class ThemeService : IThemeService
         CurrentTheme = windowsTheme == WindowsTheme.Auto ? WindowsThemeHelper.GetCurrentWindowsTheme() : windowsTheme;
 
         _accentColorService?.RefreshAccentsColors();
-        ThemeDictionaryService.Current.ThemeSource = WindowsThemeHelper.WindowsThemeToResourceTheme(CurrentTheme);
+        MicaWPFControllerService.ThemeDictionaryService.ThemeSource = WindowsThemeHelper.WindowsThemeToResourceTheme(CurrentTheme);
 
         lock (BackdropEnabledWindows)
         {

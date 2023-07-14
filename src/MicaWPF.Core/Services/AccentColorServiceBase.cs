@@ -1,47 +1,32 @@
-﻿// <copyright file="AccentColorService.cs" company="Zircon Technology">
+﻿// <copyright file="AccentColorServiceBase.cs" company="Zircon Technology">
 // This software is distributed under the MIT license and its code is free of use.
 // </copyright>
 
+using MicaWPF.Core.Controls;
+using MicaWPF.Core.Defaults.Helpers;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Events;
 using MicaWPF.Core.Helpers;
-using MicaWPF.Core.Models;
-using MicaWPF.Core.Services;
-using MicaWPF.Lite.Controls;
-using MicaWPF.Lite.Core.Helpers;
 using Microsoft.Win32;
 
-namespace MicaWPF.Lite.Services;
+namespace MicaWPF.Core.Services;
 
 /// <summary>
 /// Service that manages the accent colors of the application.
 /// </summary>
-public sealed class AccentColorService : IAccentColorService
+public class AccentColorServiceBase : IAccentColorService
 {
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
 
-    static AccentColorService()
+    public AccentColorServiceBase()
     {
-        WindowsThemeHelper.DarkUri = new Uri("pack://application:,,,/MicaWPF.Lite;component/Styles/Themes/MicaDark.xaml");
-        WindowsThemeHelper.LightUri = new Uri("pack://application:,,,/MicaWPF.Lite;component/Styles/Themes/MicaLight.xaml");
-
-        Current = new AccentColorService();
-        var localCurrent = (AccentColorService)Current;
-        localCurrent.UpdateAccentsColorsFromWindows();
-        localCurrent.IsTitleBarAndWindowsBorderColored = WindowsAccentHelper.AreTitleBarAndBordersAccented();
-        localCurrent.IsTitleBarAndBorderAccentAware = true;
-        ThemeService.Current.SetAccentColorService(Current);
+        UpdateAccentsColorsFromWindows();
+        IsTitleBarAndWindowsBorderColored = WindowsAccentHelper.AreTitleBarAndBordersAccented();
+        IsTitleBarAndBorderAccentAware = true;
     }
 
-    private AccentColorService()
-    {
-    }
-
-    /// <summary>
-    /// Gets the current instance of <see cref="AccentColorService"/> but as the interface <see cref="IAccentColorService"/>.
-    /// </summary>
-    public static IAccentColorService Current { get; }
+    public virtual IWindowsAccentHelper WindowsAccentHelper { get; } = new WindowsAccentHelperBase();
 
     public IWeakEvent<AccentColors> AccentColorChanged { get; } = new WeakEvent<AccentColors>();
 
@@ -140,7 +125,7 @@ public sealed class AccentColorService : IAccentColorService
 
     private void UpdateFromInternalColors()
     {
-        switch (ThemeService.Current.CurrentTheme)
+        switch (MicaWPFControllerService.ThemeService.CurrentTheme)
         {
             case WindowsTheme.Dark:
                 UpdateColorResources(AccentColors.SystemAccentColorLight1, AccentColors.SystemAccentColorLight2, AccentColors.SystemAccentColorLight3);
@@ -151,7 +136,7 @@ public sealed class AccentColorService : IAccentColorService
         }
 
         WindowHelper.RefreshAllWindowsContents();
-        ThemeDictionaryService.Current.RefreshThemeSource();
+        MicaWPFControllerService.ThemeDictionaryService.RefreshThemeSource();
     }
 
     private void SetAccentColorOnTitleBarAndBorders(bool isEnabled)
@@ -160,7 +145,7 @@ public sealed class AccentColorService : IAccentColorService
         var windows = Application.Current.Windows;
         foreach (var window in windows)
         {
-            if (window is MicaWindow micaWindow)
+            if (window is IMicaWindow micaWindow)
             {
                 micaWindow.UseAccentOnTitleBarAndBorder = isEnabled;
             }

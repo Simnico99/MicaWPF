@@ -3,6 +3,7 @@
 // </copyright>
 
 using MicaWPF.Core.Enums;
+using MicaWPF.Core.Services;
 using Microsoft.Win32;
 
 namespace MicaWPF.Core.Helpers;
@@ -12,9 +13,9 @@ public static class WindowsThemeHelper
     private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
     private const string _registryValueName = "AppsUseLightTheme";
 
-    public static Uri DarkUri { get; set; } = new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaDark.xaml");
+    public static Uri DarkUri { get; } = new Uri($"pack://application:,,,/{MicaWPFControllerService.CurrentNamespace};component/Styles/Themes/MicaDark.xaml");
 
-    public static Uri LightUri { get; set; } = new Uri("pack://application:,,,/MicaWPF;component/Styles/Themes/MicaLight.xaml");
+    public static Uri LightUri { get; } = new Uri($"pack://application:,,,/{MicaWPFControllerService.CurrentNamespace}MicaWPF;component/Styles/Themes/MicaLight.xaml");
 
     /// <summary>
     /// Gets the Windows theme (light or dark) from the registry.

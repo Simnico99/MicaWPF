@@ -15,7 +15,7 @@ namespace MicaWPF.DependencyInjection.Services;
 internal sealed class ThemeServiceDI : IThemeService
 {
     private readonly MicaWPFOptions _options;
-    private readonly IThemeService _themeService = ThemeService.Current;
+    private readonly IThemeService _themeService = MicaWPFControllerService.ThemeService;
 
     public ThemeServiceDI(MicaWPFOptions options)
     {
