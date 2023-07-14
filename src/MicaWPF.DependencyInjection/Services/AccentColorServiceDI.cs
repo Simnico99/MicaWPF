@@ -11,11 +11,18 @@ using MicaWPF.Services;
 
 namespace MicaWPF.DependencyInjection.Services;
 
+/// <summary>
+/// The AccentColorService through dependency injection.
+/// </summary>
 internal sealed class AccentColorServiceDI : IAccentColorService
 {
     private readonly MicaWPFOptions _options;
     private readonly IAccentColorService _accentColorService = MicaWPFControllerService.AccentColorService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AccentColorServiceDI"/> class.
+    /// </summary>
+    /// <param name="options">MicaWPF options.</param>
     public AccentColorServiceDI(MicaWPFOptions options)
     {
         _options = options;
@@ -32,30 +39,38 @@ internal sealed class AccentColorServiceDI : IAccentColorService
         _accentColorService.IsTitleBarAndBorderAccentAware = _options.IsTitleBarAndBorderAccentAware;
     }
 
+    /// <inheritdoc/>
     public IWeakEvent<AccentColors> AccentColorChanged => _accentColorService.AccentColorChanged;
 
+    /// <inheritdoc/>
     public AccentColors AccentColors => _accentColorService.AccentColors;
 
+    /// <inheritdoc/>
     public bool AccentColorsUpdateFromWindows => _accentColorService.AccentColorsUpdateFromWindows;
 
+    /// <inheritdoc/>
     public bool IsTitleBarAndBorderAccentAware
     {
         get => _accentColorService.IsTitleBarAndBorderAccentAware;
         set => _accentColorService.IsTitleBarAndBorderAccentAware = value;
     }
 
+    /// <inheritdoc/>
     public bool IsTitleBarAndWindowsBorderColored => _accentColorService.IsTitleBarAndWindowsBorderColored;
 
+    /// <inheritdoc/>
     public void UpdateAccentsColors(Color systemAccent)
     {
         _accentColorService.UpdateAccentsColors(systemAccent);
     }
 
+    /// <inheritdoc/>
     public void UpdateAccentsColorsFromWindows()
     {
         _accentColorService.UpdateAccentsColorsFromWindows();
     }
 
+    /// <inheritdoc/>
     public void RefreshAccentsColors()
     {
         _accentColorService.RefreshAccentsColors();
