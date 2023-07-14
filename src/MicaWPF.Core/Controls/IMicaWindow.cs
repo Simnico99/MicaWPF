@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Windows;
+using System.Windows.Shell;
 using MicaWPF.Core.Enums;
 
 namespace MicaWPF.Core.Controls;
@@ -46,6 +47,11 @@ public interface IMicaWindow
     /// Gets or sets the title bar type of the window (WinUI or Win32).
     /// </summary>
     TitleBarType TitleBarType { get; set; }
+
+    /// <summary>
+    /// Gets or sets a custom WindowChrom for the MicaWindow.
+    /// </summary>
+    WindowChrome CustomWindowChrome { get; set; }
 
     /// <summary>
     /// Ends the initialization of a window that is created using markup. This method is called by the markup parser.

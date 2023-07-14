@@ -22,6 +22,7 @@ namespace MicaWPF.Core.Controls;
 /// </summary>
 public class MicaWindowBase : Window, IMicaWindow
 {
+    public static readonly DependencyProperty CustomWindowChromeProperty = DependencyProperty.Register(nameof(CustomWindowChrome), typeof(WindowChrome), typeof(MicaWindowBase));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindowBase));
     public static readonly DependencyProperty UseAccentOnTitleBarAndBorderProperty = DependencyProperty.Register(nameof(UseAccentOnTitleBarAndBorder), typeof(bool), typeof(MicaWindowBase), new UIPropertyMetadata(MicaWPFServiceUtility.AccentColorService.IsTitleBarAndWindowsBorderColored));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindowBase), new UIPropertyMetadata(true));
@@ -46,6 +47,7 @@ public class MicaWindowBase : Window, IMicaWindow
 
     public MicaWindowBase()
     {
+        CustomWindowChrome = new WindowChrome();
         var myResourceDictionary = new ResourceDictionary
         {
             Source = new Uri($"{MicaWPFServiceUtility.CurrentNamespace};component/Styles/Controls/MicaWindow.xaml", UriKind.RelativeOrAbsolute),
@@ -97,6 +99,13 @@ public class MicaWindowBase : Window, IMicaWindow
     {
         get => (UIElement)GetValue(TitleBarContentProperty);
         set => SetValue(TitleBarContentProperty, value);
+    }
+
+    /// <inheritdoc/>
+    public WindowChrome CustomWindowChrome
+    {
+        get => (WindowChrome)GetValue(CustomWindowChromeProperty);
+        set => SetValue(CustomWindowChromeProperty, value);
     }
 
     /// <summary>
@@ -162,23 +171,19 @@ public class MicaWindowBase : Window, IMicaWindow
     {
         if (windowsState == WindowState.Maximized || ResizeMode == ResizeMode.NoResize)
         {
-            WindowChrome.SetWindowChrome(this, new WindowChrome()
-            {
-                CaptionHeight = TitleBarHeight - 7,
-                CornerRadius = new CornerRadius(8),
-                GlassFrameThickness = new Thickness(-1),
-                ResizeBorderThickness = new Thickness(0),
-            });
+            CustomWindowChrome.CaptionHeight = TitleBarHeight - 7;
+            CustomWindowChrome.CornerRadius = new CornerRadius(8);
+            CustomWindowChrome.GlassFrameThickness = new Thickness(-1);
+            CustomWindowChrome.ResizeBorderThickness = new Thickness(0);
+            WindowChrome.SetWindowChrome(this, CustomWindowChrome);
         }
         else
         {
-            WindowChrome.SetWindowChrome(this, new WindowChrome()
-            {
-                CaptionHeight = TitleBarHeight - 7,
-                CornerRadius = new CornerRadius(8),
-                GlassFrameThickness = new Thickness(-1),
-                ResizeBorderThickness = new Thickness(6),
-            });
+            CustomWindowChrome.CaptionHeight = TitleBarHeight - 7;
+            CustomWindowChrome.CornerRadius = new CornerRadius(8);
+            CustomWindowChrome.GlassFrameThickness = new Thickness(-1);
+            CustomWindowChrome.ResizeBorderThickness = new Thickness(6);
+            WindowChrome.SetWindowChrome(this, CustomWindowChrome);
         }
     }
 
