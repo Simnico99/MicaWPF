@@ -169,17 +169,13 @@ dotnet_diagnostic.SA1118.severity = none
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1309.md
 dotnet_diagnostic.SA1309.severity = none
 
-# SA1402: File may only contain a single type
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1402.md
-dotnet_diagnostic.SA1402.severity = none
-
 # SA1600: Elements should be documented
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md
-dotnet_diagnostic.SA1600.severity = none
+# dotnet_diagnostic.SA1600.severity = none
 
 # SA1618: Generic type parameters should be documented
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1618.md
-dotnet_diagnostic.SA1618.severity = none
+# dotnet_diagnostic.SA1618.severity = none
 
 # SA1649: File name should match first type name
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1649.md

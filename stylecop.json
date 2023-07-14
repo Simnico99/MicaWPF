@@ -3,7 +3,7 @@
   "settings": {
     "documentationRules": {
       "companyName": "Zircon Technology",
-      "copyrightText": "This software is distributed under the MIT license and its code is free of use.",
+      "copyrightText": "This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.",
       "documentExposedElements": false
     },
     "orderingRules": {

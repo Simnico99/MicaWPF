@@ -1,25 +1,63 @@
 ﻿// <copyright file="MicaWPFControllerService.cs" company="Zircon Technology">
-// This software is distributed under the MIT license and its code is free of use.
+// This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
+
+using MicaWPF.Core.Helpers;
 
 namespace MicaWPF.Core.Services;
 
+/// <summary>
+/// Controls and manages the services in the MicaWPF framework.
+/// </summary>
 public sealed class MicaWPFControllerService
 {
+    private static IAccentColorService? _accentColorService;
+    private static IThemeService? _themeService;
+    private static IThemeDictionaryService? _themeDictionaryService;
+    private static string? _currentNamespace;
+
     static MicaWPFControllerService()
     {
         // Warning the order is very important.
-        CurrentNamespace = ServiceLocator.GetNamespace();
-        ThemeDictionaryService = ServiceLocator.GetService<ThemeDictionaryServiceBase>();
-        ThemeService = ServiceLocator.GetService<ThemeServiceBase>();
-        AccentColorService = ServiceLocator.GetService<AccentColorServiceBase>();
+        CurrentNamespace ??= ServiceLocatorHelper.GetNamespace();
+        ThemeDictionaryService ??= ServiceLocatorHelper.GetService<IThemeDictionaryService>();
+        ThemeService ??= ServiceLocatorHelper.GetService<IThemeService>();
+        AccentColorService ??= ServiceLocatorHelper.GetService<IAccentColorService>();
     }
 
-    public static IAccentColorService AccentColorService { get; }
+    /// <summary>
+    /// Gets or sets the Accent Color Service instance.
+    /// </summary>
+    public static IAccentColorService AccentColorService
+    {
+        get => _accentColorService!;
+        set => StaticHelper.Init(value, ref _accentColorService);
+    }
 
-    public static IThemeService ThemeService { get; }
+    /// <summary>
+    /// Gets or sets the Theme Service instance.
+    /// </summary>
+    public static IThemeService ThemeService
+    {
+        get => _themeService!;
+        set => StaticHelper.Init(value, ref _themeService);
+    }
 
-    public static IThemeDictionaryService ThemeDictionaryService { get; }
+    /// <summary>
+    /// Gets or sets the Theme Dictionary Service instance.
+    /// </summary>
+    public static IThemeDictionaryService ThemeDictionaryService
+    {
+        get => _themeDictionaryService!;
+        set => StaticHelper.Init(value, ref _themeDictionaryService);
+    }
 
-    public static string CurrentNamespace { get; }
+    /// <summary>
+    /// Gets or sets the current namespace string.
+    /// </summary>
+    public static string CurrentNamespace
+    {
+        get => _currentNamespace!;
+        set => StaticHelper.Init(value, ref _currentNamespace);
+    }
 }
