@@ -1,4 +1,4 @@
-﻿// <copyright file="AccentColorService.cs" company="Zircon Technology">
+﻿// <copyright file="AccentColorServiceWinRT.cs" company="Zircon Technology">
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
@@ -11,7 +11,7 @@ namespace MicaWPF.Services;
 /// <summary>
 /// Service that manages the accent colors of the application.
 /// </summary
-public sealed class AccentColorService : AccentColorServiceBase
+public sealed class AccentColorServiceWinRT : AccentColorServiceBase
 {
     public override IWindowsAccentHelper WindowsAccentHelper { get; } = new WindowsAccentHelper();
 }
