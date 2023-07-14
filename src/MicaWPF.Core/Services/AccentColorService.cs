@@ -5,7 +5,6 @@
 using System.Windows;
 using System.Windows.Media;
 using MicaWPF.Core.Controls;
-using MicaWPF.Core.Defaults.Helpers;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Events;
 using MicaWPF.Core.Helpers;
@@ -29,7 +28,7 @@ public class AccentColorService : IAccentColorService
         IsTitleBarAndBorderAccentAware = true;
     }
 
-    public virtual IWindowsAccentHelper WindowsAccentHelper { get; } = new WindowsAccentHelperBase();
+    public virtual WindowsAccentHelper WindowsAccentHelper { get; } = new WindowsAccentHelper();
 
     public IWeakEvent<AccentColors> AccentColorChanged { get; } = new WeakEvent<AccentColors>();
 

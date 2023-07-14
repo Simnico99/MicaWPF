@@ -3,8 +3,8 @@
 // </copyright>
 
 using System.Windows.Media;
-using MicaWPF.Core.Defaults.Helpers;
 using MicaWPF.Core.Events;
+using MicaWPF.Core.Helpers;
 using MicaWPF.Core.Models;
 
 namespace MicaWPF.Core.Services;
@@ -17,7 +17,7 @@ public interface IAccentColorService
     /// <summary>
     /// Gets contains the currently used WindowsAccentHelper.
     /// </summary>
-    IWindowsAccentHelper WindowsAccentHelper { get; }
+    WindowsAccentHelper WindowsAccentHelper { get; }
 
     /// <summary>
     /// Gets event that is raised when the accent colors are changed.

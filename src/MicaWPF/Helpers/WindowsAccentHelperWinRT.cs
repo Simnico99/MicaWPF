@@ -1,10 +1,10 @@
-﻿// <copyright file="WindowsAccentHelper.cs" company="Zircon Technology">
+﻿// <copyright file="WindowsAccentHelperWinRT.cs" company="Zircon Technology">
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
 using System.Runtime.InteropServices;
 using System.Windows.Media;
-using MicaWPF.Core.Defaults.Helpers;
+using MicaWPF.Core.Helpers;
 using MicaWPF.Core.Interop;
 using MicaWPF.Core.Models;
 using Microsoft.Win32;
@@ -17,7 +17,7 @@ using Windows.UI.ViewManagement;
 
 namespace MicaWPF.Helpers;
 
-public class WindowsAccentHelper : WindowsAccentHelperBase
+public class WindowsAccentHelperWinRT : WindowsAccentHelper
 {
     public override bool AreTitleBarAndBordersAccented()
     {

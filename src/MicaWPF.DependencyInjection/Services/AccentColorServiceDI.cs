@@ -3,8 +3,8 @@
 // </copyright>
 
 using System.Windows.Media;
-using MicaWPF.Core.Defaults.Helpers;
 using MicaWPF.Core.Events;
+using MicaWPF.Core.Helpers;
 using MicaWPF.Core.Models;
 using MicaWPF.Core.Services;
 using MicaWPF.DependencyInjection.Options;
@@ -40,7 +40,7 @@ internal sealed class AccentColorServiceDI : IAccentColorService
     }
 
     /// <inheritdoc/>
-    public IWindowsAccentHelper WindowsAccentHelper => _accentColorService.WindowsAccentHelper;
+    public WindowsAccentHelper WindowsAccentHelper => _accentColorService.WindowsAccentHelper;
 
     /// <inheritdoc/>
     public IWeakEvent<AccentColors> AccentColorChanged => _accentColorService.AccentColorChanged;
