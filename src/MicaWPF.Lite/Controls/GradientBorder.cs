@@ -3,9 +3,11 @@
 // </copyright>
 
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
-namespace MicaWPF.Controls;
+namespace MicaWPF.Lite.Controls;
 
 /// <summary>
 /// A border that has a gradient based on the current theme.

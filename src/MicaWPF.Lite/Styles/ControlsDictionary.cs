@@ -2,6 +2,7 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
 using System.Windows.Markup;
 
 namespace MicaWPF.Lite.Styles;

@@ -17,12 +17,6 @@ namespace MicaWPF.Helpers;
 
 public class WindowsAccentHelper : WindowsAccentHelperBase
 {
-    /// <summary>
-    /// Determines whether the title bar and borders are accented.
-    /// </summary>
-    /// <returns>
-    /// Returns a boolean value indicating whether the title bar and borders are accented or not.
-    /// </returns>
     public override bool AreTitleBarAndBordersAccented()
     {
         using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
@@ -38,12 +32,6 @@ public class WindowsAccentHelper : WindowsAccentHelperBase
         return registryValue > 0;
     }
 
-    /// <summary>
-    /// Gets the accent color for the system.
-    /// </summary>
-    /// <returns>
-    /// Returns an <see cref="AccentColors"/> object containing the different variations of the accent color.
-    /// </returns>
     public override AccentColors GetAccentColor()
     {
         try

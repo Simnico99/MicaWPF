@@ -4,6 +4,7 @@
 
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using MicaWPF.Core.Helpers;
 
 namespace MicaWPF.Core.Services;

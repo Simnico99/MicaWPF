@@ -2,10 +2,12 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Shell;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Extensions;
@@ -26,9 +28,11 @@ public class MicaWindowBase : Window, IMicaWindow
     public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindowBase), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindowBase), new UIPropertyMetadata(TitleBarType.WinUI));
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindowBase));
+
     private const int _hTMAXBUTTON = 9;
     private const string _buttonMaxName = "Maximize";
     private const string _buttonRestoreName = "Restore";
+
     private System.Windows.Controls.Button? _buttonMax;
     private System.Windows.Controls.Button? _buttonRestore;
 
@@ -57,56 +61,47 @@ public class MicaWindowBase : Window, IMicaWindow
             : myResourceDictionary[$"{MicaWPFControllerService.CurrentNamespace}.Styles.Default.MicaWindow.Windows10"] as Style;
     }
 
-    /// <summary>
-    /// Gets or sets the current type of backdrop the window is using.
-    /// </summary>
+    /// <inheritdoc/>
     public BackdropType SystemBackdropType { get; set; } = BackdropType.Mica;
 
-    /// <summary>
-    /// Gets or sets the height of the title bar.
-    /// </summary>
+    /// <inheritdoc/>
     public int TitleBarHeight
     {
         get => (int)GetValue(TitleBarHeightProperty);
         set => SetValue(TitleBarHeightProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether is showing the accented border.
-    /// </summary>
+    /// <inheritdoc/>
     public bool UseAccentOnTitleBarAndBorder
     {
         get => (bool)GetValue(UseAccentOnTitleBarAndBorderProperty);
         set => SetValue(UseAccentOnTitleBarAndBorderProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets the type of title bar used.
-    /// </summary>
+    /// <inheritdoc/>
     public TitleBarType TitleBarType
     {
         get => (TitleBarType)GetValue(TitleBarTypeProperty);
         set => SetValue(TitleBarTypeProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets a value indicating whether should the title color change when the window is inactive.
-    /// </summary>
+    /// <inheritdoc/>
     public bool ChangeTitleColorWhenInactive
     {
         get => (bool)GetValue(MarginMaximizedProperty);
         set => SetValue(MarginMaximizedProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets custom <see cref="UIElement"/> that are embeded in the title bar.
-    /// </summary>
+    /// <inheritdoc/>
     public UIElement TitleBarContent
     {
         get => (UIElement)GetValue(TitleBarContentProperty);
         set => SetValue(TitleBarContentProperty, value);
     }
 
+    /// <summary>
+    /// Gets or sets if the margin maximized.
+    /// </summary>
     internal Thickness? MarginMaximized
     {
         get => (Thickness)GetValue(MarginMaximizedProperty);

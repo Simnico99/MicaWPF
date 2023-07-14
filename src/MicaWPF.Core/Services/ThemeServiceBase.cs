@@ -2,11 +2,14 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Events;
 using MicaWPF.Core.Helpers;
 using MicaWPF.Core.Interop;
+using MicaWPF.Core.Models;
 using Microsoft.Win32;
 
 namespace MicaWPF.Core.Services;
@@ -48,17 +51,6 @@ public class ThemeServiceBase : IThemeService
 
         lock (BackdropEnabledWindows)
         {
-#if NET5_0_OR_GREATER
-            foreach (var backdropEnabledWindow in CollectionsMarshal.AsSpan(BackdropEnabledWindows))
-            {
-                SetWindowBackdrop(backdropEnabledWindow.Window, backdropEnabledWindow.BackdropType);
-
-                // Force the title bar to refresh.
-                var style = backdropEnabledWindow.Window.WindowStyle;
-                backdropEnabledWindow.Window.WindowStyle = WindowStyle.None;
-                backdropEnabledWindow.Window.WindowStyle = style;
-            }
-#else
             foreach (var backdropEnabledWindow in BackdropEnabledWindows)
             {
                 SetWindowBackdrop(backdropEnabledWindow.Window, backdropEnabledWindow.BackdropType);
@@ -68,7 +60,6 @@ public class ThemeServiceBase : IThemeService
                 backdropEnabledWindow.Window.WindowStyle = WindowStyle.None;
                 backdropEnabledWindow.Window.WindowStyle = style;
             }
-#endif
         }
 
         ThemeChanged.Publish(CurrentTheme);

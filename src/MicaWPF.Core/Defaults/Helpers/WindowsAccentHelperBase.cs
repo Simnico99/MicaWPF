@@ -2,22 +2,22 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows.Media;
 using MicaWPF.Core.Interop;
+using MicaWPF.Core.Models;
 using Microsoft.Win32;
 
 namespace MicaWPF.Core.Defaults.Helpers;
 
+/// <summary>
+/// Helper method for getting windows accent.
+/// </summary>
 public class WindowsAccentHelperBase : IWindowsAccentHelper
 {
     protected const string _registryKeyPath = @"Software\Microsoft\Windows\DWM";
     protected const string _registryValueName = "ColorPrevalence";
 
-    /// <summary>
-    /// Determines whether the title bar and borders are accented.
-    /// </summary>
-    /// <returns>
-    /// Returns a boolean value indicating whether the title bar and borders are accented or not.
-    /// </returns>
+    /// <inheritdoc/>
     public virtual bool AreTitleBarAndBordersAccented()
     {
         using var key = Registry.CurrentUser.OpenSubKey(_registryKeyPath);
@@ -33,12 +33,7 @@ public class WindowsAccentHelperBase : IWindowsAccentHelper
         return registryValue > 0;
     }
 
-    /// <summary>
-    /// Gets the accent color for the system.
-    /// </summary>
-    /// <returns>
-    /// Returns an <see cref="AccentColors"/> object containing the different variations of the accent color.
-    /// </returns>
+    /// <inheritdoc/>
     public virtual AccentColors GetAccentColor()
     {
         InteropMethods.DwmGetColorizationParameters(out var colors);

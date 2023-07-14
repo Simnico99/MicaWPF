@@ -2,8 +2,10 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Events;
+using MicaWPF.Core.Models;
 
 namespace MicaWPF.Core.Services;
 
