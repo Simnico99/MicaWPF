@@ -7,7 +7,7 @@ using MicaWPF.Core.Symbols;
 namespace MicaWPF.Core.Models;
 
 /// <summary>
-/// A class to parse <see cref="string"/> into <see cref="FluentSystemIcons"/>.
+/// A static helper class to parse <see cref="string"/> instances into <see cref="FluentSystemIcons"/>.
 /// </summary>
 public static class Glyph
 {
@@ -15,18 +15,22 @@ public static class Glyph
     public const FluentSystemIcons.Filled DefaultFilledIcon = FluentSystemIcons.Filled.Heart28;
 
     /// <summary>
-    /// Parse the current string into <see cref="FluentSystemIcons.Regular"/>.
+    /// Parses a string into a <see cref="FluentSystemIcons.Regular"/> icon.
+    /// If the string is null or empty, a default icon is returned.
     /// </summary>
-    /// <returns>The parsed icon.</returns>
+    /// <param name="name">The string representation of a FluentSystemIcons.Regular enum value.</param>
+    /// <returns>The parsed <see cref="FluentSystemIcons.Regular"/> icon. If the input string is null or empty, a default icon is returned.</returns>
     public static FluentSystemIcons.Regular Parse(string name)
     {
         return string.IsNullOrEmpty(name) ? DefaultIcon : (FluentSystemIcons.Regular)Enum.Parse(typeof(FluentSystemIcons.Regular), name);
     }
 
     /// <summary>
-    /// Parse the current string into <see cref="FluentSystemIcons.Filled"/>.
+    /// Parses a string into a <see cref="FluentSystemIcons.Filled"/> icon.
+    /// If the string is null or empty, a default icon is returned.
     /// </summary>
-    /// <returns>The parsed icon.</returns>
+    /// <param name="name">The string representation of a FluentSystemIcons.Filled enum value.</param>
+    /// <returns>The parsed <see cref="FluentSystemIcons.Filled"/> icon. If the input string is null or empty, a default icon is returned.</returns>
     public static FluentSystemIcons.Filled ParseFilled(string name)
     {
         return string.IsNullOrEmpty(name) ? DefaultFilledIcon : (FluentSystemIcons.Filled)Enum.Parse(typeof(FluentSystemIcons.Filled), name);

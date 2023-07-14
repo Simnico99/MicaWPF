@@ -13,8 +13,14 @@ public static class WindowsThemeHelper
     private const string _registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
     private const string _registryValueName = "AppsUseLightTheme";
 
+    /// <summary>
+    /// Gets the dark theme resource Uri.
+    /// </summary>
     public static Uri DarkUri { get; } = new Uri($"pack://application:,,,/{MicaWPFControllerService.CurrentNamespace};component/Styles/Themes/MicaDark.xaml");
 
+    /// <summary>
+    /// Gets the light theme resource Uri.
+    /// </summary>
     public static Uri LightUri { get; } = new Uri($"pack://application:,,,/{MicaWPFControllerService.CurrentNamespace}MicaWPF;component/Styles/Themes/MicaLight.xaml");
 
     /// <summary>

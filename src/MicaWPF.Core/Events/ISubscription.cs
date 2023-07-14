@@ -9,5 +9,8 @@ namespace MicaWPF.Core.Events;
 /// </summary>
 public interface ISubscription
 {
+    /// <summary>
+    /// Dispose the Subsription.
+    /// </summary>
     void Dispose();
 }

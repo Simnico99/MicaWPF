@@ -19,10 +19,10 @@ public sealed class MicaWPFControllerService
     static MicaWPFControllerService()
     {
         // Warning the order is very important.
-        CurrentNamespace ??= ServiceLocatorHelper.GetNamespace();
-        ThemeDictionaryService ??= ServiceLocatorHelper.GetService<IThemeDictionaryService>();
-        ThemeService ??= ServiceLocatorHelper.GetService<IThemeService>();
-        AccentColorService ??= ServiceLocatorHelper.GetService<IAccentColorService>();
+        _currentNamespace ??= ServiceLocatorHelper.GetNamespace();
+        _themeDictionaryService ??= ServiceLocatorHelper.GetService<IThemeDictionaryService>();
+        _themeService ??= ServiceLocatorHelper.GetService<IThemeService>();
+        _accentColorService ??= ServiceLocatorHelper.GetService<IAccentColorService>();
     }
 
     /// <summary>
