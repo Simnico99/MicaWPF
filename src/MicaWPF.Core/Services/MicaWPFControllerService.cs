@@ -30,7 +30,7 @@ public sealed class MicaWPFControllerService
     /// </summary>
     public static IAccentColorService AccentColorService
     {
-        get => _accentColorService!;
+        get => _accentColorService ?? throw new ArgumentNullException("Value is not initialized yet.");
         set => StaticHelper.Init(value, ref _accentColorService);
     }
 
@@ -39,7 +39,7 @@ public sealed class MicaWPFControllerService
     /// </summary>
     public static IThemeService ThemeService
     {
-        get => _themeService!;
+        get => _themeService ?? throw new ArgumentNullException("Value is not initialized yet.");
         set => StaticHelper.Init(value, ref _themeService);
     }
 
@@ -48,7 +48,7 @@ public sealed class MicaWPFControllerService
     /// </summary>
     public static IThemeDictionaryService ThemeDictionaryService
     {
-        get => _themeDictionaryService!;
+        get => _themeDictionaryService ?? throw new ArgumentNullException("Value is not initialized yet.");
         set => StaticHelper.Init(value, ref _themeDictionaryService);
     }
 
@@ -57,7 +57,7 @@ public sealed class MicaWPFControllerService
     /// </summary>
     public static string CurrentNamespace
     {
-        get => _currentNamespace!;
+        get => _currentNamespace ?? throw new ArgumentNullException("Value is not initialized yet.");
         set => StaticHelper.Init(value, ref _currentNamespace);
     }
 }
