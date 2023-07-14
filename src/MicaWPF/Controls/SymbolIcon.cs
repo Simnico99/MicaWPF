@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using MicaWPF.Core.Extensions;
 using MicaWPF.Core.Symbols;

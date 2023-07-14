@@ -2,7 +2,10 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 using MicaWPF.Controls;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Extensions;

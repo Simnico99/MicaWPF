@@ -3,9 +3,11 @@
 // </copyright>
 
 using System.Runtime.InteropServices;
+using System.Windows.Media;
 using MicaWPF.Core.Defaults.Helpers;
 using MicaWPF.Core.Interop;
 using MicaWPF.Core.Models;
+using Microsoft.Win32;
 #if NET5_0_OR_GREATER
 using MicaWPFRuntimeComponent;
 #endif

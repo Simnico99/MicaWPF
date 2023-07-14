@@ -3,11 +3,11 @@
 // </copyright>
 
 using System.Windows.Media;
+using MicaWPF.Core.Defaults.Helpers;
 using MicaWPF.Core.Events;
 using MicaWPF.Core.Models;
 using MicaWPF.Core.Services;
 using MicaWPF.DependencyInjection.Options;
-using MicaWPF.Services;
 
 namespace MicaWPF.DependencyInjection.Services;
 
@@ -38,6 +38,9 @@ internal sealed class AccentColorServiceDI : IAccentColorService
 
         _accentColorService.IsTitleBarAndBorderAccentAware = _options.IsTitleBarAndBorderAccentAware;
     }
+
+    /// <inheritdoc/>
+    public IWindowsAccentHelper WindowsAccentHelper => _accentColorService.WindowsAccentHelper;
 
     /// <inheritdoc/>
     public IWeakEvent<AccentColors> AccentColorChanged => _accentColorService.AccentColorChanged;

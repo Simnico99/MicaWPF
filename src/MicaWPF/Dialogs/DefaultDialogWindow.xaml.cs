@@ -2,6 +2,8 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
+using System.Windows.Media;
 using MicaWPF.Controls;
 using MicaWPF.Core.Enums;
 
@@ -14,6 +16,9 @@ public partial class DefaultDialogWindow : MicaWindow, IContentDialog
 {
     private readonly TaskCompletionSource<bool> _taskCompletionSource = new();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DefaultDialogWindow"/> class.
+    /// </summary>
     internal DefaultDialogWindow()
     {
         InitializeComponent();

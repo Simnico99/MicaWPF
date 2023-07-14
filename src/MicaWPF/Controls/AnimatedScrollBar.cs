@@ -2,7 +2,9 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using MicaWPF.Core.Models;
 
 namespace MicaWPF.Controls;

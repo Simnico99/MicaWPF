@@ -3,6 +3,8 @@
 // </copyright>
 
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Media;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Symbols;
 

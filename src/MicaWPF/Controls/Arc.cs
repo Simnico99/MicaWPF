@@ -3,6 +3,8 @@
 // </copyright>
 
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace MicaWPF.Controls;
