@@ -1,4 +1,4 @@
-﻿// <copyright file="ThemeServiceBase.cs" company="Zircon Technology">
+﻿// <copyright file="ThemeService.cs" company="Zircon Technology">
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
@@ -17,13 +17,13 @@ namespace MicaWPF.Core.Services;
 /// <summary>
 /// Service that manages the theme of the application.
 /// </summary>
-public class ThemeServiceBase : IThemeService
+public class ThemeService : IThemeService
 {
     private IAccentColorService? _accentColorService;
     private WindowsTheme _currentTheme;
     private bool _isCheckingTheme;
 
-    public ThemeServiceBase()
+    public ThemeService()
     {
         ChangeTheme(WindowsTheme.Auto);
     }

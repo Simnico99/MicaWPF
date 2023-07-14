@@ -11,7 +11,7 @@ namespace MicaWPF.Services;
 /// <summary>
 /// Service that manages the accent colors of the application.
 /// </summary
-public sealed class AccentColorServiceWinRT : AccentColorServiceBase
+public sealed class AccentColorServiceWinRT : AccentColorService
 {
     public override IWindowsAccentHelper WindowsAccentHelper { get; } = new WindowsAccentHelper();
 }
