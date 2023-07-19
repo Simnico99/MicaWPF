@@ -22,7 +22,7 @@ public static class OsHelper
     /// <summary>
     /// Gets a value indicating whether windows 7.
     /// </summary>
-    public static bool IsWindows7 { get; } = IsWindowsNT && new Version(6, 1) == _osVersion;
+    public static bool IsWindows7 { get; } = IsWindowsNT && _osVersion.Major == 6 && _osVersion.Minor == 1;
 
     /// <summary>
     /// Gets a value indicating whether windows 7 Or Greater.
@@ -32,7 +32,7 @@ public static class OsHelper
     /// <summary>
     /// Gets a value indicating whether windows 8.
     /// </summary>
-    public static bool IsWindows8 { get; } = IsWindowsNT && new Version(6, 2) == _osVersion;
+    public static bool IsWindows8 { get; } = IsWindowsNT && _osVersion.Major == 6 && _osVersion.Minor == 2;
 
     /// <summary>
     /// Gets a value indicating whether windows 8 Or Greater.
@@ -42,7 +42,7 @@ public static class OsHelper
     /// <summary>
     /// Gets a value indicating whether windows 8.1.
     /// </summary>
-    public static bool IsWindows81 { get; } = IsWindowsNT && new Version(6, 3) == _osVersion;
+    public static bool IsWindows81 { get; } = IsWindowsNT && _osVersion.Major == 6 && _osVersion.Minor == 3;
 
     /// <summary>
     /// Gets a value indicating whether windows 8.1 Or Greater.
@@ -52,7 +52,7 @@ public static class OsHelper
     /// <summary>
     /// Gets a value indicating whether windows 10.
     /// </summary>
-    public static bool IsWindows10 { get; } = IsWindowsNT && new Version(10, 0) == _osVersion;
+    public static bool IsWindows10 { get; } = IsWindowsNT && _osVersion.Major == 10 && _osVersion.Minor == 0 && _osVersion.Build < 22000;
 
     /// <summary>
     /// Gets a value indicating whether windows 10 Or Greater.
@@ -182,7 +182,8 @@ public static class OsHelper
     /// <summary>
     ///     Gets a value indicating whether windows 11 Build 22000.
     /// </summary>
-    public static bool IsWindows11 { get; } = IsWindowsNT && new Version(10, 0, 22000) == _osVersion;
+    /// 
+    public static bool IsWindows11 { get; } = IsWindowsNT && _osVersion.Major == 10 && _osVersion.Minor == 0 && _osVersion.Build >= 22000;
 
     /// <summary>
     ///     Gets a value indicating whether windows 11 Build 22000 Or Greater.
