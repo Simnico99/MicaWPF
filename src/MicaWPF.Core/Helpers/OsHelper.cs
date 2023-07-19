@@ -181,8 +181,7 @@ public static class OsHelper
 
     /// <summary>
     ///     Gets a value indicating whether windows 11 Build 22000.
-    /// </summary>
-    /// 
+    /// </summary> 
     public static bool IsWindows11 { get; } = IsWindowsNT && _osVersion.Major == 10 && _osVersion.Minor == 0 && _osVersion.Build >= 22000;
 
     /// <summary>
