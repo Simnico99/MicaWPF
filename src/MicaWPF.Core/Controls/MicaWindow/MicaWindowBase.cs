@@ -2,7 +2,6 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Shell;
 using MicaWPF.Core.Extensions;
