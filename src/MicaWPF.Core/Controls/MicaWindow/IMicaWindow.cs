@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Shell;
 using MicaWPF.Core.Enums;
 
-namespace MicaWPF.Core.Controls;
+namespace MicaWPF.Core.Controls.MicaWindow;
 
 /// <summary>
 /// Defines the interface for a Mica-styled Window in WPF, which allows customization of the window's appearance and behavior.

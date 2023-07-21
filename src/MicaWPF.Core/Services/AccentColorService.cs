@@ -4,7 +4,7 @@
 
 using System.Windows;
 using System.Windows.Media;
-using MicaWPF.Core.Controls;
+using MicaWPF.Core.Controls.MicaWindow;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Events;
 using MicaWPF.Core.Helpers;
@@ -119,7 +119,7 @@ public class AccentColorService : IAccentColorService
 
         for (var i = 0; i < colorKeys.Length; i++)
         {
-            Application.Current.Resources[$"MicaWPF{(MicaWPFServiceUtility.CurrentNamespace == "MicaWPF" ? string.Empty : $".{MicaWPFServiceUtility.CurrentNamespace}")}.Colors.SystemAccentColor{colorKeys[i]}"] = accentColors[i];
+            Application.Current.Resources[$"MicaWPF{MicaWPFServiceUtility.BrushNamespace}.Colors.SystemAccentColor{colorKeys[i]}"] = accentColors[i];
         }
 
         AccentColorChanged.Publish(AccentColors);

@@ -60,4 +60,6 @@ public sealed class MicaWPFServiceUtility
         get => _currentNamespace ?? throw new ArgumentNullException("Value is not initialized yet.");
         set => StaticHelper.Init(value, ref _currentNamespace);
     }
+
+    public static string BrushNamespace => CurrentNamespace == "MicaWPF" ? string.Empty : $".{CurrentNamespace}";
 }

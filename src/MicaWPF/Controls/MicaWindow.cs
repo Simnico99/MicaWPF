@@ -3,7 +3,7 @@
 // </copyright>
 
 using System.Windows.Markup;
-using MicaWPF.Core.Controls;
+using MicaWPF.Core.Controls.MicaWindow;
 
 namespace MicaWPF.Controls;
 
