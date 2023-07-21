@@ -133,7 +133,7 @@ public static partial class InteropMethods
     /// <param name="handle">A handle to the window of interest.</param>
     /// <param name="flags">Determines the function's return value if the window does not intersect any display monitor.</param>
     /// <returns>If the window intersects one or more display monitor rectangles, the return value is an HMONITOR handle to the display monitor that has the largest area of intersection with the window.</returns>
-    [LibraryImport(ExternDll.User32)]
+    [LibraryImport(ExternDll.User32, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     internal static partial nint MonitorFromWindow(nint handle, uint flags);
 
@@ -143,7 +143,7 @@ public static partial class InteropMethods
     /// <param name="hMonitor">A handle to the display monitor of interest.</param>
     /// <param name="lpmi">A pointer to a MONITORINFO or MONITORINFOEX structure that receives information about the specified display monitor.</param>
     /// <returns>If the function succeeds, the return value is true. If the function fails, the return value is false.</returns>
-    [LibraryImport(ExternDll.User32)]
+    [LibraryImport(ExternDll.User32, EntryPoint = "GetMonitorInfoW")]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     [return: MarshalAs(UnmanagedType.Bool)]
     internal static partial bool GetMonitorInfo(nint hMonitor, ref MONITORINFO lpmi);
