@@ -22,11 +22,11 @@ public class MicaWindowStyle : Window
     {
         var myResourceDictionary = new ResourceDictionary
         {
-            Source = new Uri($"{MicaWPFServiceUtility.CurrentNamespace};component/Styles/Controls/MicaWindow.xaml", UriKind.RelativeOrAbsolute),
+            Source = new Uri($"MicaWPF.Core;component/Styles/MicaWindow.xaml", UriKind.RelativeOrAbsolute),
         };
 
         Style = OsHelper.IsWindows11_OrGreater
-            ? myResourceDictionary[$"{MicaWPFServiceUtility.CurrentNamespace}.Styles.Default.MicaWindow.Windows11"] as Style
-            : myResourceDictionary[$"{MicaWPFServiceUtility.CurrentNamespace}.Styles.Default.MicaWindow.Windows10"] as Style;
+            ? myResourceDictionary[$"MicaWPF.Core.Styles.Default.MicaWindow.Windows11"] as Style
+            : myResourceDictionary[$"MicaWPF.Core.Styles.Default.MicaWindow.Windows10"] as Style;
     }
 }

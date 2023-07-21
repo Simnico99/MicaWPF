@@ -5,7 +5,6 @@
 using System.Windows;
 using System.Windows.Shell;
 using MicaWPF.Core.Extensions;
-using MicaWPF.Core.Helpers;
 
 namespace MicaWPF.Core.Controls.MicaWindow;
 
