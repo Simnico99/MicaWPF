@@ -2,6 +2,7 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
@@ -40,6 +41,22 @@ public class MicaWindowInteropHandler : MicaWindowProperty
         }
 
         base.OnInitialized(e);
+    }
+
+    protected Size GetHostingScreenSize()
+    {
+        var windowHwnd = new WindowInteropHelper(this).EnsureHandle();
+
+        var mi = default(InteropValues.MONITORINFO);
+        mi.cbSize = (uint)Marshal.SizeOf(mi);
+
+        var monitor = InteropMethods.MonitorFromWindow(windowHwnd, 2);
+        InteropMethods.GetMonitorInfo(monitor, ref mi);
+
+        var width = mi.rcWork.right - mi.rcWork.left;
+        var height = mi.rcWork.bottom - mi.rcWork.top;
+
+        return new Size(width, height);
     }
 
     private nint ShowSnapLayout(nint lparam, ref bool handled)
@@ -119,6 +136,24 @@ public class MicaWindowInteropHandler : MicaWindowProperty
                 break;
             case InteropValues.HwndSourceMessages.WM_NCLBUTTONDOWN:
                 HideMaximiseAndMinimiseButton(lparam, ref handled);
+                break;
+            case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
+                var mmiNullable = (InteropValues.MINMAXINFO?)Marshal.PtrToStructure(lparam, typeof(InteropValues.MINMAXINFO));
+                if (mmiNullable.HasValue)
+                {
+                    var mmi = mmiNullable.Value;
+                    var screen = GetHostingScreenSize();
+                    if (MaxWidth < screen.Width)
+                    {
+                        mmi.ptMaxPosition.X = (int)((screen.Width - MaxWidth) / 2);
+                        mmi.ptMaxSize.X = (int)MaxWidth;
+                        mmi.ptMaxSize.Y = (int)screen.Height + 8;
+
+                        Marshal.StructureToPtr(mmi, lparam, true);
+                        handled = true;
+                    }
+                }
+
                 break;
             case InteropValues.HwndSourceMessages.WM_WINDOWPOSCHANGING:
                 var button = WindowState == WindowState.Maximized ? ButtonRestore : ButtonMax;
