@@ -57,7 +57,6 @@ public class MicaWindowBase : MicaWindowActionHandler, IMicaWindow
         MarginMaximized = windowsState == WindowState.Maximized ? new Thickness(6) : new Thickness(0);
     }
 
-
     private void ApplyResizeBorderThickness(WindowState windowsState)
     {
         if (windowsState == WindowState.Maximized || ResizeMode == ResizeMode.NoResize)
