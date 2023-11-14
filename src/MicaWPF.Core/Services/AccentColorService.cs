@@ -122,6 +122,7 @@ public class AccentColorService : IAccentColorService
             Application.Current.Resources[$"MicaWPF{MicaWPFServiceUtility.BrushNamespace}.Colors.SystemAccentColor{colorKeys[i]}"] = accentColors[i];
         }
 
+        WindowHelper.RefreshAllWindowsContents();
         AccentColorChanged.Publish(AccentColors);
     }
 
@@ -137,7 +138,6 @@ public class AccentColorService : IAccentColorService
                 break;
         }
 
-        WindowHelper.RefreshAllWindowsContents();
         MicaWPFServiceUtility.ThemeDictionaryService.RefreshThemeSource();
     }
 

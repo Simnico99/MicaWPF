@@ -15,14 +15,6 @@ namespace MicaWPF.Core.Extensions;
 public static class DependencyObjectExtension
 {
     /// <summary>
-    /// Gets or sets list of type types to refresh on theme change.
-    /// </summary>
-    private static List<Type> ObjectsThatNeedsRefresh { get; set; } = new()
-    {
-        typeof(IButton),
-    };
-
-    /// <summary>
     ///     Get all objects of a certain type in a <see cref="DependencyObject"/> (Visual only).
     /// </summary>
     /// <returns>
@@ -96,10 +88,7 @@ public static class DependencyObjectExtension
                 element.RefreshChildrenStyle();
             }
 
-            if (ObjectsThatNeedsRefresh.Contains(element.GetType()))
-            {
-                element.RefreshStyle();
-            }
+            element.RefreshStyle();
         }
     }
 }

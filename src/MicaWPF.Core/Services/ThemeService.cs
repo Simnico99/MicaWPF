@@ -26,6 +26,7 @@ public class ThemeService : IThemeService
     public ThemeService()
     {
         ChangeTheme(WindowsTheme.Auto);
+        SetThemeAware();
     }
 
     public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();

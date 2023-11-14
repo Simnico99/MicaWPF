@@ -21,7 +21,7 @@ public static class WindowsThemeHelper
     /// <summary>
     /// Gets the light theme resource Uri.
     /// </summary>
-    public static Uri LightUri { get; } = new Uri($"pack://application:,,,/{MicaWPFServiceUtility.CurrentNamespace}MicaWPF;component/Styles/Themes/MicaLight.xaml");
+    public static Uri LightUri { get; } = new Uri($"pack://application:,,,/{MicaWPFServiceUtility.CurrentNamespace};component/Styles/Themes/MicaLight.xaml");
 
     /// <summary>
     /// Gets the Windows theme (light or dark) from the registry.
