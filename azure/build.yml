@@ -46,13 +46,6 @@ steps:
     includePreviewVersions: false
 
 - task: UseDotNet@2
-  displayName: 'Use .Net 5.0.x'
-  inputs:
-    packageType: 'sdk'
-    version: '5.0.x'
-    includePreviewVersions: false
-
-- task: UseDotNet@2
   displayName: 'Use .Net 6.0.x'
   inputs:
     packageType: 'sdk'
@@ -64,6 +57,13 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '7.0.x'
+    includePreviewVersions: false
+
+- task: UseDotNet@2
+  displayName: 'Use .Net 8.0.x'
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'
     includePreviewVersions: false
 
 - task: DotNetCoreCLI@2
