@@ -59,11 +59,11 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net461' or '$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net48' OR '$(TargetFramework)'=='net481' OR '$(TargetFramework)'=='netcoreapp3.1' OR '$(TargetFramework)'=='net5.0-windows'">
-		<PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+		<PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net7.0-windows' OR '$(TargetFramework)'=='net7.0-windows'">
-		<PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+		<PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
