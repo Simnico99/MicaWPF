@@ -187,13 +187,13 @@ public partial class MainWindow : MicaWindow
 
 ```
 
-#### Note For .Net5.0, .Net6.0 and .Net7.0
+#### Note For .Net6.0, .Net7.0 and .Net8.0
 You will need to change your CSPROJ to include the windows build after the netx.0-windows.
-Here is an exemple using .Net7.0 just change the net7 for net5 or net6 for the other versions.
+Here is an exemple using .Net8.0 just change the net8 for net7 or net6 for the other versions.
 
 MicaWPF:
 ```Xaml
-<TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
+<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework> <!-- This can be changed with your available Windows SDK build ex: net8.0-windows10.0.22621.0</-->
 <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
 ```
 
