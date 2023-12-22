@@ -83,7 +83,7 @@ public static class DependencyObjectExtension
     {
         foreach (var element in depObj.FindLogicalChildren<FrameworkElement>())
         {
-            if (element is IFrame or Frame)
+            if (element is Frame)
             {
                 element.RefreshChildrenStyle();
             }

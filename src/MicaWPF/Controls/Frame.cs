@@ -13,7 +13,7 @@ namespace MicaWPF.Controls;
 /// A custom frame that reload styles on theme change.
 /// </summary>
 [ToolboxItem(true)]
-public class Frame : System.Windows.Controls.Frame, IFrame
+public class Frame : System.Windows.Controls.Frame
 {
     public Frame()
     {
