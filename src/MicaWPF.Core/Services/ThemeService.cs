@@ -31,7 +31,7 @@ public class ThemeService : IThemeService
 
     public IWeakEvent<WindowsTheme> ThemeChanged { get; } = new WeakEvent<WindowsTheme>();
 
-    public List<BackdropEnabledWindow> BackdropEnabledWindows { get; private set; } = new List<BackdropEnabledWindow>();
+    public List<BackdropEnabledWindow> BackdropEnabledWindows { get; private set; } = [];
 
     public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
 

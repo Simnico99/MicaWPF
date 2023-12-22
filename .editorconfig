@@ -148,7 +148,10 @@ dotnet_style_qualification_for_event = false:silent
 dotnet_diagnostic.CA1852.severity = warning
 indent_style = space
 
-[*]
+# SA1010: Opening square brackets should be spaced correctly
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1010.md
+dotnet_diagnostic.SA1010.severity = none
+
 # SA0001: XML comment analysis is disabled due to project configuration
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md
 dotnet_diagnostic.SA0001.severity = none
@@ -169,14 +172,19 @@ dotnet_diagnostic.SA1118.severity = none
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1309.md
 dotnet_diagnostic.SA1309.severity = none
 
+# SA1402: File may only contain a single type
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1402.md
+dotnet_diagnostic.SA1402.severity = none
+
 # SA1600: Elements should be documented
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md
-# dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.SA1600.severity = none
 
 # SA1618: Generic type parameters should be documented
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1618.md
-# dotnet_diagnostic.SA1618.severity = none
+dotnet_diagnostic.SA1618.severity = none
 
 # SA1649: File name should match first type name
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1649.md
 dotnet_diagnostic.SA1649.severity = none
+csharp_style_prefer_primary_constructors = false:suggestion

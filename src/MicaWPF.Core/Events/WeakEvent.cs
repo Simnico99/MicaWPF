@@ -13,14 +13,21 @@ namespace MicaWPF.Core.Events;
 internal sealed class WeakEvent<T> : IWeakEvent<T>
 {
     private readonly object _locker = new();
-    private readonly List<(Type EventType, Delegate MethodToCall)> _eventRegistrations = new();
+    private readonly List<(Type EventType, Delegate MethodToCall)> _eventRegistrations = [];
 
     /// <inheritdoc/>
     public ISubscription Subscribe(Action<T> action)
     {
         if (action is null)
         {
+#if NET5_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(action);
+#else
+        if (action is null)
+        {
             throw new ArgumentNullException(nameof(action));
+        }
+#endif
         }
 
         _eventRegistrations.Add((typeof(T), action));
