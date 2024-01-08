@@ -2,6 +2,7 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Shell;
 using MicaWPF.Core.Enums;
@@ -13,7 +14,7 @@ public class MicaWindowProperty : MicaWindowStyle
 {
     public static readonly DependencyProperty CustomWindowChromeProperty = DependencyProperty.Register(nameof(CustomWindowChrome), typeof(WindowChrome), typeof(MicaWindowStyle));
     public static readonly DependencyProperty TitleBarContentProperty = DependencyProperty.Register(nameof(TitleBarContent), typeof(UIElement), typeof(MicaWindowStyle));
-    public static readonly DependencyProperty UseAccentOnTitleBarAndBorderProperty = DependencyProperty.Register(nameof(UseAccentOnTitleBarAndBorder), typeof(bool), typeof(MicaWindowStyle), new UIPropertyMetadata(MicaWPFServiceUtility.AccentColorService.IsTitleBarAndWindowsBorderColored));
+    public static readonly DependencyProperty UseAccentOnTitleBarAndBorderProperty = DependencyProperty.Register(nameof(UseAccentOnTitleBarAndBorder), typeof(bool), typeof(MicaWindowStyle), new UIPropertyMetadata(MicaWPFServiceUtility.HasBeenInitialized ? MicaWPFServiceUtility.AccentColorService.IsTitleBarAndWindowsBorderColored : false));
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindowStyle), new UIPropertyMetadata(true));
     public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindowStyle), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindowStyle), new UIPropertyMetadata(TitleBarType.WinUI));

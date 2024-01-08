@@ -19,11 +19,21 @@ public sealed class MicaWPFServiceUtility
     static MicaWPFServiceUtility()
     {
         // Warning the order is very important.
-        _currentNamespace ??= ServiceLocatorHelper.GetNamespace();
-        _themeDictionaryService ??= ServiceLocatorHelper.GetService<IThemeDictionaryService>();
-        _themeService ??= ServiceLocatorHelper.GetService<IThemeService>();
-        _accentColorService ??= ServiceLocatorHelper.GetService<IAccentColorService>();
+        try
+        {
+            _currentNamespace ??= ServiceLocatorHelper.GetNamespace();
+            _themeDictionaryService ??= ServiceLocatorHelper.GetService<IThemeDictionaryService>();
+            _themeService ??= ServiceLocatorHelper.GetService<IThemeService>();
+            _accentColorService ??= ServiceLocatorHelper.GetService<IAccentColorService>();
+            HasBeenInitialized = true;
+        }
+        catch
+        {
+            HasBeenInitialized = false;
+        }
     }
+
+    public static bool HasBeenInitialized { get; }
 
     /// <summary>
     /// Gets or sets the Accent Color Service instance (WARNING: Sets should be done on application start).
