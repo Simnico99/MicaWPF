@@ -5,7 +5,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using MicaWPF.Core.Controls;
 
 namespace MicaWPF.Core.Extensions;
 

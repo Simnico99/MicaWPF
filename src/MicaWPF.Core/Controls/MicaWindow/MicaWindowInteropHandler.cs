@@ -2,6 +2,7 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -20,6 +21,9 @@ public class MicaWindowInteropHandler : MicaWindowProperty
     protected const int _hTMAXBUTTON = 9;
     protected const string _buttonMaxName = "Maximize";
     protected const string _buttonRestoreName = "Restore";
+
+    private static readonly SolidColorBrush _transparentBrush = new(Color.FromArgb(0, 0, 0, 0));
+    private static readonly double _dpiScale = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
 
     public MicaWindowInteropHandler()
         : base()
@@ -64,12 +68,11 @@ public class MicaWindowInteropHandler : MicaWindowProperty
         var x = (short)(lparam.ToInt32() & 0xffff);
         var y = lparam.ToInt32() >> 16;
         var point = new Point(x, y);
-        var dpiScale = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
         var button = WindowState == WindowState.Maximized ? ButtonRestore : ButtonMax;
 
         if (button != null)
         {
-            var buttonSize = new Size(button.ActualWidth * dpiScale, button.ActualHeight * dpiScale);
+            var buttonSize = new Size(button.ActualWidth * _dpiScale, button.ActualHeight * _dpiScale);
             var buttonLocation = button.PointToScreen(default);
             var rect = new Rect(buttonLocation, buttonSize);
 
@@ -81,7 +84,7 @@ public class MicaWindowInteropHandler : MicaWindowProperty
             }
             else
             {
-                button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                button.Background = _transparentBrush;
             }
 
             return PtrHelper.Create(_hTMAXBUTTON);
@@ -120,11 +123,6 @@ public class MicaWindowInteropHandler : MicaWindowProperty
             return PtrHelper.Zero;
         }
 
-        if (msg == InteropValues.HwndSourceMessages.WM_GETTEXT)
-        {
-            return PtrHelper.Zero;
-        }
-
         switch (msg)
         {
             case InteropValues.HwndSourceMessages.WM_NCHITTEST:
@@ -138,6 +136,7 @@ public class MicaWindowInteropHandler : MicaWindowProperty
                 HideMaximiseAndMinimiseButton(lparam, ref handled);
                 break;
             case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
+                Debug.WriteLine("Humsmm");
                 var mmiNullable = (InteropValues.MINMAXINFO?)Marshal.PtrToStructure(lparam, typeof(InteropValues.MINMAXINFO));
                 if (mmiNullable.HasValue)
                 {
@@ -150,7 +149,6 @@ public class MicaWindowInteropHandler : MicaWindowProperty
                         mmi.ptMaxSize.Y = (int)screen.Height + 8;
 
                         Marshal.StructureToPtr(mmi, lparam, true);
-                        handled = true;
                     }
                 }
 
@@ -159,7 +157,7 @@ public class MicaWindowInteropHandler : MicaWindowProperty
                 var button = WindowState == WindowState.Maximized ? ButtonRestore : ButtonMax;
                 if (button is not null)
                 {
-                    button.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+                    button.Background = _transparentBrush;
                 }
 
                 break;

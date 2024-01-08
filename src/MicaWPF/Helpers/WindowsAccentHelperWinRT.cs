@@ -9,7 +9,7 @@ using Microsoft.Win32;
 
 namespace MicaWPF.Helpers;
 
-public class WindowsAccentHelperWinRT : WindowsAccentHelper
+public sealed class WindowsAccentHelperWinRT : WindowsAccentHelper
 {
     public override bool AreTitleBarAndBordersAccented()
     {

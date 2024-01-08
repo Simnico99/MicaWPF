@@ -4,7 +4,6 @@
 
 using System.Windows;
 using MicaWPF.Core.Helpers;
-using MicaWPF.Core.Services;
 
 namespace MicaWPF.Core.Controls.MicaWindow;
 
