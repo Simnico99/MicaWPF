@@ -136,7 +136,6 @@ public class MicaWindowInteropHandler : MicaWindowProperty
                 HideMaximiseAndMinimiseButton(lparam, ref handled);
                 break;
             case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
-                Debug.WriteLine("Humsmm");
                 var mmiNullable = (InteropValues.MINMAXINFO?)Marshal.PtrToStructure(lparam, typeof(InteropValues.MINMAXINFO));
                 if (mmiNullable.HasValue)
                 {
