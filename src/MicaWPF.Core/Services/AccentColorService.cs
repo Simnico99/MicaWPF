@@ -18,6 +18,8 @@ namespace MicaWPF.Core.Services;
 /// </summary>
 public class AccentColorService : IAccentColorService
 {
+    private readonly string[] _colorKeys = ["Primary", "Secondary", "Tertiary", "Light3", "Light2", "Light1", string.Empty, "Dark1", "Dark2", "Dark3"];
+
     private bool _isTitleBarAndBorderAccentAware;
     private bool _isCheckingTitleBarAndBorderAccent;
 
@@ -36,7 +38,10 @@ public class AccentColorService : IAccentColorService
 
     public bool AccentColorsUpdateFromWindows { get; private set; } = true;
 
-    public bool IsTitleBarAndWindowsBorderColored { get; private set; }
+    public bool IsTitleBarAndWindowsBorderColored
+    {
+        get; private set;
+    }
 
     public bool IsTitleBarAndBorderAccentAware
     {
@@ -73,12 +78,11 @@ public class AccentColorService : IAccentColorService
 
     private void UpdateColorResources(Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
     {
-        var colorKeys = new string[] { "Primary", "Secondary", "Tertiary", "Light3", "Light2", "Light1", string.Empty, "Dark1", "Dark2", "Dark3" };
         var accentColors = new Color[] { primaryAccent, secondaryAccent, tertiaryAccent, AccentColors.SystemAccentColorLight3, AccentColors.SystemAccentColorLight2, AccentColors.SystemAccentColorLight1, AccentColors.SystemAccentColor, AccentColors.SystemAccentColorDark1, AccentColors.SystemAccentColorDark2, AccentColors.SystemAccentColorDark3 };
 
-        for (var i = 0; i < colorKeys.Length; i++)
+        for (var i = 0; i < _colorKeys.Length; i++)
         {
-            Application.Current.Resources[$"MicaWPF{MicaWPFServiceUtility.BrushNamespace}.Colors.SystemAccentColor{colorKeys[i]}"] = accentColors[i];
+            Application.Current.Resources[$"MicaWPF{MicaWPFServiceUtility.BrushNamespace}.Colors.SystemAccentColor{_colorKeys[i]}"] = accentColors[i];
         }
 
         WindowHelper.RefreshAllWindowsContents();
