@@ -145,7 +145,7 @@ Here is an exemple:
 </controls:MicaWindow>
 ```
 
-3. You need to add `<mica:ThemeDictionary Theme="Dark" />` to your App.xaml resources.
+3. You need to add `<mica:ThemeDictionary Theme="Auto" />` and `<mica:ControlsDictionary />` to your App.xaml resources.
 
 Here is an exemple:
 ```xaml
@@ -158,7 +158,8 @@ Here is an exemple:
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <mica:ThemeDictionary Theme="Auto" /> <!-- And Here (You can change to Light or Dark here) -->
+                <mica:ThemeDictionary DesignModeTheme="Dark" Theme="Auto" /> <!-- And Here (You can change to Light, Dark or auto here) -->
+                <!-- <mica:ThemeDictionary />  works too-->
 		<mica:ControlsDictionary /> <!-- This is mandatory -->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -171,7 +172,7 @@ Now get into your Window code:
 1. Add the namespace `using MicaWPF.Controls;`.
 2. Change the Window inherited class to `MicaWindow`.
 
-Here is an exemple of what it might look like using .NET7:
+Here is an exemple of what it might look like using .NET8:
 ```CSharp
 using MicaWPF.Controls;
 
