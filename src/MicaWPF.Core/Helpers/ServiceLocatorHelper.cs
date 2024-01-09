@@ -14,18 +14,12 @@ internal static class ServiceLocatorHelper
     private static readonly Assembly[] _assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
     /// <summary>
-    /// Returns the namespace for the current assembly.
+    /// Returns the namespace for the current MicaWPF assembly if lite is used or not.
     /// </summary>
     /// <returns>The current namespace.</returns>
     public static string GetNamespace()
     {
-        var currentAssembly = _assemblies.FirstOrDefault(x => x.GetName().Name is "MicaWPF");
-        if (currentAssembly != null)
-        {
-            return "MicaWPF";
-        }
-
-        return "MicaWPF.Lite";
+        return _assemblies.Any(x => x.GetName().Name == "MicaWPF") ? "MicaWPF" : "MicaWPF.Lite";
     }
 
     /// <summary>
@@ -39,26 +33,23 @@ internal static class ServiceLocatorHelper
     {
         var serviceType = typeof(T);
 
-        var currentAssembly = _assemblies.First(x => x.GetName().Name is "MicaWPF" or "MicaWPF.Lite");
+        // Simplified assembly search with pattern matching
+        var currentAssembly = _assemblies.FirstOrDefault(x => x.GetName().Name is "MicaWPF" or "MicaWPF.Lite");
 
-        var instance = GetInstanceFromAssembly<T>(currentAssembly, serviceType);
-        if (instance != null)
+        if (currentAssembly is not null)
         {
-            return instance;
-        }
-
-        // Fallback to MicaWPF.Core
-        currentAssembly = Assembly.GetAssembly(typeof(ServiceLocatorHelper));
-        if (currentAssembly != null)
-        {
-            instance = GetInstanceFromAssembly<T>(currentAssembly, serviceType);
-            if (instance != null)
+            var instance = GetInstanceFromAssembly<T>(currentAssembly, serviceType);
+            if (instance is not null)
             {
                 return instance;
             }
         }
 
-        throw new InvalidOperationException($"{typeof(T)} wasn't found in any assembly.");
+        // Utilizing the 'Assembly.GetAssembly' method directly
+        var fallbackAssembly = Assembly.GetAssembly(typeof(ServiceLocatorHelper));
+        var fallbackInstance = fallbackAssembly is not null ? GetInstanceFromAssembly<T>(fallbackAssembly, serviceType) : null;
+
+        return fallbackInstance ?? throw new InvalidOperationException($"{serviceType} wasn't found in any assembly.");
     }
 
     /// <summary>
@@ -71,15 +62,8 @@ internal static class ServiceLocatorHelper
     private static T? GetInstanceFromAssembly<T>(Assembly assembly, Type serviceType)
         where T : class
     {
-        var typeInAssembly = assembly
-            .GetTypes()
-            .FirstOrDefault(t => serviceType.IsAssignableFrom(t) && !t.IsInterface);
+        var typeInAssembly = assembly.GetTypes().FirstOrDefault(t => serviceType.IsAssignableFrom(t) && !t.IsInterface);
 
-        if (typeInAssembly != null)
-        {
-            return (T?)Activator.CreateInstance(typeInAssembly);
-        }
-
-        return null;
+        return typeInAssembly is not null ? Activator.CreateInstance(typeInAssembly) as T : null;
     }
 }

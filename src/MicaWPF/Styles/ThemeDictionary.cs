@@ -4,26 +4,14 @@
 
 using System.Windows;
 using System.Windows.Markup;
-using MicaWPF.Core.Enums;
+using MicaWPF.Core.Styles;
 
 namespace MicaWPF.Styles;
 
-[Localizability(LocalizationCategory.Ignore)]
 [Ambient]
+[Localizability(LocalizationCategory.Ignore)]
 [UsableDuringInitialization(true)]
-public sealed class ThemeDictionary : ResourceDictionary
+public sealed class ThemeDictionary : ThemeDictionaryBase
 {
-    public WindowsTheme Theme
-    {
-        set
-        {
-            var themeName = value switch
-            {
-                WindowsTheme.Dark => "MicaDark",
-                _ => "MicaLight",
-            };
-
-            Source = new($"pack://application:,,,/MicaWPF;component/Styles/Themes/{themeName}.xaml", UriKind.Absolute);
-        }
-    }
+    public override string SourceLocation { get; } = "pack://application:,,,/MicaWPF;component/Styles/Themes";
 }

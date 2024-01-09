@@ -7,8 +7,8 @@ using System.Windows.Markup;
 
 namespace MicaWPF.Styles;
 
-[Localizability(LocalizationCategory.Ignore)]
 [Ambient]
+[Localizability(LocalizationCategory.Ignore)]
 [UsableDuringInitialization(true)]
 public sealed class ControlsDictionary : ResourceDictionary
 {
