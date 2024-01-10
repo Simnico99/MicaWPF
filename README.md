@@ -29,9 +29,9 @@
     <br />
 	<a href="https://github.com/Simnico99/MicaWPF/tree/main/src/MicaWPF.Demo">View Demo</a>
     ·
-    <a href="https://github.com/Simnico99/MicaWPF/issues/new?template=bug_report.md&title=Bug+Report">Report Bug</a>
+    <a href="https://github.com/Simnico99/MicaWPF/issues/new?assignees=Simnico99&labels=bug%2CNeeds-Triage&projects=&template=bug_report.yaml&title=%5BBug%5D%3A+">Report Bug</a>
     ·
-    <a href="https://github.com/Simnico99/MicaWPF/issues/new?template=feature_request.md&title=Feature+Request">Request Feature</a>
+    <a href="https://github.com/Simnico99/MicaWPF/issues/new?assignees=Simnico99&labels=enhancement%2CNeeds-Triage&projects=&template=feature_request.yaml&title=%5BFeature+Request%5D%3A+">Request Feature</a>
   </p>
 </p>
 
