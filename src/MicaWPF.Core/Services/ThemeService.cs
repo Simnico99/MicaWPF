@@ -25,7 +25,7 @@ public class ThemeService : IThemeService
 
     public ThemeService()
     {
-        ChangeTheme(WindowsTheme.Auto);
+        ChangeTheme(MicaWPFServiceUtility.ThemeDictionaryService.GetCurrentResourcesTheme());
         SetThemeAware();
     }
 

@@ -13,31 +13,32 @@ namespace MicaWPF.Core.Styles;
 [UsableDuringInitialization(true)]
 public abstract class ThemeDictionaryBase : ResourceDictionary
 {
-    private WindowsTheme? _theme = null;
     private WindowsTheme? _designModeTheme = null;
 
     public ThemeDictionaryBase()
     {
         if (DesignTimeHelper.IsDesignMode && !_designModeTheme.HasValue)
         {
-            SetTheme(WindowsTheme.Light);
+            SetTheme(Enums.WindowsTheme.Light);
             return;
         }
 
-        if(!_theme.HasValue)
+        if(!WindowsTheme.HasValue)
         {
-            SetTheme(WindowsTheme.Auto);
+            SetTheme(Enums.WindowsTheme.Auto);
         }
     }
+
+    public WindowsTheme? WindowsTheme { get; private set; } = null;
 
     public virtual string SourceLocation { get; } = string.Empty;
 
     public WindowsTheme Theme
     {
-        get => _theme!.Value;
+        get => WindowsTheme!.Value;
         set
         {
-            _theme = value;
+            WindowsTheme = value;
             if (!DesignTimeHelper.IsDesignMode)
             {
                 SetTheme(value);
@@ -62,7 +63,7 @@ public abstract class ThemeDictionaryBase : ResourceDictionary
     {
         var themeName = value switch
         {
-            WindowsTheme.Dark => "MicaDark",
+            Enums.WindowsTheme.Dark => "MicaDark",
             _ => "MicaLight",
         };
 
