@@ -5,7 +5,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using MicaWPF.Core.Enums;
 using MicaWPF.Core.Helpers;
+using MicaWPF.Core.Styles;
 
 namespace MicaWPF.Core.Services;
 
@@ -52,6 +54,22 @@ public class ThemeDictionaryService : INotifyPropertyChanged, IThemeDictionarySe
                 _ = dictionaries.Remove(oldTheme);
             }
         }
+    }
+
+    public WindowsTheme GetCurrentResourcesTheme()
+    {
+        var dictionnaries = Application.Current.Resources.MergedDictionaries;
+        foreach (var dictionary in dictionnaries)
+        {
+            if (dictionary is not ThemeDictionaryBase themeDictionary)
+            {
+                continue;
+            }
+
+            return themeDictionary.Theme;
+        }
+
+        return WindowsTheme.Auto;
     }
 
     public void RefreshThemeSource()

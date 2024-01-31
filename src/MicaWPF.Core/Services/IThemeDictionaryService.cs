@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.ComponentModel;
+using MicaWPF.Core.Enums;
 
 namespace MicaWPF.Core.Services;
 
@@ -31,4 +32,10 @@ public interface IThemeDictionaryService
     /// Force the current theme source to reload.
     /// </summary>
     void RefreshThemeSource();
+
+    /// <summary>
+    /// Gets the current theme from the loaded resource dictionnary.
+    /// </summary>
+    /// <returns>The current ap theme.</returns>
+    WindowsTheme GetCurrentResourcesTheme();
 }
