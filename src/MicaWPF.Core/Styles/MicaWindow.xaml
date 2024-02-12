@@ -101,7 +101,7 @@
                     <Border
                         x:Name="WindowBorder"
                         Margin="{Binding Source={x:Static SystemParameters.WindowNonClientFrameThickness}}"
-                        Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindowBase}}"
+                        Background="{TemplateBinding Background}"
                         BorderBrush="{DynamicResource MicaWPF.Brushes.SystemFillColorSolidNeutralBackground}"
                         BorderThickness="2"
                         Focusable="False">

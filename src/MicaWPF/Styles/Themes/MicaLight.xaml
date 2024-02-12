@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--  Colors  -->
-    <Color x:Key="MicaWPF.Colors.ApplicationBackgroundColor">#fafafa</Color>
+    <Color x:Key="MicaWPF.Colors.ApplicationBackgroundColor">#f3f3f3</Color>
 
     <Color x:Key="MicaWPF.Colors.TextFillColorPrimary">#E4000000</Color>
     <Color x:Key="MicaWPF.Colors.TextFillColorSecondary">#9E000000</Color>
