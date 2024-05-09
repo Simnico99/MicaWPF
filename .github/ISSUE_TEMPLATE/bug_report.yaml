@@ -70,6 +70,16 @@ body:
         - ".NET 7.x"
         - ".NET 8.x"        
         - "Other (Please add the version in additionnal context.)"
+  - type: dropdown
+    validations:
+      required: true
+    attributes:
+      label: .MicaWPF Version
+      description: Which Version of .Net are you using?
+      multiple: true
+      options:
+        - "MicaWPF"
+        - "MicaWPF.Lite"    
   - type: textarea
     attributes:
       label: Additional context
