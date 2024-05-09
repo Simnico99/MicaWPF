@@ -2,7 +2,6 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -12,7 +11,6 @@ using System.Windows.Media;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Helpers;
 using MicaWPF.Core.Interop;
-using MicaWPF.Core.Services;
 
 namespace MicaWPF.Core.Controls.MicaWindow;
 
@@ -30,9 +28,15 @@ public class MicaWindowInteropHandler : MicaWindowProperty
     {
     }
 
-    protected System.Windows.Controls.Button? ButtonMax { get; set; }
+    protected System.Windows.Controls.Button? ButtonMax
+    {
+        get; set;
+    }
 
-    protected System.Windows.Controls.Button? ButtonRestore { get; set; }
+    protected System.Windows.Controls.Button? ButtonRestore
+    {
+        get; set;
+    }
 
     protected override void OnInitialized(EventArgs e)
     {
@@ -79,7 +83,7 @@ public class MicaWindowInteropHandler : MicaWindowProperty
             handled = rect.Contains(point);
             if (handled)
             {
-                var color = TryFindResource($"MicaWPF{MicaWPFServiceUtility.BrushNamespace}.GradientBrushes.ControlElevationBorder") as LinearGradientBrush ?? new LinearGradientBrush();
+                var color = TryFindResource($"MicaWPF.GradientBrushes.ControlElevationBorder") as LinearGradientBrush ?? new LinearGradientBrush();
                 button.Background = color;
             }
             else

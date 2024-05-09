@@ -82,7 +82,7 @@ public class AccentColorService : IAccentColorService
 
         for (var i = 0; i < _colorKeys.Length; i++)
         {
-            Application.Current.Resources[$"MicaWPF{MicaWPFServiceUtility.BrushNamespace}.Colors.SystemAccentColor{_colorKeys[i]}"] = accentColors[i];
+            Application.Current.Resources[$"MicaWPF.Colors.SystemAccentColor{_colorKeys[i]}"] = accentColors[i];
         }
 
         WindowHelper.RefreshAllWindowsContents();
