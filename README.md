@@ -153,7 +153,7 @@ Here is an exemple:
     x:Class="MicaWPF.DesktopApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mica="clr-namespace:MicaWPF.Styles;assembly=MicaWPF" <!-- For the lite version: clr-namespace:MicaWPF.Lite.Styles;assembly=MicaWPF.Lite -->
+    xmlns:mica="clr-namespace:MicaWPF.Styles;assembly=MicaWPF" <!-- For the lite version: clr-namespace:MicaWPF.Styles;assembly=MicaWPF.Lite -->
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

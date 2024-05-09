@@ -8,5 +8,5 @@ namespace MicaWPF.Lite.Styles;
 
 public sealed class ThemeDictionary : ThemeDictionaryBase
 {
-    public override string SourceLocation { get; } = "pack://application:,,,/MicaWPF.Lite;component/Styles/Themes";
+    public override string SourceLocation { get; } = "pack://application:,,,/MicaWPF.Core;component/Styles/Themes";
 }

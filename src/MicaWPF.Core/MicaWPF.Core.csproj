@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+		<TargetMinimumPlatformVersion>7.0</TargetMinimumPlatformVersion>
 		<UseWPF>true</UseWPF>
 		<Copyright>Copyright (c) 2021 Simnico99</Copyright>
 		<RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
