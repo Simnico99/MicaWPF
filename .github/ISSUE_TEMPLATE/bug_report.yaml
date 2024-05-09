@@ -75,7 +75,7 @@ body:
       required: true
     attributes:
       label: .MicaWPF Version
-      description: Which Version of .Net are you using?
+      description: Which version lite or not of MicaWPF you are using?
       multiple: true
       options:
         - "MicaWPF"
