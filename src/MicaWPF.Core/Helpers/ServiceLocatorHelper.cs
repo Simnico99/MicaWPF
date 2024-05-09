@@ -36,7 +36,7 @@ internal static class ServiceLocatorHelper
         // Simplified assembly search with pattern matching
         var currentAssembly = _assemblies.FirstOrDefault(x => x.GetName().Name is "MicaWPF" or "MicaWPF.Lite");
 
-        if (currentAssembly.GetName().Name == "MicaWPF.Lite")
+        if (currentAssembly?.GetName().Name == "MicaWPF.Lite")
         {
             currentAssembly = _assemblies.FirstOrDefault(x => x.GetName().Name is "MicaWPF.Core");
         }
