@@ -5,7 +5,7 @@
 using System.Windows;
 using System.Windows.Markup;
 
-namespace MicaWPF.Styles;
+namespace MicaWPF.Lite.Styles;
 
 [Localizability(LocalizationCategory.Ignore)]
 [Ambient]

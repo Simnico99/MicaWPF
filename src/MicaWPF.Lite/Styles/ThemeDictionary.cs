@@ -4,7 +4,7 @@
 
 using MicaWPF.Core.Styles;
 
-namespace MicaWPF.Styles;
+namespace MicaWPF.Lite.Styles;
 
 public sealed class ThemeDictionary : ThemeDictionaryBase
 {

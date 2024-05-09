@@ -19,7 +19,7 @@ internal static class ServiceLocatorHelper
     /// <returns>The current namespace.</returns>
     public static string GetNamespace()
     {
-        return _assemblies.Any(x => x.GetName().Name == "MicaWPF") ? "MicaWPF" : "MicaWPF.Lite";
+        return _assemblies.Any(x => x.GetName().Name == "MicaWPF") ? "MicaWPF" : "MicaWPF.Core";
     }
 
     /// <summary>
@@ -35,6 +35,11 @@ internal static class ServiceLocatorHelper
 
         // Simplified assembly search with pattern matching
         var currentAssembly = _assemblies.FirstOrDefault(x => x.GetName().Name is "MicaWPF" or "MicaWPF.Lite");
+
+        if (currentAssembly.GetName().Name == "MicaWPF.Lite")
+        {
+            currentAssembly = _assemblies.FirstOrDefault(x => x.GetName().Name is "MicaWPF.Core");
+        }
 
         if (currentAssembly is not null)
         {
