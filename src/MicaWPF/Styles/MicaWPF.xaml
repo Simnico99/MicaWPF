@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Assets/Accent.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MicaWPF.Core;component/Styles/Assets/Accent.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MicaWPF;component/Styles/Assets/Fonts.xaml" />
 
         <!--  Controls  -->
