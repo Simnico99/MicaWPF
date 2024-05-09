@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:MicaWPF.Lite.Controls">
 
-    <Style x:Key="MicaWPF.Lite.Styles.GradientBorder.Default" TargetType="{x:Type controls:GradientBorder}">
+    <Style x:Key="MicaWPF.Styles.GradientBorder.Default" TargetType="{x:Type controls:GradientBorder}">
         <Setter Property="TopBorderBrush" Value="{DynamicResource MicaWPF.Lite.Brushes.ControlStrokeColorSecondary}" />
         <Setter Property="BottomBorderBrush" Value="{DynamicResource MicaWPF.Lite.Brushes.ControlStrokeColorDefault}" />
         <Setter Property="Template">
@@ -32,7 +32,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="MicaWPF.Lite.Styles.GradientBorder.Accent" TargetType="{x:Type controls:GradientBorder}">
+    <Style x:Key="MicaWPF.Styles.GradientBorder.Accent" TargetType="{x:Type controls:GradientBorder}">
         <Setter Property="TopBorderBrush" Value="{DynamicResource MicaWPF.Lite.Brushes.ControlStrokeColorOnAccentDefault}" />
         <Setter Property="BottomBorderBrush" Value="{DynamicResource MicaWPF.Lite.Brushes.ControlStrokeColorOnAccentSecondary}" />
         <Setter Property="Template">
@@ -62,5 +62,5 @@
         </Setter>
     </Style>
 
-    <Style BasedOn="{StaticResource MicaWPF.Lite.Styles.GradientBorder.Default}" TargetType="{x:Type controls:GradientBorder}" />
+    <Style BasedOn="{StaticResource MicaWPF.Styles.GradientBorder.Default}" TargetType="{x:Type controls:GradientBorder}" />
 </ResourceDictionary>

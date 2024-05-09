@@ -23,13 +23,13 @@ public abstract class ThemeDictionaryBase : ResourceDictionary
             return;
         }
 
-        if(!WindowsTheme.HasValue)
+        if (!WindowsTheme.HasValue)
         {
             SetTheme(Enums.WindowsTheme.Auto);
         }
     }
 
-    public WindowsTheme? WindowsTheme { get; private set; } = null;
+    public WindowsTheme? WindowsTheme { get; private set; } = Enums.WindowsTheme.Auto;
 
     public virtual string SourceLocation { get; } = string.Empty;
 
