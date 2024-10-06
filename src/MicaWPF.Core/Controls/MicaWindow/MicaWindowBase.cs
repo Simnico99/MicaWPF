@@ -46,10 +46,10 @@ public class MicaWindowBase : MicaWindowActionHandler, IMicaWindow
         base.OnPropertyChanged(e);
     }
 
-    protected override void OnActivated(EventArgs e)
+    protected override void OnSourceInitialized(EventArgs e)
     {
+        base.OnSourceInitialized(e);
         this.EnableBackdrop(SystemBackdropType);
-        base.OnActivated(e);
     }
 
     private void AddPadding(WindowState windowsState)
