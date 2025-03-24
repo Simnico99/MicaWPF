@@ -2,8 +2,8 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
-using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Shell;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Services;
@@ -18,6 +18,7 @@ public class MicaWindowProperty : MicaWindowStyle
     public static readonly DependencyProperty ChangeTitleColorWhenInactiveProperty = DependencyProperty.Register(nameof(ChangeTitleColorWhenInactive), typeof(bool), typeof(MicaWindowStyle), new UIPropertyMetadata(true));
     public static readonly DependencyProperty TitleBarHeightProperty = DependencyProperty.Register(nameof(TitleBarHeight), typeof(int), typeof(MicaWindowStyle), new UIPropertyMetadata(34));
     public static readonly DependencyProperty TitleBarTypeProperty = DependencyProperty.Register(nameof(TitleBarType), typeof(TitleBarType), typeof(MicaWindowStyle), new UIPropertyMetadata(TitleBarType.WinUI));
+    public static readonly DependencyProperty TitleBarBrushProperty = DependencyProperty.Register(nameof(TitleBarBrush), typeof(Brush), typeof(MicaWindowStyle));
     public static readonly DependencyProperty MarginMaximizedProperty = DependencyProperty.Register(nameof(MarginMaximized), typeof(Thickness), typeof(MicaWindowStyle));
 
     public MicaWindowProperty()
@@ -56,6 +57,12 @@ public class MicaWindowProperty : MicaWindowStyle
     {
         get => (UIElement)GetValue(TitleBarContentProperty);
         set => SetValue(TitleBarContentProperty, value);
+    }
+
+    public Brush TitleBarBrush
+    {
+        get => (Brush)GetValue(TitleBarBrushProperty);
+        set => SetValue(TitleBarBrushProperty, value);
     }
 
     public WindowChrome CustomWindowChrome

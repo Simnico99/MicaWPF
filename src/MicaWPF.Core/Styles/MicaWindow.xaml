@@ -88,6 +88,7 @@
 
     <Style x:Key="MicaWPF.Core.Styles.Default.MicaWindow.Windows10" TargetType="{x:Type local:MicaWindowBase}">
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="TitleBarBrush" Value="Transparent" />
         <Setter Property="Background" Value="{DynamicResource MicaWPF.Brushes.ApplicationBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="ResizeMode" Value="CanResize" />
@@ -121,6 +122,7 @@
                                             x:Name="TitleStackPanel"
                                             Grid.ColumnSpan="2"
                                             Margin="10,5,5,5"
+                                            Background="{Binding TitleBarBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindowBase}}"
                                             Visibility="Collapsed">
                                             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                                                 <Image
@@ -294,6 +296,7 @@
 
     <Style x:Key="MicaWPF.Core.Styles.Default.MicaWindow.Windows11" TargetType="{x:Type local:MicaWindowBase}">
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="TitleBarBrush" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorPrimary}" />
         <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -317,6 +320,7 @@
                                     x:Name="TitleGrid"
                                     Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindowBase}}"
                                     Panel.ZIndex="2"
+                                    Background="{Binding TitleBarBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindowBase}}"
                                     DockPanel.Dock="Top">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
