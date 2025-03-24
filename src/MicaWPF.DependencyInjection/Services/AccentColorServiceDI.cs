@@ -80,6 +80,7 @@ internal sealed class AccentColorServiceDI : IAccentColorService
         _accentColorService.RefreshAccentsColors();
     }
 
+    /// <inheritdoc/>
     public void IsTitleBarAndBorderAccentEnabled(Window window, bool isEnabled)
     {
         _accentColorService.IsTitleBarAndBorderAccentEnabled(window, isEnabled);
