@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
 		<TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
 		<UseWPF>true</UseWPF>
 		<Copyright>Copyright (c) 2021 Simnico99</Copyright>

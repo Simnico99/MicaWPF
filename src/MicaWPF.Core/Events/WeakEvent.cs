@@ -23,10 +23,10 @@ internal sealed class WeakEvent<T> : IWeakEvent<T>
 #if NET5_0_OR_GREATER
         ArgumentNullException.ThrowIfNull(action);
 #else
-        if (action is null)
-        {
-            throw new ArgumentNullException(nameof(action));
-        }
+            if (action is null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
 #endif
         }
 

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
 		<TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
 		<UseWPF>true</UseWPF>
 		<Copyright>Copyright (c) 2021 Simnico99</Copyright>
@@ -53,16 +53,16 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows' OR '$(TargetFramework)'=='net7.0-windows' OR '$(TargetFramework)'=='net8.0-windows'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows' OR '$(TargetFramework)'=='net7.0-windows' OR '$(TargetFramework)'=='net8.0-windows' OR '$(TargetFramework)'=='net9.0-windows'">
 		<PackageReference Include="MicaWPFRuntimeComponent" Version="1.1.9" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1' OR '$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net481' OR '$(TargetFramework)'=='net48' OR '$(TargetFramework)'=='net461'">
-		<PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.22621.755" />
+		<PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="[10.0.22621.755]" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net461'">
-		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="System.ValueTuple" Version="[4.5.0]" />
 	</ItemGroup>
 
 	<ItemGroup>
