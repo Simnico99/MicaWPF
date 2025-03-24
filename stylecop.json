@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
   "settings": {
     "documentationRules": {
-      "companyName": "Zircon Technology",
+      "companyName": "Zircon Fusion",
       "copyrightText": "This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.",
       "documentExposedElements": false
     },

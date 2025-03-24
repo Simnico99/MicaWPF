@@ -12,7 +12,12 @@ namespace MicaWPF.Core.Events;
 /// <typeparam name="T">The type of the argument that will be passed to the <see cref="ISubscription"/>.</typeparam>
 internal sealed class WeakEvent<T> : IWeakEvent<T>
 {
+#if NET9_0_OR_GREATER
+    private readonly Lock _locker = new();
+#else
     private readonly object _locker = new();
+#endif
+
     private readonly List<(Type EventType, Delegate MethodToCall)> _eventRegistrations = [];
 
     /// <inheritdoc/>
@@ -21,7 +26,7 @@ internal sealed class WeakEvent<T> : IWeakEvent<T>
         if (action is null)
         {
 #if NET5_0_OR_GREATER
-        ArgumentNullException.ThrowIfNull(action);
+            ArgumentNullException.ThrowIfNull(action);
 #else
             if (action is null)
             {

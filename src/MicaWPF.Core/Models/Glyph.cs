@@ -22,7 +22,11 @@ public static class Glyph
     /// <returns>The parsed <see cref="FluentSystemIcons.Regular"/> icon. If the input string is null or empty, a default icon is returned.</returns>
     public static FluentSystemIcons.Regular Parse(string name)
     {
+#if NET9_0_OR_GREATER
+        return string.IsNullOrEmpty(name) ? DefaultIcon : Enum.Parse<FluentSystemIcons.Regular>(name);
+#else
         return string.IsNullOrEmpty(name) ? DefaultIcon : (FluentSystemIcons.Regular)Enum.Parse(typeof(FluentSystemIcons.Regular), name);
+#endif
     }
 
     /// <summary>
@@ -33,6 +37,10 @@ public static class Glyph
     /// <returns>The parsed <see cref="FluentSystemIcons.Filled"/> icon. If the input string is null or empty, a default icon is returned.</returns>
     public static FluentSystemIcons.Filled ParseFilled(string name)
     {
+#if NET9_0_OR_GREATER
+        return string.IsNullOrEmpty(name) ? DefaultFilledIcon : Enum.Parse<FluentSystemIcons.Filled>(name);
+#else
         return string.IsNullOrEmpty(name) ? DefaultFilledIcon : (FluentSystemIcons.Filled)Enum.Parse(typeof(FluentSystemIcons.Filled), name);
+#endif
     }
 }

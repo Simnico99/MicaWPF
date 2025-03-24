@@ -65,6 +65,7 @@ csharp_style_var_elsewhere = true:suggestion
 csharp_space_around_binary_operators = before_and_after
 csharp_style_prefer_primary_constructors = false:suggestion
 csharp_prefer_system_threading_lock = true:suggestion
+dotnet_diagnostic.SA0001.severity = none
 
 [*.{cs,vb}]
 #### Naming styles ####

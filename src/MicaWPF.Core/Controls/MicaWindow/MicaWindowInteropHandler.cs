@@ -141,19 +141,15 @@ public class MicaWindowInteropHandler : MicaWindowProperty
                 HideMaximiseAndMinimiseButton(lparam, ref handled);
                 break;
             case InteropValues.HwndSourceMessages.WM_GETMINMAXINFO:
-                var mmiNullable = (InteropValues.MINMAXINFO?)Marshal.PtrToStructure(lparam, typeof(InteropValues.MINMAXINFO));
-                if (mmiNullable.HasValue)
+                var mmi = Marshal.PtrToStructure<InteropValues.MINMAXINFO>(lparam);
+                var screen = GetHostingScreenSize();
+                if (MaxWidth < screen.Width)
                 {
-                    var mmi = mmiNullable.Value;
-                    var screen = GetHostingScreenSize();
-                    if (MaxWidth < screen.Width)
-                    {
-                        mmi.ptMaxPosition.X = (int)((screen.Width - MaxWidth) / 2);
-                        mmi.ptMaxSize.X = (int)MaxWidth;
-                        mmi.ptMaxSize.Y = (int)screen.Height + 8;
+                    mmi.ptMaxPosition.X = (int)((screen.Width - MaxWidth) / 2);
+                    mmi.ptMaxSize.X = (int)MaxWidth;
+                    mmi.ptMaxSize.Y = (int)screen.Height + 8;
 
-                        Marshal.StructureToPtr(mmi, lparam, true);
-                    }
+                    Marshal.StructureToPtr(mmi, lparam, true);
                 }
 
                 break;
