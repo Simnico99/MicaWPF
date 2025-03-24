@@ -2,15 +2,15 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
-using MicaWPF.Core.Enums;
-using MicaWPF.Core.Helpers;
-using MicaWPF.Core.Interop;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Interop;
 using System.Windows.Media;
+using MicaWPF.Core.Enums;
+using MicaWPF.Core.Helpers;
+using MicaWPF.Core.Interop;
 
 namespace MicaWPF.Core.Controls.MicaWindow;
 
