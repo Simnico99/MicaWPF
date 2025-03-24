@@ -172,7 +172,7 @@ Now get into your Window code:
 1. Add the namespace `using MicaWPF.Controls;`.
 2. Change the Window inherited class to `MicaWindow`.
 
-Here is an exemple of what it might look like using .NET8:
+Here is an exemple of what it might look like using .NET9:
 ```CSharp
 using MicaWPF.Controls;
 
@@ -188,19 +188,19 @@ public partial class MainWindow : MicaWindow
 
 ```
 
-#### Note For .Net6.0, .Net7.0 and .Net8.0
+#### Note For .Net6.0, .Net7.0, .Net8.0 and .Net9.0
 You will need to change your CSPROJ to include the windows build after the netx.0-windows.
-Here is an exemple using .Net8.0 just change the net8 for net7 or net6 for the other versions.
+Here is an exemple using .Net9.0 just change the net9 for net8, net7 or net6 for the other versions.
 
 MicaWPF:
 ```Xaml
-<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework> <!-- This can be changed with your available Windows SDK build ex: net8.0-windows10.0.22621.0</-->
+<TargetFramework>net9.0-windows</TargetFramework>
 <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
 ```
 
 MicaWPF.Lite:
 ```Xaml
-<TargetFramework>net7.0-windows</TargetFramework>
+<TargetFramework>net9.0-windows</TargetFramework>
 ```
 
 _For more examples, please refer to the [Documentation](https://github.com/Simnico99/MicaWPF/wiki)_
