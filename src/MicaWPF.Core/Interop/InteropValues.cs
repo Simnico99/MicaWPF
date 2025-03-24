@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace MicaWPF.Core.Interop;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Interops")]
 [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1310:Field names should not contain underscore", Justification = "Interops")]
 [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1307:Accessible fields should begin with upper-case letter", Justification = "Interops")]
@@ -383,3 +384,4 @@ public static class InteropValues
         public const int DWMWA_COLOR_NONE = unchecked((int)0xFFFFFFFE);
     }
 }
+#pragma warning restore IDE0079 // Remove unnecessary suppression

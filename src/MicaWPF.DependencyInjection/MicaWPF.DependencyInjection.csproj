@@ -45,8 +45,12 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows' OR '$(TargetFramework)'=='net7.0-windows' OR '$(TargetFramework)'=='net8.0-windows' OR '$(TargetFramework)'=='net9.0-windows'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows' OR '$(TargetFramework)'=='net9.0-windows'">
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.3" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows' OR '$(TargetFramework)'=='net7.0-windows'">
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="[8.0.0]" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1' OR '$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net481' OR '$(TargetFramework)'=='net48' OR '$(TargetFramework)'=='net461'">

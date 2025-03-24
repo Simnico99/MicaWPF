@@ -8,6 +8,7 @@ using static MicaWPF.Core.Interop.InteropValues;
 
 namespace MicaWPF.Core.Interop;
 
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #if NET7_0_OR_GREATER
 [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:Partial elements should be documented", Justification = "Interops")]
 public static partial class InteropMethods
@@ -331,3 +332,4 @@ public static class InteropMethods
     private static extern int DwmSetWindowAttribute(nint hwnd, DWMWINDOWATTRIBUTE dwAttribute, ref int pvAttribute, int cbAttribute);
 }
 #endif
+#pragma warning restore IDE0079 // Remove unnecessary suppression
