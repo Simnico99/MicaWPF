@@ -2,6 +2,7 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
 using System.Windows.Media;
 using MicaWPF.Core.Events;
 using MicaWPF.Core.Helpers;
@@ -17,32 +18,50 @@ public interface IAccentColorService
     /// <summary>
     /// Gets contains the currently used WindowsAccentHelper.
     /// </summary>
-    WindowsAccentHelper WindowsAccentHelper { get; }
+    WindowsAccentHelper WindowsAccentHelper
+    {
+        get;
+    }
 
     /// <summary>
     /// Gets event that is raised when the accent colors are changed.
     /// </summary>
-    IWeakEvent<AccentColors> AccentColorChanged { get; }
+    IWeakEvent<AccentColors> AccentColorChanged
+    {
+        get;
+    }
 
     /// <summary>
     /// Gets contains information about the current accent colors.
     /// </summary>
-    AccentColors AccentColors { get; }
+    AccentColors AccentColors
+    {
+        get;
+    }
 
     /// <summary>
     /// Gets a value indicating whether indicates if the accent colors were updated from Windows.
     /// </summary>
-    bool AccentColorsUpdateFromWindows { get; }
+    bool AccentColorsUpdateFromWindows
+    {
+        get;
+    }
 
     /// <summary>
     /// Gets or sets a value indicating whether indicates if the title bar and borders are accent aware.
     /// </summary>
-    bool IsTitleBarAndBorderAccentAware { get; set; }
+    bool IsTitleBarAndBorderAccentAware
+    {
+        get; set;
+    }
 
     /// <summary>
     /// Gets a value indicating whether indicates if the title bar and windows borders are colored.
     /// </summary>
-    bool IsTitleBarAndWindowsBorderColored { get; }
+    bool IsTitleBarAndWindowsBorderColored
+    {
+        get;
+    }
 
     /// <summary>
     /// Refreshes the accent colors used in the application.
@@ -62,4 +81,11 @@ public interface IAccentColorService
     /// Updates the accent colors with the system accent color obtained from Windows.
     /// </summary>
     void UpdateAccentsColorsFromWindows();
+
+    /// <summary>
+    /// Add border and titlebar accent color.
+    /// </summary>
+    /// <param name="window">The window to apply it to.</param>
+    /// <param name="isEnabled">Is the accent color enabled</param>
+    void IsTitleBarAndBorderAccentEnabled(Window window, bool isEnabled);
 }

@@ -278,20 +278,6 @@
                             <Setter TargetName="Maximize" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=UseAccentOnTitleBarAndBorder}" Value="True" />
-                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=IsActive}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="WindowBorder" Property="BorderBrush">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource MicaWPF.Colors.SystemAccentColor}" />
-                                </Setter.Value>
-                            </Setter>
-                        </MultiDataTrigger>
-                        <Trigger Property="UseAccentOnTitleBarAndBorder" Value="False">
-                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="{DynamicResource MicaWPF.Brushes.SystemFillColorSolidNeutralBackground}" />
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -320,7 +306,7 @@
                 <ControlTemplate TargetType="{x:Type local:MicaWindowBase}">
                     <Border
                         x:Name="WindowBorder"
-                        BorderThickness="2"
+                        BorderThickness="0"
                         CornerRadius="8">
                         <Grid Margin="-1">
                             <DockPanel
@@ -485,16 +471,6 @@
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="TitleTextBlock" Property="Foreground" Value="{DynamicResource MicaWPF.Brushes.TextFillColorDisabled}" />
                         </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=UseAccentOnTitleBarAndBorder}" Value="True" />
-                                <Condition Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=IsActive}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="WindowBorder" Property="BorderThickness" Value="2" />
-                        </MultiDataTrigger>
-                        <Trigger Property="UseAccentOnTitleBarAndBorder" Value="False">
-                            <Setter TargetName="WindowBorder" Property="BorderThickness" Value="0" />
-                        </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="Restore" Property="Visibility" Value="Visible" />

@@ -43,6 +43,11 @@ public class MicaWindowBase : MicaWindowActionHandler, IMicaWindow
             ApplyResizeBorderThickness((WindowState)e.NewValue);
         }
 
+        if (e.Property.Name is nameof(IsActive))
+        {
+            this.UpdateBorderColor();
+        }
+
         base.OnPropertyChanged(e);
     }
 
@@ -50,6 +55,7 @@ public class MicaWindowBase : MicaWindowActionHandler, IMicaWindow
     {
         base.OnSourceInitialized(e);
         this.EnableBackdrop(SystemBackdropType);
+        this.UpdateBorderColor();
     }
 
     private void AddPadding(WindowState windowsState)

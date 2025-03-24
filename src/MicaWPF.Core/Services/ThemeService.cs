@@ -33,9 +33,15 @@ public class ThemeService : IThemeService
 
     public List<BackdropEnabledWindow> BackdropEnabledWindows { get; private set; } = [];
 
-    public WindowsTheme CurrentTheme { get => GetTheme(); private set => _currentTheme = value; }
+    public WindowsTheme CurrentTheme
+    {
+        get => GetTheme(); private set => _currentTheme = value;
+    }
 
-    public bool IsThemeAware { get; private set; }
+    public bool IsThemeAware
+    {
+        get; private set;
+    }
 
     public void SetAccentColorService(IAccentColorService accentColorService)
     {
@@ -93,6 +99,8 @@ public class ThemeService : IThemeService
 
         window.Background = new SolidColorBrush(Color.FromArgb(0, 255, 255, 255));
         var windowHandle = new WindowInteropHelper(window).Handle;
+
+        InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR, InteropValues.DwmValues.DWMWA_COLOR_NONE);
 
         if (CurrentTheme == WindowsTheme.Dark)
         {

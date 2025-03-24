@@ -28,4 +28,9 @@ public static class WindowExtension
     {
         MicaWPFServiceUtility.ThemeService.EnableBackdrop(window, backdropType);
     }
+
+    public static void UpdateBorderColor(this Window window)
+    {
+        MicaWPFServiceUtility.AccentColorService.IsTitleBarAndBorderAccentEnabled(window, MicaWPFServiceUtility.AccentColorService.IsTitleBarAndWindowsBorderColored);
+    }
 }

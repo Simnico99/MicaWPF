@@ -3,11 +3,13 @@
 // </copyright>
 
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
 using MicaWPF.Core.Controls.MicaWindow;
 using MicaWPF.Core.Enums;
 using MicaWPF.Core.Events;
 using MicaWPF.Core.Helpers;
+using MicaWPF.Core.Interop;
 using MicaWPF.Core.Models;
 using Microsoft.Win32;
 
@@ -76,6 +78,22 @@ public class AccentColorService : IAccentColorService
         UpdateFromInternalColors();
     }
 
+    public void IsTitleBarAndBorderAccentEnabled(Window window, bool isEnabled)
+    {
+        var windowHandle = new WindowInteropHelper(window).Handle;
+
+        if (isEnabled && window.IsActive)
+        {
+            var color = AccentColors.SystemAccentColor;
+            var colorNum = (color.B << 16) | (color.G << 8) | color.R;
+            InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR, colorNum);
+        }
+        else
+        {
+            InteropMethods.SetWindowAttribute(windowHandle, InteropValues.DWMWINDOWATTRIBUTE.DWMWA_BORDER_COLOR, -1);
+        }
+    }
+
     private void UpdateColorResources(Color primaryAccent, Color secondaryAccent, Color tertiaryAccent)
     {
         var accentColors = new Color[] { primaryAccent, secondaryAccent, tertiaryAccent, AccentColors.SystemAccentColorLight3, AccentColors.SystemAccentColorLight2, AccentColors.SystemAccentColorLight1, AccentColors.SystemAccentColor, AccentColors.SystemAccentColorDark1, AccentColors.SystemAccentColorDark2, AccentColors.SystemAccentColorDark3 };
@@ -101,6 +119,16 @@ public class AccentColorService : IAccentColorService
                 break;
         }
 
+        foreach (Window? window in Application.Current.Windows)
+        {
+            if (window is null)
+            {
+                continue;
+            }
+
+            IsTitleBarAndBorderAccentEnabled(window, IsTitleBarAndWindowsBorderColored);
+        }
+
         MicaWPFServiceUtility.ThemeDictionaryService.RefreshThemeSource();
     }
 
@@ -112,6 +140,7 @@ public class AccentColorService : IAccentColorService
         {
             if (window is IMicaWindow micaWindow)
             {
+                IsTitleBarAndBorderAccentEnabled((Window)window, IsTitleBarAndWindowsBorderColored);
                 micaWindow.UseAccentOnTitleBarAndBorder = isEnabled;
             }
         }
