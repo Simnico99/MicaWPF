@@ -1,4 +1,4 @@
-﻿// <copyright file="ObjectToSymbolConverter.cs" company="Zircon Technology">
+﻿// <copyright file="ObjectToSymbolConverter.cs" company="Zircon Fusion">
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
