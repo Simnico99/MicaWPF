@@ -99,8 +99,9 @@ public class MicaWindowInteropHandler : MicaWindowProperty
 
     private void HideMaximiseAndMinimiseButton(nint lparam, ref bool handled)
     {
-        var x = lparam.ToInt32() & 0xffff;
-        var y = lparam.ToInt32() >> 16;
+        var lParamInt = lparam.ToInt32();
+        var x = unchecked((short)(lParamInt & 0xffff));
+        var y = unchecked((short)(lParamInt >> 16));
 
         var dpiScale = DpiHelper.LogicalToDeviceUnitsScalingFactorX;
         var button = WindowState == WindowState.Maximized ? ButtonRestore : ButtonMax;
