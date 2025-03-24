@@ -2,6 +2,7 @@
 // This software is distributed under the MIT license and its code is open-source and free for use, modification, and distribution.
 // </copyright>
 
+using System.Windows;
 using System.Windows.Media;
 using MicaWPF.Core.Events;
 using MicaWPF.Core.Helpers;
@@ -77,5 +78,10 @@ internal sealed class AccentColorServiceDI : IAccentColorService
     public void RefreshAccentsColors()
     {
         _accentColorService.RefreshAccentsColors();
+    }
+
+    public void IsTitleBarAndBorderAccentEnabled(Window window, bool isEnabled)
+    {
+        _accentColorService.IsTitleBarAndBorderAccentEnabled(window, isEnabled);
     }
 }
