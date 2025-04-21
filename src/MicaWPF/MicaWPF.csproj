@@ -25,6 +25,7 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<EnableWindowsTargeting>true</EnableWindowsTargeting>
 		<NoWarn>NETSDK1138</NoWarn>
 	</PropertyGroup>
 
