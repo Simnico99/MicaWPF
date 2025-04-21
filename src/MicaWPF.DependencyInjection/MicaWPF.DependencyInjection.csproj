@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
@@ -55,7 +55,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1' OR '$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net481' OR '$(TargetFramework)'=='net48' OR '$(TargetFramework)'=='net461'">
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="[6.0.1]" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="[9.0.4]" />
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="[6.0.0]" />
 	</ItemGroup>
 
