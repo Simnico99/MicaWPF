@@ -2,7 +2,7 @@ version: 2
 updates:
   - package-ecosystem: "nuget"
     directories:
-      - "/src/Mica.*"
+      - "/src/MicaWPF.*"
     schedule:
       interval: "daily"
     reviewers:
