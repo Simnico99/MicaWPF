@@ -1,28 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "nuget"
-    directory: "/src/MicaWPF"
-    schedule:
-      interval: "daily"
-    reviewers:
-      - "Simnico99"
-
-  - package-ecosystem: "nuget"
-    directory: "/src/MicaWPF.Core"
-    schedule:
-      interval: "daily"
-    reviewers:
-      - "Simnico99"
-
-  - package-ecosystem: "nuget"
-    directory: "/src/MicaWPF.Lite"
-    schedule:
-      interval: "daily"
-    reviewers:
-      - "Simnico99"
-
-  - package-ecosystem: "nuget"
-    directory: "/src/MicaWPF.DependencyInjection"
+    directory: "/src/*"
     schedule:
       interval: "daily"
     reviewers:
