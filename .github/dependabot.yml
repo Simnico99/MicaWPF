@@ -2,7 +2,10 @@ version: 2
 updates:
   - package-ecosystem: "nuget"
     directories:
-      - "/src/MicaWPF.*"
+      - "/src/MicaWPF"
+      - "/src/MicaWPF.Core"
+      - "/src/MicaWPF.Lite"
+      - "/src/MicaWPF.DependencyInjection"
     schedule:
       interval: "daily"
     reviewers:
