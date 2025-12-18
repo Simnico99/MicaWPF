@@ -271,6 +271,9 @@
                         <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Title, Converter={StaticResource IsNullConverter}}" Value="False">
                             <Setter TargetName="TitleStackPanel" Property="Visibility" Value="Visible" />
                         </DataTrigger>
+                        <Trigger Property="WindowStyle" Value="None">
+                            <Setter TargetName="TitleGrid" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="Restore" Property="Visibility" Value="Visible" />
