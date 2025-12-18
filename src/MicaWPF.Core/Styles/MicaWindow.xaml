@@ -112,7 +112,12 @@
                                     x:Name="LayoutRoot"
                                     Grid.Row="0"
                                     Grid.RowSpan="3">
-                                    <Grid Panel.ZIndex="2" DockPanel.Dock="Top">
+                                    <Grid                                     
+                                        x:Name="TitleGrid"
+                                        Height="{Binding TitleBarHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindowBase}}"
+                                        Panel.ZIndex="2"
+                                        Background="{Binding TitleBarBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MicaWindowBase}}"
+                                        DockPanel.Dock="Top">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
