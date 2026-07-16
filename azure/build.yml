@@ -39,27 +39,6 @@ steps:
   displayName: "Use .Net Framework 4.8.1"
 
 - task: UseDotNet@2
-  displayName: 'Use .Net Core 3.1.x'
-  inputs:
-    packageType: 'sdk'
-    version: '3.1.x'
-    includePreviewVersions: false
-
-- task: UseDotNet@2
-  displayName: 'Use .Net 6.0.x'
-  inputs:
-    packageType: 'sdk'
-    version: '6.0.x'
-    includePreviewVersions: false
-
-- task: UseDotNet@2
-  displayName: 'Use .Net 7.0.x'
-  inputs:
-    packageType: 'sdk'
-    version: '7.0.x'
-    includePreviewVersions: false
-
-- task: UseDotNet@2
   displayName: 'Use .Net 8.0.x'
   inputs:
     packageType: 'sdk'
@@ -71,6 +50,13 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '9.0.x'
+    includePreviewVersions: false
+
+- task: UseDotNet@2
+  displayName: 'Use .Net 10.0.x'
+  inputs:
+    packageType: 'sdk'
+    version: '10.0.x'
     includePreviewVersions: false
 
 - task: DotNetCoreCLI@2
