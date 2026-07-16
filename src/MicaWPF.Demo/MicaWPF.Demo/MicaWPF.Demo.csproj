@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
+		<TargetFramework>net10.0-windows10.0.19041.0.0</TargetFramework>
 		<TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
