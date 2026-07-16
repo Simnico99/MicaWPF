@@ -11,7 +11,7 @@ steps:
         $sortedVersions = $versionList | Sort-Object -Descending | foreach {$_.ToString()}
         $version = $sortedVersions[0]
         Write-Host $version
-        $productVersionBeta = “$version.$(Build.BuildId)-Beta”
+        $productVersionBeta = "$version.$(Build.BuildId)-Beta"
         Write-Host "##vso[task.setvariable variable=packageVersion]$productVersionBeta"
         Write-Host $productVersionBeta
   displayName: "Computing alpha version"
@@ -39,27 +39,6 @@ steps:
   displayName: "Use .Net Framework 4.8.1"
 
 - task: UseDotNet@2
-  displayName: 'Use .Net Core 3.1.x'
-  inputs:
-    packageType: 'sdk'
-    version: '3.1.x'
-    includePreviewVersions: false
-
-- task: UseDotNet@2
-  displayName: 'Use .Net 6.0.x'
-  inputs:
-    packageType: 'sdk'
-    version: '6.0.x'
-    includePreviewVersions: false
-
-- task: UseDotNet@2
-  displayName: 'Use .Net 7.0.x'
-  inputs:
-    packageType: 'sdk'
-    version: '7.0.x'
-    includePreviewVersions: false
-
-- task: UseDotNet@2
   displayName: 'Use .Net 8.0.x'
   inputs:
     packageType: 'sdk'
@@ -73,18 +52,33 @@ steps:
     version: '9.0.x'
     includePreviewVersions: false
 
+- task: UseDotNet@2
+  displayName: 'Use .Net 10.0.x'
+  inputs:
+    packageType: 'sdk'
+    version: '10.0.x'
+    includePreviewVersions: false
+
 - task: DotNetCoreCLI@2
   displayName: .Net Restore
   inputs:
     command: 'restore'
-    projects: '**\*!(Demo).csproj'
+    projects: |
+      **/*.csproj
+      !**/MicaWPF.Demo.csproj
+  env:
+    DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE: 'true'
 
 - task: DotNetCoreCLI@2
   displayName: .Net Build
   inputs:
     command: 'build'
     configuration: Release
-    projects: '**\*!(Demo).csproj'
+    projects: |
+      **/*.csproj
+      !**/MicaWPF.Demo.csproj
     arguments: --no-restore -c release -p:FileVersionRevision=$(packageVersion) -p:ContinuousIntegrationBuild=true
     versioningScheme: byEnvVar
     versionEnvVar: '$(packageVersion)'
+  env:
+    DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE: 'true'

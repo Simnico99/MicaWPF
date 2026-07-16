@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net461;net47;net48;net481;netcoreapp3.1;net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
+		<TargetFrameworks>net461;net47;net48;net481;net8.0-windows;net9.0-windows;net10.0-windows</TargetFrameworks>
 		<TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
 		<UseWPF>true</UseWPF>
-		<Copyright>Copyright (c) 2021 Simnico99</Copyright>
+		<Copyright>Copyright (c) 2026 Simnico99</Copyright>
 		<RepositoryUrl>https://github.com/Simnico99/MicaWPF</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>MicaWPF;WPF;Mica;WinUI;wpfui;UI;windows;controls;custom;modern;xaml;toolkit;color;dark;theme;Simnico99;net6;net5;net;fluent;acrylic</PackageTags>
@@ -54,11 +54,11 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows' OR '$(TargetFramework)'=='net7.0-windows' OR '$(TargetFramework)'=='net8.0-windows' OR '$(TargetFramework)'=='net9.0-windows'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows' OR '$(TargetFramework)'=='net9.0-windows' OR '$(TargetFramework)'=='net10.0-windows'">
 		<PackageReference Include="MicaWPFRuntimeComponent" Version="1.1.9" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1' OR '$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net481' OR '$(TargetFramework)'=='net48' OR '$(TargetFramework)'=='net461'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net481' OR '$(TargetFramework)'=='net48' OR '$(TargetFramework)'=='net461'">
 		<PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="[10.0.28000.2270]" />
 	</ItemGroup>
 
