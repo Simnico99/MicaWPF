@@ -45,6 +45,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#target-frameworks">Target Frameworks</a></li>
       </ul>
     </li>
     <li>
@@ -86,6 +87,21 @@ Here are some exemple controls:
 ### Built With
 
 * [MicaWPFRuntimeComponent](https://github.com/Simnico99/MicaWPFRuntimeComponent)
+
+
+### Target Frameworks
+
+MicaWPF targets the following frameworks:
+
+* .NET Framework 4.6.1 (`net461`)
+* .NET Framework 4.7 (`net47`)
+* .NET Framework 4.8 (`net48`)
+* .NET Framework 4.8.1 (`net481`)
+* .NET 8 for Windows (`net8.0-windows`)
+* .NET 9 for Windows (`net9.0-windows`)
+* .NET 10 for Windows (`net10.0-windows`)
+
+For new applications, .NET 10 is recommended.
 
 
 <!-- GETTING STARTED -->
@@ -172,7 +188,7 @@ Now get into your Window code:
 1. Add the namespace `using MicaWPF.Controls;`.
 2. Change the Window inherited class to `MicaWindow`.
 
-Here is an exemple of what it might look like using .NET9:
+Here is an exemple of what it might look like using .NET 10:
 ```CSharp
 using MicaWPF.Controls;
 
@@ -188,19 +204,19 @@ public partial class MainWindow : MicaWindow
 
 ```
 
-#### Note For .Net6.0, .Net7.0, .Net8.0 and .Net9.0
-You will need to change your CSPROJ to include the windows build after the netx.0-windows.
-Here is an exemple using .Net9.0 just change the net9 for net8, net7 or net6 for the other versions.
+#### Note For .NET 8.0, .NET 9.0 and .NET 10.0
+Your project must use a Windows-specific target framework by appending `-windows` to the .NET target framework.
+Here is an exemple using .NET 10.0. Replace `net10.0` with `net9.0` or `net8.0` when targeting those versions.
 
 MicaWPF:
 ```Xaml
-<TargetFramework>net9.0-windows</TargetFramework>
+<TargetFramework>net10.0-windows</TargetFramework>
 <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
 ```
 
 MicaWPF.Lite:
 ```Xaml
-<TargetFramework>net9.0-windows</TargetFramework>
+<TargetFramework>net10.0-windows</TargetFramework>
 ```
 
 _For more examples, please refer to the [Documentation](https://github.com/Simnico99/MicaWPF/wiki)_
@@ -265,3 +281,4 @@ Project Link: [https://github.com/Simnico99](https://github.com/Simnico99)
 * [Best README template](https://github.com/othneildrew/Best-README-Template)
 
 ![Alt](https://repobeats.axiom.co/api/embed/756130021d85947f6cd1d56b08c1f7b358e5d3a5.svg "Repobeats analytics image")
+
