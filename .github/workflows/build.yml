@@ -1,0 +1,303 @@
+name: Build MicaWPFRuntimeComponent
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - "MicaWPFRuntimeComponent/**"
+      - "MicaWPF.Projection/**"
+      - "MicaWPFRuntimeComponent.sln"
+      - "Directory.Build.props"
+      - ".github/workflows/build.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mica-wpf-runtime-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Release x64
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 30
+
+    env:
+      SOLUTION_PATH: MicaWPFRuntimeComponent.sln
+      BUILD_CONFIGURATION: Release
+      BUILD_PLATFORM: x64
+
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "true"
+      NUGET_XMLDOC_MODE: skip
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Install .NET SDKs
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+          architecture: x64
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v3
+        with:
+          msbuild-architecture: x64
+
+      - name: Display installed build tools
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          Write-Host '=== MSBuild ==='
+          msbuild -version
+
+          Write-Host '=== .NET SDKs ==='
+          dotnet --list-sdks
+
+          Write-Host '=== Visual Studio ==='
+          $vswhere = Join-Path `
+              ${env:ProgramFiles(x86)} `
+              'Microsoft Visual Studio\Installer\vswhere.exe'
+
+          & $vswhere `
+              -latest `
+              -products '*' `
+              -format json
+
+      - name: Create output directories
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          New-Item `
+              -ItemType Directory `
+              -Force `
+              -Path '_artifacts', '_logs' |
+              Out-Null
+
+      - name: Restore NuGet packages
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          msbuild $env:SOLUTION_PATH `
+              /t:Restore `
+              /m `
+              /p:RestorePackagesConfig=true `
+              /p:Configuration=$env:BUILD_CONFIGURATION `
+              /p:Platform=$env:BUILD_PLATFORM `
+              /verbosity:minimal
+
+      - name: Build solution
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          msbuild $env:SOLUTION_PATH `
+              /t:Rebuild `
+              /m `
+              /p:Configuration=$env:BUILD_CONFIGURATION `
+              /p:Platform=$env:BUILD_PLATFORM `
+              /p:ContinuousIntegrationBuild=true `
+              /p:RestorePackages=false `
+              /verbosity:minimal `
+              /bl:_logs\MicaWPFRuntimeComponent.binlog
+
+      - name: Collect compiled output
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          $artifactRoot = Join-Path `
+              $env:GITHUB_WORKSPACE `
+              '_artifacts'
+
+          $packageDestination = Join-Path `
+              $artifactRoot `
+              'packages'
+
+          $nativeDestination = Join-Path `
+              $artifactRoot `
+              'native'
+
+          $projectionDestination = Join-Path `
+              $artifactRoot `
+              'projection'
+
+          New-Item `
+              -ItemType Directory `
+              -Force `
+              -Path `
+                  $packageDestination, `
+                  $nativeDestination, `
+                  $projectionDestination |
+              Out-Null
+
+          $packages = Get-ChildItem `
+              -Path $env:GITHUB_WORKSPACE `
+              -Recurse `
+              -File |
+              Where-Object {
+                  $_.Extension -in '.nupkg', '.snupkg' -and
+                  $_.FullName -notmatch '\\packages\\'
+              }
+
+          if (-not $packages) {
+              throw 'No NuGet package was generated.'
+          }
+
+          foreach ($package in $packages) {
+              Copy-Item `
+                  -LiteralPath $package.FullName `
+                  -Destination $packageDestination `
+                  -Force
+          }
+
+          $nativeSource = Join-Path `
+              $env:GITHUB_WORKSPACE `
+              '_build\x64\Release'
+
+          if (-not (Test-Path -LiteralPath $nativeSource)) {
+              throw "Native output directory not found: $nativeSource"
+          }
+
+          Copy-Item `
+              -Path "$nativeSource\*" `
+              -Destination $nativeDestination `
+              -Recurse `
+              -Force
+
+          foreach ($targetFramework in 'net8.0', 'net9.0', 'net10.0') {
+              $projectionSource = Join-Path `
+                  $env:GITHUB_WORKSPACE `
+                  "MicaWPF.Projection\obj\Release\$targetFramework\IIDOptimizer"
+
+              if (-not (Test-Path -LiteralPath $projectionSource)) {
+                  throw `
+                      "Projection output not found for $targetFramework`: " +
+                      $projectionSource
+              }
+
+              $targetDestination = Join-Path `
+                  $projectionDestination `
+                  $targetFramework
+
+              New-Item `
+                  -ItemType Directory `
+                  -Force `
+                  -Path $targetDestination |
+                  Out-Null
+
+              Copy-Item `
+                  -Path "$projectionSource\*" `
+                  -Destination $targetDestination `
+                  -Recurse `
+                  -Force
+          }
+
+          Write-Host '=== Collected artifacts ==='
+
+          Get-ChildItem `
+              -Path $artifactRoot `
+              -Recurse `
+              -File |
+              ForEach-Object {
+                  $_.FullName.Substring(
+                      $env:GITHUB_WORKSPACE.Length + 1
+                  )
+              }
+
+      - name: Validate NuGet package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          Add-Type `
+              -AssemblyName System.IO.Compression.FileSystem
+
+          $package = Get-ChildItem `
+              -Path '_artifacts\packages' `
+              -Filter 'MicaWPFRuntimeComponent.*.nupkg' `
+              -File |
+              Where-Object {
+                  $_.Name -notlike '*.snupkg'
+              } |
+              Select-Object -First 1
+
+          if ($null -eq $package) {
+              throw 'MicaWPFRuntimeComponent NuGet package was not found.'
+          }
+
+          $requiredEntries = @(
+              'lib/net8.0/MicaWPF.Projection.dll'
+              'lib/net9.0/MicaWPF.Projection.dll'
+              'lib/net10.0/MicaWPF.Projection.dll'
+              'runtimes/win/native/MicaWPFRuntimeComponent.dll'
+              'README.md'
+          )
+
+          $archive = [System.IO.Compression.ZipFile]::OpenRead(
+              $package.FullName
+          )
+
+          try {
+              $entries = @(
+                  $archive.Entries |
+                  ForEach-Object {
+                      $_.FullName.Replace('\', '/')
+                  }
+              )
+
+              foreach ($requiredEntry in $requiredEntries) {
+                  if ($requiredEntry -notin $entries) {
+                      throw `
+                          "Required package entry is missing: " +
+                          $requiredEntry
+                  }
+              }
+
+              Write-Host `
+                  "Validated package: $($package.Name)"
+
+              Write-Host '=== Package contents ==='
+
+              $entries |
+                  Sort-Object |
+                  ForEach-Object {
+                      Write-Host $_
+                  }
+          }
+          finally {
+              $archive.Dispose()
+          }
+
+      - name: Upload compiled packages
+        uses: actions/upload-artifact@v7
+        with:
+          name: MicaWPFRuntimeComponent-${{ github.sha }}
+          path: _artifacts/**
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9
+
+      - name: Upload MSBuild diagnostic log
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: MicaWPFRuntimeComponent-build-log-${{ github.sha }}
+          path: _logs/**
+          if-no-files-found: warn
+          retention-days: 14
+          compression-level: 6
