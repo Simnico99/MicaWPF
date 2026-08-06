@@ -27,7 +27,7 @@ jobs:
     timeout-minutes: 30
 
     env:
-      SOLUTION_PATH: MicaWPFRuntimeComponent.sln
+      SOLUTION_PATH: ${{ github.workspace }}\MicaWPFRuntimeComponent.sln
       BUILD_CONFIGURATION: Release
       BUILD_PLATFORM: x64
 
@@ -40,6 +40,27 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 1
+
+      - name: Verify repository contents
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          Write-Host "Workspace: $env:GITHUB_WORKSPACE"
+
+          Get-ChildItem `
+              -LiteralPath $env:GITHUB_WORKSPACE `
+              -Force |
+              Format-Table `
+                  -AutoSize `
+                  Name,
+                  FullName,
+                  Length,
+                  LastWriteTime
+
+          if (-not (Test-Path -LiteralPath $env:SOLUTION_PATH)) {
+              throw "Solution not found: $env:SOLUTION_PATH"
+          }
 
       - name: Install .NET SDKs
         uses: actions/setup-dotnet@v6
@@ -67,6 +88,7 @@ jobs:
           dotnet --list-sdks
 
           Write-Host '=== Visual Studio ==='
+
           $vswhere = Join-Path `
               ${env:ProgramFiles(x86)} `
               'Microsoft Visual Studio\Installer\vswhere.exe'
@@ -84,7 +106,9 @@ jobs:
           New-Item `
               -ItemType Directory `
               -Force `
-              -Path '_artifacts', '_logs' |
+              -Path `
+                  "$env:GITHUB_WORKSPACE\_artifacts",
+                  "$env:GITHUB_WORKSPACE\_logs" |
               Out-Null
 
       - name: Restore NuGet packages
@@ -92,12 +116,12 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
 
-          msbuild $env:SOLUTION_PATH `
+          msbuild "$env:SOLUTION_PATH" `
               /t:Restore `
               /m `
               /p:RestorePackagesConfig=true `
-              /p:Configuration=$env:BUILD_CONFIGURATION `
-              /p:Platform=$env:BUILD_PLATFORM `
+              /p:Configuration="$env:BUILD_CONFIGURATION" `
+              /p:Platform="$env:BUILD_PLATFORM" `
               /verbosity:minimal
 
       - name: Build solution
@@ -105,15 +129,15 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
 
-          msbuild $env:SOLUTION_PATH `
+          msbuild "$env:SOLUTION_PATH" `
               /t:Rebuild `
               /m `
-              /p:Configuration=$env:BUILD_CONFIGURATION `
-              /p:Platform=$env:BUILD_PLATFORM `
+              /p:Configuration="$env:BUILD_CONFIGURATION" `
+              /p:Platform="$env:BUILD_PLATFORM" `
               /p:ContinuousIntegrationBuild=true `
               /p:RestorePackages=false `
               /verbosity:minimal `
-              /bl:_logs\MicaWPFRuntimeComponent.binlog
+              "/bl:$env:GITHUB_WORKSPACE\_logs\MicaWPFRuntimeComponent.binlog"
 
       - name: Collect compiled output
         shell: pwsh
@@ -140,21 +164,23 @@ jobs:
               -ItemType Directory `
               -Force `
               -Path `
-                  $packageDestination, `
-                  $nativeDestination, `
+                  $packageDestination,
+                  $nativeDestination,
                   $projectionDestination |
               Out-Null
 
-          $packages = Get-ChildItem `
-              -Path $env:GITHUB_WORKSPACE `
-              -Recurse `
-              -File |
-              Where-Object {
-                  $_.Extension -in '.nupkg', '.snupkg' -and
-                  $_.FullName -notmatch '\\packages\\'
-              }
+          $packages = @(
+              Get-ChildItem `
+                  -Path $env:GITHUB_WORKSPACE `
+                  -Recurse `
+                  -File `
+                  -Include '*.nupkg', '*.snupkg' |
+                  Where-Object {
+                      $_.FullName -notmatch '\\packages\\'
+                  }
+          )
 
-          if (-not $packages) {
+          if ($packages.Count -eq 0) {
               throw 'No NuGet package was generated.'
           }
 
@@ -185,9 +211,7 @@ jobs:
                   "MicaWPF.Projection\obj\Release\$targetFramework\IIDOptimizer"
 
               if (-not (Test-Path -LiteralPath $projectionSource)) {
-                  throw `
-                      "Projection output not found for $targetFramework`: " +
-                      $projectionSource
+                  throw "Projection output not found for $targetFramework`: $projectionSource"
               }
 
               $targetDestination = Join-Path `
@@ -228,7 +252,7 @@ jobs:
               -AssemblyName System.IO.Compression.FileSystem
 
           $package = Get-ChildItem `
-              -Path '_artifacts\packages' `
+              -Path "$env:GITHUB_WORKSPACE\_artifacts\packages" `
               -Filter 'MicaWPFRuntimeComponent.*.nupkg' `
               -File |
               Where-Object {
@@ -262,15 +286,11 @@ jobs:
 
               foreach ($requiredEntry in $requiredEntries) {
                   if ($requiredEntry -notin $entries) {
-                      throw `
-                          "Required package entry is missing: " +
-                          $requiredEntry
+                      throw "Required package entry is missing: $requiredEntry"
                   }
               }
 
-              Write-Host `
-                  "Validated package: $($package.Name)"
-
+              Write-Host "Validated package: $($package.Name)"
               Write-Host '=== Package contents ==='
 
               $entries |
@@ -287,7 +307,8 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: MicaWPFRuntimeComponent-${{ github.sha }}
-          path: _artifacts/**
+          path: |
+            _artifacts/**
           if-no-files-found: error
           retention-days: 30
           compression-level: 9
@@ -297,7 +318,8 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: MicaWPFRuntimeComponent-build-log-${{ github.sha }}
-          path: _logs/**
+          path: |
+            _logs/**
           if-no-files-found: warn
           retention-days: 14
           compression-level: 6
